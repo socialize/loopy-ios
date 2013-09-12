@@ -24,7 +24,7 @@ NSString *const OPEN = @"/open";
     return self;
 }
 
-- (void)open:(NSDictionary *)openJSON {
+- (void)open:(NSDictionary *)openJSON withDelegate:(id)delegate {
     self.responseData = [NSMutableData data];
     BOOL isValid = [NSJSONSerialization isValidJSONObject:openJSON];
     if(isValid) {
@@ -45,7 +45,11 @@ NSString *const OPEN = @"/open";
         [request setValue:[NSString stringWithFormat:@"%d", [jsonOpenObjStr length]] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody:jsonOpenObj];
         
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+        //delegate is self if not specified
+        if(!delegate) {
+            delegate = self;
+        }
+        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:delegate];
         if(!connection) {
             NSLog(@"Error creating URL connection.");
         }

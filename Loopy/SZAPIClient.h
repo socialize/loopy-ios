@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *urlPrefix;
 
 - (id)initWithURLPrefix:(NSString *)url;
-- (void)open:(NSDictionary *)openJSON;
+- (void)open:(NSDictionary *)openJSON withDelegate:(id)delegate;
 - (NSData *)toJSONData:(NSDictionary *)jsonDict;
 - (NSString *)toJSONString:(NSData *)jsonDict;
 @end

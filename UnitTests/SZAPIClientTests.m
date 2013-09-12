@@ -58,7 +58,32 @@
 }
 
 - (void)testOpen {
-    
+    //TODO delgate-ify...
+    [self.apiClient open:[self jsonForOpen] withDelegate:self];
+}
+
+
+//protocol impl
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+    int code = [httpResponse statusCode];
+    NSLog(@"didReceiveResponse; code: %d", code);
+}
+
+//protocol impl
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"didReceiveData");
+}
+
+//protocol impl
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"didFailWithError");
+    NSLog(@"Connection failed: %@", [error description]);
+}
+
+//protocol impl
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connectionDidFinishLoading");
 }
 
 - (NSDictionary *)jsonForOpen {
