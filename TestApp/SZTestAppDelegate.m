@@ -18,6 +18,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    //SIMPLE TEST -- this calls open on the APIClient
     SZAPIClient *apiClient = [[SZAPIClient alloc] init];
     [apiClient open];
     

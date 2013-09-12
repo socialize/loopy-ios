@@ -11,7 +11,10 @@
 @interface SZAPIClient : NSObject
 
 @property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSString *urlPrefix;
 
-- (void)open;
-
+- (id)initWithURLPrefix:(NSString *)url;
+- (void)open:(NSDictionary *)openJSON;
+- (NSData *)toJSONData:(NSDictionary *)jsonDict;
+- (NSString *)toJSONString:(NSData *)jsonDict;
 @end
