@@ -7,6 +7,7 @@
 //
 
 #import "SZAPIClient.h"
+#import "SZJSONUtils.h"
 
 @implementation SZAPIClient
 
@@ -14,6 +15,7 @@ NSString *const OPEN = @"/open";
 
 @synthesize responseData;
 @synthesize urlPrefix;
+//@synthesize connection;
 
 //constructor with specified endpoint
 - (id)initWithURLPrefix:(NSString *)url {
@@ -28,10 +30,10 @@ NSString *const OPEN = @"/open";
     self.responseData = [NSMutableData data];
     BOOL isValid = [NSJSONSerialization isValidJSONObject:openJSON];
     if(isValid) {
-        NSData *jsonOpenObj = [self toJSONData:openJSON];
-        NSString *jsonOpenObjStr = [self toJSONString:jsonOpenObj];
+        NSData *jsonOpenObj = [SZJSONUtils toJSONData:openJSON];
+        NSString *jsonOpenObjStr = [SZJSONUtils toJSONString:jsonOpenObj];
         if (jsonOpenObj) {
-            jsonOpenObjStr = [self toJSONString:jsonOpenObj];
+            jsonOpenObjStr = [SZJSONUtils toJSONString:jsonOpenObj];
         }
 
         NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, OPEN];
@@ -49,45 +51,13 @@ NSString *const OPEN = @"/open";
         if(!delegate) {
             delegate = self;
         }
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:delegate];
+        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:delegate startImmediately:YES];
         if(!connection) {
             NSLog(@"Error creating URL connection.");
         }
     }
     else {
         //TODO handle error
-    }
-}
-
-//convert JSON dictionary to NSData
-- (NSData *)toJSONData:(NSDictionary *)jsonDict {
-    NSError *jsonError;
-    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:jsonDict
-                                                      options:NSJSONWritingPrettyPrinted
-                                                        error:&jsonError];
-    if (!jsonObj && jsonError) {
-        NSLog(@"Error creating JSON data.");
-        [self logError:jsonError];
-    }
-    
-    return jsonObj;
-}
-
-//convert JSON dictionary to String
-- (NSString *)toJSONString:(NSData *)jsonData {
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-}
-
-//error logging
-- (void)logError:(NSError *)error {
-    NSLog(@"ERROR code: %d", error.code);
-    for(id key in error.userInfo) {
-        id value = [error.userInfo objectForKey:key];
-        NSString *keyAsString = (NSString *)key;
-        NSString *valueAsString = (NSString *)value;
-        
-        NSLog(@"ERROR key: %@", keyAsString);
-        NSLog(@"ERROR value: %@", valueAsString);
     }
 }
 

@@ -26,6 +26,9 @@
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
+		2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
+		2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
+		2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; };
 		2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
@@ -104,6 +107,8 @@
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
+		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZAPIClient.h; sourceTree = "<group>"; };
 		2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClient.m; sourceTree = "<group>"; };
 		2C8C1E1017E10BB80075B527 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -203,9 +208,9 @@
 			children = (
 				2C8C1E0B17E10BB80075B527 /* Loopy */,
 				2C8C1E0E17E10BB80075B527 /* TestApp */,
-				2C8C1E1617E10BB80075B527 /* ThirdParty */,
 				2CDE0E7317E122A30048B055 /* UnitTests */,
 				2C1B5B9B17E2783D00855D0D /* IntegrationTests */,
+				2C8C1E1617E10BB80075B527 /* ThirdParty */,
 				2C48EAF117DF87F200181C3E /* Frameworks */,
 				2C48EAF017DF87F200181C3E /* Products */,
 			);
@@ -236,11 +241,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2C8C1E0B17E10BB80075B527 /* Loopy */ = {
+		2C6D366217E3ACAA00CF1199 /* API Client */ = {
 			isa = PBXGroup;
 			children = (
 				2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */,
 				2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */,
+			);
+			name = "API Client";
+			sourceTree = "<group>";
+		};
+		2C6D366A17E3ACBB00CF1199 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */,
+				2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		2C8C1E0B17E10BB80075B527 /* Loopy */ = {
+			isa = PBXGroup;
+			children = (
+				2C6D366217E3ACAA00CF1199 /* API Client */,
+				2C6D366A17E3ACBB00CF1199 /* Utils */,
 			);
 			path = Loopy;
 			sourceTree = "<group>";
@@ -534,6 +557,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */,
+				2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,
 				2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */,
@@ -544,6 +569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */,
 				2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */,
 				2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,

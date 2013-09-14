@@ -7,18 +7,25 @@
 //
 
 #import <GHUnitIOS/GHUnit.h>
+#import <OCMock/OCMock.h>
 #import "SZAPIClient.h"
+#import "SZJSONUtils.h"
 
-@interface SZAPIClientTests : GHTestCase {}
-@property SZAPIClient *apiClient;
+@interface SZAPIClientTests : GHTestCase {
+}
+@property id mockAPIClient;
 @end
 
 @implementation SZAPIClientTests
 
-@synthesize apiClient;
+@synthesize mockAPIClient;
 
 - (void)setUpClass {
-    self.apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock"];
+    self.mockAPIClient = [OCMockObject mockForClass:[SZAPIClient class]];
+    [[self.mockAPIClient expect] connection:[OCMArg any] didReceiveData:[OCMArg any]];
+    [[self.mockAPIClient expect] connection:[OCMArg any] didReceiveResponse:[OCMArg any]];
+    [[self.mockAPIClient expect] connectionDidFinishLoading:[OCMArg any]];
+    NSLog(@"Mock created");
 }
 
 - (void)tearDownClass {
@@ -29,10 +36,10 @@
     NSDictionary *openObj = [self jsonForOpen];
     GHAssertTrue([NSJSONSerialization isValidJSONObject:openObj], nil);
     
-    NSData *jsonData = [self.apiClient toJSONData:openObj];
+    NSData *jsonData = [SZJSONUtils toJSONData:openObj];
     GHAssertNotNil(jsonData, nil);
     
-    NSString *jsonString = [self.apiClient toJSONString:jsonData];
+    NSString *jsonString = [SZJSONUtils toJSONString:jsonData];
     GHAssertNotNil(jsonString, nil);
 
     //read from file and compare
@@ -58,34 +65,35 @@
 }
 
 - (void)testOpen {
-    //TODO delgate-ify...
-    [self.apiClient open:[self jsonForOpen] withDelegate:self];
+    //TODO this should be moved to INTEGRATION test and unit test should stub out connection
+    NSURL *url = [NSURL URLWithString:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1/open"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:mockAPIClient startImmediately:NO];
+    
+    [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [connection start];
+    
+    //Wait for five seconds
+    [self waitForVerifiedMock:mockAPIClient delay:5.0];
+    
+    [mockAPIClient verify];
 }
 
-
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    int code = [httpResponse statusCode];
-    NSLog(@"didReceiveResponse; code: %d", code);
+//taken from a code example for async/delegate callback implementation
+- (void)waitForVerifiedMock:(OCMockObject *)inMock delay:(NSTimeInterval)inDelay {
+    NSTimeInterval i = 0;
+    while (i < inDelay) {
+        @try {
+            [inMock verify];
+            break;
+        }
+        @catch (NSException *e) {}
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+        i+=0.5;
+    }
 }
 
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"didReceiveData");
-}
-
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError");
-    NSLog(@"Connection failed: %@", [error description]);
-}
-
-//protocol impl
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectionDidFinishLoading");
-}
-
+//test JSON object
 - (NSDictionary *)jsonForOpen {
     NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:12.456],@"lat",

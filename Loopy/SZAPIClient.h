@@ -12,9 +12,8 @@
 
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSString *urlPrefix;
+//@property (nonatomic, strong) NSURLConnection *connection;
 
 - (id)initWithURLPrefix:(NSString *)url;
 - (void)open:(NSDictionary *)openJSON withDelegate:(id)delegate;
-- (NSData *)toJSONData:(NSDictionary *)jsonDict;
-- (NSString *)toJSONString:(NSData *)jsonDict;
 @end
