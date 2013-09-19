@@ -26,6 +26,8 @@
 		2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; };
 		2C6F4ECD17EB9C9C0039C787 /* libGHUnitIOSSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */; };
 		2C6F4EE717EB9E320039C787 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4EE617EB9E320039C787 /* libOCMock.a */; };
+		2C6F4EFA17EBA3DE0039C787 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDE0EB217E123140048B055 /* libOCMock.a */; };
+		2C6F4EFB17EBA3E30039C787 /* libGHUnitIOSSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDE0EC217E123D60048B055 /* libGHUnitIOSSimulator.a */; };
 		2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
@@ -152,6 +154,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6F4EFB17EBA3E30039C787 /* libGHUnitIOSSimulator.a in Frameworks */,
+				2C6F4EFA17EBA3DE0039C787 /* libOCMock.a in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
 				2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */,
@@ -677,7 +681,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Project-iOS/build/Framework",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Examples/MyTestable-iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntegrationTests/IntegrationTests-Prefix.pch";
@@ -689,12 +693,15 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -716,7 +723,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Project-iOS/build/Framework",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Examples/MyTestable-iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntegrationTests/IntegrationTests-Prefix.pch";
@@ -724,12 +731,15 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
