@@ -48,6 +48,27 @@
 			remoteGlobalIDString = 2C1B5B9617E2783D00855D0D;
 			remoteInfo = IntegrationTests;
 		};
+		2C52935C17E7775100AA4B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA4F55781642F2AA00B66710;
+			remoteInfo = SZNetworking;
+		};
+		2C52935E17E7775100AA4B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA4F56A01643233C00B66710;
+			remoteInfo = "SZNetworking-profiling";
+		};
+		2C52936017E7775100AA4B0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA4F55951642F35700B66710;
+			remoteInfo = "SZNetworking Tests";
+		};
 		2CDE0EAD17E123140048B055 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
@@ -107,6 +128,7 @@
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SZNetworking.xcodeproj; path = "socialize-networking/SZNetworking.xcodeproj"; sourceTree = "<group>"; };
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZAPIClient.h; sourceTree = "<group>"; };
@@ -241,6 +263,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2C52934D17E7775000AA4B0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C52935D17E7775100AA4B0C /* libSZNetworking.a */,
+				2C52935F17E7775100AA4B0C /* libSZNetworking-profiling.a */,
+				2C52936117E7775100AA4B0C /* SZNetworking Tests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2C6D366217E3ACAA00CF1199 /* API Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +313,7 @@
 		2C8C1E1617E10BB80075B527 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */,
 				2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */,
 				2CDE0EA717E123140048B055 /* OCMock.xcodeproj */,
 			);
@@ -445,6 +478,10 @@
 					ProductGroup = 2CDE0EA817E123140048B055 /* Products */;
 					ProjectRef = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
 				},
+				{
+					ProductGroup = 2C52934D17E7775000AA4B0C /* Products */;
+					ProjectRef = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -457,6 +494,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2C52935D17E7775100AA4B0C /* libSZNetworking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSZNetworking.a;
+			remoteRef = 2C52935C17E7775100AA4B0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2C52935F17E7775100AA4B0C /* libSZNetworking-profiling.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSZNetworking-profiling.a";
+			remoteRef = 2C52935E17E7775100AA4B0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2C52936117E7775100AA4B0C /* SZNetworking Tests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "SZNetworking Tests.app";
+			remoteRef = 2C52936017E7775100AA4B0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		2CDE0EAE17E123140048B055 /* OCMock.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -846,8 +904,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Examples/MyTestable-iOS",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Project-iOS/build/Framework",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Examples/MyTestable-iOS",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Project-iOS/build/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
@@ -862,13 +920,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build/**",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/build/**",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/build",
 				);
 				OTHER_LDFLAGS = (
 					"-all-load",
@@ -892,8 +950,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Examples/MyTestable-iOS",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/gh-unit/Project-iOS/build/Framework",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Examples/MyTestable-iOS",
+					"$(PROJECT_DIR)/ThirdParty/gh-unit/Project-iOS/build/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
@@ -904,13 +962,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build/**",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/build/**",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/djedeikin/git/loopy-sdk-ios/ThirdParty/ocmock/build",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/build",
 				);
 				OTHER_LDFLAGS = (
 					"-all-load",
