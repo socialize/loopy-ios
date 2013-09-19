@@ -16,10 +16,6 @@
 		2C1B5BCE17E278FC00855D0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B5BCD17E278FC00855D0D /* main.m */; };
 		2C1B5BD117E2790500855D0D /* IntegrationTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5BCF17E2790500855D0D /* IntegrationTests-Info.plist */; };
 		2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5BD317E2793000855D0D /* InfoPlist.strings */; };
-		2C1B5BD717E279E400855D0D /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C314A0517E1304B003CA1A0 /* libOCMock.a */; };
-		2C1B5BD817E279F800855D0D /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3149FB17E128AC003CA1A0 /* GHUnitIOS.framework */; };
-		2C3149FC17E128AC003CA1A0 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3149FB17E128AC003CA1A0 /* GHUnitIOS.framework */; };
-		2C314A0617E1304B003CA1A0 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C314A0517E1304B003CA1A0 /* libOCMock.a */; };
 		2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
 		2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
@@ -29,6 +25,8 @@
 		2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; };
+		2C6F4ECD17EB9C9C0039C787 /* libGHUnitIOSSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */; };
+		2C6F4EE717EB9E320039C787 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4EE617EB9E320039C787 /* libOCMock.a */; };
 		2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
@@ -120,8 +118,6 @@
 		2C1B5BCF17E2790500855D0D /* IntegrationTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "IntegrationTests-Info.plist"; sourceTree = "<group>"; };
 		2C1B5BD017E2790500855D0D /* IntegrationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IntegrationTests-Prefix.pch"; sourceTree = "<group>"; };
 		2C1B5BD417E2793000855D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C3149FB17E128AC003CA1A0 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "ThirdParty/gh-unit/Project-iOS/build/Framework/GHUnitIOS.framework"; sourceTree = "<group>"; };
-		2C314A0517E1304B003CA1A0 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = ThirdParty/ocmock/build/libOCMock.a; sourceTree = "<group>"; };
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
 		2C48EAEF17DF87F200181C3E /* Loopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +127,8 @@
 		2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SZNetworking.xcodeproj; path = "socialize-networking/SZNetworking.xcodeproj"; sourceTree = "<group>"; };
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
+		2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGHUnitIOSSimulator.a; path = "ThirdParty/socialize-networking/ThirdParty/gh-unit/Project-iOS/build/Debug-iphoneos/libGHUnitIOSSimulator.a"; sourceTree = "<group>"; };
+		2C6F4EE617EB9E320039C787 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libOCMock.a; path = "ThirdParty/socialize-networking/ThirdParty/ocmock/Source/build/Debug-iphoneos/libOCMock.a"; sourceTree = "<group>"; };
 		2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZAPIClient.h; sourceTree = "<group>"; };
 		2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClient.m; sourceTree = "<group>"; };
 		2C8C1E1017E10BB80075B527 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -155,8 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1B5BD717E279E400855D0D /* libOCMock.a in Frameworks */,
-				2C1B5BD817E279F800855D0D /* GHUnitIOS.framework in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
 				2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */,
@@ -187,8 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C314A0617E1304B003CA1A0 /* libOCMock.a in Frameworks */,
-				2C3149FC17E128AC003CA1A0 /* GHUnitIOS.framework in Frameworks */,
+				2C6F4EE717EB9E320039C787 /* libOCMock.a in Frameworks */,
+				2C6F4ECD17EB9C9C0039C787 /* libGHUnitIOSSimulator.a in Frameworks */,
 				2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */,
 				2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */,
 				2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */,
@@ -253,8 +249,8 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C314A0517E1304B003CA1A0 /* libOCMock.a */,
-				2C3149FB17E128AC003CA1A0 /* GHUnitIOS.framework */,
+				2C6F4EE617EB9E320039C787 /* libOCMock.a */,
+				2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */,
 				2C48EAF217DF87F200181C3E /* UIKit.framework */,
 				2C48EAF417DF87F200181C3E /* Foundation.framework */,
 				2C48EAF617DF87F200181C3E /* CoreGraphics.framework */,
@@ -919,7 +915,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/build/**",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -957,7 +953,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/build/**",
+					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;

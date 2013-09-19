@@ -1,9 +1,9 @@
 [submodule "ThirdParty/gh-unit"]
 	path = ThirdParty/gh-unit
-	url = https://github.com/gabriel/gh-unit.git
+	url = https://github.com/socialize/gh-unit.git
 [submodule "ThirdParty/ocmock"]
 	path = ThirdParty/ocmock
-	url = https://github.com/erikdoe/ocmock.git
+	url = https://github.com/socialize/ocmock.git
 [submodule "ThirdParty/socialize-networking"]
 	path = ThirdParty/socialize-networking
 	url = https://github.com/socialize/socialize-networking.git
