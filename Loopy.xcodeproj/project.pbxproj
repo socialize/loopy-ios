@@ -14,7 +14,6 @@
 		2C1B5BAF17E2783D00855D0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C1B5BB017E2783D00855D0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C1B5BCE17E278FC00855D0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B5BCD17E278FC00855D0D /* main.m */; };
-		2C1B5BD117E2790500855D0D /* IntegrationTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5BCF17E2790500855D0D /* IntegrationTests-Info.plist */; };
 		2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5BD317E2793000855D0D /* InfoPlist.strings */; };
 		2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
@@ -128,7 +127,7 @@
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGHUnitIOSSimulator.a; path = "ThirdParty/socialize-networking/ThirdParty/gh-unit/Project-iOS/build/Debug-iphoneos/libGHUnitIOSSimulator.a"; sourceTree = "<group>"; };
-		2C6F4EE617EB9E320039C787 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libOCMock.a; path = "ThirdParty/socialize-networking/ThirdParty/ocmock/Source/build/Debug-iphoneos/libOCMock.a"; sourceTree = "<group>"; };
+		2C6F4EE617EB9E320039C787 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "ThirdParty/socialize-networking/ThirdParty/ocmock/Source/build/Debug-iphoneos/libOCMock.a"; sourceTree = "<group>"; };
 		2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZAPIClient.h; sourceTree = "<group>"; };
 		2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClient.m; sourceTree = "<group>"; };
 		2C8C1E1017E10BB80075B527 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -560,7 +559,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1B5BD117E2790500855D0D /* IntegrationTests-Info.plist in Resources */,
 				2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,7 +669,6 @@
 		2C1B5BBB17E2783D00855D0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -710,7 +707,6 @@
 		2C1B5BBC17E2783D00855D0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -746,7 +742,6 @@
 		2C1B5BBD17E2783D00855D0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IntegrationTests.app/IntegrationTests";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -778,7 +773,6 @@
 		2C1B5BBE17E2783D00855D0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IntegrationTests.app/IntegrationTests";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -891,7 +885,6 @@
 		2CDE0E9517E122A30048B055 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -932,7 +925,6 @@
 		2CDE0E9617E122A30048B055 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
