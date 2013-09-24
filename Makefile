@@ -1,7 +1,7 @@
 test:
 	SZEventTrackingDisabled=1 WRITE_JUNIT_XML=YES RUN_CLI=1 xcodebuild -scheme UnitTests -configuration Debug -sdk iphonesimulator
 
-default: test
+default: build buildsample test
 
 clean:
 	xcodebuild -scheme "TestApp" -configuration Release -sdk iphoneos clean
