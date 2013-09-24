@@ -375,9 +375,9 @@
 			productReference = 2C1B5B9717E2783D00855D0D /* IntegrationTests.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2C48EAEE17DF87F200181C3E /* Loopy */ = {
+		2C48EAEE17DF87F200181C3E /* TestApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C48EB0C17DF87F200181C3E /* Build configuration list for PBXNativeTarget "Loopy" */;
+			buildConfigurationList = 2C48EB0C17DF87F200181C3E /* Build configuration list for PBXNativeTarget "TestApp" */;
 			buildPhases = (
 				55B23CB551514882AC930B89 /* Check Pods Manifest.lock */,
 				2C48EAEB17DF87F200181C3E /* Sources */,
@@ -389,7 +389,7 @@
 			);
 			dependencies = (
 			);
-			name = Loopy;
+			name = TestApp;
 			productName = Loopy;
 			productReference = 2C48EAEF17DF87F200181C3E /* Loopy.app */;
 			productType = "com.apple.product-type.application";
@@ -447,7 +447,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				2C48EAEE17DF87F200181C3E /* Loopy */,
+				2C48EAEE17DF87F200181C3E /* TestApp */,
 				2CDE0E6E17E122A20048B055 /* UnitTests */,
 				2C1B5B9617E2783D00855D0D /* IntegrationTests */,
 			);
@@ -896,7 +896,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C48EB0C17DF87F200181C3E /* Build configuration list for PBXNativeTarget "Loopy" */ = {
+		2C48EB0C17DF87F200181C3E /* Build configuration list for PBXNativeTarget "TestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C48EB0D17DF87F200181C3E /* Debug */,
