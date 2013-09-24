@@ -1,6 +1,0 @@
-[submodule "ThirdParty/gh-unit"]
-	path = ThirdParty/gh-unit
-	url = https://github.com/socialize/gh-unit.git
-[submodule "ThirdParty/ocmock"]
-	path = ThirdParty/ocmock
-	url = https://github.com/socialize/ocmock.git
