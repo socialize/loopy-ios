@@ -4,7 +4,7 @@ test:
 default: build buildsample test
 
 clean:
-	xcodebuild -scheme "TestApp" -configuration Release -sdk iphoneos clean
+	xcodebuild -scheme "Loopy" -configuration Release -sdk iphoneos clean
 	xcodebuild -scheme "UnitTests" -configuration Debug -sdk iphonesimulator clean
 	xcodebuild -scheme "IntegrationTests" -configuration Debug -sdk iphonesimulator clean
 	rm -rfd build
