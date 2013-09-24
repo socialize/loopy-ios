@@ -1,6 +1,5 @@
 .DS_Store
 build
-*.xcworkspace
 *xcuserdata*
 xcshareddata
 xcuserdata
