@@ -21,10 +21,9 @@
 		2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; };
-		2C6F4ECD17EB9C9C0039C787 /* libGHUnitIOSSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */; };
-		2C6F4EE717EB9E320039C787 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6F4EE617EB9E320039C787 /* libOCMock.a */; };
-		2C6F4EFA17EBA3DE0039C787 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDE0EB217E123140048B055 /* libOCMock.a */; };
-		2C6F4EFB17EBA3E30039C787 /* libGHUnitIOSSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDE0EC217E123D60048B055 /* libGHUnitIOSSimulator.a */; };
+		2C742AA417F371620063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AA017F371620063653A /* libPods.a */; };
+		2C742AD217F3912E0063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742ACE17F3912E0063653A /* libPods.a */; };
+		2C742AD617F391440063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AD517F391440063653A /* libPods.a */; };
 		2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
@@ -34,7 +33,6 @@
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2CDE0E7817E122A30048B055 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7617E122A30048B055 /* InfoPlist.strings */; };
 		2CDE0E7A17E122A30048B055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7917E122A30048B055 /* main.m */; };
-		DE18A73DC7F34137BB7E7C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FF3B14B1414F9D8911EA25 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +120,20 @@
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGHUnitIOSSimulator.a; path = "ThirdParty/socialize-networking/ThirdParty/gh-unit/Project-iOS/build/Debug-iphoneos/libGHUnitIOSSimulator.a"; sourceTree = "<group>"; };
 		2C6F4EE617EB9E320039C787 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "ThirdParty/socialize-networking/ThirdParty/ocmock/Source/build/Debug-iphoneos/libOCMock.a"; sourceTree = "<group>"; };
+		2C742A9517F370E60063653A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2C742A9717F371050063653A /* libPods-GHUnitIOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GHUnitIOS.a"; path = "Pods/build/Release-iphoneos/libPods-GHUnitIOS.a"; sourceTree = "<group>"; };
+		2C742A9817F371050063653A /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Release-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		2C742A9917F371050063653A /* libPods-SZNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SZNetworking.a"; path = "Pods/build/Release-iphoneos/libPods-SZNetworking.a"; sourceTree = "<group>"; };
+		2C742A9D17F371620063653A /* libPods-GHUnitIOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GHUnitIOS.a"; path = "Pods/build/Release-iphoneos/libPods-GHUnitIOS.a"; sourceTree = "<group>"; };
+		2C742A9E17F371620063653A /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Release-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		2C742A9F17F371620063653A /* libPods-SZNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SZNetworking.a"; path = "Pods/build/Release-iphoneos/libPods-SZNetworking.a"; sourceTree = "<group>"; };
+		2C742AA017F371620063653A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2C742ACB17F3912E0063653A /* libPods-GHUnitIOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GHUnitIOS.a"; path = "Pods/build/Debug-iphoneos/libPods-GHUnitIOS.a"; sourceTree = "<group>"; };
+		2C742ACC17F3912E0063653A /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		2C742ACD17F3912E0063653A /* libPods-SZNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SZNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-SZNetworking.a"; sourceTree = "<group>"; };
+		2C742ACE17F3912E0063653A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2C742AD317F391390063653A /* libPods-SZNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SZNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-SZNetworking.a"; sourceTree = "<group>"; };
+		2C742AD517F391440063653A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZAPIClient.h; sourceTree = "<group>"; };
 		2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClient.m; sourceTree = "<group>"; };
 		2C8C1E1017E10BB80075B527 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -146,8 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6F4EFB17EBA3E30039C787 /* libGHUnitIOSSimulator.a in Frameworks */,
-				2C6F4EFA17EBA3DE0039C787 /* libOCMock.a in Frameworks */,
+				2C742AD217F3912E0063653A /* libPods.a in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
 				2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */,
@@ -158,10 +169,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C742AD617F391440063653A /* libPods.a in Frameworks */,
 				2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */,
 				2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */,
 				2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */,
-				DE18A73DC7F34137BB7E7C64 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,8 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6F4EE717EB9E320039C787 /* libOCMock.a in Frameworks */,
-				2C6F4ECD17EB9C9C0039C787 /* libGHUnitIOSSimulator.a in Frameworks */,
+				2C742AA417F371620063653A /* libPods.a in Frameworks */,
 				2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */,
 				2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */,
 				2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */,
@@ -235,6 +245,20 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C742AD517F391440063653A /* libPods.a */,
+				2C742AD317F391390063653A /* libPods-SZNetworking.a */,
+				2C742ACB17F3912E0063653A /* libPods-GHUnitIOS.a */,
+				2C742ACC17F3912E0063653A /* libPods-OCMock.a */,
+				2C742ACD17F3912E0063653A /* libPods-SZNetworking.a */,
+				2C742ACE17F3912E0063653A /* libPods.a */,
+				2C742A9D17F371620063653A /* libPods-GHUnitIOS.a */,
+				2C742A9E17F371620063653A /* libPods-OCMock.a */,
+				2C742A9F17F371620063653A /* libPods-SZNetworking.a */,
+				2C742AA017F371620063653A /* libPods.a */,
+				2C742A9717F371050063653A /* libPods-GHUnitIOS.a */,
+				2C742A9817F371050063653A /* libPods-OCMock.a */,
+				2C742A9917F371050063653A /* libPods-SZNetworking.a */,
+				2C742A9517F370E60063653A /* libPods.a */,
 				2C6F4EE617EB9E320039C787 /* libOCMock.a */,
 				2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */,
 				2C48EAF217DF87F200181C3E /* UIKit.framework */,
@@ -665,10 +689,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n",
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/OCMock\"",
+					"\"${PODS_ROOT}/Headers/SZNetworking\"",
 				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -684,6 +708,7 @@
 		};
 		2C1B5BBC17E2783D00855D0D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20AC7383AFAB491BB995F927 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -700,10 +725,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n",
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include\n$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/OCMock\"",
+					"\"${PODS_ROOT}/Headers/SZNetworking\"",
 				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -825,9 +850,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/OCMock\"",
+					"\"${PODS_ROOT}/Headers/SZNetworking\"",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -843,6 +869,7 @@
 		};
 		2CDE0E9617E122A30048B055 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20AC7383AFAB491BB995F927 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -859,9 +886,10 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/ThirdParty/ocmock/Examples/iOS5Example/usr/include",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
+					"\"${PODS_ROOT}/Headers/OCMock\"",
+					"\"${PODS_ROOT}/Headers/SZNetworking\"",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;

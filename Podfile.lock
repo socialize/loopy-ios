@@ -1,24 +1,19 @@
 PODS:
   - GHUnitIOS (0.5.6)
   - OCMock (2.2.1)
-  - SZNetworking (0.0.1)
 
 DEPENDENCIES:
   - GHUnitIOS (from `https://raw.github.com/CocoaPods/Specs/master/GHUnitIOS/0.5.6/GHUnitIOS.podspec`)
   - OCMock (from `https://raw.github.com/CocoaPods/Specs/master/OCMock/2.2.1/OCMock.podspec`)
-  - SZNetworking (from `https://github.com/socialize/socialize-networking.git`)
 
 EXTERNAL SOURCES:
   GHUnitIOS:
     :podspec: https://raw.github.com/CocoaPods/Specs/master/GHUnitIOS/0.5.6/GHUnitIOS.podspec
   OCMock:
     :podspec: https://raw.github.com/CocoaPods/Specs/master/OCMock/2.2.1/OCMock.podspec
-  SZNetworking:
-    :git: https://github.com/socialize/socialize-networking.git
 
 SPEC CHECKSUMS:
   GHUnitIOS: bf149b2c44084eee2785ce4ac3675c3a699e509d
   OCMock: 80e4cfbc71a0e1bd28caf10a9fda27da7c4c8402
-  SZNetworking: d480b2405ea337c122f00690e6338145468cda27
 
 COCOAPODS: 0.25.0
