@@ -35,72 +35,6 @@
 		2CDE0E7A17E122A30048B055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7917E122A30048B055 /* main.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2C52935C17E7775100AA4B0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA4F55781642F2AA00B66710;
-			remoteInfo = SZNetworking;
-		};
-		2C52935E17E7775100AA4B0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA4F56A01643233C00B66710;
-			remoteInfo = "SZNetworking-profiling";
-		};
-		2C52936017E7775100AA4B0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA4F55951642F35700B66710;
-			remoteInfo = "SZNetworking Tests";
-		};
-		2CDE0EAD17E123140048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0A814632FD000B04273;
-			remoteInfo = OCMock;
-		};
-		2CDE0EAF17E123140048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0C014632FD000B04273;
-			remoteInfo = OCMockTests;
-		};
-		2CDE0EB117E123140048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0DC14632FF700B04273;
-			remoteInfo = OCMockLib;
-		};
-		2CDE0EC117E123D60048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0041C5EA13BA7B8A0015FC22;
-			remoteInfo = "GHUnitIOS (Simulator)";
-		};
-		2CDE0EC317E123D60048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0041C61313BA7C6C0015FC22;
-			remoteInfo = "GHUnitIOS (Device)";
-		};
-		2CDE0EC517E123D60048B055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0097C4A813BA7FC800D3BEF0;
-			remoteInfo = Tests;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		04FF3B14B1414F9D8911EA25 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20AC7383AFAB491BB995F927 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -115,7 +49,6 @@
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SZNetworking.xcodeproj; path = "socialize-networking/SZNetworking.xcodeproj"; sourceTree = "<group>"; };
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGHUnitIOSSimulator.a; path = "ThirdParty/socialize-networking/ThirdParty/gh-unit/Project-iOS/build/Debug-iphoneos/libGHUnitIOSSimulator.a"; sourceTree = "<group>"; };
@@ -149,8 +82,6 @@
 		2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDE0E8517E122A30048B055 /* UnitTestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E8617E122A30048B055 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2CDE0EA717E123140048B055 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ocmock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
-		2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHUnitIOS.xcodeproj; path = "gh-unit/Project-iOS/GHUnitIOS.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +155,6 @@
 				2C8C1E0E17E10BB80075B527 /* TestApp */,
 				2CDE0E7317E122A30048B055 /* UnitTests */,
 				2C1B5B9B17E2783D00855D0D /* IntegrationTests */,
-				2C8C1E1617E10BB80075B527 /* ThirdParty */,
 				2C48EAF117DF87F200181C3E /* Frameworks */,
 				2C48EAF017DF87F200181C3E /* Products */,
 				20AC7383AFAB491BB995F927 /* Pods.xcconfig */,
@@ -270,16 +200,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2C52934D17E7775000AA4B0C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2C52935D17E7775100AA4B0C /* libSZNetworking.a */,
-				2C52935F17E7775100AA4B0C /* libSZNetworking-profiling.a */,
-				2C52936117E7775100AA4B0C /* SZNetworking Tests.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2C6D366217E3ACAA00CF1199 /* API Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,16 +237,6 @@
 			path = TestApp;
 			sourceTree = "<group>";
 		};
-		2C8C1E1617E10BB80075B527 /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */,
-				2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */,
-				2CDE0EA717E123140048B055 /* OCMock.xcodeproj */,
-			);
-			path = ThirdParty;
-			sourceTree = "<group>";
-		};
 		2C8C1E1D17E10BD60075B527 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,26 +267,6 @@
 				2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CDE0EA817E123140048B055 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2CDE0EAE17E123140048B055 /* OCMock.framework */,
-				2CDE0EB017E123140048B055 /* OCMockTests.octest */,
-				2CDE0EB217E123140048B055 /* libOCMock.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2CDE0EBB17E123D60048B055 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2CDE0EC217E123D60048B055 /* libGHUnitIOSSimulator.a */,
-				2CDE0EC417E123D60048B055 /* libGHUnitIOSDevice.a */,
-				2CDE0EC617E123D60048B055 /* Tests.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,20 +345,6 @@
 			mainGroup = 2C48EAE617DF87F100181C3E;
 			productRefGroup = 2C48EAF017DF87F200181C3E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 2CDE0EBB17E123D60048B055 /* Products */;
-					ProjectRef = 2CDE0EBA17E123D60048B055 /* GHUnitIOS.xcodeproj */;
-				},
-				{
-					ProductGroup = 2CDE0EA817E123140048B055 /* Products */;
-					ProjectRef = 2CDE0EA717E123140048B055 /* OCMock.xcodeproj */;
-				},
-				{
-					ProductGroup = 2C52934D17E7775000AA4B0C /* Products */;
-					ProjectRef = 2C52934C17E7775000AA4B0C /* SZNetworking.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				2C48EAEE17DF87F200181C3E /* TestApp */,
@@ -477,72 +353,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		2C52935D17E7775100AA4B0C /* libSZNetworking.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSZNetworking.a;
-			remoteRef = 2C52935C17E7775100AA4B0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2C52935F17E7775100AA4B0C /* libSZNetworking-profiling.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSZNetworking-profiling.a";
-			remoteRef = 2C52935E17E7775100AA4B0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2C52936117E7775100AA4B0C /* SZNetworking Tests.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "SZNetworking Tests.app";
-			remoteRef = 2C52936017E7775100AA4B0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EAE17E123140048B055 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = 2CDE0EAD17E123140048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EB017E123140048B055 /* OCMockTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockTests.octest;
-			remoteRef = 2CDE0EAF17E123140048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EB217E123140048B055 /* libOCMock.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOCMock.a;
-			remoteRef = 2CDE0EB117E123140048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EC217E123D60048B055 /* libGHUnitIOSSimulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libGHUnitIOSSimulator.a;
-			remoteRef = 2CDE0EC117E123D60048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EC417E123D60048B055 /* libGHUnitIOSDevice.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libGHUnitIOSDevice.a;
-			remoteRef = 2CDE0EC317E123D60048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2CDE0EC617E123D60048B055 /* Tests.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Tests.app;
-			remoteRef = 2CDE0EC517E123D60048B055 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2C1B5B9517E2783D00855D0D /* Resources */ = {
