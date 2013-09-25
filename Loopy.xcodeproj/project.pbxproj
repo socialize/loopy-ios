@@ -113,7 +113,7 @@
 		2C1B5BD417E2793000855D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
-		2C48EAEF17DF87F200181C3E /* Loopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C48EAEF17DF87F200181C3E /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -224,7 +224,7 @@
 		2C48EAF017DF87F200181C3E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C48EAEF17DF87F200181C3E /* Loopy.app */,
+				2C48EAEF17DF87F200181C3E /* TestApp.app */,
 				2CDE0E6F17E122A20048B055 /* UnitTests.app */,
 				2CDE0E8517E122A30048B055 /* UnitTestsTests.xctest */,
 				2C1B5B9717E2783D00855D0D /* IntegrationTests.app */,
@@ -391,7 +391,7 @@
 			);
 			name = TestApp;
 			productName = Loopy;
-			productReference = 2C48EAEF17DF87F200181C3E /* Loopy.app */;
+			productReference = 2C48EAEF17DF87F200181C3E /* TestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2CDE0E6E17E122A20048B055 /* UnitTests */ = {
