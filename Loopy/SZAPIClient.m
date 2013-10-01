@@ -15,7 +15,6 @@ NSString *const OPEN = @"/open";
 
 @synthesize responseData;
 @synthesize urlPrefix;
-//@synthesize connection;
 
 //constructor with specified endpoint
 - (id)initWithURLPrefix:(NSString *)url {
@@ -26,39 +25,35 @@ NSString *const OPEN = @"/open";
     return self;
 }
 
-- (void)open:(NSDictionary *)openJSON withDelegate:(id)delegate {
-    self.responseData = [NSMutableData data];
-    BOOL isValid = [NSJSONSerialization isValidJSONObject:openJSON];
-    if(isValid) {
-        NSData *jsonOpenObj = [SZJSONUtils toJSONData:openJSON];
-        NSString *jsonOpenObjStr = [SZJSONUtils toJSONString:jsonOpenObj];
-        if (jsonOpenObj) {
-            jsonOpenObjStr = [SZJSONUtils toJSONString:jsonOpenObj];
-        }
+//factory method for URLConnection
+- (NSURLConnection *)newURLConnection:(NSURLRequest *)request {
+    return [[NSURLConnection alloc] initWithRequest:request
+                                           delegate:self
+                                   startImmediately:NO];
+}
 
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, OPEN];
-        NSURL *url = [NSURL URLWithString:urlStr];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:60.0];
-        [request setHTTPMethod:@"POST"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:[NSString stringWithFormat:@"%d", [jsonOpenObjStr length]] forHTTPHeaderField:@"Content-Length"];
-        [request setHTTPBody:jsonOpenObj];
-        
-        //delegate is self if not specified
-        if(!delegate) {
-            delegate = self;
-        }
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:delegate startImmediately:YES];
-        if(!connection) {
-            NSLog(@"Error creating URL connection.");
-        }
-    }
-    else {
-        //TODO handle error
-    }
+//factory method for URLRequest for specified JSON data and endpoint
+- (NSURLRequest *)newURLRequest:(NSData *)jsonData
+                         length:(NSNumber *)length
+                       endpoint:(NSString *)endpoint {
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[length stringValue] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:jsonData];
+    
+    return request;
+}
+
+//calls open endpoint
+- (void)open:(NSDictionary *)jsonDict withConnection:(NSURLConnection *)connection {
+    self.responseData = [NSMutableData data];
+    [connection start];
 }
 
 //protocol impl
@@ -84,42 +79,17 @@ NSString *const OPEN = @"/open";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"connectionDidFinishLoading");
     NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
-    
-    //try converting to JSON
-    NSError *error = nil;
-    id result = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:&error];
-    
-    //error of some kind
-    if(!result && self.responseData) {
-        NSLog(@"result: %@", self.responseData);
-        NSString *resultStr = [[NSString alloc] initWithBytes:[self.responseData bytes] length:[self.responseData length] encoding: NSASCIIStringEncoding];
-        NSLog(@"resultStr: %@", resultStr);
-        
-        //error
-        if(error) {
-            NSLog(@"ERROR code: %d", error.code);
-            for(id key in error.userInfo) {
-                id value = [error.userInfo objectForKey:key];
-                NSString *keyAsString = (NSString *)key;
-                NSString *valueAsString = (NSString *)value;
-                
-                NSLog(@"ERROR key: %@", keyAsString);
-                NSLog(@"ERROR value: %@", valueAsString);
-            }
-        }
-    }
-    //valid JSON
-    else {
-        NSDictionary *resultDict = (NSDictionary *)result;
-        // show all values
-        for(id key in resultDict) {
-            id value = [resultDict objectForKey:key];
-            NSString *keyAsString = (NSString *)key;
-            NSString *valueAsString = (NSString *)value;
-            
-            NSLog(@"key: %@", keyAsString);
-            NSLog(@"value: %@", valueAsString);
-        }
-    }
 }
+
+//returns response JSON data as NSDictionary
+- (NSDictionary *)responseDataToDictionary {
+    NSError *error = nil;
+    return (NSDictionary *)[NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:&error];
+}
+
+//returns Stringified version of response JSON data
+- (NSString *)responseDataToString {
+    return [[NSString alloc] initWithBytes:[self.responseData bytes] length:[self.responseData length] encoding: NSASCIIStringEncoding];
+}
+
 @end

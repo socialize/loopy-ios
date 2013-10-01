@@ -15,6 +15,8 @@
 		2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
 		2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
+		2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */; };
+		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
@@ -45,6 +47,9 @@
 		2C1B5BD417E2793000855D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
+		2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtilsTests.m; sourceTree = "<group>"; };
+		2C3E069317FA418C00FF751B /* SZTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestUtils.h; sourceTree = "<group>"; };
+		2C3E069417FA418C00FF751B /* SZTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestUtils.m; sourceTree = "<group>"; };
 		2C48EAEF17DF87F200181C3E /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -252,6 +257,9 @@
 			isa = PBXGroup;
 			children = (
 				2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */,
+				2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */,
+				2C3E069317FA418C00FF751B /* SZTestUtils.h */,
+				2C3E069417FA418C00FF751B /* SZTestUtils.m */,
 				2C314A1117E134C9003CA1A0 /* Resources */,
 				2CDE0E7417E122A30048B055 /* Supporting Files */,
 			);
@@ -444,6 +452,8 @@
 				2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */,
 				2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
+				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
+				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
