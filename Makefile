@@ -1,5 +1,5 @@
 test:
-	SZEventTrackingDisabled=1 WRITE_JUNIT_XML=YES RUN_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme UnitTests -configuration Debug -sdk iphonesimulator
+	WRITE_JUNIT_XML=YES GHUNIT_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator build
 
 default: build buildsample test
 
@@ -10,4 +10,4 @@ clean:
 	rm -rfd build
 
 integration-tests:
-	WRITE_JUNIT_XML=YES RUN_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme IntegrationTests -configuration Debug -sdk iphonesimulator build
+	WRITE_JUNIT_XML=YES GHUNIT_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme "IntegrationTests" -configuration Debug -sdk iphonesimulator build

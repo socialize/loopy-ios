@@ -293,6 +293,7 @@
 				2C1B5B9317E2783D00855D0D /* Sources */,
 				2C1B5B9417E2783D00855D0D /* Frameworks */,
 				2C1B5B9517E2783D00855D0D /* Resources */,
+				2C34327E17FB90160039A2D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -329,6 +330,7 @@
 				2CDE0E6B17E122A20048B055 /* Sources */,
 				2CDE0E6C17E122A20048B055 /* Frameworks */,
 				2CDE0E6D17E122A20048B055 /* Resources */,
+				2C34327117FB883D0039A2D8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -410,6 +412,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C34327117FB883D0039A2D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh Scripts/RunTests.sh";
+			showEnvVarsInLog = 0;
+		};
+		2C34327E17FB90160039A2D8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh Scripts/RunTests.sh";
 			showEnvVarsInLog = 0;
 		};
 		55B23CB551514882AC930B89 /* Check Pods Manifest.lock */ = {
