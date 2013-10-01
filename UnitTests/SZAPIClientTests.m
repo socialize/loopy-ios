@@ -14,6 +14,7 @@
 
 @interface SZAPIClientTests : GHTestCase {}
 @property id mockAPIClient;
+
 @end
 
 @implementation SZAPIClientTests
@@ -35,7 +36,7 @@
     NSURLConnection *dummyUrlConnection = [[NSURLConnection alloc] initWithRequest:dummyRequest
                                                                           delegate:nil
                                                                   startImmediately:NO];
-    [[[self.mockAPIClient stub] andReturn:dummyUrlConnection] newURLConnection:[OCMArg any]];
+    [[[self.mockAPIClient stub] andReturn:dummyUrlConnection] newURLConnection:[OCMArg any] delegate:self.mockAPIClient];
     
     //do open with test JSON data
     [self.mockAPIClient open:[SZTestUtils jsonForOpen]

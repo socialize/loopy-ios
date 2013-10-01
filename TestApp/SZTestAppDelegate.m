@@ -8,6 +8,8 @@
 
 #import "SZTestAppDelegate.h"
 #import "SZAPIClient.h"
+#import "SZTestUtils.h"
+#import "SZJSONUtils.h"
 
 @implementation SZTestAppDelegate
 
@@ -18,9 +20,17 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    
     //SIMPLE TEST -- this calls open on the APIClient
+    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
+    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
     SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1"];
-    [apiClient open:[self jsonForOpen] withDelegate:nil];
+    NSURLRequest *request = [apiClient newURLRequest:jsonData
+                                              length:[NSNumber numberWithInt:[jsonStr length]]
+                                            endpoint:OPEN];
+    NSURLConnection *connection = [apiClient newURLConnection:request delegate:apiClient];
+    [apiClient open:jsonDict withConnection:connection];
     
     return YES;
 }
@@ -51,43 +61,5 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
-- (NSDictionary *)jsonForOpen {
-    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithDouble:12.456],@"lat",
-                            [NSNumber numberWithDouble:78.900],@"lon",
-                            nil];
-    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"iPhone 4S",@"model",
-                               @"ios",@"os",
-                               @"6.1",@"osv",
-                               @"verizon",@"carrier",
-                               @"on",@"wifi",
-                               geoObj,@"geo",
-                               nil];
-    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"com.socialize.appname",@"id",
-                            @"App Name",@"name",
-                            @"123.4",@"version",
-                            nil];
-    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"objc",@"lang",
-                               @"1.3",@"version",
-                               nil];
-    NSDictionary *mockObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"200",@"http",
-                             nil];
-    NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"69",@"stdid",
-                             [NSNumber numberWithInt:1234567890],@"timestamp",
-                             @"ABCDEF",@"referrer",
-                             deviceObj,@"device",
-                             appObj,@"app",
-                             clientObj,@"client",
-                             mockObj,@"mock",
-                             nil];
-    return openObj;
-}
-
 
 @end

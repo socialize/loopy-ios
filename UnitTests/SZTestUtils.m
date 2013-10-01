@@ -34,7 +34,7 @@
                                @"1.3",@"version",
                                nil];
     NSDictionary *mockObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"200",@"http",
+                             [NSNumber numberWithInt:200],@"http",
                              nil];
     NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
                              @"69",@"stdid",

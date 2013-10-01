@@ -15,6 +15,11 @@
 		2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
 		2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
+		2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */; };
+		2C34326D17FB6CE60039A2D8 /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
+		2C34326E17FB6CFA0039A2D8 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
+		2C34326F17FB6D130039A2D8 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
+		2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
 		2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */; };
 		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -22,7 +27,6 @@
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
-		2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; };
 		2C742AA417F371620063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AA017F371620063653A /* libPods.a */; };
 		2C742AD217F3912E0063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742ACE17F3912E0063653A /* libPods.a */; };
 		2C742AD617F391440063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AD517F391440063653A /* libPods.a */; };
@@ -47,6 +51,7 @@
 		2C1B5BD417E2793000855D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
+		2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIEndpointTests.m; sourceTree = "<group>"; };
 		2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtilsTests.m; sourceTree = "<group>"; };
 		2C3E069317FA418C00FF751B /* SZTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestUtils.h; sourceTree = "<group>"; };
 		2C3E069417FA418C00FF751B /* SZTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestUtils.m; sourceTree = "<group>"; };
@@ -129,6 +134,7 @@
 		2C1B5B9B17E2783D00855D0D /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */,
 				2C1B5BD217E2791C00855D0D /* Supporting Files */,
 			);
 			path = IntegrationTests;
@@ -428,6 +434,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C34326F17FB6D130039A2D8 /* SZAPIClient.m in Sources */,
+				2C34326E17FB6CFA0039A2D8 /* SZJSONUtils.m in Sources */,
+				2C34326D17FB6CE60039A2D8 /* SZTestUtils.m in Sources */,
+				2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,7 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6D367617E3BAEC00CF1199 /* SZJSONUtils.h in Sources */,
+				2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */,
 				2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,

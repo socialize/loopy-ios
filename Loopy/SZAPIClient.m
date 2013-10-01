@@ -13,6 +13,7 @@
 
 NSString *const OPEN = @"/open";
 
+@synthesize responseCode;
 @synthesize responseData;
 @synthesize urlPrefix;
 
@@ -26,9 +27,9 @@ NSString *const OPEN = @"/open";
 }
 
 //factory method for URLConnection
-- (NSURLConnection *)newURLConnection:(NSURLRequest *)request {
+- (NSURLConnection *)newURLConnection:(NSURLRequest *)request delegate:(id)delegate {
     return [[NSURLConnection alloc] initWithRequest:request
-                                           delegate:self
+                                           delegate:delegate
                                    startImmediately:NO];
 }
 
@@ -59,8 +60,8 @@ NSString *const OPEN = @"/open";
 //protocol impl
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    int code = [httpResponse statusCode];
-    NSLog(@"didReceiveResponse; code: %d", code);
+    self.responseCode = [httpResponse statusCode];
+    NSLog(@"didReceiveResponse; code: %d", self.responseCode);
     [self.responseData setLength:0];
 }
 
@@ -78,7 +79,14 @@ NSString *const OPEN = @"/open";
 //protocol impl
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"connectionDidFinishLoading");
-    NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
+    
+    //success
+    if(self.responseCode == 200) {
+        NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
+    }
+    else {
+        NSLog(@"FAILED; responseCode: %d; responseData: %@", self.responseCode, [self responseDataToString]);
+    }
 }
 
 //returns response JSON data as NSDictionary
