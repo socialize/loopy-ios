@@ -1,0 +1,1 @@
+../../SZNetworking/SZNetworking/Functional.h
