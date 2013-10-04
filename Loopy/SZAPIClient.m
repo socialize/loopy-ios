@@ -13,28 +13,22 @@
 
 NSString *const OPEN = @"/open";
 
-@synthesize responseCode;
-@synthesize responseData;
 @synthesize urlPrefix;
+@synthesize operationQueue;
 
 //constructor with specified endpoint
 - (id)initWithURLPrefix:(NSString *)url {
     self = [super init];
     if(self) {
         self.urlPrefix = url;
+        self.operationQueue = [[NSOperationQueue alloc] init];
+        self.operationQueue.maxConcurrentOperationCount = 5;
     }
     return self;
 }
 
-//factory method for URLConnection
-- (NSURLConnection *)newURLConnection:(NSURLRequest *)request delegate:(id)delegate {
-    return [[NSURLConnection alloc] initWithRequest:request
-                                           delegate:delegate
-                                   startImmediately:NO];
-}
-
 //factory method for URLRequest for specified JSON data and endpoint
-- (NSURLRequest *)newURLRequest:(NSData *)jsonData
+- (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint {
     NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
@@ -51,53 +45,22 @@ NSString *const OPEN = @"/open";
     return request;
 }
 
-//calls open endpoint
-- (void)open:(NSDictionary *)jsonDict withConnection:(NSURLConnection *)connection {
-    self.responseData = [NSMutableData data];
-    [connection start];
+//factory method for URLRequestOperation for specified request
+- (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request {
+    return [[SZURLRequestOperation alloc] initWithURLRequest:request];
 }
 
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-    self.responseCode = [httpResponse statusCode];
-    NSLog(@"didReceiveResponse; code: %d", self.responseCode);
-    [self.responseData setLength:0];
-}
-
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-//protocol impl
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError");
-    NSLog(@"Connection failed: %@", [error description]);
-}
-
-//protocol impl
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectionDidFinishLoading");
-    
-    //success
-    if(self.responseCode == 200) {
-        NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
-    }
-    else {
-        NSLog(@"FAILED; responseCode: %d; responseData: %@", self.responseCode, [self responseDataToString]);
-    }
-}
-
-//returns response JSON data as NSDictionary
-- (NSDictionary *)responseDataToDictionary {
-    NSError *error = nil;
-    return (NSDictionary *)[NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingAllowFragments error:&error];
-}
-
-//returns Stringified version of response JSON data
-- (NSString *)responseDataToString {
-    return [[NSString alloc] initWithBytes:[self.responseData bytes] length:[self.responseData length] encoding: NSASCIIStringEncoding];
+//calls open endpoint, including manufacturing URLRequest for it
+- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
+    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
+    NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
+    NSMutableURLRequest *request = [self newURLRequest:jsonData
+                                                length:jsonLength
+                                              endpoint:OPEN];
+    SZURLRequestOperation *operation = [self newURLRequestOperation:request];
+    operation.URLCompletionBlock = callback;
+    [operationQueue addOperation:operation];
 }
 
 @end

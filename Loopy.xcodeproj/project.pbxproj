@@ -39,6 +39,7 @@
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2CDE0E7817E122A30048B055 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7617E122A30048B055 /* InfoPlist.strings */; };
 		2CDE0E7A17E122A30048B055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7917E122A30048B055 /* main.m */; };
+		2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,8 @@
 		2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDE0E8517E122A30048B055 /* UnitTestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E8617E122A30048B055 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SZURLRequestOperation+Testing.h"; sourceTree = "<group>"; };
+		2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SZURLRequestOperation+Testing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +265,7 @@
 		2CDE0E7317E122A30048B055 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CF669CB17FF4B7700F5060D /* Test Helpers */,
 				2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */,
 				2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */,
 				2C3E069317FA418C00FF751B /* SZTestUtils.h */,
@@ -281,6 +285,15 @@
 				2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2CF669CB17FF4B7700F5060D /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */,
+				2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */,
+			);
+			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -494,6 +507,7 @@
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
 				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,
+				2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

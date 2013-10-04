@@ -7,22 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SZNetworking/SZNetworking.h>
 
 @interface SZAPIClient : NSObject <NSURLConnectionDataDelegate>
 
 extern NSString *const OPEN;
 
-@property (nonatomic) int responseCode;
-@property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSString *urlPrefix;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 - (id)initWithURLPrefix:(NSString *)url;
-- (NSURLConnection *)newURLConnection:(NSURLRequest *)request delegate:(id)delegate;
-- (NSURLRequest *)newURLRequest:(NSData *)jsonData
+- (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
-- (void)open:(NSDictionary *)jsonDict withConnection:(NSURLConnection *)connection;
-- (NSDictionary *)responseDataToDictionary;
-- (NSString *)responseDataToString;
+- (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request;
+- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback; //TEST with NEW SZNetworking
 
 @end

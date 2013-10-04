@@ -24,9 +24,17 @@
     return jsonObj;
 }
 
-//convert JSON dictionary to String
+//convert JSON dictionary to NSString
 + (NSString *)toJSONString:(NSData *)jsonData {
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+//convert JSON data to NSDictionary
++ (NSDictionary *)toJSONDictionary:(NSData *)jsonData {
+    NSError *error = nil;
+    return (NSDictionary *)[NSJSONSerialization JSONObjectWithData:jsonData
+                                                           options:NSJSONReadingAllowFragments
+                                                             error:&error];
 }
 
 //error logging

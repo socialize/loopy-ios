@@ -10,6 +10,7 @@
 #import "SZAPIClient.h"
 #import "SZTestUtils.h"
 #import "SZJSONUtils.h"
+#import <SZNetworking/SZNetworking.h>
 
 @implementation SZTestAppDelegate
 
@@ -20,17 +21,19 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    
     //SIMPLE TEST -- this calls open on the APIClient
     NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
-    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
-    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
     SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1"];
-    NSURLRequest *request = [apiClient newURLRequest:jsonData
-                                              length:[NSNumber numberWithInt:[jsonStr length]]
-                                            endpoint:OPEN];
-    NSURLConnection *connection = [apiClient newURLConnection:request delegate:apiClient];
-    [apiClient open:jsonDict withConnection:connection];
+    [apiClient open:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if(error == nil) {
+            NSLog(@"EPIC SUCCEED!");
+            id result = [data objectFromJSONData];
+            NSLog(@"%@", result);
+        }
+        else {
+            NSLog(@"#FAIL! Error code: %d", error.code);
+        }
+    }];
     
     return YES;
 }

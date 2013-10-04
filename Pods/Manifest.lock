@@ -1,19 +1,30 @@
 PODS:
-  - GHUnitIOS (0.5.6)
-  - OCMock (2.2.1)
+  - GHUnitIOS (0.5.6.1)
+  - NSData+Base64 (1.0.0)
+  - OAuthCore (0.0.1):
+    - NSData+Base64
+  - OCMock (2.0.1.1)
+  - SZNetworking (0.4):
+    - OAuthCore
 
 DEPENDENCIES:
-  - GHUnitIOS (from `https://raw.github.com/CocoaPods/Specs/master/GHUnitIOS/0.5.6/GHUnitIOS.podspec`)
-  - OCMock (from `https://raw.github.com/CocoaPods/Specs/master/OCMock/2.2.1/OCMock.podspec`)
+  - GHUnitIOS (from `https://raw.github.com/socialize/gh-unit/master/GHUnitIOS.podspec`)
+  - OCMock (from `https://raw.github.com/socialize/ocmock/master/OCMock.podspec`)
+  - SZNetworking (from `https://raw.github.com/socialize/Specs/master/SZNetworking/0.4/SZNetworking.podspec`)
 
 EXTERNAL SOURCES:
   GHUnitIOS:
-    :podspec: https://raw.github.com/CocoaPods/Specs/master/GHUnitIOS/0.5.6/GHUnitIOS.podspec
+    :podspec: https://raw.github.com/socialize/gh-unit/master/GHUnitIOS.podspec
   OCMock:
-    :podspec: https://raw.github.com/CocoaPods/Specs/master/OCMock/2.2.1/OCMock.podspec
+    :podspec: https://raw.github.com/socialize/ocmock/master/OCMock.podspec
+  SZNetworking:
+    :podspec: https://raw.github.com/socialize/Specs/master/SZNetworking/0.4/SZNetworking.podspec
 
 SPEC CHECKSUMS:
-  GHUnitIOS: bf149b2c44084eee2785ce4ac3675c3a699e509d
-  OCMock: 80e4cfbc71a0e1bd28caf10a9fda27da7c4c8402
+  GHUnitIOS: 235566a6ecbe574b9a6d9269ccf2bf9ec2294774
+  NSData+Base64: 36c4e5b6479259c1a68866ccd2a8dd385c9744f7
+  OAuthCore: 4164eec5e28c68f794953446e68f91054ffe570c
+  OCMock: 30ccfe69ecd85c77e9f25f5e098cae3b7ba117ac
+  SZNetworking: 1a9da9a986aa3f8b4bccf194b84747e10955beb3
 
 COCOAPODS: 0.25.0

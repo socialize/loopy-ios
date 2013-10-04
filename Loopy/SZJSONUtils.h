@@ -11,6 +11,7 @@
 @interface SZJSONUtils : NSObject
 
 + (NSData *)toJSONData:(NSDictionary *)jsonDict;
-+ (NSString *)toJSONString:(NSData *)jsonDict;
++ (NSString *)toJSONString:(NSData *)jsonData;
++ (NSDictionary *)toJSONDictionary:(NSData *)jsonData;
 
 @end
