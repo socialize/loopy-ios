@@ -471,6 +471,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = XcodeCoverage/exportenv.sh;
+			showEnvVarsInLog = 0;
 		};
 		2C522CD317FF7F3F009C1F43 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
