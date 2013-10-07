@@ -500,6 +500,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd XcodeCoverage\n./getcov";
+			showEnvVarsInLog = 0;
 		};
 		55B23CB551514882AC930B89 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
