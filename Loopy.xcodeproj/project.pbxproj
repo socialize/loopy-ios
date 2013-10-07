@@ -60,6 +60,7 @@
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C522CD117FF79C3009C1F43 /* libprofile_rt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libprofile_rt.dylib; path = ../../../../usr/lib/libprofile_rt.dylib; sourceTree = "<group>"; };
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
 		2C6F4ECC17EB9C9C0039C787 /* libGHUnitIOSSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGHUnitIOSSimulator.a; path = "ThirdParty/socialize-networking/ThirdParty/gh-unit/Project-iOS/build/Debug-iphoneos/libGHUnitIOSSimulator.a"; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C522CD117FF79C3009C1F43 /* libprofile_rt.dylib */,
 				2C742AD517F391440063653A /* libPods.a */,
 				2C742AD317F391390063653A /* libPods-SZNetworking.a */,
 				2C742ACB17F3912E0063653A /* libPods-GHUnitIOS.a */,
@@ -306,6 +308,7 @@
 				2C1B5B9317E2783D00855D0D /* Sources */,
 				2C1B5B9417E2783D00855D0D /* Frameworks */,
 				2C1B5B9517E2783D00855D0D /* Resources */,
+				2C3FE4BF18033E3C00BAF591 /* ShellScript */,
 				2C34327E17FB90160039A2D8 /* ShellScript */,
 			);
 			buildRules = (
@@ -343,6 +346,7 @@
 				2CDE0E6B17E122A20048B055 /* Sources */,
 				2CDE0E6C17E122A20048B055 /* Frameworks */,
 				2CDE0E6D17E122A20048B055 /* Resources */,
+				2C522CD317FF7F3F009C1F43 /* ShellScript */,
 				2C34327117FB883D0039A2D8 /* ShellScript */,
 			);
 			buildRules = (
@@ -438,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh Scripts/RunTests.sh";
+			shellScript = Scripts/RunTests.sh;
 			showEnvVarsInLog = 0;
 		};
 		2C34327E17FB90160039A2D8 /* ShellScript */ = {
@@ -453,6 +457,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh Scripts/RunTests.sh";
+			showEnvVarsInLog = 0;
+		};
+		2C3FE4BF18033E3C00BAF591 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
+		2C522CD317FF7F3F009C1F43 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
 			showEnvVarsInLog = 0;
 		};
 		55B23CB551514882AC930B89 /* Check Pods Manifest.lock */ = {
@@ -632,6 +663,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -641,6 +674,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -663,9 +697,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -713,6 +750,8 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -723,6 +762,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers\"",
 					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
@@ -732,6 +772,7 @@
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -753,12 +794,15 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers\"",
 					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
@@ -768,6 +812,7 @@
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
