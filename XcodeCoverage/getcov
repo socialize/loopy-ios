@@ -9,18 +9,20 @@ source envcov.sh
 
 remove_old_report()
 {
-    pushd ${BUILT_PRODUCTS_DIR}
-    if [ -e lcov ]; then
-        rm -r lcov
+    # TODO this blows away the ENTIRE build directory
+    # will need to make this more selective as build develops
+    pushd ${PROJECT_DIR}
+    if [ -e build ]; then
+        rm -r build
     fi
     popd
 }
 
 enter_lcov_dir()
 {
-    cd ${BUILT_PRODUCTS_DIR}
-    mkdir lcov
-    cd lcov
+    cd ${PROJECT_DIR}
+    mkdir -p build/test-coverage
+    cd build/test-coverage
 }
 
 gather_coverage()
@@ -37,9 +39,11 @@ exclude_data()
 
 generate_report()
 {
-    "${LCOV_PATH}/genhtml" --output-directory . ${LCOV_INFO}
-    # open index.html
+    "${LCOV_PATH}/genhtml" --output-directory ${COVERAGE_OUTPUT_PATH} ${LCOV_INFO}
 }
+
+# create this env var here; TODO improve this whole sheel script setup
+COVERAGE_OUTPUT_PATH=${PROJECT_DIR}/build/test-coverage
 
 remove_old_report
 enter_lcov_dir
