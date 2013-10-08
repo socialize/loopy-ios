@@ -21,8 +21,8 @@ remove_old_report()
 enter_lcov_dir()
 {
     cd ${PROJECT_DIR}
-    mkdir -p build/test-coverage
-    cd build/test-coverage
+    mkdir -p build/test-coverage/combined
+    cd build/test-coverage/combined
 }
 
 gather_coverage()
@@ -42,8 +42,8 @@ generate_report()
     "${LCOV_PATH}/genhtml" --output-directory ${COVERAGE_OUTPUT_PATH} ${LCOV_INFO}
 }
 
-# create this env var here; TODO improve this whole sheel script setup
-COVERAGE_OUTPUT_PATH=${PROJECT_DIR}/build/test-coverage
+# create this env var here; TODO improve this whole shell script setup
+COVERAGE_OUTPUT_PATH=${PROJECT_DIR}/build/test-coverage/combined
 
 remove_old_report
 enter_lcov_dir
