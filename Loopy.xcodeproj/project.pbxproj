@@ -310,6 +310,7 @@
 				2C1B5B9517E2783D00855D0D /* Resources */,
 				2C3FE4BF18033E3C00BAF591 /* ShellScript */,
 				2C34327E17FB90160039A2D8 /* ShellScript */,
+				2CB8BF2B1804A4EA009DCB50 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -486,6 +487,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = XcodeCoverage/exportenv.sh;
+			showEnvVarsInLog = 0;
+		};
+		2CB8BF2B1804A4EA009DCB50 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd XcodeCoverage\n./getcov";
 			showEnvVarsInLog = 0;
 		};
 		2CE116D21803627A00EFF9E4 /* ShellScript */ = {

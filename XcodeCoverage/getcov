@@ -9,11 +9,9 @@ source envcov.sh
 
 remove_old_report()
 {
-    # TODO this blows away the ENTIRE build directory
-    # will need to make this more selective as build develops
     pushd ${PROJECT_DIR}
-    if [ -e build ]; then
-        rm -r build
+    if [ -e ${COVERAGE_OUTPUT_DIR} ]; then
+        rm -r ${COVERAGE_OUTPUT_DIR}
     fi
     popd
 }
@@ -21,8 +19,8 @@ remove_old_report()
 enter_lcov_dir()
 {
     cd ${PROJECT_DIR}
-    mkdir -p build/test-coverage/combined
-    cd build/test-coverage/combined
+    mkdir -p ${COVERAGE_OUTPUT_DIR}
+    cd ${COVERAGE_OUTPUT_DIR}
 }
 
 gather_coverage()
@@ -34,16 +32,14 @@ exclude_data()
 {
     "${LCOV}" --remove ${LCOV_INFO} "/Applications/Xcode.app/*" -d "${OBJ_DIR}" -o ${LCOV_INFO}
     "${LCOV}" --remove ${LCOV_INFO} "main.m" -d "${OBJ_DIR}" -o ${LCOV_INFO}
-    # Remove other patterns here...
+    "${LCOV}" --remove ${LCOV_INFO} "UnitTests/**" -d "${OBJ_DIR}" -o ${LCOV_INFO}
+    "${LCOV}" --remove ${LCOV_INFO} "IntegrationTests/**" -d "${OBJ_DIR}" -o ${LCOV_INFO}
 }
 
 generate_report()
 {
-    "${LCOV_PATH}/genhtml" --output-directory ${COVERAGE_OUTPUT_PATH} ${LCOV_INFO}
+    "${LCOV_PATH}/genhtml" --output-directory ${COVERAGE_OUTPUT_PATH} ${LCOV_INFO} --legend
 }
-
-# create this env var here; TODO improve this whole shell script setup
-COVERAGE_OUTPUT_PATH=${PROJECT_DIR}/build/test-coverage/combined
 
 remove_old_report
 enter_lcov_dir
