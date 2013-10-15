@@ -7,6 +7,7 @@
 //
 
 #import "SZTestAppDelegate.h"
+#import "SZRootViewController.h"
 #import "SZAPIClient.h"
 #import "SZTestUtils.h"
 #import "SZJSONUtils.h"
@@ -17,23 +18,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[SZRootViewController alloc] initWithNibName:@"SZRootViewController" bundle:nil];
     [self.window makeKeyAndVisible];
     
     //SIMPLE TEST -- this calls open on the APIClient
-    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1"];
-    [apiClient open:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if(error == nil) {
-            NSLog(@"EPIC SUCCEED!");
-            id result = [data objectFromJSONData];
-            NSLog(@"%@", result);
-        }
-        else {
-            NSLog(@"#FAIL! Error code: %d", error.code);
-        }
-    }];
+//    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+//    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1"];
+//    [apiClient open:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+//        if(error == nil) {
+//            NSLog(@"EPIC SUCCEED!");
+//            id result = [data objectFromJSONData];
+//            NSLog(@"%@", result);
+//        }
+//        else {
+//            NSLog(@"#FAIL! Error code: %d", error.code);
+//        }
+//    }];
     
     return YES;
 }

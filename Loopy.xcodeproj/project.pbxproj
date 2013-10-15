@@ -12,6 +12,8 @@
 		2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C1B5BCE17E278FC00855D0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B5BCD17E278FC00855D0D /* main.m */; };
 		2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B5BD317E2793000855D0D /* InfoPlist.strings */; };
+		2C250E2C1804C8EC00A788AC /* SZRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C250E2A1804C8EC00A788AC /* SZRootViewController.m */; };
+		2C250E2D1804C8EC00A788AC /* SZRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C250E2B1804C8EC00A788AC /* SZRootViewController.xib */; };
 		2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
 		2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
@@ -34,6 +36,10 @@
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
 		2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */; };
+		2C9966DC180DC62C0045DC07 /* SZGooglePlusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */; };
+		2C9966E1180DDB870045DC07 /* GooglePlusIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */; };
+		2C9966E3180DE66A0045DC07 /* GooglePlusIconSmaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */; };
+		2C9966E5180DE6E10045DC07 /* GooglePlusIconMedium.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -50,6 +56,9 @@
 		2C1B5BCF17E2790500855D0D /* IntegrationTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "IntegrationTests-Info.plist"; sourceTree = "<group>"; };
 		2C1B5BD017E2790500855D0D /* IntegrationTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IntegrationTests-Prefix.pch"; sourceTree = "<group>"; };
 		2C1B5BD417E2793000855D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C250E291804C8EC00A788AC /* SZRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZRootViewController.h; sourceTree = "<group>"; };
+		2C250E2A1804C8EC00A788AC /* SZRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZRootViewController.m; sourceTree = "<group>"; };
+		2C250E2B1804C8EC00A788AC /* SZRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZRootViewController.xib; sourceTree = "<group>"; };
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
 		2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIEndpointTests.m; sourceTree = "<group>"; };
@@ -87,6 +96,11 @@
 		2C8C1E1317E10BB80075B527 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestAppDelegate.h; sourceTree = "<group>"; };
 		2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestAppDelegate.m; sourceTree = "<group>"; };
+		2C9966DA180DC62C0045DC07 /* SZGooglePlusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZGooglePlusActivity.h; sourceTree = "<group>"; };
+		2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZGooglePlusActivity.m; sourceTree = "<group>"; };
+		2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIcon.png; path = Resources/GooglePlusIcon.png; sourceTree = "<group>"; };
+		2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIconSmaller.png; path = Resources/GooglePlusIconSmaller.png; sourceTree = "<group>"; };
+		2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIconMedium.png; path = Resources/GooglePlusIconMedium.png; sourceTree = "<group>"; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E7517E122A30048B055 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		2CDE0E7717E122A30048B055 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -246,8 +260,14 @@
 		2C8C1E0E17E10BB80075B527 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				2C9966DD180DDB690045DC07 /* Resources */,
 				2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */,
 				2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */,
+				2C250E291804C8EC00A788AC /* SZRootViewController.h */,
+				2C250E2A1804C8EC00A788AC /* SZRootViewController.m */,
+				2C250E2B1804C8EC00A788AC /* SZRootViewController.xib */,
+				2C9966DA180DC62C0045DC07 /* SZGooglePlusActivity.h */,
+				2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */,
 				2C8C1E1D17E10BD60075B527 /* Supporting Files */,
 			);
 			path = TestApp;
@@ -262,6 +282,16 @@
 				2C8C1E1317E10BB80075B527 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C9966DD180DDB690045DC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */,
+				2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */,
+				2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		2CDE0E7317E122A30048B055 /* UnitTests */ = {
@@ -402,7 +432,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9966E5180DE6E10045DC07 /* GooglePlusIconMedium.png in Resources */,
 				2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */,
+				2C250E2D1804C8EC00A788AC /* SZRootViewController.xib in Resources */,
+				2C9966E3180DE66A0045DC07 /* GooglePlusIconSmaller.png in Resources */,
+				2C9966E1180DDB870045DC07 /* GooglePlusIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,7 +588,9 @@
 				2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */,
 				2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
+				2C250E2C1804C8EC00A788AC /* SZRootViewController.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,
+				2C9966DC180DC62C0045DC07 /* SZGooglePlusActivity.m in Sources */,
 				2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
