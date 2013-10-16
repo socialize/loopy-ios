@@ -12,6 +12,7 @@
 @interface SZAPIClient : NSObject <NSURLConnectionDataDelegate>
 
 extern NSString *const OPEN;
+extern NSString *const SHORTLINK;
 
 @property (nonatomic, strong) NSString *urlPrefix;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
@@ -21,6 +22,8 @@ extern NSString *const OPEN;
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
 - (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request;
-- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback; //TEST with NEW SZNetworking
+
+- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
+- (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
 
 @end

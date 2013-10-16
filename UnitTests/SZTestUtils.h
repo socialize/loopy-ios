@@ -11,5 +11,6 @@
 @interface SZTestUtils : NSObject
 
 + (NSDictionary *)jsonForOpen;
++ (NSDictionary *)jsonForShortlink;
 
 @end

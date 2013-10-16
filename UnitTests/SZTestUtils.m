@@ -48,4 +48,22 @@
     return openObj;
 }
 
++ (NSDictionary *)jsonForShortlink {
+    NSDictionary *mockObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithInt:200],@"http",
+                             nil];
+    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"ABCD-1234",@"url",
+                             nil];
+    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"69",@"stdid",
+                                  [NSNumber numberWithInt:1234567890],@"timestamp",
+                                  mockObj,@"mock",
+                                  itemObj,@"item",
+                                  [NSArray arrayWithObjects:@"sports", @"entertainment", nil],@"tags",
+                                  nil];
+    
+    return shortlinkObj;
+}
+
 @end

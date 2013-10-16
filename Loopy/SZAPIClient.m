@@ -12,6 +12,7 @@
 @implementation SZAPIClient
 
 NSString *const OPEN = @"/open";
+NSString *const SHORTLINK = @"/shortlink";
 
 @synthesize urlPrefix;
 @synthesize operationQueue;
@@ -52,12 +53,24 @@ NSString *const OPEN = @"/open";
 
 //calls open endpoint, including manufacturing URLRequest for it
 - (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+    [self callEndpoint:OPEN withJSON:jsonDict andCallback:callback];
+}
+
+//calls shortlink endpoint, including manufacturing URLRequest for it
+- (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+    [self callEndpoint:SHORTLINK withJSON:jsonDict andCallback:callback];
+}
+
+//convenience method
+- (void)callEndpoint:(NSString *)endpoint
+            withJSON:(NSDictionary *)jsonDict
+        andCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
     NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
     NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
     NSMutableURLRequest *request = [self newURLRequest:jsonData
                                                 length:jsonLength
-                                              endpoint:OPEN];
+                                              endpoint:endpoint];
     SZURLRequestOperation *operation = [self newURLRequestOperation:request];
     operation.URLCompletionBlock = callback;
     [operationQueue addOperation:operation];

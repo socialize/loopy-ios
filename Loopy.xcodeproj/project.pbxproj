@@ -478,7 +478,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = Scripts/RunTests.sh;
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\n    Scripts/RunTests.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C34327E17FB90160039A2D8 /* ShellScript */ = {
@@ -492,7 +492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh Scripts/RunTests.sh";
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\nsh Scripts/RunTests.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C3FE4BF18033E3C00BAF591 /* ShellScript */ = {
@@ -506,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = XcodeCoverage/exportenv.sh;
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\nXcodeCoverage/exportenv.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C522CD317FF7F3F009C1F43 /* ShellScript */ = {
@@ -520,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = XcodeCoverage/exportenv.sh;
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\n    XcodeCoverage/exportenv.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2CB8BF2B1804A4EA009DCB50 /* ShellScript */ = {
@@ -534,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd XcodeCoverage\n./getcov";
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\ncd XcodeCoverage\n./getcov\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2CE116D21803627A00EFF9E4 /* ShellScript */ = {
@@ -548,7 +548,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd XcodeCoverage\n./getcov";
+			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\n    cd XcodeCoverage\n    ./getcov\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		55B23CB551514882AC930B89 /* Check Pods Manifest.lock */ = {
