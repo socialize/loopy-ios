@@ -13,11 +13,14 @@
 //convert JSON dictionary to NSData
 + (NSData *)toJSONData:(NSDictionary *)jsonDict {
     NSError *jsonError;
-    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:jsonDict
-                                                      options:NSJSONWritingPrettyPrinted
-                                                        error:&jsonError];
-    if (!jsonObj && jsonError) {
-        NSLog(@"Error creating JSON data.");
+    NSData *jsonObj = nil;
+    @try {
+        jsonObj = [NSJSONSerialization dataWithJSONObject:jsonDict
+                                                  options:NSJSONWritingPrettyPrinted
+                                                    error:&jsonError];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Error creating JSON data:");
         [self logError:jsonError];
     }
     

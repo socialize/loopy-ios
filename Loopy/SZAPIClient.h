@@ -13,6 +13,7 @@
 
 extern NSString *const OPEN;
 extern NSString *const SHORTLINK;
+extern NSString *const SHARE;
 
 @property (nonatomic, strong) NSString *urlPrefix;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
@@ -25,5 +26,6 @@ extern NSString *const SHORTLINK;
 
 - (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
 - (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
+- (void)share:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
 
 @end

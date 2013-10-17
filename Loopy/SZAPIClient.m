@@ -13,6 +13,7 @@
 
 NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
+NSString *const SHARE = @"/share";
 
 @synthesize urlPrefix;
 @synthesize operationQueue;
@@ -59,6 +60,10 @@ NSString *const SHORTLINK = @"/shortlink";
 //calls shortlink endpoint, including manufacturing URLRequest for it
 - (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
     [self callEndpoint:SHORTLINK withJSON:jsonDict andCallback:callback];
+}
+
+- (void)share:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+    [self callEndpoint:SHARE withJSON:jsonDict andCallback:callback];
 }
 
 //convenience method

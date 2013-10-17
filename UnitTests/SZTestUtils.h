@@ -12,5 +12,6 @@
 
 + (NSDictionary *)jsonForOpen;
 + (NSDictionary *)jsonForShortlink;
++ (NSDictionary *)jsonForShare;
 
 @end

@@ -94,4 +94,38 @@ NSString *const URL_PREFIX = @"http://ec2-54-227-157-217.compute-1.amazonaws.com
     
     GHAssertTrue(operationSucceeded, @"");
 }
+
+
+//this uses the same JSON object used by unit tests
+- (void)testShareEndpoint {
+    [self prepare];
+    NSDictionary *jsonDict = [SZTestUtils jsonForShare];
+    __block BOOL operationSucceeded = NO;
+    __block id responseData;
+    
+    [apiClient share:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if(error == nil) {
+            responseData = [data objectFromJSONData];
+            //response data should be an empty dictionary
+            if([responseData isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *responseDict = (NSDictionary *)responseData;
+                if([responseDict count] == 0) {
+                    operationSucceeded = YES;
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShareEndpoint)];
+                }
+                else {
+                    operationSucceeded = NO;
+                    [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
+                }
+            }
+        }
+        else {
+            operationSucceeded = NO;
+            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
+        }
+    }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    
+    GHAssertTrue(operationSucceeded, @"");
+}
 @end

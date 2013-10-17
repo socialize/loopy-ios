@@ -74,4 +74,29 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
+- (void)testShare {
+    [self prepare];
+    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
+    id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
+    __block BOOL operationSucceeded = NO;
+    
+    //return dummy request and request operations
+    NSMutableURLRequest *dummyRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
+    [[[mockAPIClient stub] andReturn:dummyRequest] newURLRequest:[OCMArg any]
+                                                          length:[OCMArg any]
+                                                        endpoint:[OCMArg any]];
+    SZURLRequestOperation *requestOperation = [[SZURLRequestOperation alloc] initWithURLRequest:dummyRequest];
+    [[[mockAPIClient stub] andReturn:requestOperation] newURLRequestOperation:[OCMArg any]];
+    
+    //call with test JSON dict
+    NSDictionary *jsonDict = [SZTestUtils jsonForShare];
+    [mockAPIClient share:jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        operationSucceeded = YES;
+        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShare)];
+    }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
 @end
