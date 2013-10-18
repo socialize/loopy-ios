@@ -1,5 +1,5 @@
 //
-//  SZAppDelegate.m
+//  SZTestAppDelegate.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/10/13.

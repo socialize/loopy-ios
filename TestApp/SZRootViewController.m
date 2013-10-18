@@ -8,6 +8,8 @@
 
 #import "SZRootViewController.h"
 #import "SZGooglePlusActivity.h"
+#import "SZFacebookActivity.h"
+#import "SZTwitterActivity.h"
 
 @interface SZRootViewController ()
 
@@ -32,14 +34,17 @@
 
 - (IBAction)shareButtonPressed:(id)sender {
     SZGooglePlusActivity *gPlusActivity = [[SZGooglePlusActivity alloc] init];
+    SZFacebookActivity *fbActivity = [[SZFacebookActivity alloc] init];
+    SZTwitterActivity *twitterActivity = [[SZTwitterActivity alloc] init];
+
     self.activityViewController = [[UIActivityViewController alloc]
                                    initWithActivityItems:@[self.textField.text]
-                                   applicationActivities:@[gPlusActivity]];
+                                   applicationActivities:@[gPlusActivity, fbActivity, twitterActivity]];
     self.activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,
                                                           UIActivityTypePostToTwitter,
+                                                          UIActivityTypePostToWeibo,
                                                           UIActivityTypeMail,
-                                                          UIActivityTypeCopyToPasteboard
-                                                          ];
+                                                          UIActivityTypeCopyToPasteboard];
     
     [self presentViewController:self.activityViewController animated:YES completion:nil];
 }

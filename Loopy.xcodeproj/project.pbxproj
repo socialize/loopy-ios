@@ -36,10 +36,18 @@
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
 		2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */; };
-		2C9966DC180DC62C0045DC07 /* SZGooglePlusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */; };
-		2C9966E1180DDB870045DC07 /* GooglePlusIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */; };
-		2C9966E3180DE66A0045DC07 /* GooglePlusIconSmaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */; };
-		2C9966E5180DE6E10045DC07 /* GooglePlusIconMedium.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */; };
+		2CA3DCF01811E8AD005E9159 /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
+		2CA3DCF11811E8AD005E9159 /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
+		2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
+		2CA3DCF31811E8AD005E9159 /* GooglePlusLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */; };
+		2CA3DCF41811E8AD005E9159 /* GooglePlusLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */; };
+		2CA3DCF51811E8AD005E9159 /* GooglePlusLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */; };
+		2CA3DCF61811E8AD005E9159 /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
+		2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
+		2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
+		2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
+		2CA3DCFA1811E8AD005E9159 /* SZGooglePlusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */; };
+		2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -96,11 +104,21 @@
 		2C8C1E1317E10BB80075B527 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestAppDelegate.h; sourceTree = "<group>"; };
 		2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestAppDelegate.m; sourceTree = "<group>"; };
-		2C9966DA180DC62C0045DC07 /* SZGooglePlusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZGooglePlusActivity.h; sourceTree = "<group>"; };
-		2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZGooglePlusActivity.m; sourceTree = "<group>"; };
-		2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIcon.png; path = Resources/GooglePlusIcon.png; sourceTree = "<group>"; };
-		2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIconSmaller.png; path = Resources/GooglePlusIconSmaller.png; sourceTree = "<group>"; };
-		2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GooglePlusIconMedium.png; path = Resources/GooglePlusIconMedium.png; sourceTree = "<group>"; };
+		2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue43x43.png; sourceTree = "<group>"; };
+		2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue60x60.png; sourceTree = "<group>"; };
+		2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue76x76.png; sourceTree = "<group>"; };
+		2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo43x43.png; sourceTree = "<group>"; };
+		2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo60x60.png; sourceTree = "<group>"; };
+		2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo76x76.png; sourceTree = "<group>"; };
+		2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo43x43.png; sourceTree = "<group>"; };
+		2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo60x60.png; sourceTree = "<group>"; };
+		2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo76x76.png; sourceTree = "<group>"; };
+		2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZFacebookActivity.h; sourceTree = "<group>"; };
+		2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZFacebookActivity.m; sourceTree = "<group>"; };
+		2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZGooglePlusActivity.h; sourceTree = "<group>"; };
+		2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZGooglePlusActivity.m; sourceTree = "<group>"; };
+		2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTwitterActivity.h; sourceTree = "<group>"; };
+		2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTwitterActivity.m; sourceTree = "<group>"; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E7517E122A30048B055 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		2CDE0E7717E122A30048B055 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -251,6 +269,7 @@
 		2C8C1E0B17E10BB80075B527 /* Loopy */ = {
 			isa = PBXGroup;
 			children = (
+				2CA3DCC41811E807005E9159 /* Share */,
 				2C6D366217E3ACAA00CF1199 /* API Client */,
 				2C6D366A17E3ACBB00CF1199 /* Utils */,
 			);
@@ -260,14 +279,11 @@
 		2C8C1E0E17E10BB80075B527 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				2C9966DD180DDB690045DC07 /* Resources */,
 				2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */,
 				2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */,
 				2C250E291804C8EC00A788AC /* SZRootViewController.h */,
 				2C250E2A1804C8EC00A788AC /* SZRootViewController.m */,
 				2C250E2B1804C8EC00A788AC /* SZRootViewController.xib */,
-				2C9966DA180DC62C0045DC07 /* SZGooglePlusActivity.h */,
-				2C9966DB180DC62C0045DC07 /* SZGooglePlusActivity.m */,
 				2C8C1E1D17E10BD60075B527 /* Supporting Files */,
 			);
 			path = TestApp;
@@ -284,14 +300,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2C9966DD180DDB690045DC07 /* Resources */ = {
+		2CA3DCC41811E807005E9159 /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				2C9966E4180DE6E10045DC07 /* GooglePlusIconMedium.png */,
-				2C9966E2180DE66A0045DC07 /* GooglePlusIconSmaller.png */,
-				2C9966E0180DDB870045DC07 /* GooglePlusIcon.png */,
+				2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */,
+				2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */,
+				2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */,
+				2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */,
+				2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */,
+				2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */,
+				2CA3DCE01811E8AD005E9159 /* Resources */,
 			);
-			name = Resources;
+			name = Share;
+			sourceTree = "<group>";
+		};
+		2CA3DCE01811E8AD005E9159 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */,
+				2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */,
+				2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */,
+				2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */,
+				2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */,
+				2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */,
+				2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */,
+				2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */,
+				2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		2CDE0E7317E122A30048B055 /* UnitTests */ = {
@@ -432,11 +468,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9966E5180DE6E10045DC07 /* GooglePlusIconMedium.png in Resources */,
 				2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */,
+				2CA3DCF01811E8AD005E9159 /* FacebookLogoNoBlue43x43.png in Resources */,
+				2CA3DCF61811E8AD005E9159 /* TwitterLogo43x43.png in Resources */,
+				2CA3DCF31811E8AD005E9159 /* GooglePlusLogo43x43.png in Resources */,
+				2CA3DCF41811E8AD005E9159 /* GooglePlusLogo60x60.png in Resources */,
+				2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */,
+				2CA3DCF11811E8AD005E9159 /* FacebookLogoNoBlue60x60.png in Resources */,
+				2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */,
+				2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */,
+				2CA3DCF51811E8AD005E9159 /* GooglePlusLogo76x76.png in Resources */,
 				2C250E2D1804C8EC00A788AC /* SZRootViewController.xib in Resources */,
-				2C9966E3180DE66A0045DC07 /* GooglePlusIconSmaller.png in Resources */,
-				2C9966E1180DDB870045DC07 /* GooglePlusIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,11 +628,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */,
+				2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */,
+				2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */,
 				2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
+				2CA3DCFA1811E8AD005E9159 /* SZGooglePlusActivity.m in Sources */,
 				2C250E2C1804C8EC00A788AC /* SZRootViewController.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,
-				2C9966DC180DC62C0045DC07 /* SZGooglePlusActivity.m in Sources */,
 				2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
