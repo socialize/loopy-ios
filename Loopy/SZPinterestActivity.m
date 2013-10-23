@@ -1,14 +1,14 @@
 //
-//  SZGooglePlusActivity.m
+//  SZPinterestActivity.m
 //  Loopy
 //
-//  Created by David Jedeikin on 10/15/13.
+//  Created by David Jedeikin on 10/22/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZGooglePlusActivity.h"
+#import "SZPinterestActivity.h"
 
-@implementation SZGooglePlusActivity
+@implementation SZPinterestActivity
 
 - (id)init {
     self = [super init];
@@ -19,16 +19,16 @@
     
 }
 - (NSString *)activityTitle {
-    return @"Google+";
+    return @"Pinterest";
 }
 
 - (NSString *)activityType {
-    return @"com.sharethis.googlePlusSharing";
+    return @"com.sharethis.pinterestSharing";
 }
 
 //overrides private UI for image to prevent B&W look & feel
 //- (UIImage *)_activityImage {
-//    UIImage *image = [UIImage imageNamed:@"GooglePlusIconMedium.png"];
+//    UIImage *image = [UIImage imageNamed:@"TwitterIconMedium.png"];
 //    return image;
 //}
 
@@ -42,13 +42,13 @@
     }
     
     if((isIOS7 && isIPhone) || (!isIOS7 && !isIPhone)) {
-        image = [UIImage imageNamed:@"GooglePlusLogo60x60.png"];
+        image = [UIImage imageNamed:@"PinterestLogo60x60.png"];
     }
     else if(!isIOS7 && isIPhone) {
-        image = [UIImage imageNamed:@"GooglePlusLogo43x43.png"];
+        image = [UIImage imageNamed:@"PinterestLogo43x43.png"];
     }
     else if(isIOS7 && !isIPhone) {
-        image = [UIImage imageNamed:@"GooglePlusLogo76x76.png"];
+        image = [UIImage imageNamed:@"PinterestLogo76x76.png"];
     }
     
     return image;
@@ -62,7 +62,7 @@
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
     NSLog(@"PRE-SHARE!!");
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Coming Soon"
-                                                      message:@"Google+ Sharing in Loopy."
+                                                      message:@"Pinterest Sharing in Loopy."
                                                      delegate:nil
                                             cancelButtonTitle:@"OK"
                                             otherButtonTitles:nil];
@@ -72,5 +72,4 @@
 //Notification of all done can happen here
 - (void)activityDidFinish:(BOOL)completed {
     NSLog(@"FINISHED");
-}
-@end
+}@end

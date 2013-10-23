@@ -7,6 +7,7 @@
 //
 
 #import "SZTwitterActivity.h"
+#import "SZConstants.h"
 
 @implementation SZTwitterActivity
 
@@ -34,44 +35,21 @@
 
 - (UIImage *)activityImage {
     UIImage *image = nil;
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    BOOL isRetina = NO;
-    BOOL isIPhone = screenWidth == 320; //TODO this might change...
+    BOOL isIPhone = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
     BOOL isIOS7 = YES;
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
-        ([UIScreen mainScreen].scale == 2.0)) {
-        isRetina = YES;
-    }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         isIOS7 = NO;
     }
     
-    //TODO not very elegant
-    if(isIOS7 && isIPhone && isRetina) {
+    if((isIOS7 && isIPhone) || (!isIOS7 && !isIPhone)) {
         image = [UIImage imageNamed:@"TwitterLogo60x60.png"];
     }
-    else if(!isIOS7 && isIPhone && isRetina) {
+    else if(!isIOS7 && isIPhone) {
         image = [UIImage imageNamed:@"TwitterLogo43x43.png"];
     }
-    else if(isIOS7 && !isIPhone && isRetina) {
+    else if(isIOS7 && !isIPhone) {
         image = [UIImage imageNamed:@"TwitterLogo76x76.png"];
-    }
-    else if(!isIOS7 && !isIPhone && isRetina) {
-        image = [UIImage imageNamed:@"TwitterLogo60x60.png"];
-    }
-    else if(isIOS7 && !isIPhone && !isRetina) {
-        image = [UIImage imageNamed:@"TwitterLogo76x76.png"];
-    }
-    else if(!isIOS7 && !isIPhone && !isRetina) {
-        image = [UIImage imageNamed:@"TwitterLogo60x60.png"];
-    }
-    else if(!isIOS7 && isIPhone && !isRetina) {
-        image = [UIImage imageNamed:@"TwitterLogo43x43.png"];
-    }
-    else if(isIOS7 && isIPhone && !isRetina) {
-        image = [UIImage imageNamed:@"TwitterLogo60x60.png"];
     }
     
     return image;
@@ -83,6 +61,7 @@
 
 //Notification of intent to share and such can happen here
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
+    NSLog(@"PRE-SHARE!!");
     for (NSObject *item in activityItems) {
         //        if ([item isKindOfClass:[NSString class]]) {
         //            self.text = (NSString *)item;
@@ -90,6 +69,7 @@
         //            self.url = (NSURL *)item;
         //        }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
 }
 
 //Notification of all done can happen here
