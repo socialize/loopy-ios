@@ -39,6 +39,25 @@
     GHAssertNotNil(jsonFileData, nil);
 }
 
+- (void)testToJSONDictionary {
+    //read from hardcoded dictionary and convert to JSON NSData
+    NSDictionary *openObj = [SZTestUtils jsonForOpen];
+    NSData *jsonDictData = [SZJSONUtils toJSONData:openObj];
+    NSDictionary *matchObj = [SZJSONUtils toJSONDictionary:jsonDictData];
+    NSArray *matchObjKeys = [matchObj allKeys];
+    NSArray *openObjKeys = [openObj allKeys];
+    GHAssertNotNil(matchObj, @"");
+    
+    BOOL equal = YES;
+    for(id item in matchObjKeys) {
+        if(![openObjKeys containsObject:item]) {
+            equal = NO;
+            break;
+        }
+    }
+    GHAssertTrue(equal, @"");
+}
+
 //deliberately create bad JSON to see what happens
 - (void)testToInvalidJSONData {
     NSMutableDictionary *openObj = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForOpen]];

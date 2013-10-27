@@ -12,9 +12,7 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIButton *shareButton;
-@property (nonatomic, strong) UIActivityViewController *activityViewController;
 
 - (IBAction)shareButtonPressed:(id)sender;
-- (void)handleBeginShare:(NSNotification *)notification;
 
 @end

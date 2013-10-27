@@ -23,11 +23,25 @@
 		2C34326E17FB6CFA0039A2D8 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C34326F17FB6D130039A2D8 /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
 		2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
+		2C3C15EA1819C1FB00793F9B /* SZActivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15E91819C1FB00793F9B /* SZActivityTests.m */; };
+		2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */; };
 		2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */; };
 		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
+		2C5ADD4818185FE700BAC4DC /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
+		2C5ADD4B181879EC00BAC4DC /* SZShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */; };
+		2C64D41F18187A5100D6CE6C /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
+		2C64D42018187A5100D6CE6C /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
+		2C64D42118187A5100D6CE6C /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
+		2C64D42218187A6900D6CE6C /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
+		2C64D42318187A6900D6CE6C /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
+		2C64D42418187A6900D6CE6C /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
+		2C64D42518187A6900D6CE6C /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
+		2C64D42618187A6900D6CE6C /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
+		2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
+		2C64D42818187AB100D6CE6C /* SZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* SZConstants.m */; };
 		2C698F2918172D20003643B0 /* PinterestLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2618172D20003643B0 /* PinterestLogo43x43.png */; };
 		2C698F2A18172D20003643B0 /* PinterestLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2718172D20003643B0 /* PinterestLogo60x60.png */; };
 		2C698F2B18172D20003643B0 /* PinterestLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2818172D20003643B0 /* PinterestLogo76x76.png */; };
@@ -54,6 +68,10 @@
 		2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
 		2CA3DCFA1811E8AD005E9159 /* SZGooglePlusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */; };
 		2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
+		2CD55AFE1819C9FA0051C842 /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
+		2CD55AFF1819C9FA0051C842 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
+		2CD55B001819C9FA0051C842 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
+		2CD55B011819CA140051C842 /* SZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* SZConstants.m */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -78,6 +96,8 @@
 		2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIClientTests.m; sourceTree = "<group>"; };
 		2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = OpenJSONTest.txt; path = Resources/OpenJSONTest.txt; sourceTree = "<group>"; };
 		2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIEndpointTests.m; sourceTree = "<group>"; };
+		2C3C15E91819C1FB00793F9B /* SZActivityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZActivityTests.m; sourceTree = "<group>"; };
+		2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZShareCallbackTests.m; sourceTree = "<group>"; };
 		2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtilsTests.m; sourceTree = "<group>"; };
 		2C3E069317FA418C00FF751B /* SZTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestUtils.h; sourceTree = "<group>"; };
 		2C3E069417FA418C00FF751B /* SZTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestUtils.m; sourceTree = "<group>"; };
@@ -86,6 +106,9 @@
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C48EAF617DF87F200181C3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2C522CD117FF79C3009C1F43 /* libprofile_rt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libprofile_rt.dylib; path = ../../../../usr/lib/libprofile_rt.dylib; sourceTree = "<group>"; };
+		2C5ADD4618185FE700BAC4DC /* SZShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZShare.h; sourceTree = "<group>"; };
+		2C5ADD4718185FE700BAC4DC /* SZShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZShare.m; sourceTree = "<group>"; };
+		2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZShareTests.m; sourceTree = "<group>"; };
 		2C698F2618172D20003643B0 /* PinterestLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo43x43.png; sourceTree = "<group>"; };
 		2C698F2718172D20003643B0 /* PinterestLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo60x60.png; sourceTree = "<group>"; };
 		2C698F2818172D20003643B0 /* PinterestLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo76x76.png; sourceTree = "<group>"; };
@@ -186,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */,
+				2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */,
 				2C1B5BD217E2791C00855D0D /* Supporting Files */,
 			);
 			path = IntegrationTests;
@@ -321,6 +345,8 @@
 		2CA3DCC41811E807005E9159 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				2C5ADD4618185FE700BAC4DC /* SZShare.h */,
+				2C5ADD4718185FE700BAC4DC /* SZShare.m */,
 				2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */,
 				2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */,
 				2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */,
@@ -359,6 +385,8 @@
 				2CF669CB17FF4B7700F5060D /* Test Helpers */,
 				2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */,
 				2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */,
+				2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */,
+				2C3C15E91819C1FB00793F9B /* SZActivityTests.m */,
 				2C3E069317FA418C00FF751B /* SZTestUtils.h */,
 				2C3E069417FA418C00FF751B /* SZTestUtils.m */,
 				2C314A1117E134C9003CA1A0 /* Resources */,
@@ -512,6 +540,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C64D42218187A6900D6CE6C /* FacebookLogoNoBlue43x43.png in Resources */,
+				2C64D42318187A6900D6CE6C /* FacebookLogoNoBlue60x60.png in Resources */,
+				2C64D42418187A6900D6CE6C /* FacebookLogoNoBlue76x76.png in Resources */,
+				2C64D42518187A6900D6CE6C /* TwitterLogo43x43.png in Resources */,
+				2C64D42618187A6900D6CE6C /* TwitterLogo60x60.png in Resources */,
+				2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */,
 				2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */,
 				2CDE0E7817E122A30048B055 /* InfoPlist.strings in Resources */,
 			);
@@ -641,9 +675,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD55B011819CA140051C842 /* SZConstants.m in Sources */,
+				2CD55AFE1819C9FA0051C842 /* SZShare.m in Sources */,
+				2CD55AFF1819C9FA0051C842 /* SZFacebookActivity.m in Sources */,
+				2CD55B001819C9FA0051C842 /* SZTwitterActivity.m in Sources */,
 				2C34326F17FB6D130039A2D8 /* SZAPIClient.m in Sources */,
 				2C34326E17FB6CFA0039A2D8 /* SZJSONUtils.m in Sources */,
 				2C34326D17FB6CE60039A2D8 /* SZTestUtils.m in Sources */,
+				2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
@@ -653,6 +692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5ADD4818185FE700BAC4DC /* SZShare.m in Sources */,
 				2C34327017FB70270039A2D8 /* SZTestUtils.m in Sources */,
 				2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */,
 				2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */,
@@ -671,10 +711,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C64D42818187AB100D6CE6C /* SZConstants.m in Sources */,
+				2C3C15EA1819C1FB00793F9B /* SZActivityTests.m in Sources */,
+				2C64D41F18187A5100D6CE6C /* SZShare.m in Sources */,
+				2C64D42018187A5100D6CE6C /* SZFacebookActivity.m in Sources */,
+				2C64D42118187A5100D6CE6C /* SZTwitterActivity.m in Sources */,
 				2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */,
 				2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */,
 				2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
+				2C5ADD4B181879EC00BAC4DC /* SZShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,
 				2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */,
