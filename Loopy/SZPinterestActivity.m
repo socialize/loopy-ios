@@ -10,14 +10,18 @@
 
 @implementation SZPinterestActivity
 
-- (id)init {
-    self = [super init];
-    if(self) {
-        //anything special can happen here
+@synthesize shareItems;
+
+//new activity with specified share items
++ (id)initWithActivityItems:(NSArray *)items {
+    SZPinterestActivity *newActivity = [[SZPinterestActivity alloc] init];
+    if(newActivity) {
+        newActivity.shareItems = items;
     }
-    return self;
     
+    return newActivity;
 }
+
 - (NSString *)activityTitle {
     return @"Pinterest";
 }
@@ -25,12 +29,6 @@
 - (NSString *)activityType {
     return @"com.sharethis.pinterestSharing";
 }
-
-//overrides private UI for image to prevent B&W look & feel
-//- (UIImage *)_activityImage {
-//    UIImage *image = [UIImage imageNamed:@"TwitterIconMedium.png"];
-//    return image;
-//}
 
 - (UIImage *)activityImage {
     UIImage *image = nil;

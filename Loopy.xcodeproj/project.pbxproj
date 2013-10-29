@@ -27,6 +27,8 @@
 		2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */; };
 		2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */; };
 		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
+		2C44DDDA182036400026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
+		2C44DDDB182036470026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
@@ -141,6 +143,7 @@
 		2C8C1E1317E10BB80075B527 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestAppDelegate.h; sourceTree = "<group>"; };
 		2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestAppDelegate.m; sourceTree = "<group>"; };
+		2C9C283318201CE40036FBD0 /* SZActivity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZActivity.h; sourceTree = "<group>"; };
 		2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue43x43.png; sourceTree = "<group>"; };
 		2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue60x60.png; sourceTree = "<group>"; };
 		2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue76x76.png; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C44DDDB182036470026938A /* Social.framework in Frameworks */,
 				2C742AD217F3912E0063653A /* libPods.a in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
@@ -195,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C44DDDA182036400026938A /* Social.framework in Frameworks */,
 				2C742AA417F371620063653A /* libPods.a in Frameworks */,
 				2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */,
 				2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */,
@@ -347,6 +352,7 @@
 			children = (
 				2C5ADD4618185FE700BAC4DC /* SZShare.h */,
 				2C5ADD4718185FE700BAC4DC /* SZShare.m */,
+				2C9C283318201CE40036FBD0 /* SZActivity.h */,
 				2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */,
 				2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */,
 				2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */,

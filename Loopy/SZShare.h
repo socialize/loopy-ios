@@ -7,15 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Social/Social.h>
 
 @interface SZShare : NSObject
 
 @property (nonatomic, strong) UIViewController *parentController;
 
 - (id)initWithParent:(UIViewController *)parent;
-- (NSArray *)getCurrentActivities;
+- (NSArray *)getCurrentActivities:(NSArray *)activityItems;
 - (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities;
-- (void)showShareDialog:(UIActivityViewController *)activityController completion:(void (^)(void))completion;
-- (BOOL)handleBeginShare:(NSNotification *)notification;
+- (SLComposeViewController *)newActivityShareController:(id)activityObj;
+- (void)showActivityViewDialog:(UIActivityViewController *)activityController completion:(void (^)(void))completion;
+- (BOOL)handleShowActivityShare:(NSNotification *)notification;
+- (void)showActivityShareDialog:(SLComposeViewController *)controller;
 
 @end

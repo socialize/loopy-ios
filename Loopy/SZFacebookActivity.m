@@ -8,23 +8,28 @@
 
 #import "SZFacebookActivity.h"
 #import "SZConstants.h"
+#import <Social/Social.h>
 
 @implementation SZFacebookActivity
 
-- (id)init {
-    self = [super init];
-    if(self) {
-        //anything special can happen here
+@synthesize shareItems;
+
+//new activity with specified share items
++ (id)initWithActivityItems:(NSArray *)items {
+    SZFacebookActivity *newActivity = [[SZFacebookActivity alloc] init];
+    if(newActivity) {
+        newActivity.shareItems = items;
     }
-    return self;
     
+    return newActivity;
 }
+
 - (NSString *)activityTitle {
     return @"Facebook";
 }
 
 - (NSString *)activityType {
-    return @"com.sharethis.facebookSharing";
+    return SLServiceTypeFacebook;
 }
 
 - (UIImage *)activityImage {
@@ -50,27 +55,17 @@
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
-    return YES;
+    return [self.shareItems isEqualToArray:activityItems];
 }
 
 //Notification of intent to share and such can happen here
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
-    NSLog(@"PRE-SHARE!!");
-    
+    self.shareItems = activityItems;
     [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
-    
-    for (NSObject *item in activityItems) {
-        //        if ([item isKindOfClass:[NSString class]]) {
-        //            self.text = (NSString *)item;
-        //        } else if ([item isKindOfClass:[NSURL class]]) {
-        //            self.url = (NSURL *)item;
-        //        }
-    }
 }
 
 //Notification of all done can happen here
 - (void)activityDidFinish:(BOOL)completed {
-    NSLog(@"FINISHED");
 }
 
 @end

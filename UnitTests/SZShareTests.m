@@ -7,9 +7,11 @@
 //
 
 #import "SZShare.h"
+#import "SZActivity.h"
 #import "SZFacebookActivity.h"
 #import "SZTwitterActivity.h"
 #import "SZConstants.h"
+#import <Social/Social.h>
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 
@@ -25,18 +27,26 @@
 - (void)setUpClass {
     UIViewController *dummyController = (UIViewController *)[OCMockObject mockForClass:[UIViewController class]];
     share = [[SZShare alloc] initWithParent:dummyController];
-    dummyActivities = @[[[SZFacebookActivity alloc] init], [[SZTwitterActivity alloc] init]];
-    dummyShareItems = @[@"MyShareItem1", @"MyShareItem2"];
+    dummyShareItems = @[@"www.shortlink.com", @"More information about this site"];
+    dummyActivities = @[[SZFacebookActivity initWithActivityItems:dummyShareItems], [SZTwitterActivity initWithActivityItems:dummyShareItems]];
 }
 
 - (void)testGetCurrentActivities {
-    NSArray *activities = [share getCurrentActivities];
+    NSArray *activities = [share getCurrentActivities:dummyActivities];
     GHAssertNotNil(activities, @"");
 }
 
 - (void)testNewActivityViewController {
     UIActivityViewController *controller = [share newActivityViewController:dummyShareItems withActivities:dummyActivities];
     GHAssertNotNil(controller, @"");
+}
+
+- (void)testNewActivityShareController {
+    for (id<SZActivity> activity in dummyActivities) {
+        SLComposeViewController *controller = [share newActivityShareController:activity];
+        GHAssertNotNil(controller, @"");
+        GHAssertEqualStrings([activity activityType], [controller serviceType], @"");
+    }
 }
 
 @end

@@ -10,12 +10,14 @@
 #import "SZFacebookActivity.h"
 #import "SZTwitterActivity.h"
 #import "SZConstants.h"
+#import <Social/Social.h>
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 
 @interface SZActivityTests : GHTestCase {
     SZFacebookActivity *facebookActivity;
     SZTwitterActivity *twitterActivity;
+    NSArray *dummyShareItems;
 }
 
 @end
@@ -23,8 +25,9 @@
 @implementation SZActivityTests
 
 - (void)setUpClass {
-    facebookActivity = [[SZFacebookActivity alloc] init];
-    twitterActivity = [[SZTwitterActivity alloc] init];
+    dummyShareItems = @[@"MyShareItem1", @"MyShareItem2"];
+    facebookActivity = [SZFacebookActivity initWithActivityItems:dummyShareItems];
+    twitterActivity = [SZTwitterActivity initWithActivityItems:dummyShareItems];
 }
 
 //TODO these may become more meaningful
@@ -36,13 +39,14 @@
     GHAssertNotNil(twitterTitle, @"");
 }
 
-//TODO these may become more meaningful
 - (void)testActivityTypes {
     NSString *facebookType = [facebookActivity activityType];
-    GHAssertNotNil(facebookType, @"");
+    BOOL match = [facebookType isEqualToString:SLServiceTypeFacebook];
+    GHAssertTrue(match, @"");
     
     NSString *twitterType = [twitterActivity activityType];
-    GHAssertNotNil(twitterType, @"");
+    match = [twitterType isEqualToString:SLServiceTypeTwitter];
+    GHAssertTrue(match, @"");
 }
 
 - (void)testActivityImages {
@@ -54,7 +58,6 @@
 }
 
 - (void)testCanPerformWithActivityItems {
-    NSArray *dummyShareItems = @[@"MyShareItem1", @"MyShareItem2"];
     BOOL fb = [facebookActivity canPerformWithActivityItems:dummyShareItems];
     GHAssertTrue(fb, @"");
     BOOL tw = [twitterActivity canPerformWithActivityItems:dummyShareItems];

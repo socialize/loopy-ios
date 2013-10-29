@@ -10,14 +10,18 @@
 
 @implementation SZGooglePlusActivity
 
-- (id)init {
-    self = [super init];
-    if(self) {
-        //anything special can happen here
+@synthesize shareItems;
+
+//new activity with specified share items
++ (id)initWithActivityItems:(NSArray *)items {
+    SZGooglePlusActivity *newActivity = [[SZGooglePlusActivity alloc] init];
+    if(newActivity) {
+        newActivity.shareItems = items;
     }
-    return self;
     
+    return newActivity;
 }
+
 - (NSString *)activityTitle {
     return @"Google+";
 }
@@ -25,12 +29,6 @@
 - (NSString *)activityType {
     return @"com.sharethis.googlePlusSharing";
 }
-
-//overrides private UI for image to prevent B&W look & feel
-//- (UIImage *)_activityImage {
-//    UIImage *image = [UIImage imageNamed:@"GooglePlusIconMedium.png"];
-//    return image;
-//}
 
 - (UIImage *)activityImage {
     UIImage *image = nil;

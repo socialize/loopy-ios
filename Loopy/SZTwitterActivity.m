@@ -8,30 +8,30 @@
 
 #import "SZTwitterActivity.h"
 #import "SZConstants.h"
+#import <Social/Social.h>
 
 @implementation SZTwitterActivity
 
-- (id)init {
-    self = [super init];
-    if(self) {
-        //anything special can happen here
+@synthesize shareItems;
+
+//new activity with specified share items
++ (id)initWithActivityItems:(NSArray *)items {
+    SZTwitterActivity *newActivity = [[SZTwitterActivity alloc] init];
+    if(newActivity) {
+        newActivity.shareItems = items;
     }
-    return self;
+    
+    return newActivity;
     
 }
+
 - (NSString *)activityTitle {
     return @"Twitter";
 }
 
 - (NSString *)activityType {
-    return @"com.sharethis.twitterSharing";
+    return SLServiceTypeTwitter;
 }
-
-//overrides private UI for image to prevent B&W look & feel
-//- (UIImage *)_activityImage {
-//    UIImage *image = [UIImage imageNamed:@"TwitterIconMedium.png"];
-//    return image;
-//}
 
 - (UIImage *)activityImage {
     UIImage *image = nil;
@@ -56,24 +56,16 @@
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
-    return YES;
+    return [self.shareItems isEqualToArray:activityItems];
 }
 
 //Notification of intent to share and such can happen here
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
-    NSLog(@"PRE-SHARE!!");
-    for (NSObject *item in activityItems) {
-        //        if ([item isKindOfClass:[NSString class]]) {
-        //            self.text = (NSString *)item;
-        //        } else if ([item isKindOfClass:[NSURL class]]) {
-        //            self.url = (NSURL *)item;
-        //        }
-    }
+    self.shareItems = activityItems;
     [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
 }
 
 //Notification of all done can happen here
 - (void)activityDidFinish:(BOOL)completed {
-    NSLog(@"FINISHED");
 }
 @end

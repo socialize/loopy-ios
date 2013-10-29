@@ -42,9 +42,9 @@
 //simulate FB share being selected
 - (void)testFacebookShareCallbacks {
     id mockShare = [OCMockObject partialMockForObject:share];
-    [[[mockShare stub] andReturn:activities] getCurrentActivities];
+    [[[mockShare stub] andReturn:activities] getCurrentActivities:shareItems];
     [self prepare];
-    [[[mockShare stub] andCall:@selector(shareFacebookCallback:) onObject:self] handleBeginShare:[OCMArg any]];
+    [[[mockShare stub] andCall:@selector(shareFacebookCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
     [facebookActivity prepareWithActivityItems:shareItems];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
     
@@ -62,8 +62,8 @@
 - (void)testTwitterShareCallbacks {
     [self prepare];
     id mockShare = [OCMockObject partialMockForObject:share];
-    [[[mockShare stub] andReturn:activities] getCurrentActivities];
-    [[[mockShare stub] andCall:@selector(shareTwitterCallback:) onObject:self] handleBeginShare:[OCMArg any]];
+    [[[mockShare stub] andReturn:activities] getCurrentActivities:shareItems];
+    [[[mockShare stub] andCall:@selector(shareTwitterCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
     [twitterActivity prepareWithActivityItems:shareItems];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
     
