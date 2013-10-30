@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.dependency     'SZNetworking'
   s.source       = { :git => "https://github.com/socialize/loopy-sdk-ios.git", :tag => "0.1" }
   s.source_files = 'Loopy/**/*.{h,m}'
+  s.resources    = 'Loopy/Resources/*.png'
  end
