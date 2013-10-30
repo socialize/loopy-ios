@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		2CA668A718218334003D0AF1 /* Loopy Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2CA668AA18218334003D0AF1 /* Build configuration list for PBXAggregateTarget "Loopy Framework" */;
+			buildPhases = (
+				2CA668AB182184EE003D0AF1 /* ShellScript */,
+				2CA668AC18218516003D0AF1 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Loopy Framework";
+			productName = "Loopy Framework";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		2C0ECE9618174C46005965D0 /* SZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* SZConstants.m */; };
 		2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
@@ -29,6 +44,21 @@
 		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
 		2C44DDDA182036400026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C44DDDB182036470026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
+		2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
+		2C44DDE618207EC20026938A /* Loopy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C44DDE518207EC20026938A /* Loopy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0318207FDC0026938A /* SZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0ECE9418174C46005965D0 /* SZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0418207FE80026938A /* SZShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C5ADD4618185FE700BAC4DC /* SZShare.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0518207FEB0026938A /* SZActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9C283318201CE40036FBD0 /* SZActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0D1820808B0026938A /* SZFacebookActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0E182080900026938A /* SZTwitterActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE0F1820809B0026938A /* SZAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C1E0C17E10BB80075B527 /* SZAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE10182080A40026938A /* SZJSONUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C44DE11182081210026938A /* SZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* SZConstants.m */; };
+		2C44DE12182081240026938A /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
+		2C44DE13182081260026938A /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
+		2C44DE141820812A0026938A /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
+		2C44DE151820812E0026938A /* SZAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* SZAPIClient.m */; };
+		2C44DE16182081300026938A /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
@@ -82,6 +112,18 @@
 		2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2C44DDDE18207EC20026938A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		04FF3B14B1414F9D8911EA25 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		20AC7383AFAB491BB995F927 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -103,6 +145,10 @@
 		2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtilsTests.m; sourceTree = "<group>"; };
 		2C3E069317FA418C00FF751B /* SZTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestUtils.h; sourceTree = "<group>"; };
 		2C3E069417FA418C00FF751B /* SZTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestUtils.m; sourceTree = "<group>"; };
+		2C44DDE018207EC20026938A /* libLoopy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C44DDE418207EC20026938A /* Loopy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Loopy-Prefix.pch"; sourceTree = "<group>"; };
+		2C44DDE518207EC20026938A /* Loopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loopy.h; sourceTree = "<group>"; };
+		2C44DE18182081C90026938A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2C48EAEF17DF87F200181C3E /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C48EAF217DF87F200181C3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C48EAF417DF87F200181C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,6 +229,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C44DDDD18207EC20026938A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C48EAEC17DF87F200181C3E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,10 +293,20 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		2C44DDE318207EC20026938A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C44DDE418207EC20026938A /* Loopy-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			path = Loopy;
+			sourceTree = "<group>";
+		};
 		2C48EAE617DF87F100181C3E = {
 			isa = PBXGroup;
 			children = (
 				2C8C1E0B17E10BB80075B527 /* Loopy */,
+				2C44DDE318207EC20026938A /* Supporting Files */,
 				2C8C1E0E17E10BB80075B527 /* TestApp */,
 				2CDE0E7317E122A30048B055 /* UnitTests */,
 				2C1B5B9B17E2783D00855D0D /* IntegrationTests */,
@@ -259,6 +323,7 @@
 				2CDE0E6F17E122A20048B055 /* UnitTests.app */,
 				2CDE0E8517E122A30048B055 /* UnitTestsTests.xctest */,
 				2C1B5B9717E2783D00855D0D /* IntegrationTests.app */,
+				2C44DDE018207EC20026938A /* libLoopy.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +331,7 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C44DE18182081C90026938A /* libPods.a */,
 				2C522CD117FF79C3009C1F43 /* libprofile_rt.dylib */,
 				2C742AD517F391440063653A /* libPods.a */,
 				2C742AD317F391390063653A /* libPods-SZNetworking.a */,
@@ -314,11 +380,12 @@
 		2C8C1E0B17E10BB80075B527 /* Loopy */ = {
 			isa = PBXGroup;
 			children = (
+				2C44DDE518207EC20026938A /* Loopy.h */,
+				2C0ECE9418174C46005965D0 /* SZConstants.h */,
+				2C0ECE9518174C46005965D0 /* SZConstants.m */,
 				2CA3DCC41811E807005E9159 /* Share */,
 				2C6D366217E3ACAA00CF1199 /* API Client */,
 				2C6D366A17E3ACBB00CF1199 /* Utils */,
-				2C0ECE9418174C46005965D0 /* SZConstants.h */,
-				2C0ECE9518174C46005965D0 /* SZConstants.m */,
 			);
 			path = Loopy;
 			sourceTree = "<group>";
@@ -423,6 +490,24 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		2C44DE0218207FD50026938A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C44DDE618207EC20026938A /* Loopy.h in Headers */,
+				2C44DE0318207FDC0026938A /* SZConstants.h in Headers */,
+				2C44DE0418207FE80026938A /* SZShare.h in Headers */,
+				2C44DE0518207FEB0026938A /* SZActivity.h in Headers */,
+				2C44DE0D1820808B0026938A /* SZFacebookActivity.h in Headers */,
+				2C44DE0E182080900026938A /* SZTwitterActivity.h in Headers */,
+				2C44DE0F1820809B0026938A /* SZAPIClient.h in Headers */,
+				2C44DE10182080A40026938A /* SZJSONUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		2C1B5B9617E2783D00855D0D /* IntegrationTests */ = {
 			isa = PBXNativeTarget;
@@ -443,6 +528,24 @@
 			productName = IntegrationTests;
 			productReference = 2C1B5B9717E2783D00855D0D /* IntegrationTests.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2C44DDDF18207EC20026938A /* Loopy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C44DDFC18207EC30026938A /* Build configuration list for PBXNativeTarget "Loopy" */;
+			buildPhases = (
+				2C44DDDC18207EC20026938A /* Sources */,
+				2C44DDDD18207EC20026938A /* Frameworks */,
+				2C44DDDE18207EC20026938A /* CopyFiles */,
+				2C44DE0218207FD50026938A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Loopy;
+			productName = Loopy;
+			productReference = 2C44DDE018207EC20026938A /* libLoopy.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		2C48EAEE17DF87F200181C3E /* TestApp */ = {
 			isa = PBXNativeTarget;
@@ -508,6 +611,8 @@
 				2C48EAEE17DF87F200181C3E /* TestApp */,
 				2CDE0E6E17E122A20048B055 /* UnitTests */,
 				2C1B5B9617E2783D00855D0D /* IntegrationTests */,
+				2C44DDDF18207EC20026938A /* Loopy */,
+				2CA668A718218334003D0AF1 /* Loopy Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -631,6 +736,34 @@
 			shellScript = "if [ \"$GHUNIT_CLI\" == 1 ]; then\n    XcodeCoverage/exportenv.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		2CA668AB182184EE003D0AF1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "xcodebuild -scheme Loopy -configuration ${CONFIGURATION} -sdk iphonesimulator\nxcodebuild -scheme Loopy -configuration ${CONFIGURATION} -sdk iphoneos";
+			showEnvVarsInLog = 0;
+		};
+		2CA668AC18218516003D0AF1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Scripts/iOSFramework.sh;
+			showEnvVarsInLog = 0;
+		};
 		2CB8BF2B1804A4EA009DCB50 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -691,6 +824,19 @@
 				2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C44DDDC18207EC20026938A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C44DE11182081210026938A /* SZConstants.m in Sources */,
+				2C44DE12182081240026938A /* SZShare.m in Sources */,
+				2C44DE13182081260026938A /* SZFacebookActivity.m in Sources */,
+				2C44DE141820812A0026938A /* SZTwitterActivity.m in Sources */,
+				2C44DE151820812E0026938A /* SZAPIClient.m in Sources */,
+				2C44DE16182081300026938A /* SZJSONUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,6 +984,61 @@
 			};
 			name = Release;
 		};
+		2C44DDFD18207EC30026938A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DSTROOT = /tmp/Loopy.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Loopy/Loopy-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"${SRCROOT}/Pods/Headers/SZNetworking\"",
+					"\"${SRCROOT}/Pods/Headers\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2C44DDFE18207EC30026938A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DSTROOT = /tmp/Loopy.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Loopy/Loopy-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"${SRCROOT}/Pods/Headers/SZNetworking\"",
+					"\"${SRCROOT}/Pods/Headers\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		2C48EB0A17DF87F200181C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -927,6 +1128,20 @@
 				INFOPLIST_FILE = "TestApp/Loopy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2CA668A818218334003D0AF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2CA668A918218334003D0AF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1025,6 +1240,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		2C44DDFC18207EC30026938A /* Build configuration list for PBXNativeTarget "Loopy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C44DDFD18207EC30026938A /* Debug */,
+				2C44DDFE18207EC30026938A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2C48EAEA17DF87F100181C3E /* Build configuration list for PBXProject "Loopy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1042,6 +1266,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2CA668AA18218334003D0AF1 /* Build configuration list for PBXAggregateTarget "Loopy Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CA668A818218334003D0AF1 /* Debug */,
+				2CA668A918218334003D0AF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		2CDE0E9417E122A30048B055 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;

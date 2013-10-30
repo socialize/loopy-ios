@@ -14,3 +14,9 @@ integration-tests:
 
 coverage:
 	./XcodeCoverage/getcovcombined
+
+framework:
+	xcodebuild -scheme "Loopy Framework" -configuration Release
+
+package: framework
+	./Scripts/package.sh
