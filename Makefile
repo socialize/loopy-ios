@@ -15,6 +15,12 @@ integration-tests:
 coverage:
 	./XcodeCoverage/getcovcombined
 
+sphinx_doc:
+	export LANG=en_US.UTF-8;\
+	export LC_ALL=en_US.UTF-8;\
+	export LC_CTYPE=en_US.UTF-8;\
+	ant -buildfile ./sphinx_doc.xml
+
 framework:
 	xcodebuild -scheme "Loopy Framework" -configuration Release
 
