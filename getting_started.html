@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started Guide &mdash; Loopy iOS SDK 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Loopy iOS SDK 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Loopy iOS SDK" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="index.html" title="Loopy iOS SDK"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "socialize";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+  feedback_widget_options.product = "socialize_ios_sdk";
+  feedback_widget_options.tag = "Feedback";
+
+  feedback_widget_options.limit = "3";
+
+  GSFN.feedback_widget.prototype.local_base_url = "http://support.getsocialize.com";
+  GSFN.feedback_widget.prototype.local_ssl_base_url = "http://support.getsocialize.com";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script><div class="section" id="getting-started-guide">
+<h1><a class="toc-backref" href="#id1">Getting Started Guide</a><a class="headerlink" href="#getting-started-guide" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#getting-started-guide" id="id1">Getting Started Guide</a><ul>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#installing-the-sdk" id="id3">Installing the SDK</a></li>
+<li><a class="reference internal" href="#installing-with-cocoapods-recommended" id="id4">Installing With CocoaPods (Recommended)</a><ul>
+<li><a class="reference internal" href="#step-1-install-rubygems-cocoapods-one-time-operation" id="id5">Step 1: Install RubyGems &amp; CocoaPods (One-Time Operation)</a></li>
+<li><a class="reference internal" href="#step-2-install-loopy-as-a-cocoapod" id="id6">Step 2: Install Loopy as a CocoaPod</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Loopy SDK provides a simple set of classes and methods built upon the Loopy REST API.</p>
+<p>App developers can elect to use either the pre-defined user interface controls provided in the Loopy UI
+framework, or &#8220;roll their own&#8221; using direct SDK calls.</p>
+<p>All calls to the Loopy SDK are <em>asynchronous</em>, meaning that your application will not &#8220;block&#8221; while
+waiting for a response from the Loopy server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>iOS 6.1 is the minimum version supported by this SDK</li>
+</ul>
+</div>
+</div>
+<div class="section" id="installing-the-sdk">
+<h2><a class="toc-backref" href="#id3">Installing the SDK</a><a class="headerlink" href="#installing-the-sdk" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>If you are upgrading from a previous release, check out the <a class="reference external" href="upgrading.html">Upgrading Guide</a>.</dt>
+<dd></dd>
+</dl>
+<p><strong>There are two options for installing the Loopy SDK:</strong> using CocoaPods, or via manual download and install.</p>
+</div>
+<div class="section" id="installing-with-cocoapods-recommended">
+<h2><a class="toc-backref" href="#id4">Installing With CocoaPods (Recommended)</a><a class="headerlink" href="#installing-with-cocoapods-recommended" title="Permalink to this headline">¶</a></h2>
+<p>CocoaPods is an easy, elegant way to manage library dependencies in iOS. No need to manually import frameworks or deal with compiler flags. After a one-time installation of RubyGems (CocoaPods is Ruby-based), a single command-line operation is all that&#8217;s needed to install or upgrade Loopy.</p>
+<div class="section" id="step-1-install-rubygems-cocoapods-one-time-operation">
+<h3><a class="toc-backref" href="#id5">Step 1: Install RubyGems &amp; CocoaPods (One-Time Operation)</a><a class="headerlink" href="#step-1-install-rubygems-cocoapods-one-time-operation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Macs come preinstalled with Ruby 1.8.7. For the purposes of CocoaPods, <strong>this is the correct version.</strong> However, you may still need to install RubyGems from the <a class="reference external" href="https://rubygems.org/pages/download">installation page</a>:</li>
+<li>Verify that you have both Ruby and RubyGems installed by entering the following in the command line:</li>
+</ul>
+<div class="highlight-objective-c"><pre>$ ruby -v
+ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0]
+$ gem -v
+2.1.5</pre>
+</div>
+<ul class="simple">
+<li>Install CocoaPods by entering the following in the command line:</li>
+</ul>
+<div class="highlight-objective-c"><pre>$ sudo gem install cocoapods
+$ pod setup</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Installing gem can take up to a minute, and may appear unresponsive intermittently during install.</p>
+</div>
+</div>
+<div class="section" id="step-2-install-loopy-as-a-cocoapod">
+<h3><a class="toc-backref" href="#id6">Step 2: Install Loopy as a CocoaPod</a><a class="headerlink" href="#step-2-install-loopy-as-a-cocoapod" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-sdk">Installing the SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-with-cocoapods-recommended">Installing With CocoaPods (Recommended)</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="index.html" title="Loopy iOS SDK"
+             >previous</a></li>
+        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ShareThis Inc.
+    </div>
+  </body>
+</html>
