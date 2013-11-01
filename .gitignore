@@ -1,0 +1,5 @@
+.DS_Store
+Loopy/Resources/.DS_Store
+TestApp/.DS_Store
+UnitTests/.DS_Store
+XcodeCoverage/*
