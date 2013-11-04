@@ -38,6 +38,10 @@
 			<fileset dir="build/docs/user_guide" includes="**/*.html **/*.js **/*.css"/>
 		</replaceregexp>
 				
+		<replaceregexp flags="g" match="_templates" replace="templates">
+			<fileset dir="build/docs/user_guide" includes="**/*.html **/*.js **/*.css"/>
+		</replaceregexp>
+				
 		<replaceregexp flags="g" match="_sources" replace="sources">
 			<fileset dir="build/docs/user_guide" includes="**/*.html **/*.js **/*.css"/>
 		</replaceregexp>
@@ -49,6 +53,13 @@
 		<copy 
 			file="Documentation/sphinx/source/_static/nature.css" 
 			todir="build/docs/user_guide/static" 
+			verbose="true" 
+			failonerror="true" 
+			overwrite="true"/>
+		
+		<copy 
+			file="Documentation/sphinx/source/_templates/layout.html" 
+			todir="build/docs/user_guide/templates" 
 			verbose="true" 
 			failonerror="true" 
 			overwrite="true"/>

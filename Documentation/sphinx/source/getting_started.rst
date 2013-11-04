@@ -1,8 +1,8 @@
 .. include:: feedback_widget.rst
 
-=====================
-Getting Started Guide
-=====================
+===============
+Getting Started
+===============
 
 .. contents:: Table of contents
  
@@ -77,8 +77,8 @@ Step 2: Install Loopy as a CocoaPod
  
 
 .. image:: images/podfile_in_directory.png
-            :width: 558
-            :height: 189
+            :width: 718
+            :height: 137
  
 
 - In the command line at the root directory of your project, enter the following:
