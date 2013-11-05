@@ -26,7 +26,6 @@ If you are upgrading from a previous release, check out the `Upgrading Guide`_.
 
     .. _Upgrading Guide: upgrading.html
 
-The Loopy SDK is easily installed with CocoaPods.
 
 Installing With CocoaPods
 -------------------------
@@ -76,7 +75,13 @@ Step 2: Install Loopy as a CocoaPod
             pod 'Loopy'
  
 
-.. image:: images/podfile_in_directory.png
+.. note:: If you already use an Xcode workspace to manage your project files, you will need to customize your Podfile to include CocoaPods for each Xcode project and app target. See this `CocoaPods help page`_ for more information.
+ 
+  .. _CocoaPods help page: https://github.com/CocoaPods/CocoaPods/issues/738
+
+- Once complete, your Podfile should appear in this location in your project directory:
+
+  .. image:: images/podfile_in_directory.png
             :width: 718
             :height: 137
  
@@ -89,7 +94,6 @@ Step 2: Install Loopy as a CocoaPod
 
 - After Loopy CocoaPod is created in your project, **you must use the Xcode workspace (YourProject.xcworkspace) to use the CocoaPod.** All your project settings should still be available to you from the workspace. **DO NOT open the .xcodeproj directly.**
 
- 
 
 If you're having problems please let us know by clicking on the 'Feedback' tab on the right side of the page.   We're here to help.
 
