@@ -9,3 +9,8 @@ Contents:
 
    getting_started
    upgrading
+   share_dialog
+   custom_share
+   non_url
+   examples
+   getting_help

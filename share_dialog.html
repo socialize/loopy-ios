@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using the Share Dialog &mdash; Loopy iOS SDK 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="shortcut icon" href="static/favicon.ico"/>
+    <link rel="top" title="Loopy iOS SDK 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Using a Custom Share UI" href="custom_share.html" />
+    <link rel="prev" title="Upgrading Loopy" href="upgrading.html" />
+<script type="text/javascript" src="static/loopy.js"></script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_share.html" title="Using a Custom Share UI"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading Loopy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "socialize";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+  feedback_widget_options.product = "socialize_ios_sdk";
+  feedback_widget_options.tag = "Feedback";
+
+  feedback_widget_options.limit = "3";
+
+  GSFN.feedback_widget.prototype.local_base_url = "http://support.getsocialize.com";
+  GSFN.feedback_widget.prototype.local_ssl_base_url = "http://support.getsocialize.com";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script><div class="section" id="using-the-share-dialog">
+<h1>Using the Share Dialog<a class="headerlink" href="#using-the-share-dialog" title="Permalink to this headline">¶</a></h1>
+<div class="block-padded container">
+<p>If you currently have a share function in your app you are most likely using the default UIActivityViewController provided by the iOS platform.</p>
+<p>The Loopy™ Share Dialog leverages UIActivityViewController but provides important callbacks to allow more sophisticated social analytics.</p>
+<p>To implement the Loopy™ Share Dialog, simply use the <strong>SZAPIClient</strong> and <strong>SZShare</strong> classes to create a trackable URL and display it using the default share dialog.</p>
+</div>
+<div class="block container">
+<a class="reference internal image-reference" href="images/share-dialog-1.png"><img alt="images/share-dialog-1.png" class="align-center" src="images/share-dialog-1.png" style="width: 201px; height: 405px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="clear container">
+<p>If you don&#8217;t already have one, add a button to your UIView layout (either in XIB file, pictured below, or programatically):</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="images/share-dialog-button.png"><img alt="images/share-dialog-button.png" src="images/share-dialog-button.png" style="width: 685px; height: 511px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Add an event handler for when the button is pressed (in this example, the <strong>Touch Up Inside</strong> event handled by an <strong>IBAction</strong>):</p>
+<div class="highlight-objective-c"><pre>
+//Returns a shortened URL then launches the Share Dialog
+- (IBAction)shareButtonPressed:(id)sender {
+    SZShare *share = [[SZShare alloc] initWithParent:self];
+    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    NSDictionary *jsonDict = [self jsonForShortlink:@"www.very-long-url.com"];
+    [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        id responseData = [data objectFromJSONData];
+        BOOL success = (error == nil) &amp;&amp; ([responseData isKindOfClass:[NSDictionary class]]);
+        if(success) {
+            NSDictionary *responseDict = (NSDictionary *)responseData;
+            if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@"shortlink"]) {
+                NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                NSArray *activityItems = @[shortlink];
+                NSArray *activities = [share getCurrentActivities:activityItems];
+                UIActivityViewController * activityController = [share newActivityViewController:activityItems
+                                                                                  withActivities:activities];
+                [share showActivityViewDialog:activityController completion:nil];
+            }
+        }
+        else {
+            //error
+        }
+    }];
+}
+
+//This is a sample of JSON needed for the "shortlink" API call
+- (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
+    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             urlStr,@"url",
+                             nil];
+    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"69",@"stdid",
+                                  [NSNumber numberWithInt:1234567890],@"timestamp",
+                                  itemObj,@"item",
+                                  [NSArray arrayWithObjects:@"sports", @"entertainment", nil],@"tags",
+                                  nil];
+    
+    return shortlinkObj;
+}
+
+</pre>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>hhh</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading Loopy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Using the Share Dialog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_share.html">Using a Custom Share UI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="non_url.html">Sharing Non-URL Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting Help</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_share.html" title="Using a Custom Share UI"
+             >next</a></li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading Loopy"
+             >previous</a> |</li>
+        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ShareThis Inc.
+    </div>
+  </body>
+</html>
