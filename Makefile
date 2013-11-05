@@ -1,7 +1,6 @@
 default: clean test integration-tests coverage
 
 clean:
-	xcodebuild -workspace Loopy.xcworkspace -scheme "Loopy" -configuration Release -sdk iphoneos clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "TestApp" -configuration Release -sdk iphoneos clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "IntegrationTests" -configuration Debug -sdk iphonesimulator clean
