@@ -1,25 +1,23 @@
 //
-//  share_dialog.m
+//  custom_share.m
 //  Loopy SDK
 //
 //  Created by David Jedeikin on 11/5/13.
 //  Copyright (c) 2013 ShareThis, Inc. All rights reserved.
 //
 
-#import "share_dialog.h"
-#import "SZShare.h"
+#import "custom_share.h"
 #import "SZAPIClient.h"
 #import <Social/Social.h>
 
-@implementation ShareDialogViewController
+@implementation CustomShareViewController
 
-// begin-show-share-dialog-snippet
+// begin-custom-share-snippet
 
-//Returns a shortened URL then launches the Share Dialog
-- (IBAction)shareButtonPressed:(id)sender {
-    SZShare *share = [[SZShare alloc] initWithParent:self];
+//Returns a shortened URL
+- (void)shortenURL:(NSString *)url {
     SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
-    NSDictionary *jsonDict = [self jsonForShortlink:@"www.very-long-url.com"];
+    NSDictionary *jsonDict = [self jsonForShortlink:url];
     [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         id responseData = [data objectFromJSONData];
         BOOL success = (error == nil) && ([responseData isKindOfClass:[NSDictionary class]]);
@@ -27,11 +25,7 @@
             NSDictionary *responseDict = (NSDictionary *)responseData;
             if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getCurrentActivities:activityItems];
-                UIActivityViewController * activityController = [share newActivityViewController:activityItems
-                                                                                  withActivities:activities];
-                [share showActivityViewDialog:activityController completion:nil];
+                //Your UI code goes here
             }
         }
         else {
@@ -55,7 +49,7 @@
     return shortlinkObj;
 }
 
-// end-show-share-dialog-snippet
+// end-custom-share-snippet
 
 
 @end
