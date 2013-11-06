@@ -14,6 +14,7 @@
 NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const SHARE = @"/share";
+NSTimeInterval const TIMEOUT = 1.0f;
 
 @synthesize urlPrefix;
 @synthesize operationQueue;
@@ -37,7 +38,7 @@ NSString *const SHARE = @"/share";
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
+                                                       timeoutInterval:TIMEOUT];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

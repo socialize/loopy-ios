@@ -13,5 +13,6 @@
 + (NSDictionary *)jsonForOpen;
 + (NSDictionary *)jsonForShortlink;
 + (NSDictionary *)jsonForShare;
++ (NSDictionary *)addLatencyToMock:(int)latency forDictionary:(NSDictionary *)originalDict;
 
 @end

@@ -74,8 +74,6 @@
 		2C64D42618187A6900D6CE6C /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
 		2C64D42818187AB100D6CE6C /* SZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* SZConstants.m */; };
-		2C66953B18297A0700AB8C08 /* share_dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66953A18297A0700AB8C08 /* share_dialog.m */; };
-		2C66953F18299EA700AB8C08 /* custom_share.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66953E18299EA700AB8C08 /* custom_share.m */; };
 		2C698F2918172D20003643B0 /* PinterestLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2618172D20003643B0 /* PinterestLogo43x43.png */; };
 		2C698F2A18172D20003643B0 /* PinterestLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2718172D20003643B0 /* PinterestLogo60x60.png */; };
 		2C698F2B18172D20003643B0 /* PinterestLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2818172D20003643B0 /* PinterestLogo76x76.png */; };
@@ -888,10 +886,8 @@
 				2C64D42118187A5100D6CE6C /* SZTwitterActivity.m in Sources */,
 				2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */,
 				2C314A1B17E13702003CA1A0 /* SZAPIClient.m in Sources */,
-				2C66953F18299EA700AB8C08 /* custom_share.m in Sources */,
 				2C314A0917E13143003CA1A0 /* SZAPIClientTests.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
-				2C66953B18297A0700AB8C08 /* share_dialog.m in Sources */,
 				2C5ADD4B181879EC00BAC4DC /* SZShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,

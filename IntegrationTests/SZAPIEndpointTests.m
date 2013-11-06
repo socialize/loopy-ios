@@ -18,7 +18,7 @@
 
 @implementation SZAPIEndpointTests
 
-NSString *const URL_PREFIX = @"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1";
+NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
 
 - (void)setUp {
     apiClient = [[SZAPIClient alloc] initWithURLPrefix:URL_PREFIX];
@@ -57,6 +57,37 @@ NSString *const URL_PREFIX = @"http://ec2-54-227-157-217.compute-1.amazonaws.com
     }];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
 
+    GHAssertTrue(operationSucceeded, @"");
+}
+
+
+//this uses the same JSON object used by unit tests
+//adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
+- (void)testOpenEndpointLatencyFail {
+    [self prepare];
+    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSDictionary *jsonDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
+    __block BOOL operationSucceeded = NO;
+    
+    [apiClient open:(NSDictionary *)jsonDictWithLatency withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        //this scenario EXPECTS an error with code -1001 (request timeout)
+        if(error) {
+            if([error code] == -1001) {
+                operationSucceeded = YES;
+                [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpenEndpointLatencyFail)];
+            }
+            else {
+                operationSucceeded = NO;
+                [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointLatencyFail)];
+            }
+        }
+        else {
+            operationSucceeded = NO;
+            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointLatencyFail)];
+        }
+    }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    
     GHAssertTrue(operationSucceeded, @"");
 }
 

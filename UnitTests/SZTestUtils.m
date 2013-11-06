@@ -106,4 +106,17 @@
     return shareObj;
 }
 
+//adds latency to an existing mock object
+//dictionary passed in MUST have a "@mock" key with an NSDictionary as value
++ (NSDictionary *)addLatencyToMock:(int)latency forDictionary:(NSDictionary *)originalDict {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:originalDict];
+    
+    NSDictionary *mockObj = (NSDictionary *)[dict valueForKey:@"mock"];
+    NSMutableDictionary *newMockObj = [NSMutableDictionary dictionaryWithDictionary:mockObj];
+    [newMockObj setValue:[NSNumber numberWithInt:latency] forKey:@"hang"];
+    [dict setValue:newMockObj forKey:@"mock"];
+    
+    return dict;
+}
+
 @end

@@ -14,6 +14,7 @@
 extern NSString *const OPEN;
 extern NSString *const SHORTLINK;
 extern NSString *const SHARE;
+extern NSTimeInterval const TIMEOUT;
 
 @property (nonatomic, strong) NSString *urlPrefix;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
