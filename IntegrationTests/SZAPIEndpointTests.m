@@ -159,4 +159,57 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
     
     GHAssertTrue(operationSucceeded, @"");
 }
+
+- (void)testShortenShareLatencyFail {
+    [self prepare];
+    NSDictionary *jsonDict = [SZTestUtils jsonForShortlink];
+    NSDictionary *jsonDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
+    __block BOOL operationSucceeded = NO;
+    __block id responseData;
+    
+    [apiClient shortlink:(NSDictionary *)jsonDictWithLatency withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        //this scenario EXPECTS an error with code -1001 (request timeout)
+        if(error) {
+            if([error code] == -1001) {
+                //now do the share with the original URL (and no latency)
+                NSDictionary *itemDict = (NSDictionary *)[jsonDictWithLatency valueForKey:@"item"];
+                NSString *url = (NSString *)[itemDict valueForKey:@"url"];
+                NSMutableDictionary *shortlinkDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
+                [shortlinkDict setValue:url forKey:@"shortlink"];
+                [apiClient share:(NSDictionary *)shortlinkDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+                    if(error == nil) {
+                        responseData = [data objectFromJSONData];
+                        //response data should be an empty dictionary
+                        if([responseData isKindOfClass:[NSDictionary class]]) {
+                            NSDictionary *responseDict = (NSDictionary *)responseData;
+                            if([responseDict count] == 0) {
+                                operationSucceeded = YES;
+                                [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShortenShareLatencyFail)];
+                            }
+                            else {
+                                operationSucceeded = NO;
+                                [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortenShareLatencyFail)];
+                            }
+                        }
+                    }
+                    else {
+                        operationSucceeded = NO;
+                        [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortenShareLatencyFail)];
+                    }
+                }];
+            }
+            else {
+                operationSucceeded = NO;
+                [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortenShareLatencyFail)];
+            }
+        }
+        else {
+            operationSucceeded = NO;
+            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortenShareLatencyFail)];
+        }
+    }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    
+    GHAssertTrue(operationSucceeded, @"");
+}
 @end

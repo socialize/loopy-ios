@@ -53,7 +53,7 @@
                              [NSNumber numberWithInt:200],@"http",
                              nil];
     NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"ABCD-1234",@"url",
+                             @"http://www.sharethis.com",@"url",
                              nil];
     NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                   @"69",@"stdid",
