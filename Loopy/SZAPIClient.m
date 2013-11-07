@@ -53,6 +53,44 @@ NSTimeInterval const TIMEOUT = 1.0f;
     return [[SZURLRequestOperation alloc] initWithURLRequest:request];
 }
 
+//Returns error code 
+//if code is nil or no error value contained, returns nil
+- (NSNumber *)loopyErrorCode:(NSError *)error {
+    NSNumber *errorCode = nil;
+    if(error) {
+        NSDictionary *userInfo = error.userInfo;
+        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
+        if([responseBody isKindOfClass:[NSData class]]) {
+            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
+            id codeObj = [errorDict valueForKey:@"code"];
+            if([codeObj isKindOfClass:[NSNumber class]]) {
+                errorCode = (NSNumber *)codeObj;
+            }
+        }
+    }
+    return errorCode;
+}
+
+//Returns array of error values taken from the userInfo portion of error returned from request
+//if error is nil or no error value contained, returns nil
+- (NSArray *)loopyErrorArray:(NSError *)error {
+    NSArray *errorArray = nil;
+    if(error) {
+        NSDictionary *userInfo = error.userInfo;
+        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
+        if([responseBody isKindOfClass:[NSData class]]) {
+            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
+            id errorObj = [errorDict valueForKey:@"error"];
+            
+            if([errorObj isKindOfClass:[NSArray class]]) {
+                errorArray = (NSArray *)errorObj;
+            }
+        }
+    }
+    return errorArray;
+}
+
+
 //calls open endpoint, including manufacturing URLRequest for it
 - (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
     [self callEndpoint:OPEN withJSON:jsonDict andCallback:callback];

@@ -24,6 +24,8 @@ extern NSTimeInterval const TIMEOUT;
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
 - (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request;
+- (NSNumber *)loopyErrorCode:(NSError *)error;
+- (NSArray *)loopyErrorArray:(NSError *)error;
 
 - (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
 - (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;

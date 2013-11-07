@@ -10,6 +10,7 @@
 #import <SZNetworking/SZNetworking.h>
 #import "SZAPIClient.h"
 #import "SZTestUtils.h"
+#import "SZJSONUtils.h"
 
 @interface SZAPIEndpointTests : GHAsyncTestCase {
     SZAPIClient *apiClient;
@@ -60,6 +61,30 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
     GHAssertTrue(operationSucceeded, @"");
 }
 
+//deliberately-mangled JSON to test error format
+- (void)testOpenEndpointInvalidJSON {
+    [self prepare];
+    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSMutableDictionary *jsonDictInvalid = [NSMutableDictionary dictionaryWithDictionary:jsonDict];
+    [jsonDictInvalid removeObjectForKey:@"stdid"];
+    __block BOOL operationSucceeded = NO;
+    
+    [apiClient open:(NSDictionary *)jsonDictInvalid withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        //this scenario EXPECTS an error with code nbr and error array
+        if(!error) {
+            operationSucceeded = NO;
+            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointInvalidJSON)];
+        }
+
+        NSNumber *errorCode = [apiClient loopyErrorCode:error];
+        NSArray *errorArray = [apiClient loopyErrorArray:error];
+        operationSucceeded = (errorCode && errorArray);
+        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpenEndpointInvalidJSON)];
+    }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    
+    GHAssertTrue(operationSucceeded, @"");
+}
 
 //this uses the same JSON object used by unit tests
 //adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
