@@ -24,6 +24,28 @@
 - (void)tearDownClass {
 }
 
+- (void)testRequestHeaderForLoopyKeys {
+    BOOL containsAPIKey = NO;
+    BOOL containsLoopyKey = NO;
+    NSData *dummyData = [[NSData alloc] init];
+    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
+    NSMutableURLRequest *request = [apiClient newURLRequest:dummyData length:0 endpoint:@""];
+    NSDictionary *headerFields = [request allHTTPHeaderFields];
+    for(NSString *key in headerFields) {
+        id value = [headerFields valueForKey:key];
+        GHAssertNotNil(value, @"");
+        
+        if([key isEqualToString:API_KEY]) {
+            containsAPIKey = YES;
+        }
+        else if([key isEqualToString:LOOPY_KEY]) {
+            containsLoopyKey = YES;
+        }
+    }
+    
+    GHAssertTrue(containsAPIKey && containsLoopyKey, @"");
+}
+
 - (void)testOpen {
     [self prepare];
     id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
@@ -33,8 +55,8 @@
     //return dummy request and request operations
     NSMutableURLRequest *dummyRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
     [[[mockAPIClient stub] andReturn:dummyRequest] newURLRequest:[OCMArg any]
-                                                               length:[OCMArg any]
-                                                             endpoint:[OCMArg any]];
+                                                          length:[OCMArg any]
+                                                        endpoint:[OCMArg any]];
     SZURLRequestOperation *requestOperation = [[SZURLRequestOperation alloc] initWithURLRequest:dummyRequest];
     [[[mockAPIClient stub] andReturn:requestOperation] newURLRequestOperation:[OCMArg any]];
     

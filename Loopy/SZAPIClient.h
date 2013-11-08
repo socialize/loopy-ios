@@ -15,6 +15,10 @@ extern NSString *const OPEN;
 extern NSString *const SHORTLINK;
 extern NSString *const SHARE;
 extern NSTimeInterval const TIMEOUT;
+extern NSString *const API_KEY;
+extern NSString *const LOOPY_KEY;
+extern NSString *const API_KEY_VAL;
+extern NSString *const LOOPY_KEY_VAL;
 
 @property (nonatomic, strong) NSString *urlPrefix;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;

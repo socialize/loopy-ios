@@ -15,6 +15,10 @@ NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const SHARE = @"/share";
 NSTimeInterval const TIMEOUT = 1.0f;
+NSString *const API_KEY = @"X-LoopyAppID";
+NSString *const LOOPY_KEY = @"X-LoopyKey";
+NSString *const API_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
+NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
 
 @synthesize urlPrefix;
 @synthesize operationQueue;
@@ -42,6 +46,8 @@ NSTimeInterval const TIMEOUT = 1.0f;
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:API_KEY_VAL forHTTPHeaderField:API_KEY];
+    [request setValue:LOOPY_KEY_VAL forHTTPHeaderField:LOOPY_KEY];
     [request setValue:[length stringValue] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:jsonData];
     
