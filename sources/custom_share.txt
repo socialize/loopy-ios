@@ -11,5 +11,6 @@ Simply use the **[SZAPIClient shortlink:withCallback:]** method to create a trac
 When the user elects to share using your custom UI:
 
 .. literalinclude:: snippets/custom_share.m
+        :language: objective-c
         :start-after: begin-custom-share-snippet
         :end-before: end-custom-share-snippet

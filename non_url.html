@@ -26,8 +26,6 @@
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
     <link rel="top" title="Loopy iOS SDK 0.1.0 documentation" href="index.html" />
-    <link rel="next" title="Examples" href="examples.html" />
-    <link rel="prev" title="Using a Custom Share UI" href="custom_share.html" />
 <script type="text/javascript" src="static/loopy.js"></script>
 
   </head>
@@ -35,12 +33,6 @@
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="examples.html" title="Examples"
-             accesskey="N">next</a></li>
-        <li class="right" >
-          <a href="custom_share.html" title="Using a Custom Share UI"
-             accesskey="P">previous</a> |</li>
         <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -74,12 +66,22 @@
 
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script><div class="section" id="sharing-non-url-content">
-<h1><a class="toc-backref" href="#id1">Sharing Non-URL Content</a><a class="headerlink" href="#sharing-non-url-content" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="table-of-contents">
-<p class="topic-title first">Table of contents</p>
-<ul class="simple">
-<li><a class="reference internal" href="#sharing-non-url-content" id="id1">Sharing Non-URL Content</a></li>
-</ul>
+<h1>Sharing Non-URL Content<a class="headerlink" href="#sharing-non-url-content" title="Permalink to this headline">¶</a></h1>
+<div class="block-padded container">
+<p>If your app has content that does not live on the web (i.e. it does not have URL)
+you can still allow your users to share this content using a non-URL share.</p>
+<p>When the share occurs we will create a webpage for you that renders the content you
+include in the share item.</p>
+<p>Non-URL components of the share item correspond to <a href="http://ogp.me/" target="_blank">Open Graph</a>&nbsp;&#10138; tags automatically added
+to the page we create so that post to social networks like Facebook render with the correct
+text and images you intend.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><br /> You can also use the <strong>Item</strong> described below even if you <em>do</em> have a URL to add more meaning to your analytics</p>
+</div>
+</div>
+<div class="block container">
+<img alt="images/og_logo.png" class="align-center" src="images/og_logo.png" />
 </div>
 </div>
 
@@ -90,12 +92,11 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
 <h3><a href="index.html">Table Of Contents</a></h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading Loopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="share_dialog.html">Using the Share Dialog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_share.html">Using a Custom Share UI</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Sharing Non-URL Content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting Help</a></li>
 </ul>
@@ -120,12 +121,6 @@
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="examples.html" title="Examples"
-             >next</a></li>
-        <li class="right" >
-          <a href="custom_share.html" title="Using a Custom Share UI"
-             >previous</a> |</li>
         <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
