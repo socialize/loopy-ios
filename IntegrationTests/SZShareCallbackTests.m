@@ -31,7 +31,7 @@
     facebookActivity = [[SZFacebookActivity alloc] init];
     twitterActivity = [[SZTwitterActivity alloc] init];
     
-    share = [[SZShare alloc] initWithParent:nil];
+    share = [[SZShare alloc] initWithParent:nil apiClient:nil];
     activities = @[facebookActivity, twitterActivity];
     shareItems = @[@"ShareItem1",@"ShareItem2"];
 

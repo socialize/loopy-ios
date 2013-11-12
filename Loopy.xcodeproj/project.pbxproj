@@ -77,7 +77,6 @@
 		2C698F2918172D20003643B0 /* PinterestLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2618172D20003643B0 /* PinterestLogo43x43.png */; };
 		2C698F2A18172D20003643B0 /* PinterestLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2718172D20003643B0 /* PinterestLogo60x60.png */; };
 		2C698F2B18172D20003643B0 /* PinterestLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2818172D20003643B0 /* PinterestLogo76x76.png */; };
-		2C698F2E18172D4F003643B0 /* SZPinterestActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C698F2D18172D4F003643B0 /* SZPinterestActivity.m */; };
 		2C698F5418173F5E003643B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
 		2C6D367517E3B85E00CF1199 /* SZJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */; };
@@ -98,7 +97,6 @@
 		2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
 		2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
-		2CA3DCFA1811E8AD005E9159 /* SZGooglePlusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */; };
 		2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
 		2CD55AFE1819C9FA0051C842 /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
 		2CD55AFF1819C9FA0051C842 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
@@ -109,6 +107,14 @@
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2CDE0E7817E122A30048B055 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7617E122A30048B055 /* InfoPlist.strings */; };
 		2CDE0E7A17E122A30048B055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE0E7917E122A30048B055 /* main.m */; };
+		2CE78B9A1831AAC9004EBB82 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */; };
+		2CE78B9B1831AAD6004EBB82 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */; };
+		2CE78B9D1831B0C9004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
+		2CE78B9E1831B0CF004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
+		2CE78B9F1831B0E5004EBB82 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */; };
+		2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
+		2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
+		2CE78BA21831B109004EBB82 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */; };
 		2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */; };
 /* End PBXBuildFile section */
 
@@ -164,8 +170,6 @@
 		2C698F2618172D20003643B0 /* PinterestLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo43x43.png; sourceTree = "<group>"; };
 		2C698F2718172D20003643B0 /* PinterestLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo60x60.png; sourceTree = "<group>"; };
 		2C698F2818172D20003643B0 /* PinterestLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo76x76.png; sourceTree = "<group>"; };
-		2C698F2C18172D4F003643B0 /* SZPinterestActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZPinterestActivity.h; sourceTree = "<group>"; };
-		2C698F2D18172D4F003643B0 /* SZPinterestActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZPinterestActivity.m; sourceTree = "<group>"; };
 		2C698F5318173F5E003643B0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2C6D367217E3AD0300CF1199 /* SZJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* SZJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZJSONUtils.m; sourceTree = "<group>"; };
@@ -205,8 +209,6 @@
 		2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo76x76.png; sourceTree = "<group>"; };
 		2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZFacebookActivity.h; sourceTree = "<group>"; };
 		2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZFacebookActivity.m; sourceTree = "<group>"; };
-		2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZGooglePlusActivity.h; sourceTree = "<group>"; };
-		2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZGooglePlusActivity.m; sourceTree = "<group>"; };
 		2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTwitterActivity.h; sourceTree = "<group>"; };
 		2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTwitterActivity.m; sourceTree = "<group>"; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +218,8 @@
 		2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDE0E8517E122A30048B055 /* UnitTestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E8617E122A30048B055 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SZURLRequestOperation+Testing.h"; sourceTree = "<group>"; };
 		2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SZURLRequestOperation+Testing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,11 +229,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C44DDDB182036470026938A /* Social.framework in Frameworks */,
 				2C742AD217F3912E0063653A /* libPods.a in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
 				2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */,
+				2C44DDDB182036470026938A /* Social.framework in Frameworks */,
+				2CE78BA21831B109004EBB82 /* CoreTelephony.framework in Frameworks */,
+				2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +243,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CE78B9E1831B0CF004EBB82 /* CoreLocation.framework in Frameworks */,
+				2CE78B9A1831AAC9004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +258,8 @@
 				2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */,
 				2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */,
 				2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */,
+				2CE78B9B1831AAD6004EBB82 /* CoreTelephony.framework in Frameworks */,
+				2CE78B9D1831B0C9004EBB82 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,11 +267,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C44DDDA182036400026938A /* Social.framework in Frameworks */,
 				2C742AA417F371620063653A /* libPods.a in Frameworks */,
 				2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */,
 				2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */,
 				2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */,
+				2C44DDDA182036400026938A /* Social.framework in Frameworks */,
+				2CE78B9F1831B0E5004EBB82 /* CoreTelephony.framework in Frameworks */,
+				2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +347,8 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */,
+				2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */,
 				2C44DE18182081C90026938A /* libPods.a */,
 				2C522CD117FF79C3009C1F43 /* libprofile_rt.dylib */,
 				2C742AD517F391440063653A /* libPods.a */,
@@ -437,10 +451,6 @@
 				2C9C283318201CE40036FBD0 /* SZActivity.h */,
 				2CA3DCEA1811E8AD005E9159 /* SZFacebookActivity.h */,
 				2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */,
-				2CA3DCEC1811E8AD005E9159 /* SZGooglePlusActivity.h */,
-				2CA3DCED1811E8AD005E9159 /* SZGooglePlusActivity.m */,
-				2C698F2C18172D4F003643B0 /* SZPinterestActivity.h */,
-				2C698F2D18172D4F003643B0 /* SZPinterestActivity.m */,
 				2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */,
 				2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */,
 				2CA3DCE01811E8AD005E9159 /* Resources */,
@@ -866,8 +876,6 @@
 				2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */,
 				2C6D367417E3AD0300CF1199 /* SZJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
-				2CA3DCFA1811E8AD005E9159 /* SZGooglePlusActivity.m in Sources */,
-				2C698F2E18172D4F003643B0 /* SZPinterestActivity.m in Sources */,
 				2C250E2C1804C8EC00A788AC /* SZRootViewController.m in Sources */,
 				2C0ECE9618174C46005965D0 /* SZConstants.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,

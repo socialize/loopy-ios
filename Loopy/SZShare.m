@@ -15,15 +15,21 @@
 @implementation SZShare
 
 @synthesize parentController;
+@synthesize apiClient;
 
-- (id)initWithParent:(UIViewController *)parent {
+- (id)initWithParent:(UIViewController *)parent apiClient:(SZAPIClient *)client {
     self = [super init];
     if(self) {
         self.parentController = parent;
-        //listen for share events
+        self.apiClient = client;
+        //listen for share events (both intent to share -- beginning -- and end -- share complete)
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleShowActivityShare:)
                                                      name:BeginShareNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleShareComplete:)
+                                                     name:EndShareNotification
                                                    object:nil];
     }
     
@@ -91,14 +97,22 @@
 }
 
 //Shows specific share dialog for selected service
-//TODO will need to include all social network types
-- (BOOL)handleShowActivityShare:(NSNotification *)notification {
+- (void)handleShowActivityShare:(NSNotification *)notification {
     //dismiss controller and bring up share dialog
     [self.parentController dismissViewControllerAnimated:YES completion:^ {
         SLComposeViewController *controller = [self newActivityShareController:[notification object]];
         [self.parentController presentViewController:controller animated:YES completion:Nil];
     }];
-    return YES;
+}
+
+//calls out to API to report share
+- (void)handleShareComplete:(NSNotification *)notification {
+    id<SZActivity> activity = (id<SZActivity>)[notification object];
+    NSArray *shareItems = activity.shareItems;
+    NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
+    NSDictionary *shareDict = [self.apiClient reportShareDictionary:shareItem
+                                                            channel:activity.activityType];
+    [self.apiClient reportShare:shareDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {}];
 }
 
 @end

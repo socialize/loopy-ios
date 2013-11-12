@@ -159,7 +159,7 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
     __block BOOL operationSucceeded = NO;
     __block id responseData;
     
-    [apiClient share:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [apiClient reportShare:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         if(error == nil) {
             responseData = [data objectFromJSONData];
             //response data should be an empty dictionary
@@ -201,7 +201,7 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
                 NSString *url = (NSString *)[itemDict valueForKey:@"url"];
                 NSMutableDictionary *shortlinkDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
                 [shortlinkDict setValue:url forKey:@"shortlink"];
-                [apiClient share:(NSDictionary *)shortlinkDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+                [apiClient reportShare:(NSDictionary *)shortlinkDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
                     if(error == nil) {
                         responseData = [data objectFromJSONData];
                         //response data should be an empty dictionary

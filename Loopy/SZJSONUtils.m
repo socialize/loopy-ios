@@ -20,7 +20,6 @@
                                                     error:&jsonError];
     }
     @catch (NSException *exception) {
-        NSLog(@"Error creating JSON data:");
         [self logError:jsonError];
     }
     
@@ -42,14 +41,16 @@
 
 //error logging
 + (void)logError:(NSError *)error {
-    NSLog(@"ERROR code: %d", error.code);
+    //TODO have these output to an actual log
+//    NSLog(@"ERROR code: %d", error.code);
     for(id key in error.userInfo) {
         id value = [error.userInfo objectForKey:key];
         NSString *keyAsString = (NSString *)key;
         NSString *valueAsString = (NSString *)value;
         
-        NSLog(@"ERROR key: %@", keyAsString);
-        NSLog(@"ERROR value: %@", valueAsString);
+        //TODO have these output to an actual log
+//        NSLog(@"ERROR key: %@", keyAsString);
+//        NSLog(@"ERROR value: %@", valueAsString);
     }
 }
 

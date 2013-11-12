@@ -8,20 +8,31 @@
 
 #import "SZAPIClient.h"
 #import "SZJSONUtils.h"
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <sys/utsname.h>
 
 @implementation SZAPIClient
 
 NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
-NSString *const SHARE = @"/share";
+NSString *const REPORT_SHARE = @"/share";
 NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
 NSString *const API_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
 NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
+NSString *const LANGUAGE_ID = @"objc";
+NSString *const LANGUAGE_VERSION = @"1.3";
 
 @synthesize urlPrefix;
 @synthesize operationQueue;
+@synthesize locationManager;
+@synthesize carrierName;
+@synthesize osVersion;
+@synthesize deviceModel;
+@synthesize idfa;
+@synthesize currentLocation;
 
 //constructor with specified endpoint
 - (id)initWithURLPrefix:(NSString *)url {
@@ -30,6 +41,19 @@ NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
         self.urlPrefix = url;
         self.operationQueue = [[NSOperationQueue alloc] init];
         self.operationQueue.maxConcurrentOperationCount = 5;
+        
+        //device information cached for sharing and other operations
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        self.locationManager.delegate = self;
+        [self.locationManager startUpdatingLocation];
+        CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+        CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+        UIDevice *device = [UIDevice currentDevice];
+        self.carrierName = [carrier carrierName];
+        self.deviceModel = machineName();//device.model;
+        self.osVersion = device.systemVersion;
+        self.idfa = device.identifierForVendor;
     }
     return self;
 }
@@ -96,6 +120,51 @@ NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
     return errorArray;
 }
 
+//returns JSON-ready dictionary for reportShare endpoint, based on shortlink and channel
+- (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
+    CLLocationCoordinate2D coordinate;
+    
+    if(self.currentLocation) {
+        coordinate = self.currentLocation.coordinate;
+    }
+    else {
+        coordinate = CLLocationCoordinate2DMake(0.0f, 0.0f); //bogus coordinates if nothing found
+    }
+    
+    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithDouble:coordinate.latitude],@"lat",
+                            [NSNumber numberWithDouble:coordinate.longitude],@"lon",
+                            nil];
+    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [self.idfa UUIDString],@"id",
+                               self.deviceModel,@"model",
+                               @"ios",@"os",
+                               self.osVersion,@"osv",
+                               self.carrierName,@"carrier",
+                               @"on",@"wifi",
+                               geoObj,@"geo",
+                               nil];
+    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"com.socialize.appname",@"id", //TODO
+                            @"App Name",@"name",            //TODO
+                            @"123.4",@"version",            //TODO
+                            nil];
+    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               LANGUAGE_ID,@"lang",
+                               LANGUAGE_VERSION,@"version",
+                               nil];
+    NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"69",@"stdid",               //TODO
+                              [NSNumber numberWithInt:1234567890],@"timestamp",
+                              deviceObj,@"device",
+                              appObj,@"app",
+                              socialChannel,@"channel",
+                              shortlink,@"shortlink",
+                              clientObj,@"client",
+                              nil];
+    
+    return shareObj;
+}
 
 //calls open endpoint, including manufacturing URLRequest for it
 - (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
@@ -107,8 +176,8 @@ NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
     [self callEndpoint:SHORTLINK withJSON:jsonDict andCallback:callback];
 }
 
-- (void)share:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
-    [self callEndpoint:SHARE withJSON:jsonDict andCallback:callback];
+- (void)reportShare:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+    [self callEndpoint:REPORT_SHARE withJSON:jsonDict andCallback:callback];
 }
 
 //convenience method
@@ -124,6 +193,23 @@ NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
     SZURLRequestOperation *operation = [self newURLRequestOperation:request];
     operation.URLCompletionBlock = callback;
     [operationQueue addOperation:operation];
+}
+
+//location update
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    if(locations.lastObject) {
+        currentLocation = (CLLocation *)locations.lastObject;
+    }
+}
+
+//convenience method to return "real" device name
+//per http://stackoverflow.com/questions/11197509/ios-iphone-get-device-model-and-make
+NSString *machineName() {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
 }
 
 @end

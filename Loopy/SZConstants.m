@@ -11,5 +11,6 @@
 @implementation SZConstants
 
 NSString * const BeginShareNotification = @"BeginShareNotification";
+NSString * const EndShareNotification = @"EndShareNotification";
 
 @end

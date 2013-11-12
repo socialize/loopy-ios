@@ -11,6 +11,7 @@
 #import "SZFacebookActivity.h"
 #import "SZTwitterActivity.h"
 #import "SZConstants.h"
+#import "SZAPIClient.h"
 #import <Social/Social.h>
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
@@ -26,7 +27,8 @@
 
 - (void)setUpClass {
     UIViewController *dummyController = (UIViewController *)[OCMockObject mockForClass:[UIViewController class]];
-    share = [[SZShare alloc] initWithParent:dummyController];
+    SZAPIClient *dummyAPIClient = (SZAPIClient *)[OCMockObject mockForClass:[SZAPIClient class]];
+    share = [[SZShare alloc] initWithParent:dummyController apiClient:dummyAPIClient];
     dummyShareItems = @[@"www.shortlink.com", @"More information about this site"];
     dummyActivities = @[[SZFacebookActivity initWithActivityItems:dummyShareItems], [SZTwitterActivity initWithActivityItems:dummyShareItems]];
 }

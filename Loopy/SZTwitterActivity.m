@@ -59,13 +59,14 @@
     return [self.shareItems isEqualToArray:activityItems];
 }
 
-//Notification of intent to share and such can happen here
+//Notification of intent to share
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
     self.shareItems = activityItems;
     [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
 }
 
-//Notification of all done can happen here
+//Notification of share initiated
 - (void)activityDidFinish:(BOOL)completed {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:self];
 }
 @end

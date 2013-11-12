@@ -96,7 +96,7 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-- (void)testShare {
+- (void)testReportShare {
     [self prepare];
     id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
     id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
@@ -112,9 +112,9 @@
     
     //call with test JSON dict
     NSDictionary *jsonDict = [SZTestUtils jsonForShare];
-    [mockAPIClient share:jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [mockAPIClient reportShare:jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         operationSucceeded = YES;
-        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShare)];
+        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testReportShare)];
     }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
