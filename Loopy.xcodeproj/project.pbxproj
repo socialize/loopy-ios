@@ -115,6 +115,11 @@
 		2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
 		2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */; };
 		2CE78BA21831B109004EBB82 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */; };
+		2CEFADA91832FFEF00841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
+		2CEFADAA1832FFF800841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
+		2CEFADAB1833000200841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
+		2CEFADAC1833000E00841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
+		2CEFADAD1833001B00841C33 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */; };
 /* End PBXBuildFile section */
 
@@ -222,6 +227,7 @@
 		2CDE0E8617E122A30048B055 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2CEFADA81832FFEF00841C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SZURLRequestOperation+Testing.h"; sourceTree = "<group>"; };
 		2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SZURLRequestOperation+Testing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +244,7 @@
 				2C44DDDB182036470026938A /* Social.framework in Frameworks */,
 				2CE78BA21831B109004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */,
+				2CEFADA91832FFEF00841C33 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +252,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEFADAD1833001B00841C33 /* Social.framework in Frameworks */,
+				2CEFADAC1833000E00841C33 /* AdSupport.framework in Frameworks */,
 				2CE78B9E1831B0CF004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CE78B9A1831AAC9004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */,
@@ -262,6 +271,7 @@
 				2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */,
 				2CE78B9B1831AAD6004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78B9D1831B0C9004EBB82 /* CoreLocation.framework in Frameworks */,
+				2CEFADAB1833000200841C33 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +286,7 @@
 				2C44DDDA182036400026938A /* Social.framework in Frameworks */,
 				2CE78B9F1831B0E5004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */,
+				2CEFADAA1832FFF800841C33 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +360,7 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CEFADA81832FFEF00841C33 /* AdSupport.framework */,
 				2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */,
 				2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */,
 				2C44DE18182081C90026938A /* libPods.a */,

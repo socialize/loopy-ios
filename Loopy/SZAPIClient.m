@@ -10,6 +10,7 @@
 #import "SZJSONUtils.h"
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <AdSupport/ASIdentifierManager.h>
 #import <sys/utsname.h>
 
 @implementation SZAPIClient
@@ -50,10 +51,11 @@ NSString *const LANGUAGE_VERSION = @"1.3";
         CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [networkInfo subscriberCellularProvider];
         UIDevice *device = [UIDevice currentDevice];
+        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.carrierName = [carrier carrierName];
         self.deviceModel = machineName();//device.model;
         self.osVersion = device.systemVersion;
-        self.idfa = device.identifierForVendor;
+        self.idfa = idManager.advertisingIdentifier;
     }
     return self;
 }
@@ -123,6 +125,12 @@ NSString *const LANGUAGE_VERSION = @"1.3";
 //returns JSON-ready dictionary for reportShare endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     CLLocationCoordinate2D coordinate;
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+    NSString *appID = [info valueForKey:@"CFBundleIdentifier"];
+    NSString *appName = [info valueForKey:@"CFBundleName"];
+    NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
+    int timestamp = [[NSDate date] timeIntervalSince1970];
     
     if(self.currentLocation) {
         coordinate = self.currentLocation.coordinate;
@@ -145,9 +153,9 @@ NSString *const LANGUAGE_VERSION = @"1.3";
                                geoObj,@"geo",
                                nil];
     NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"com.socialize.appname",@"id", //TODO
-                            @"App Name",@"name",            //TODO
-                            @"123.4",@"version",            //TODO
+                            appID,@"id",
+                            appName,@"name",
+                            appVersion,@"version",
                             nil];
     NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                LANGUAGE_ID,@"lang",
@@ -155,7 +163,7 @@ NSString *const LANGUAGE_VERSION = @"1.3";
                                nil];
     NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
                               @"69",@"stdid",               //TODO
-                              [NSNumber numberWithInt:1234567890],@"timestamp",
+                              [NSNumber numberWithInt:timestamp],@"timestamp",
                               deviceObj,@"device",
                               appObj,@"app",
                               socialChannel,@"channel",
