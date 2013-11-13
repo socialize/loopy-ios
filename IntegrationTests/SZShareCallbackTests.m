@@ -42,7 +42,7 @@
 //simulate FB share being selected
 - (void)testFacebookShareCallbacks {
     id mockShare = [OCMockObject partialMockForObject:share];
-    [[[mockShare stub] andReturn:activities] getCurrentActivities:shareItems];
+    [[[mockShare stub] andReturn:activities] getDefaultActivities:shareItems];
     [self prepare];
     [[[mockShare stub] andCall:@selector(shareFacebookCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
     [facebookActivity prepareWithActivityItems:shareItems];
@@ -62,7 +62,7 @@
 - (void)testTwitterShareCallbacks {
     [self prepare];
     id mockShare = [OCMockObject partialMockForObject:share];
-    [[[mockShare stub] andReturn:activities] getCurrentActivities:shareItems];
+    [[[mockShare stub] andReturn:activities] getDefaultActivities:shareItems];
     [[[mockShare stub] andCall:@selector(shareTwitterCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
     [twitterActivity prepareWithActivityItems:shareItems];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
@@ -74,6 +74,14 @@
 - (void)shareTwitterCallback:(NSNotification *)notification{
     twitterShared = YES;
     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testTwitterShareCallbacks)];
+}
+
+//TODO the share complete callback doesn't do anything yet...
+- (void)testHandleShareComplete {
+    SZFacebookActivity *dummyActivity = [[SZFacebookActivity alloc] init];
+    dummyActivity.shareItems = shareItems;
+    NSNotification *dummyNotification = [NSNotification notificationWithName:EndShareNotification object:dummyActivity];
+    [share handleShareComplete:dummyNotification];
 }
 
 @end

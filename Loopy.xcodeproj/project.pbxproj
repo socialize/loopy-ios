@@ -211,6 +211,8 @@
 		2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZFacebookActivity.m; sourceTree = "<group>"; };
 		2CA3DCEE1811E8AD005E9159 /* SZTwitterActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTwitterActivity.h; sourceTree = "<group>"; };
 		2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTwitterActivity.m; sourceTree = "<group>"; };
+		2CB4EF171832E11A00A0AA0B /* custom_activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = custom_activity.h; path = Documentation/sphinx/source/snippets/custom_activity.h; sourceTree = SOURCE_ROOT; };
+		2CB4EF181832E11A00A0AA0B /* custom_activity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = custom_activity.m; path = Documentation/sphinx/source/snippets/custom_activity.m; sourceTree = SOURCE_ROOT; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E7517E122A30048B055 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		2CDE0E7717E122A30048B055 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -380,6 +382,8 @@
 		2C66953C18299D9A00AB8C08 /* Snippets */ = {
 			isa = PBXGroup;
 			children = (
+				2CB4EF171832E11A00A0AA0B /* custom_activity.h */,
+				2CB4EF181832E11A00A0AA0B /* custom_activity.m */,
 				2C66953D18299EA700AB8C08 /* custom_share.h */,
 				2C66953E18299EA700AB8C08 /* custom_share.m */,
 				2C66953918297A0700AB8C08 /* share_dialog.h */,

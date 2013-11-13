@@ -7,6 +7,7 @@
 //
 
 #import "share_dialog.h"
+#import "custom_activity.h"
 #import "SZShare.h"
 #import "SZAPIClient.h"
 #import <Social/Social.h>
@@ -28,7 +29,7 @@
             if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
                 NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getCurrentActivities:activityItems];
+                NSArray *activities = [share getDefaultActivities:activityItems];
                 UIActivityViewController * activityController = [share newActivityViewController:activityItems
                                                                                   withActivities:activities];
                 [share showActivityViewDialog:activityController completion:nil];
@@ -57,5 +58,25 @@
 
 // end-show-share-dialog-snippet
 
+
+// begin-show-custom-activity-snippet
+
+//This is an example of an activity controller with custom UIActivities added in
+- (UIActivityViewController *)activityControllerWithCustomActivities:(NSArray *)activityItems {
+    SZShare *share = [[SZShare alloc] initWithParent:self];
+    NSArray *defaultActivities = [share getDefaultActivities:activityItems];
+    
+    //add in any custom activities
+    NSMutableArray *allActivities = [NSMutableArray arrayWithArray:defaultActivities];
+    MyCustomActivity *customActivity = [MyCustomActivity initWithActivityItems:activityItems];
+    [allActivities addObject:customActivity];
+    
+    UIActivityViewController *activityController = [share newActivityViewController:activityItems
+                                                                     withActivities:allActivities];
+    
+    return activityController;
+}
+
+// end-show-custom-activity-snippet
 
 @end

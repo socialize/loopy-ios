@@ -14,17 +14,6 @@
 
 @synthesize shareItems;
 
-//new activity with specified share items
-+ (id)initWithActivityItems:(NSArray *)items {
-    SZTwitterActivity *newActivity = [[SZTwitterActivity alloc] init];
-    if(newActivity) {
-        newActivity.shareItems = items;
-    }
-    
-    return newActivity;
-    
-}
-
 - (NSString *)activityTitle {
     return @"Twitter";
 }
@@ -56,7 +45,7 @@
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
-    return [self.shareItems isEqualToArray:activityItems];
+    return YES;
 }
 
 //Notification of intent to share
@@ -65,8 +54,4 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
 }
 
-//Notification of share initiated
-- (void)activityDidFinish:(BOOL)completed {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:self];
-}
 @end

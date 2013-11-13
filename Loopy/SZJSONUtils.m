@@ -39,18 +39,19 @@
                                                              error:&error];
 }
 
-//error logging
+//error logging (debug mode only)
 + (void)logError:(NSError *)error {
-    //TODO have these output to an actual log
-//    NSLog(@"ERROR code: %d", error.code);
+#if DEBUG
+    NSLog(@"ERROR code: %d", error.code);
+#endif
     for(id key in error.userInfo) {
         id value = [error.userInfo objectForKey:key];
         NSString *keyAsString = (NSString *)key;
         NSString *valueAsString = (NSString *)value;
-        
-        //TODO have these output to an actual log
-//        NSLog(@"ERROR key: %@", keyAsString);
-//        NSLog(@"ERROR value: %@", valueAsString);
+#if DEBUG
+        NSLog(@"ERROR key: %@", keyAsString);
+        NSLog(@"ERROR value: %@", valueAsString);
+#endif
     }
 }
 

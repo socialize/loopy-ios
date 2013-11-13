@@ -13,6 +13,4 @@
 
 @property (nonatomic, strong) NSArray *shareItems;
 
-+ (id)initWithActivityItems:(NSArray *)items;
-
 @end

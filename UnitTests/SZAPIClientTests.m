@@ -96,6 +96,15 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
+- (void)testReportShareDictionary {
+    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
+    NSString *dummyShortlink = @"www.shortlink.com";
+    NSString *dummyChannel = @"Facebook";
+    
+    NSDictionary *shareDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
+    GHAssertNotNil(shareDict, @"");
+}
+
 - (void)testReportShare {
     [self prepare];
     id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];

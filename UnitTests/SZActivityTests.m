@@ -26,8 +26,8 @@
 
 - (void)setUpClass {
     dummyShareItems = @[@"MyShareItem1", @"MyShareItem2"];
-    facebookActivity = [SZFacebookActivity initWithActivityItems:dummyShareItems];
-    twitterActivity = [SZTwitterActivity initWithActivityItems:dummyShareItems];
+    facebookActivity = [[SZFacebookActivity alloc] init];
+    twitterActivity = [[SZTwitterActivity alloc] init];
 }
 
 //TODO these may become more meaningful
@@ -55,13 +55,6 @@
     
     UIImage *twitterImage = [twitterActivity activityImage];
     GHAssertNotNil(twitterImage, @"");
-}
-
-- (void)testCanPerformWithActivityItems {
-    BOOL fb = [facebookActivity canPerformWithActivityItems:dummyShareItems];
-    GHAssertTrue(fb, @"");
-    BOOL tw = [twitterActivity canPerformWithActivityItems:dummyShareItems];
-    GHAssertTrue(tw, @"");
 }
 
 @end

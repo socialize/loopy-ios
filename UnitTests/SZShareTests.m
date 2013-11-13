@@ -30,11 +30,17 @@
     SZAPIClient *dummyAPIClient = (SZAPIClient *)[OCMockObject mockForClass:[SZAPIClient class]];
     share = [[SZShare alloc] initWithParent:dummyController apiClient:dummyAPIClient];
     dummyShareItems = @[@"www.shortlink.com", @"More information about this site"];
-    dummyActivities = @[[SZFacebookActivity initWithActivityItems:dummyShareItems], [SZTwitterActivity initWithActivityItems:dummyShareItems]];
+    
+    //add activity items as a setter (i.e. no notification of intent to share)
+    SZFacebookActivity *fbActivity = [[SZFacebookActivity alloc] init];
+    SZTwitterActivity *twActivity = [[SZTwitterActivity alloc] init];
+    fbActivity.shareItems = dummyShareItems;
+    twActivity.shareItems = dummyShareItems;
+    dummyActivities = @[fbActivity, twActivity];
 }
 
 - (void)testGetCurrentActivities {
-    NSArray *activities = [share getCurrentActivities:dummyActivities];
+    NSArray *activities = [share getDefaultActivities:dummyActivities];
     GHAssertNotNil(activities, @"");
 }
 

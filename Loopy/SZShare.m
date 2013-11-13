@@ -36,11 +36,11 @@
     return self;
 }
 
-//Returns the current available set of Activities using the specified activity items
-//TODO determine which services are active or not
-- (NSArray *)getCurrentActivities:(NSArray *)activityItems {
-    SZFacebookActivity *fbActivity = [SZFacebookActivity initWithActivityItems:activityItems];
-    SZTwitterActivity *twitterActivity = [SZTwitterActivity initWithActivityItems:activityItems];
+//Returns the default set of Activities using the specified activity items
+//These are newly-created each time as activities will vary
+- (NSArray *)getDefaultActivities:(NSArray *)activityItems {
+    SZFacebookActivity *fbActivity = [[SZFacebookActivity alloc] init];
+    SZTwitterActivity *twitterActivity = [[SZTwitterActivity alloc] init];
     
     return @[fbActivity, twitterActivity];
 }
@@ -91,17 +91,24 @@
     [self.parentController presentViewController:activityController animated:YES completion:completion];
 }
 
-//Shows activity-specific dialog (share to Facebook, Twitter, etc)
-- (void)showActivityShareDialog:(SLComposeViewController *)controller {
-    [self.parentController presentViewController:controller animated:YES completion:Nil];
-}
-
 //Shows specific share dialog for selected service
 - (void)handleShowActivityShare:(NSNotification *)notification {
-    //dismiss controller and bring up share dialog
+    __block id<SZActivity> activity = (id<SZActivity>)[notification object];
+    //dismiss share selector and bring up activity-specific share dialog
     [self.parentController dismissViewControllerAnimated:YES completion:^ {
-        SLComposeViewController *controller = [self newActivityShareController:[notification object]];
-        [self.parentController presentViewController:controller animated:YES completion:Nil];
+        SLComposeViewController *controller = [self newActivityShareController:activity];
+        controller.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                case SLComposeViewControllerResultCancelled:
+                    break;
+                //post notification of share
+                //this is done as a callback as implementors may post notification as well
+                case SLComposeViewControllerResultDone:
+                    [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
+                    break;
+            }
+        };
+        [self.parentController presentViewController:controller animated:YES completion:nil];
     }];
 }
 

@@ -7,7 +7,9 @@
 //
 
 #import "custom_share.h"
+#import "custom_activity.h"
 #import "SZAPIClient.h"
+#import "SZActivity.h"
 #import <Social/Social.h>
 
 @implementation CustomShareViewController
@@ -24,8 +26,16 @@
         if(success) {
             NSDictionary *responseDict = (NSDictionary *)responseData;
             if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
+                
+                //initialization code for UIActivity
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                NSArray *activityItems = @[shortlink];
+                MyCustomActivity *activity = [MyCustomActivity initWithActivityItems:activityItems];
+                
                 //Your UI code goes here
+                //...
+                //Once share is successful for the specified activity, call this notification:
+                [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
             }
         }
         else {

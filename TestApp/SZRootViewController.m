@@ -49,7 +49,7 @@ SZAPIClient *apiClient;
             if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
                 NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getCurrentActivities:activityItems];
+                NSArray *activities = [share getDefaultActivities:activityItems];
                 UIActivityViewController * activityController = [share newActivityViewController:activityItems
                                                                                   withActivities:activities];
                 [share showActivityViewDialog:activityController completion:nil];
