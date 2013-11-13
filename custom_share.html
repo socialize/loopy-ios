@@ -75,44 +75,54 @@
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script><div class="section" id="using-a-custom-share-ui">
 <h1>Using a Custom Share UI<a class="headerlink" href="#using-a-custom-share-ui" title="Permalink to this headline">¶</a></h1>
-<p>If you have your own custom implementation of a share UI you can still benefit from the Loopy™ social analytics platform by creating a trackable URL to be shared.</p>
-<p>Simply use the <strong>[SZAPIClient shortlink:withCallback:]</strong> method to create a trackable URL for sharing when the user executes a share.</p>
-<p>When the user elects to share using your custom UI:</p>
-<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">//Returns a shortened URL</span>
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">shortenURL:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">url</span> <span class="p">{</span>
-    <span class="n">SZAPIClient</span> <span class="o">*</span><span class="n">apiClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SZAPIClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithURLPrefix</span><span class="o">:</span><span class="s">@&quot;http://loopy-api-url-prefix&quot;</span><span class="p">];</span>
-    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">jsonDict</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">jsonForShortlink</span><span class="o">:</span><span class="n">url</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">apiClient</span> <span class="n">shortlink</span><span class="o">:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">jsonDict</span> <span class="n">withCallback</span><span class="o">:^</span><span class="p">(</span><span class="n">NSURLResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">,</span> <span class="n">NSData</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">id</span> <span class="n">responseData</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
-        <span class="kt">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">([</span><span class="n">responseData</span> <span class="n">isKindOfClass</span><span class="o">:</span><span class="p">[</span><span class="n">NSDictionary</span> <span class="n">class</span><span class="p">]]);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">responseDict</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">responseData</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">([</span><span class="n">responseDict</span> <span class="n">count</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">responseDict</span> <span class="n">valueForKey</span><span class="o">:</span><span class="s">@&quot;shortlink&quot;</span><span class="p">])</span> <span class="p">{</span>
-                <span class="n">NSString</span> <span class="o">*</span><span class="n">shortlink</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)[</span><span class="n">responseDict</span> <span class="n">valueForKey</span><span class="o">:</span><span class="s">@&quot;shortlink&quot;</span><span class="p">];</span>
-                <span class="c1">//Your UI code goes here</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">//error</span>
-        <span class="p">}</span>
-    <span class="p">}];</span>
-<span class="p">}</span>
+<p>If you have your own custom implementation of a share UI you can still benefit from the Loopy™ social analytics platform by creating a trackable URL to be shared, and notifying the analytics platform when the share was successful.</p>
+<p>Simply use the <strong>[SZAPIClient shortlink:withCallback:]</strong> method to create a trackable URL for sharing when the user executes a share. Then, once sharing is complete, ensure you call <strong>[SZAPIClient reportShare:withCallback:]</strong> to record the share.</p>
+<p>This can be implemented as follows:</p>
+<div class="highlight-objective-c"><pre>
+//Returns a shortened URL
+- (void)shortenURL:(NSString *)url {
+    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    NSDictionary *jsonDict = [self jsonForShortlink:url];
+    [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+        id responseData = [data objectFromJSONData];
+        BOOL success = (error == nil) &amp;&amp; ([responseData isKindOfClass:[NSDictionary class]]);
+        if(success) {
+            NSDictionary *responseDict = (NSDictionary *)responseData;
+            if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@"shortlink"]) {
+                
+                //initialization code for UIActivity
+                NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                NSArray *activityItems = @[shortlink];
+                MyCustomActivity *activity = [MyCustomActivity initWithActivityItems:activityItems];
+                
+                //Your UI code goes here
+                //...
+                //Once share is successful for the specified activity, call this notification:
+                [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
+            }
+        }
+        else {
+            //error
+        }
+    }];
+}
 
-<span class="c1">//This is a sample of JSON needed for the &quot;shortlink&quot; API call</span>
-<span class="k">-</span> <span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nf">jsonForShortlink:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">urlStr</span> <span class="p">{</span>
-    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">itemObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="n">dictionaryWithObjectsAndKeys</span><span class="o">:</span>
-                             <span class="n">urlStr</span><span class="p">,</span><span class="s">@&quot;url&quot;</span><span class="p">,</span>
-                             <span class="nb">nil</span><span class="p">];</span>
-    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">shortlinkObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="n">dictionaryWithObjectsAndKeys</span><span class="o">:</span>
-                                  <span class="s">@&quot;69&quot;</span><span class="p">,</span><span class="s">@&quot;stdid&quot;</span><span class="p">,</span>
-                                  <span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithInt</span><span class="o">:</span><span class="mi">1234567890</span><span class="p">],</span><span class="s">@&quot;timestamp&quot;</span><span class="p">,</span>
-                                  <span class="n">itemObj</span><span class="p">,</span><span class="s">@&quot;item&quot;</span><span class="p">,</span>
-                                  <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObjects</span><span class="o">:</span><span class="s">@&quot;sports&quot;</span><span class="p">,</span> <span class="s">@&quot;entertainment&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">],</span><span class="s">@&quot;tags&quot;</span><span class="p">,</span>
-                                  <span class="nb">nil</span><span class="p">];</span>
+//This is a sample of JSON needed for the "shortlink" API call
+- (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
+    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             urlStr,@"url",
+                             nil];
+    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"69",@"stdid",
+                                  [NSNumber numberWithInt:1234567890],@"timestamp",
+                                  itemObj,@"item",
+                                  [NSArray arrayWithObjects:@"sports", @"entertainment", nil],@"tags",
+                                  nil];
     
-    <span class="k">return</span> <span class="n">shortlinkObj</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+    return shortlinkObj;
+}
+
+</pre>
 </div>
 </div>
 

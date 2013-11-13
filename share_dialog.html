@@ -78,7 +78,8 @@
 <div class="block-padded container">
 <p>If you currently have a share function in your app you are most likely using the default UIActivityViewController provided by the iOS platform.</p>
 <p>The Loopy™ Share Dialog leverages UIActivityViewController but provides important callbacks to allow more sophisticated social analytics.</p>
-<p>To implement the Loopy™ Share Dialog, simply use the <strong>SZAPIClient</strong> and <strong>SZShare</strong> classes to create a trackable URL and display it using the default share dialog.</p>
+<p>To implement the Loopy™ Share Dialog, simply use the <strong>SZAPIClient</strong> and <strong>SZShare</strong> classes, along with the <strong>SZActivity</strong> protocol, to create a trackable URL and display it using the default share dialog.</p>
+<p>As with the iOS default UIActivityViewController, <strong>SZShare</strong> offers Facebook and Twitter sharing, as well as the ability to add additional UIActivity implementations you may have representing additional social networks or other sharing services.</p>
 </div>
 <div class="block container">
 <a class="reference internal image-reference" href="images/share-dialog-1.png"><img alt="images/share-dialog-1.png" class="align-center" src="images/share-dialog-1.png" style="width: 201px; height: 405px;" /></a>
@@ -90,7 +91,6 @@
 <a class="reference internal image-reference" href="images/share-dialog-button.png"><img alt="images/share-dialog-button.png" src="images/share-dialog-button.png" style="width: 685px; height: 511px;" /></a>
 <p><br /></p>
 <p>Add an event handler for when the button is pressed (in this example, the <strong>Touch Up Inside</strong> event handled by an <strong>IBAction</strong>):</p>
-</div>
 <div class="highlight-objective-c"><pre>
 //Returns a shortened URL then launches the Share Dialog
 - (IBAction)shareButtonPressed:(id)sender {
@@ -105,7 +105,7 @@
             if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@"shortlink"]) {
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
                 NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getCurrentActivities:activityItems];
+                NSArray *activities = [share getDefaultActivities:activityItems];
                 UIActivityViewController * activityController = [share newActivityViewController:activityItems
                                                                                   withActivities:activities];
                 [share showActivityViewDialog:activityController completion:nil];
@@ -133,6 +133,77 @@
 }
 
 </pre>
+</div>
+<p>To add additional <strong>UIActivity</strong> classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the <strong>SZActivity</strong> protocol; <strong>your header and implementation files should contain the following:</strong></p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+<span class="cp">#import &quot;SZActivity.h&quot;</span>
+
+<span class="k">@interface</span> <span class="nc">MyCustomActivity</span> : <span class="nc">UIActivity</span><span class="o">&lt;</span><span class="n">SZActivity</span><span class="o">&gt;</span>
+
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">shareItems</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</pre></div>
+</div>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@implementation</span> <span class="nc">MyCustomActivity</span>
+
+<span class="k">@synthesize</span> <span class="n">shareItems</span><span class="p">;</span>
+
+<span class="c1">//Standard UIActivity implementation</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityTitle</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;MyCustomActivity&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//Standard UIActivity implementation</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityType</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;MyActivityType&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//Standard UIActivity implementation</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">UIImage</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityImage</span> <span class="p">{</span>
+    <span class="n">UIImage</span> <span class="o">*</span><span class="n">image</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    
+    <span class="c1">//return an image that&#39;s appropriately sized for all devices and OSes:</span>
+    <span class="c1">//iOS 7 iPhone and non-iOS7 iPads: 60x60</span>
+    <span class="c1">//non-iOS7 iPhone: 43 x 43</span>
+    <span class="c1">//iOS 7 iPad: 76 x 76</span>
+    
+    <span class="k">return</span> <span class="n">image</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//Any final checking of activities or sharing service passed in can be done here</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">canPerformWithActivityItems:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">activityItems</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//Notification of intent to share</span>
+<span class="c1">//Set shareItems and post notification here</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareWithActivityItems:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">activityItems</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">shareItems</span> <span class="o">=</span> <span class="n">activityItems</span><span class="p">;</span>
+    <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span> <span class="n">postNotificationName</span><span class="o">:</span><span class="n">BeginShareNotification</span> <span class="n">object</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</pre></div>
+</div>
+<p>Include the custom activity in the NSArray passed in to SZShare&#8217;s UIActivityViewController, as follows:</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">//This is an example of an activity controller with custom UIActivities added in</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">UIActivityViewController</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityControllerWithCustomActivities:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">activityItems</span> <span class="p">{</span>
+    <span class="n">SZShare</span> <span class="o">*</span><span class="n">share</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SZShare</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithParent</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+    <span class="n">NSArray</span> <span class="o">*</span><span class="n">defaultActivities</span> <span class="o">=</span> <span class="p">[</span><span class="n">share</span> <span class="n">getDefaultActivities</span><span class="o">:</span><span class="n">activityItems</span><span class="p">];</span>
+    
+    <span class="c1">//add in any custom activities</span>
+    <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">allActivities</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">arrayWithArray</span><span class="o">:</span><span class="n">defaultActivities</span><span class="p">];</span>
+    <span class="n">MyCustomActivity</span> <span class="o">*</span><span class="n">customActivity</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyCustomActivity</span> <span class="n">initWithActivityItems</span><span class="o">:</span><span class="n">activityItems</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">allActivities</span> <span class="n">addObject</span><span class="o">:</span><span class="n">customActivity</span><span class="p">];</span>
+    
+    <span class="n">UIActivityViewController</span> <span class="o">*</span><span class="n">activityController</span> <span class="o">=</span> <span class="p">[</span><span class="n">share</span> <span class="n">newActivityViewController</span><span class="o">:</span><span class="n">activityItems</span>
+                                                                     <span class="nl">withActivities:</span><span class="n">allActivities</span><span class="p">];</span>
+    
+    <span class="k">return</span> <span class="n">activityController</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 
