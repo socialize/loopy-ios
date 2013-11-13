@@ -19,10 +19,14 @@
 
 @implementation SZAPIEndpointTests
 
-NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
-
 - (void)setUp {
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:URL_PREFIX];
+    NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
+    NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
+    NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
+    NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
+    NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
+
+    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix];
 }
 
 - (void)tearDown {

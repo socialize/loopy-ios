@@ -16,8 +16,6 @@
 
 @implementation SZRootViewController
 
-NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
-
 SZShare *share;
 SZAPIClient *apiClient;
 
@@ -27,9 +25,14 @@ SZAPIClient *apiClient;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        apiClient = [[SZAPIClient alloc] initWithURLPrefix:URL_PREFIX];
-        share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
+        NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
+        NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
+        NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
+        NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
+        NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
 
+        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix];
+        share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
 }

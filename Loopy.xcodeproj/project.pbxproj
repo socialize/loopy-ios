@@ -98,6 +98,8 @@
 		2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
 		2CA3DCF91811E8AD005E9159 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
 		2CA3DCFB1811E8AD005E9159 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
+		2CC32EA718342D630025FCD2 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CC32EA618342D630025FCD2 /* LoopyApiInfo.plist */; };
+		2CC32EA9183434410025FCD2 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CC32EA618342D630025FCD2 /* LoopyApiInfo.plist */; };
 		2CD55AFE1819C9FA0051C842 /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
 		2CD55AFF1819C9FA0051C842 /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
 		2CD55B001819C9FA0051C842 /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
@@ -218,6 +220,7 @@
 		2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTwitterActivity.m; sourceTree = "<group>"; };
 		2CB4EF171832E11A00A0AA0B /* custom_activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = custom_activity.h; path = Documentation/sphinx/source/snippets/custom_activity.h; sourceTree = SOURCE_ROOT; };
 		2CB4EF181832E11A00A0AA0B /* custom_activity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = custom_activity.m; path = Documentation/sphinx/source/snippets/custom_activity.m; sourceTree = SOURCE_ROOT; };
+		2CC32EA618342D630025FCD2 /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E7517E122A30048B055 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		2CDE0E7717E122A30048B055 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -438,6 +441,7 @@
 		2C8C1E0E17E10BB80075B527 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				2CC32EA518342D3B0025FCD2 /* Resources */,
 				2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */,
 				2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */,
 				2C250E291804C8EC00A788AC /* SZRootViewController.h */,
@@ -491,6 +495,14 @@
 				2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2CC32EA518342D3B0025FCD2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2CC32EA618342D630025FCD2 /* LoopyApiInfo.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		2CDE0E7317E122A30048B055 /* UnitTests */ = {
@@ -665,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */,
+				2CC32EA9183434410025FCD2 /* LoopyApiInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +698,7 @@
 				2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */,
 				2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */,
 				2CA3DCF51811E8AD005E9159 /* GooglePlusLogo76x76.png in Resources */,
+				2CC32EA718342D630025FCD2 /* LoopyApiInfo.plist in Resources */,
 				2C250E2D1804C8EC00A788AC /* SZRootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
