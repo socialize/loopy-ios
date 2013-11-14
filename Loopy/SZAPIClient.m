@@ -8,6 +8,7 @@
 
 #import "SZAPIClient.h"
 #import "SZJSONUtils.h"
+#import "Reachability.h"
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <AdSupport/ASIdentifierManager.h>
@@ -33,6 +34,7 @@ NSString *const LANGUAGE_VERSION = @"1.3";
 @synthesize osVersion;
 @synthesize deviceModel;
 @synthesize idfa;
+@synthesize stdid;
 @synthesize currentLocation;
 
 //constructor with specified endpoint
@@ -53,9 +55,11 @@ NSString *const LANGUAGE_VERSION = @"1.3";
         UIDevice *device = [UIDevice currentDevice];
         ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.carrierName = [carrier carrierName];
-        self.deviceModel = machineName();//device.model;
+        self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
         self.idfa = idManager.advertisingIdentifier;
+        
+        self.stdid = @"69"; //this will be replaced with real stdid when /install is implemented
     }
     return self;
 }
@@ -131,27 +135,27 @@ NSString *const LANGUAGE_VERSION = @"1.3";
     NSString *appName = [info valueForKey:@"CFBundleName"];
     NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
     int timestamp = [[NSDate date] timeIntervalSince1970];
-    
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
+    NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
+    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                      [self.idfa UUIDString],@"id",
+                                      self.deviceModel,@"model",
+                                      @"ios",@"os",
+                                      self.osVersion,@"osv",
+                                      self.carrierName,@"carrier",
+                                      wifiStatus,@"wifi",
+                                      nil];
+    NSDictionary *geoObj = nil;
     if(self.currentLocation) {
         coordinate = self.currentLocation.coordinate;
-    }
-    else {
-        coordinate = CLLocationCoordinate2DMake(0.0f, 0.0f); //bogus coordinates if nothing found
+        geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                  [NSNumber numberWithDouble:coordinate.latitude],@"lat",
+                  [NSNumber numberWithDouble:coordinate.longitude],@"lon",
+                  nil];
+        [deviceObj setObject:geoObj forKey:@"geo"];
     }
     
-    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithDouble:coordinate.latitude],@"lat",
-                            [NSNumber numberWithDouble:coordinate.longitude],@"lon",
-                            nil];
-    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               [self.idfa UUIDString],@"id",
-                               self.deviceModel,@"model",
-                               @"ios",@"os",
-                               self.osVersion,@"osv",
-                               self.carrierName,@"carrier",
-                               @"on",@"wifi",
-                               geoObj,@"geo",
-                               nil];
     NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             appID,@"id",
                             appName,@"name",
@@ -162,7 +166,7 @@ NSString *const LANGUAGE_VERSION = @"1.3";
                                LANGUAGE_VERSION,@"version",
                                nil];
     NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"69",@"stdid",               //TODO
+                              self.stdid,@"stdid",
                               [NSNumber numberWithInt:timestamp],@"timestamp",
                               deviceObj,@"device",
                               appObj,@"app",

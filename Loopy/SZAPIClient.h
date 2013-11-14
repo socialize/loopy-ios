@@ -31,6 +31,7 @@ extern NSString *const LANGUAGE_VERSION;
 @property (nonatomic, strong) NSString *osVersion;
 @property (nonatomic, strong) NSString *deviceModel;
 @property (nonatomic, strong) NSUUID *idfa;
+@property (nonatomic, strong) NSString *stdid;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
 - (id)initWithURLPrefix:(NSString *)url;

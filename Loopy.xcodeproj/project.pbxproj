@@ -87,6 +87,14 @@
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
 		2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */; };
+		2C8D99E01834519E00D9BB4E /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8D99DE1834519E00D9BB4E /* Reachability.h */; };
+		2C8D99E11834519E00D9BB4E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* Reachability.m */; };
+		2CA3360D18345245003D7498 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* Reachability.m */; };
+		2CA3360E1834524D003D7498 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* Reachability.m */; };
+		2CA33610183452E5003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
+		2CA33611183452FC003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
+		2CA3361218345307003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
+		2CA3361318345312003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
 		2CA3DCF01811E8AD005E9159 /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
 		2CA3DCF11811E8AD005E9159 /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
 		2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
@@ -204,7 +212,10 @@
 		2C8C1E1317E10BB80075B527 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C8C1E1417E10BB80075B527 /* SZTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTestAppDelegate.h; sourceTree = "<group>"; };
 		2C8C1E1517E10BB80075B527 /* SZTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTestAppDelegate.m; sourceTree = "<group>"; };
+		2C8D99DE1834519E00D9BB4E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		2C8D99DF1834519E00D9BB4E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2C9C283318201CE40036FBD0 /* SZActivity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZActivity.h; sourceTree = "<group>"; };
+		2CA3360F183452E5003D7498 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue43x43.png; sourceTree = "<group>"; };
 		2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue60x60.png; sourceTree = "<group>"; };
 		2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue76x76.png; sourceTree = "<group>"; };
@@ -248,6 +259,7 @@
 				2CE78BA21831B109004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CEFADA91832FFEF00841C33 /* AdSupport.framework in Frameworks */,
+				2CA3361218345307003D7498 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +272,7 @@
 				2CE78B9E1831B0CF004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CE78B9A1831AAC9004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */,
+				2CA3361318345312003D7498 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +288,7 @@
 				2CE78B9B1831AAD6004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78B9D1831B0C9004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CEFADAB1833000200841C33 /* AdSupport.framework in Frameworks */,
+				2CA33610183452E5003D7498 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +304,7 @@
 				2CE78B9F1831B0E5004EBB82 /* CoreTelephony.framework in Frameworks */,
 				2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CEFADAA1832FFF800841C33 /* AdSupport.framework in Frameworks */,
+				2CA33611183452FC003D7498 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +378,7 @@
 		2C48EAF117DF87F200181C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CA3360F183452E5003D7498 /* SystemConfiguration.framework */,
 				2CEFADA81832FFEF00841C33 /* AdSupport.framework */,
 				2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */,
 				2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */,
@@ -431,6 +447,8 @@
 				2C44DDE518207EC20026938A /* Loopy.h */,
 				2C0ECE9418174C46005965D0 /* SZConstants.h */,
 				2C0ECE9518174C46005965D0 /* SZConstants.m */,
+				2C8D99DE1834519E00D9BB4E /* Reachability.h */,
+				2C8D99DF1834519E00D9BB4E /* Reachability.m */,
 				2CA3DCC41811E807005E9159 /* Share */,
 				2C6D366217E3ACAA00CF1199 /* API Client */,
 				2C6D366A17E3ACBB00CF1199 /* Utils */,
@@ -549,6 +567,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C8D99E01834519E00D9BB4E /* Reachability.h in Headers */,
 				2C44DDE618207EC20026938A /* Loopy.h in Headers */,
 				2C44DE0318207FDC0026938A /* SZConstants.h in Headers */,
 				2C44DE0418207FE80026938A /* SZShare.h in Headers */,
@@ -649,6 +668,11 @@
 				CLASSPREFIX = SZ;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = ShareThis;
+				TargetAttributes = {
+					2C48EAEE17DF87F200181C3E = {
+						DevelopmentTeam = 6QWWQR8948;
+					};
+				};
 			};
 			buildConfigurationList = 2C48EAEA17DF87F100181C3E /* Build configuration list for PBXProject "Loopy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -890,6 +914,7 @@
 				2C44DE11182081210026938A /* SZConstants.m in Sources */,
 				2C44DE12182081240026938A /* SZShare.m in Sources */,
 				2C44DE13182081260026938A /* SZFacebookActivity.m in Sources */,
+				2C8D99E11834519E00D9BB4E /* Reachability.m in Sources */,
 				2C44DE141820812A0026938A /* SZTwitterActivity.m in Sources */,
 				2C44DE151820812E0026938A /* SZAPIClient.m in Sources */,
 				2C44DE16182081300026938A /* SZJSONUtils.m in Sources */,
@@ -910,6 +935,7 @@
 				2C0ECE9618174C46005965D0 /* SZConstants.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* SZTestAppDelegate.m in Sources */,
 				2C8C1E1817E10BB80075B527 /* SZAPIClient.m in Sources */,
+				2CA3360E1834524D003D7498 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -930,6 +956,7 @@
 				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,
 				2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */,
+				2CA3360D18345245003D7498 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,12 +1188,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20AC7383AFAB491BB995F927 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestApp/Loopy-Prefix.pch";
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TestApp/Loopy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1175,12 +1205,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20AC7383AFAB491BB995F927 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestApp/Loopy-Prefix.pch";
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TestApp/Loopy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
