@@ -11,5 +11,5 @@
 @interface SZConstants : NSObject
 
 extern NSString * const BeginShareNotification;
-
+extern NSString * const EndShareNotification;
 @end

@@ -15,26 +15,32 @@
 @implementation SZShare
 
 @synthesize parentController;
+@synthesize apiClient;
 
-- (id)initWithParent:(UIViewController *)parent {
+- (id)initWithParent:(UIViewController *)parent apiClient:(SZAPIClient *)client {
     self = [super init];
     if(self) {
         self.parentController = parent;
-        //listen for share events
+        self.apiClient = client;
+        //listen for share events (both intent to share -- beginning -- and end -- share complete)
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleShowActivityShare:)
                                                      name:BeginShareNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleShareComplete:)
+                                                     name:EndShareNotification
                                                    object:nil];
     }
     
     return self;
 }
 
-//Returns the current available set of Activities using the specified activity items
-//TODO determine which services are active or not
-- (NSArray *)getCurrentActivities:(NSArray *)activityItems {
-    SZFacebookActivity *fbActivity = [SZFacebookActivity initWithActivityItems:activityItems];
-    SZTwitterActivity *twitterActivity = [SZTwitterActivity initWithActivityItems:activityItems];
+//Returns the default set of Activities using the specified activity items
+//These are newly-created each time as activities will vary
+- (NSArray *)getDefaultActivities:(NSArray *)activityItems {
+    SZFacebookActivity *fbActivity = [[SZFacebookActivity alloc] init];
+    SZTwitterActivity *twitterActivity = [[SZTwitterActivity alloc] init];
     
     return @[fbActivity, twitterActivity];
 }
@@ -85,20 +91,35 @@
     [self.parentController presentViewController:activityController animated:YES completion:completion];
 }
 
-//Shows activity-specific dialog (share to Facebook, Twitter, etc)
-- (void)showActivityShareDialog:(SLComposeViewController *)controller {
-    [self.parentController presentViewController:controller animated:YES completion:Nil];
+//Shows specific share dialog for selected service
+- (void)handleShowActivityShare:(NSNotification *)notification {
+    __block id<SZActivity> activity = (id<SZActivity>)[notification object];
+    //dismiss share selector and bring up activity-specific share dialog
+    [self.parentController dismissViewControllerAnimated:YES completion:^ {
+        SLComposeViewController *controller = [self newActivityShareController:activity];
+        controller.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                case SLComposeViewControllerResultCancelled:
+                    break;
+                //post notification of share
+                //this is done as a callback as implementors may post notification as well
+                case SLComposeViewControllerResultDone:
+                    [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
+                    break;
+            }
+        };
+        [self.parentController presentViewController:controller animated:YES completion:nil];
+    }];
 }
 
-//Shows specific share dialog for selected service
-//TODO will need to include all social network types
-- (BOOL)handleShowActivityShare:(NSNotification *)notification {
-    //dismiss controller and bring up share dialog
-    [self.parentController dismissViewControllerAnimated:YES completion:^ {
-        SLComposeViewController *controller = [self newActivityShareController:[notification object]];
-        [self.parentController presentViewController:controller animated:YES completion:Nil];
-    }];
-    return YES;
+//calls out to API to report share
+- (void)handleShareComplete:(NSNotification *)notification {
+    id<SZActivity> activity = (id<SZActivity>)[notification object];
+    NSArray *shareItems = activity.shareItems;
+    NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
+    NSDictionary *shareDict = [self.apiClient reportShareDictionary:shareItem
+                                                            channel:activity.activityType];
+    [self.apiClient reportShare:shareDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {}];
 }
 
 @end

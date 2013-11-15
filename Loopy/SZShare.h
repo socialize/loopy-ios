@@ -6,19 +6,20 @@
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
+#import "SZAPIClient.h"
 #import <Foundation/Foundation.h>
 #import <Social/Social.h>
 
 @interface SZShare : NSObject
 
 @property (nonatomic, strong) UIViewController *parentController;
+@property (nonatomic, strong) SZAPIClient *apiClient;
 
-- (id)initWithParent:(UIViewController *)parent;
-- (NSArray *)getCurrentActivities:(NSArray *)activityItems;
+- (id)initWithParent:(UIViewController *)parent apiClient:(SZAPIClient *)client;
+- (NSArray *)getDefaultActivities:(NSArray *)activityItems;
 - (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities;
 - (SLComposeViewController *)newActivityShareController:(id)activityObj;
 - (void)showActivityViewDialog:(UIActivityViewController *)activityController completion:(void (^)(void))completion;
-- (BOOL)handleShowActivityShare:(NSNotification *)notification;
-- (void)showActivityShareDialog:(SLComposeViewController *)controller;
-
+- (void)handleShowActivityShare:(NSNotification *)notification;
+- (void)handleShareComplete:(NSNotification *)notification;
 @end

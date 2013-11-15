@@ -16,8 +16,6 @@
 
 @implementation SZRootViewController
 
-NSString *const URL_PREFIX = @"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1";
-
 SZShare *share;
 SZAPIClient *apiClient;
 
@@ -27,9 +25,14 @@ SZAPIClient *apiClient;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        share = [[SZShare alloc] initWithParent:self];
-        apiClient = [[SZAPIClient alloc] initWithURLPrefix:URL_PREFIX];
+        NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
+        NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
+        NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
+        NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
+        NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
 
+        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix];
+        share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
 }
@@ -49,7 +52,7 @@ SZAPIClient *apiClient;
             if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
                 NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
                 NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getCurrentActivities:activityItems];
+                NSArray *activities = [share getDefaultActivities:activityItems];
                 UIActivityViewController * activityController = [share newActivityViewController:activityItems
                                                                                   withActivities:activities];
                 [share showActivityViewDialog:activityController completion:nil];

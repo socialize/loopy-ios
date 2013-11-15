@@ -19,10 +19,14 @@
 
 @implementation SZAPIEndpointTests
 
-NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
-
 - (void)setUp {
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:URL_PREFIX];
+    NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
+    NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
+    NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
+    NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
+    NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
+
+    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix];
 }
 
 - (void)tearDown {
@@ -159,7 +163,7 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
     __block BOOL operationSucceeded = NO;
     __block id responseData;
     
-    [apiClient share:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [apiClient reportShare:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         if(error == nil) {
             responseData = [data objectFromJSONData];
             //response data should be an empty dictionary
@@ -201,7 +205,7 @@ NSString *const URL_PREFIX = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:
                 NSString *url = (NSString *)[itemDict valueForKey:@"url"];
                 NSMutableDictionary *shortlinkDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
                 [shortlinkDict setValue:url forKey:@"shortlink"];
-                [apiClient share:(NSDictionary *)shortlinkDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
+                [apiClient reportShare:(NSDictionary *)shortlinkDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
                     if(error == nil) {
                         responseData = [data objectFromJSONData];
                         //response data should be an empty dictionary

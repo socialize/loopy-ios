@@ -14,16 +14,6 @@
 
 @synthesize shareItems;
 
-//new activity with specified share items
-+ (id)initWithActivityItems:(NSArray *)items {
-    SZFacebookActivity *newActivity = [[SZFacebookActivity alloc] init];
-    if(newActivity) {
-        newActivity.shareItems = items;
-    }
-    
-    return newActivity;
-}
-
 - (NSString *)activityTitle {
     return @"Facebook";
 }
@@ -55,17 +45,13 @@
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
-    return [self.shareItems isEqualToArray:activityItems];
+    return YES;
 }
 
-//Notification of intent to share and such can happen here
+//Notification of intent to share
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
     self.shareItems = activityItems;
     [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
-}
-
-//Notification of all done can happen here
-- (void)activityDidFinish:(BOOL)completed {
 }
 
 @end
