@@ -10,6 +10,7 @@
 
 @interface SZTestUtils : NSObject
 
++ (NSDictionary *)jsonForInstall;
 + (NSDictionary *)jsonForOpen;
 + (NSDictionary *)jsonForShortlink;
 + (NSDictionary *)jsonForShare;
