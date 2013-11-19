@@ -28,7 +28,7 @@
     BOOL containsAPIKey = NO;
     BOOL containsLoopyKey = NO;
     NSData *dummyData = [[NSData alloc] init];
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
+    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"" httpsPrefix:@""];
     NSMutableURLRequest *request = [apiClient newURLRequest:dummyData length:0 endpoint:@""];
     NSDictionary *headerFields = [request allHTTPHeaderFields];
     for(NSString *key in headerFields) {
@@ -48,7 +48,7 @@
 
 - (void)testOpen {
     [self prepare];
-    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
+    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"" httpsPrefix:@""];
     id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
     __block BOOL operationSucceeded = NO;
 

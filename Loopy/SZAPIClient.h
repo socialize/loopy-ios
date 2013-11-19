@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <SZNetworking/SZNetworking.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface SZAPIClient : NSObject <NSURLConnectionDataDelegate,CLLocationManagerDelegate>
 
+extern NSString *const INSTALL;
 extern NSString *const OPEN;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
@@ -24,8 +25,8 @@ extern NSString *const LOOPY_KEY_VAL;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
 
+@property (nonatomic, strong) NSString *httpsURLPrefix;
 @property (nonatomic, strong) NSString *urlPrefix;
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSString *carrierName;
 @property (nonatomic, strong) NSString *osVersion;
@@ -34,17 +35,35 @@ extern NSString *const LANGUAGE_VERSION;
 @property (nonatomic, strong) NSString *stdid;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
-- (id)initWithURLPrefix:(NSString *)url;
+- (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
-- (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request;
+- (NSMutableURLRequest *)newHTTPSURLRequest:(NSData *)jsonData
+                                     length:(NSNumber *)length
+                                   endpoint:(NSString *)endpoint;
+- (AFHTTPRequestOperation *)newURLRequestOperation:(NSURLRequest *)request
+                                           isHTTPS:(BOOL)https
+                                           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+                                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSNumber *)loopyErrorCode:(NSError *)error;
 - (NSArray *)loopyErrorArray:(NSError *)error;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
-- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
-- (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
-- (void)reportShare:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback;
+- (void)install:(NSDictionary *)jsonDict
+        success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+- (void)open:(NSDictionary *)jsonDict
+     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+- (void)shortlink:(NSDictionary *)jsonDict
+          success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+          failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+- (void)reportShare:(NSDictionary *)jsonDict
+            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
 @end
