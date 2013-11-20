@@ -21,7 +21,7 @@ NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 
-NSTimeInterval const TIMEOUT = 10.0f;
+NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
 NSString *const API_KEY_VAL = @"hkg435723o4tho95fh29"; //TODO real key
@@ -124,37 +124,23 @@ NSString *const LANGUAGE_VERSION = @"1.3";
 
 //Returns error code
 //if code is nil or no error value contained, returns nil
-- (NSNumber *)loopyErrorCode:(NSError *)error {
+- (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict {
     NSNumber *errorCode = nil;
-    if(error) {
-        NSDictionary *userInfo = error.userInfo;
-        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
-        if([responseBody isKindOfClass:[NSData class]]) {
-            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
-            id codeObj = [errorDict valueForKey:@"code"];
-            if([codeObj isKindOfClass:[NSNumber class]]) {
-                errorCode = (NSNumber *)codeObj;
-            }
-        }
+    id codeObj = [errorDict valueForKey:@"code"];
+    if([codeObj isKindOfClass:[NSNumber class]]) {
+        errorCode = (NSNumber *)codeObj;
     }
     return errorCode;
 }
 
 //Returns array of error values taken from the userInfo portion of error returned from request
 //if error is nil or no error value contained, returns nil
-- (NSArray *)loopyErrorArray:(NSError *)error {
+- (NSArray *)loopyErrorArray:(NSDictionary *)errorDict {
     NSArray *errorArray = nil;
-    if(error) {
-        NSDictionary *userInfo = error.userInfo;
-        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
-        if([responseBody isKindOfClass:[NSData class]]) {
-            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
-            id errorObj = [errorDict valueForKey:@"error"];
-            
-            if([errorObj isKindOfClass:[NSArray class]]) {
-                errorArray = (NSArray *)errorObj;
-            }
-        }
+    id errorObj = [errorDict valueForKey:@"error"];
+    
+    if([errorObj isKindOfClass:[NSArray class]]) {
+        errorArray = (NSArray *)errorObj;
     }
     return errorArray;
 }
@@ -261,9 +247,9 @@ NSString *const LANGUAGE_VERSION = @"1.3";
     NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
     NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
-    NSURLRequest *request = [self newHTTPSURLRequest:jsonData
-                                              length:jsonLength
-                                            endpoint:endpoint];
+    NSURLRequest *request = [self newURLRequest:jsonData
+                                         length:jsonLength
+                                        endpoint:endpoint];
     AFHTTPRequestOperation *operation = [self newURLRequestOperation:request
                                                              isHTTPS:NO
                                                              success:successCallback

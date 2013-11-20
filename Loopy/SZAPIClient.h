@@ -46,8 +46,8 @@ extern NSString *const LANGUAGE_VERSION;
                                            isHTTPS:(BOOL)https
                                            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
                                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-- (NSNumber *)loopyErrorCode:(NSError *)error;
-- (NSArray *)loopyErrorArray:(NSError *)error;
+- (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
+- (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (void)install:(NSDictionary *)jsonDict
