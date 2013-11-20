@@ -42,6 +42,7 @@
 		2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */; };
 		2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */; };
 		2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* SZTestUtils.m */; };
+		2C3FE374183C2EAA005621B0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* Reachability.m */; };
 		2C44DDDA182036400026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C44DDDB182036470026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
@@ -903,6 +904,7 @@
 				2C34326D17FB6CE60039A2D8 /* SZTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */,
+				2C3FE374183C2EAA005621B0 /* Reachability.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

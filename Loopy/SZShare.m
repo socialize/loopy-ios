@@ -119,7 +119,14 @@
     NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
     NSDictionary *shareDict = [self.apiClient reportShareDictionary:shareItem
                                                             channel:activity.activityType];
-    [self.apiClient reportShare:shareDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+    [self.apiClient reportShare:shareDict
+                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            //Currently no response is needed after success
+                        }
+                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            //Currently no response is made after failure; this may change
+                        }];
+
 }
 
 @end

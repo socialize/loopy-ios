@@ -11,8 +11,10 @@
 @interface SZRootViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UIButton *installButton;
 @property (nonatomic, strong) IBOutlet UIButton *shareButton;
 
+- (IBAction)installButtonPressed:(id)sender;
 - (IBAction)shareButtonPressed:(id)sender;
 
 @end

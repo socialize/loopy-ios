@@ -16,19 +16,21 @@
 
 @implementation SZAPIClient
 
+NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
+
 NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
-NSString *const API_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
-NSString *const LOOPY_KEY_VAL = @"LOOPY_KEY"; //TODO real key
+NSString *const API_KEY_VAL = @"hkg435723o4tho95fh29"; //TODO real key
+NSString *const LOOPY_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
 
 @synthesize urlPrefix;
-@synthesize operationQueue;
+@synthesize httpsURLPrefix;
 @synthesize locationManager;
 @synthesize carrierName;
 @synthesize osVersion;
@@ -38,12 +40,11 @@ NSString *const LANGUAGE_VERSION = @"1.3";
 @synthesize currentLocation;
 
 //constructor with specified endpoint
-- (id)initWithURLPrefix:(NSString *)url {
+- (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL {
     self = [super init];
     if(self) {
         self.urlPrefix = url;
-        self.operationQueue = [[NSOperationQueue alloc] init];
-        self.operationQueue.maxConcurrentOperationCount = 5;
+        self.httpsURLPrefix = httpsURL;
         
         //device information cached for sharing and other operations
         self.locationManager = [[CLLocationManager alloc] init];
@@ -59,9 +60,17 @@ NSString *const LANGUAGE_VERSION = @"1.3";
         self.osVersion = device.systemVersion;
         self.idfa = idManager.advertisingIdentifier;
         
-        self.stdid = @"69"; //this will be replaced with real stdid when /install is implemented
+        self.stdid = @"69"; //TODO this will be replaced with real stdid when /install and /stdid are implemented
     }
     return self;
+}
+
+//factory method for URLRequest for specified JSON data and endpoint
+- (NSMutableURLRequest *)newHTTPSURLRequest:(NSData *)jsonData
+                                length:(NSNumber *)length
+                              endpoint:(NSString *)endpoint {
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", httpsURLPrefix, endpoint];
+    return [self jsonURLRequestForURL:urlStr data:jsonData length:length];
 }
 
 //factory method for URLRequest for specified JSON data and endpoint
@@ -69,6 +78,13 @@ NSString *const LANGUAGE_VERSION = @"1.3";
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint {
     NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
+    return [self jsonURLRequestForURL:urlStr data:jsonData length:length];
+}
+
+//convenience method
+-(NSMutableURLRequest *)jsonURLRequestForURL:(NSString *)urlStr
+                                        data:(NSData *)jsonData
+                                      length:(NSNumber *)length {
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -84,44 +100,47 @@ NSString *const LANGUAGE_VERSION = @"1.3";
     return request;
 }
 
-//factory method for URLRequestOperation for specified request
-- (SZURLRequestOperation *)newURLRequestOperation:(NSMutableURLRequest *)request {
-    return [[SZURLRequestOperation alloc] initWithURLRequest:request];
+//factory method to init operations with specified requests and callbacks
+- (AFHTTPRequestOperation *)newURLRequestOperation:(NSURLRequest *)request
+                                           isHTTPS:(BOOL)https
+                                           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+                                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:successCallback
+                                     failure:failureCallback];
+    
+    //allow self-signed certs for HTTPS
+    if(https) {
+        [operation setWillSendRequestForAuthenticationChallengeBlock:^(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge) {
+            SecTrustRef trust = challenge.protectionSpace.serverTrust;
+            NSURLCredential *cred = [NSURLCredential credentialForTrust:trust];
+            [challenge.sender useCredential:cred forAuthenticationChallenge:challenge];
+            [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+        }];
+    }
+    return operation;
 }
 
-//Returns error code 
+//Returns error code
 //if code is nil or no error value contained, returns nil
-- (NSNumber *)loopyErrorCode:(NSError *)error {
+- (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict {
     NSNumber *errorCode = nil;
-    if(error) {
-        NSDictionary *userInfo = error.userInfo;
-        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
-        if([responseBody isKindOfClass:[NSData class]]) {
-            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
-            id codeObj = [errorDict valueForKey:@"code"];
-            if([codeObj isKindOfClass:[NSNumber class]]) {
-                errorCode = (NSNumber *)codeObj;
-            }
-        }
+    id codeObj = [errorDict valueForKey:@"code"];
+    if([codeObj isKindOfClass:[NSNumber class]]) {
+        errorCode = (NSNumber *)codeObj;
     }
     return errorCode;
 }
 
 //Returns array of error values taken from the userInfo portion of error returned from request
 //if error is nil or no error value contained, returns nil
-- (NSArray *)loopyErrorArray:(NSError *)error {
+- (NSArray *)loopyErrorArray:(NSDictionary *)errorDict {
     NSArray *errorArray = nil;
-    if(error) {
-        NSDictionary *userInfo = error.userInfo;
-        id responseBody = [userInfo valueForKey:@"SZErrorURLResponseBodyKey"];
-        if([responseBody isKindOfClass:[NSData class]]) {
-            NSDictionary *errorDict = [SZJSONUtils toJSONDictionary:(NSData *)responseBody];
-            id errorObj = [errorDict valueForKey:@"error"];
-            
-            if([errorObj isKindOfClass:[NSArray class]]) {
-                errorArray = (NSArray *)errorObj;
-            }
-        }
+    id errorObj = [errorDict valueForKey:@"error"];
+    
+    if([errorObj isKindOfClass:[NSArray class]]) {
+        errorArray = (NSArray *)errorObj;
     }
     return errorArray;
 }
@@ -178,33 +197,64 @@ NSString *const LANGUAGE_VERSION = @"1.3";
     return shareObj;
 }
 
-//calls open endpoint, including manufacturing URLRequest for it
-- (void)open:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
-    [self callEndpoint:OPEN withJSON:jsonDict andCallback:callback];
+- (void)install:(NSDictionary *)jsonDict
+        success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callHTTPSEndpoint:INSTALL json:jsonDict success:successCallback failure:failureCallback];
 }
 
-//calls shortlink endpoint, including manufacturing URLRequest for it
-- (void)shortlink:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
-    [self callEndpoint:SHORTLINK withJSON:jsonDict andCallback:callback];
+- (void)open:(NSDictionary *)jsonDict
+     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
 }
 
-- (void)reportShare:(NSDictionary *)jsonDict withCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
-    [self callEndpoint:REPORT_SHARE withJSON:jsonDict andCallback:callback];
+- (void)shortlink:(NSDictionary *)jsonDict
+          success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+          failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:SHORTLINK json:jsonDict success:successCallback failure:failureCallback];
+}
+
+- (void)reportShare:(NSDictionary *)jsonDict
+            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:REPORT_SHARE json:jsonDict success:successCallback failure:failureCallback];
+}
+
+//convenience method
+- (void)callHTTPSEndpoint:(NSString *)endpoint
+                     json:(NSDictionary *)jsonDict
+                  success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+                  failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
+    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
+    NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
+    NSURLRequest *request = [self newHTTPSURLRequest:jsonData
+                                              length:jsonLength
+                                            endpoint:endpoint];
+    AFHTTPRequestOperation *operation = [self newURLRequestOperation:request
+                                                             isHTTPS:YES
+                                                             success:successCallback
+                                                             failure:failureCallback];
+    [operation start];
 }
 
 //convenience method
 - (void)callEndpoint:(NSString *)endpoint
-            withJSON:(NSDictionary *)jsonDict
-        andCallback:(void (^)(NSURLResponse *, NSData *, NSError *))callback {
+                json:(NSDictionary *)jsonDict
+             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
     NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
-    NSMutableURLRequest *request = [self newURLRequest:jsonData
-                                                length:jsonLength
-                                              endpoint:endpoint];
-    SZURLRequestOperation *operation = [self newURLRequestOperation:request];
-    operation.URLCompletionBlock = callback;
-    [operationQueue addOperation:operation];
+    NSURLRequest *request = [self newURLRequest:jsonData
+                                         length:jsonLength
+                                        endpoint:endpoint];
+    AFHTTPRequestOperation *operation = [self newURLRequestOperation:request
+                                                             isHTTPS:NO
+                                                             success:successCallback
+                                                             failure:failureCallback];
+    [operation start];
 }
 
 //location update

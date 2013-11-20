@@ -6,30 +6,39 @@
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import <GHUnitIOS/GHUnit.h>
-#import <OCMock/OCMock.h>
 #import "SZAPIClient.h"
 #import "SZJSONUtils.h"
 #import "SZTestUtils.h"
-#import "SZURLRequestOperation+Testing.h"
+#import <GHUnitIOS/GHUnit.h>
+#import <OCMock/OCMock.h>
+#import <AFNetworking/AFNetworking.h>
 
-@interface SZAPIClientTests : GHAsyncTestCase {}
+@interface SZAPIClientTests : GHAsyncTestCase {
+    SZAPIClient *apiClient;
+    NSString *urlPrefix;
+    NSString *httpsURLPrefix;
+    NSString *endpoint;
+    BOOL mockInstallSucceeded;
+}
 @end
 
 @implementation SZAPIClientTests
 
 - (void)setUpClass {
+    urlPrefix = @"http://loopy.com:8080";
+    httpsURLPrefix = @"https://loopy.com:8443";
+    endpoint = @"/endpoint";
+    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix httpsPrefix:httpsURLPrefix];
+    mockInstallSucceeded = NO;
 }
 
-- (void)tearDownClass {
-}
-
-- (void)testRequestHeaderForLoopyKeys {
+- (void)testNewURLRequest {
     BOOL containsAPIKey = NO;
     BOOL containsLoopyKey = NO;
     NSData *dummyData = [[NSData alloc] init];
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
-    NSMutableURLRequest *request = [apiClient newURLRequest:dummyData length:0 endpoint:@""];
+    NSURLRequest *request = [apiClient newURLRequest:dummyData length:0 endpoint:endpoint];
+    
+    //verify header fields
     NSDictionary *headerFields = [request allHTTPHeaderFields];
     for(NSString *key in headerFields) {
         id value = [headerFields valueForKey:key];
@@ -42,92 +51,64 @@
             containsLoopyKey = YES;
         }
     }
-    
     GHAssertTrue(containsAPIKey && containsLoopyKey, @"");
+    NSString *acceptVal = [request valueForHTTPHeaderField:@"Accept"];
+    NSString *contentTypeVal = [request valueForHTTPHeaderField:@"Content-Type"];
+    GHAssertEqualStrings(@"application/json", acceptVal, @"");
+    GHAssertEqualStrings(@"application/json", contentTypeVal, @"");
+    
+    //verify URL
+    NSString *urlMatchStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
+    GHAssertEqualStrings(urlPrefix, apiClient.urlPrefix, @"");
+    NSURL *url = request.URL;
+    GHAssertEqualStrings(urlMatchStr, [url absoluteString], @"");
 }
 
-- (void)testOpen {
-    [self prepare];
-    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
-    id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
-    __block BOOL operationSucceeded = NO;
-
-    //return dummy request and request operations
-    NSMutableURLRequest *dummyRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
-    [[[mockAPIClient stub] andReturn:dummyRequest] newURLRequest:[OCMArg any]
-                                                          length:[OCMArg any]
-                                                        endpoint:[OCMArg any]];
-    SZURLRequestOperation *requestOperation = [[SZURLRequestOperation alloc] initWithURLRequest:dummyRequest];
-    [[[mockAPIClient stub] andReturn:requestOperation] newURLRequestOperation:[OCMArg any]];
+- (void)testNewHTTPSURLRequest {
+    NSData *dummyData = [[NSData alloc] init];
+    NSURLRequest *request = [apiClient newHTTPSURLRequest:dummyData length:0 endpoint:endpoint];
     
-    //call with test JSON dict
-    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
-    [mockAPIClient open:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        operationSucceeded = YES;
-        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpen)];
-    }];
-    
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
+    //verify URL
+    NSString *urlMatchStr = [NSString stringWithFormat:@"%@%@", httpsURLPrefix, endpoint];
+    GHAssertEqualStrings(httpsURLPrefix, apiClient.httpsURLPrefix, @"");
+    NSURL *url = request.URL;
+    GHAssertEqualStrings(urlMatchStr, [url absoluteString], @"");
 }
 
-- (void)testShortlink {
-    [self prepare];
-    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
-    id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
-    __block BOOL operationSucceeded = NO;
-
-    //return dummy request and request operations
-    NSMutableURLRequest *dummyRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
-    [[[mockAPIClient stub] andReturn:dummyRequest] newURLRequest:[OCMArg any]
-                                                          length:[OCMArg any]
-                                                        endpoint:[OCMArg any]];
-    SZURLRequestOperation *requestOperation = [[SZURLRequestOperation alloc] initWithURLRequest:dummyRequest];
-    [[[mockAPIClient stub] andReturn:requestOperation] newURLRequestOperation:[OCMArg any]];
+- (void)testNewURLRequestOperation {
+    NSData *dummyData = [[NSData alloc] init];
     
-    //call with test JSON dict
-    NSDictionary *jsonDict = [SZTestUtils jsonForShortlink];
-    [mockAPIClient shortlink:jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        operationSucceeded = YES;
-        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShortlink)];
-    }];
+    //https -- verify serialization & challenge block created
+    NSURLRequest *httpsRequest = [apiClient newHTTPSURLRequest:dummyData length:0 endpoint:endpoint];
+    AFHTTPRequestOperation *httpsOperation = [apiClient newURLRequestOperation:httpsRequest isHTTPS:YES success:nil failure:nil];
+    GHAssertTrue([httpsOperation.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]], @"");
+    NSString *authChallengeName = @"authenticationChallenge";
+    id authChallengeBlock = [httpsOperation valueForKey:authChallengeName];
+    GHAssertNotNil(authChallengeBlock, @"");
     
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
+    //https -- no challenge block but same serialization
+    NSURLRequest *request = [apiClient newURLRequest:dummyData length:0 endpoint:endpoint];
+    AFHTTPRequestOperation *operation = [apiClient newURLRequestOperation:request isHTTPS:NO success:nil failure:nil];
+    GHAssertTrue([httpsOperation.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]], @"");
+    authChallengeBlock = [operation valueForKey:authChallengeName];
+    GHAssertNil(authChallengeBlock, @"");
 }
 
 - (void)testReportShareDictionary {
-    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";
     
     NSDictionary *shareDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
     GHAssertNotNil(shareDict, @"");
-}
-
-- (void)testReportShare {
-    [self prepare];
-    id apiClient = [[SZAPIClient alloc] initWithURLPrefix:@""];
-    id mockAPIClient = [OCMockObject partialMockForObject:apiClient];
-    __block BOOL operationSucceeded = NO;
-    
-    //return dummy request and request operations
-    NSMutableURLRequest *dummyRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
-    [[[mockAPIClient stub] andReturn:dummyRequest] newURLRequest:[OCMArg any]
-                                                          length:[OCMArg any]
-                                                        endpoint:[OCMArg any]];
-    SZURLRequestOperation *requestOperation = [[SZURLRequestOperation alloc] initWithURLRequest:dummyRequest];
-    [[[mockAPIClient stub] andReturn:requestOperation] newURLRequestOperation:[OCMArg any]];
-    
-    //call with test JSON dict
-    NSDictionary *jsonDict = [SZTestUtils jsonForShare];
-    [mockAPIClient reportShare:jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        operationSucceeded = YES;
-        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testReportShare)];
-    }];
-    
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
+    GHAssertNotNil([shareDict valueForKey:@"stdid"], @"");
+    GHAssertNotNil([shareDict valueForKey:@"timestamp"], @"");
+    GHAssertNotNil([shareDict valueForKey:@"device"], @"");
+    GHAssertNotNil([shareDict valueForKey:@"app"], @"");
+    NSString *channel = [shareDict valueForKey:@"channel"];
+    GHAssertEqualStrings(channel, dummyChannel, @"");
+    NSString *shortlink = [shareDict valueForKey:@"shortlink"];
+    GHAssertEqualStrings(shortlink, dummyShortlink, @"");
+    GHAssertNotNil([shareDict valueForKey:@"client"], @"");
 }
 
 @end
