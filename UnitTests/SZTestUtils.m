@@ -10,7 +10,39 @@
 
 @implementation SZTestUtils
 
-//test JSON object
++ (NSDictionary *)jsonForInstall {
+    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithDouble:12.456],@"lat",
+                            [NSNumber numberWithDouble:78.900],@"lon",
+                            nil];
+    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"ABCD-1234",@"id",
+                               @"iPhone 4S",@"model",
+                               @"ios",@"os",
+                               @"6.1",@"osv",
+                               @"verizon",@"carrier",
+                               @"on",@"wifi",
+                               geoObj,@"geo",
+                               nil];
+    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"com.socialize.appname",@"id",
+                            @"App Name",@"name",
+                            @"123.4",@"version",
+                            nil];
+    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"objc",@"lang",
+                               @"1.3",@"version",
+                               nil];
+    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithInt:123456],@"timestamp",
+                                @"www.facebook.com",@"referrer",
+                                deviceObj,@"device",
+                                appObj,@"app",
+                                clientObj,@"client",
+                                nil];
+    return installObj;
+}
+
 + (NSDictionary *)jsonForOpen {
     NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSNumber numberWithDouble:12.456],@"lat",

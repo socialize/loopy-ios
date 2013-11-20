@@ -9,7 +9,10 @@
 #import "SZRootViewController.h"
 #import "SZShare.h"
 #import "SZAPIClient.h"
+#import "SZJSONUtils.h"
 #import <Social/Social.h>
+#import <AFNetworking/AFNetworking.h>
+#import "SZTestUtils.h"
 
 @interface SZRootViewController ()
 @end
@@ -20,6 +23,7 @@ SZShare *share;
 SZAPIClient *apiClient;
 
 @synthesize textField;
+@synthesize installButton;
 @synthesize shareButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -30,8 +34,9 @@ SZAPIClient *apiClient;
         NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
         NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
         NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
+        NSString *urlHttpsPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
 
-        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix];
+        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix httpsPrefix:urlHttpsPrefix];
         share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
@@ -44,24 +49,71 @@ SZAPIClient *apiClient;
 //shorten then share
 - (IBAction)shareButtonPressed:(id)sender {
     NSDictionary *jsonDict = [self jsonForShortlink:self.textField.text];
-    [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        id responseData = [data objectFromJSONData];
-        BOOL success = (error == nil) && ([responseData isKindOfClass:[NSDictionary class]]);
-        if(success) {
-            NSDictionary *responseDict = (NSDictionary *)responseData;
-            if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
-                NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                NSArray *activityItems = @[shortlink];
-                NSArray *activities = [share getDefaultActivities:activityItems];
-                UIActivityViewController * activityController = [share newActivityViewController:activityItems
-                                                                                  withActivities:activities];
-                [share showActivityViewDialog:activityController completion:nil];
-            }
-        }
-        else {
-            //error
-        }
-    }];
+    [apiClient shortlink:(NSDictionary *)jsonDict
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
+                     if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
+                         NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                         NSArray *activityItems = @[shortlink];
+                         NSArray *activities = [share getDefaultActivities:activityItems];
+                         UIActivityViewController * activityController = [share newActivityViewController:activityItems
+                                                                                          withActivities:activities];
+                         [share showActivityViewDialog:activityController completion:nil];
+                     }
+                     else {
+                         NSLog(@"FAILURE");
+                     }
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"FAILURE");
+                 }];
+}
+
+//install with device ID
+- (IBAction)installButtonPressed:(id)sender {
+    NSDictionary *jsonDict = [self jsonForInstall];
+    [apiClient install:jsonDict
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   NSDictionary *responseDict = (NSDictionary *)responseObject;
+                   NSString *responseSTDID = (NSString *)[responseDict valueForKey:@"stdid"];
+                   NSLog(@"SUCCESS: %@", responseSTDID);
+               }
+               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   NSLog(@"FAILURE");
+               }];
+}
+
+- (NSDictionary *)jsonForInstall {
+    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithDouble:12.456],@"lat",
+                            [NSNumber numberWithDouble:78.900],@"lon",
+                            nil];
+    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"ABCD-1234",@"id",
+                               @"iPhone 4S",@"model",
+                               @"ios",@"os",
+                               @"6.1",@"osv",
+                               @"verizon",@"carrier",
+                               @"on",@"wifi",
+                               geoObj,@"geo",
+                               nil];
+    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"com.socialize.appname",@"id",
+                            @"App Name",@"name",
+                            @"123.4",@"version",
+                            nil];
+    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"objc",@"lang",
+                               @"1.3",@"version",
+                               nil];
+    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithInt:123456],@"timestamp",
+                             @"www.facebook.com",@"referrer",
+                             deviceObj,@"device",
+                             appObj,@"app",
+                             clientObj,@"client",
+                             nil];
+    return installObj;
 }
 
 - (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
