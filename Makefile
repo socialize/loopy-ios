@@ -1,10 +1,15 @@
-default: clean test integration-tests coverage
+default: clean pods test integration-tests coverage
 
 clean:
 	xcodebuild -workspace Loopy.xcworkspace -scheme "TestApp" -configuration Release -sdk iphoneos clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "IntegrationTests" -configuration Debug -sdk iphonesimulator clean
 	rm -rfd build
+	rm -rfd Pods
+
+pods:
+	pod install
+	pod update
 
 test:
 	WRITE_JUNIT_XML=YES GHUNIT_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator build
