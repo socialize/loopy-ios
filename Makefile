@@ -9,7 +9,6 @@ clean:
 
 pods:
 	pod install
-	pod update
 
 test:
 	WRITE_JUNIT_XML=YES GHUNIT_CLI=1 xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator build

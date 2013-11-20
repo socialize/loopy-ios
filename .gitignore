@@ -2,3 +2,5 @@
 build
 *xcuserdata*
 xcuserdata
+Pods
+Podfile.lock
