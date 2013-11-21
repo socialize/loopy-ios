@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Loopy"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "The next-generation Socialize framework from ShareThis."
   s.description  = "Loopy is ShareThis' successor to the Socialize SDK, allowing iOS applications to interact with the Loopy REST API."
   s.homepage     = "https://github.com/socialize/socialize-networking"
