@@ -28,6 +28,7 @@ NSString *const API_KEY_VAL = @"hkg435723o4tho95fh29"; //TODO real key
 NSString *const LOOPY_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
+NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 
 @synthesize urlPrefix;
 @synthesize httpsURLPrefix;
@@ -40,6 +41,7 @@ NSString *const LANGUAGE_VERSION = @"1.3";
 @synthesize currentLocation;
 
 //constructor with specified endpoint
+//performs actions to check for stdid and calls "install" or "open" as required
 - (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL {
     self = [super init];
     if(self) {
@@ -60,9 +62,63 @@ NSString *const LANGUAGE_VERSION = @"1.3";
         self.osVersion = device.systemVersion;
         self.idfa = idManager.advertisingIdentifier;
         
-        self.stdid = @"69"; //TODO this will be replaced with real stdid when /install and /stdid are implemented
+        //init identity check
+        [self loadIdentities];
     }
     return self;
+}
+
+//updates identities file
+- (void)updateIdentities {
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    NSMutableDictionary *identities = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        [self.idfa UUIDString],@"idfa",
+                                        self.stdid,@"stdid",
+                                        nil];
+    NSString *error;
+    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:(id)identities
+                                                                   format:NSPropertyListXMLFormat_v1_0
+                                                         errorDescription:&error];
+    if(plistData) {
+        [plistData writeToFile:filePath atomically:YES];
+    }
+    else {
+        NSLog(@"Error : %@",error);
+    }
+}
+
+//loads identities file from disk
+- (void)loadIdentities {
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    
+    //load it and compare idfa
+    //if they don't match, call /stdid
+    if(plistDict != nil) {
+        NSLog(@"CA EXISTE!!!");
+    }
+    //call /install and store stdid returned in new file
+    else {
+        [self install:[self installDictionaryWithReferrer:@"www.facebook.com"] //TODO real value
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSDictionary *responseDict = (NSDictionary *)responseObject;
+                  self.stdid = (NSString *)[responseDict valueForKey:@"stdid"];
+                  if(self.stdid) {
+                      [self updateIdentities];
+                  }
+                  else {
+                      //TODO handle this
+                      NSLog(@"FAILURE");
+                  }
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  //TODO handle this
+                  NSLog(@"FAILURE");
+              }];
+        NSLog(@"A-SA NON!!!");
+    }
 }
 
 //factory method for URLRequest for specified JSON data and endpoint
@@ -145,15 +201,38 @@ NSString *const LANGUAGE_VERSION = @"1.3";
     return errorArray;
 }
 
-//returns JSON-ready dictionary for reportShare endpoint, based on shortlink and channel
+//returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
-    CLLocationCoordinate2D coordinate;
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSDictionary *info = [bundle infoDictionary];
-    NSString *appID = [info valueForKey:@"CFBundleIdentifier"];
-    NSString *appName = [info valueForKey:@"CFBundleName"];
-    NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                              self.stdid,@"stdid",
+                              [NSNumber numberWithInt:timestamp],@"timestamp",
+                              [self deviceDictionary],@"device",
+                              [self appDictionary],@"app",
+                              socialChannel,@"channel",
+                              shortlink,@"shortlink",
+                              [self clientDictionary],@"client",
+                              nil];
+    
+    return shareObj;
+}
+
+//returns JSON-ready dictionary for /install endpoint for specified referrer
+- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithInt:timestamp],@"timestamp",
+                                referrer,@"referrer",
+                                [self deviceDictionary],@"device",
+                                [self appDictionary],@"app",
+                                [self clientDictionary],@"client",
+                                nil];
+    return installObj;
+}
+
+//required subset of endpoint calls
+- (NSDictionary *)deviceDictionary {
+    CLLocationCoordinate2D coordinate;
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
@@ -175,26 +254,31 @@ NSString *const LANGUAGE_VERSION = @"1.3";
         [deviceObj setObject:geoObj forKey:@"geo"];
     }
     
+    return deviceObj;
+}
+
+//required subset of endpoint calls
+- (NSDictionary *)appDictionary {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+    NSString *appID = [info valueForKey:@"CFBundleIdentifier"];
+    NSString *appName = [info valueForKey:@"CFBundleName"];
+    NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
     NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             appID,@"id",
                             appName,@"name",
                             appVersion,@"version",
                             nil];
+    return appObj;
+}
+
+//required subset of endpoint calls
+- (NSDictionary *)clientDictionary {
     NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                LANGUAGE_ID,@"lang",
                                LANGUAGE_VERSION,@"version",
                                nil];
-    NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              self.stdid,@"stdid",
-                              [NSNumber numberWithInt:timestamp],@"timestamp",
-                              deviceObj,@"device",
-                              appObj,@"app",
-                              socialChannel,@"channel",
-                              shortlink,@"shortlink",
-                              clientObj,@"client",
-                              nil];
-    
-    return shareObj;
+    return clientObj;
 }
 
 - (void)install:(NSDictionary *)jsonDict

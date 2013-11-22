@@ -24,6 +24,7 @@ extern NSString *const API_KEY_VAL;
 extern NSString *const LOOPY_KEY_VAL;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
+extern NSString *const IDENTITIES_FILENAME;
 
 @property (nonatomic, strong) NSString *httpsURLPrefix;
 @property (nonatomic, strong) NSString *urlPrefix;
@@ -49,6 +50,7 @@ extern NSString *const LANGUAGE_VERSION;
 - (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
+- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
 
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
