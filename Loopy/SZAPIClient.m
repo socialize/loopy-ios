@@ -18,6 +18,7 @@
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
+NSString *const STDID = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 
@@ -26,6 +27,8 @@ NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
 NSString *const API_KEY_VAL = @"hkg435723o4tho95fh29"; //TODO real key
 NSString *const LOOPY_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
+NSString *const IDFA_KEY = @"idfa";
+NSString *const STDID_KEY = @"stdid";
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
 NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
@@ -61,9 +64,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
         self.idfa = idManager.advertisingIdentifier;
-        
-        //init identity check
-        [self loadIdentities];
     }
     return self;
 }
@@ -73,8 +73,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
     NSMutableDictionary *identities = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        [self.idfa UUIDString],@"idfa",
-                                        self.stdid,@"stdid",
+                                        [self.idfa UUIDString],IDFA_KEY,
+                                        self.stdid,STDID_KEY,
                                         nil];
     NSString *error;
     NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:(id)identities
@@ -84,27 +84,59 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         [plistData writeToFile:filePath atomically:YES];
     }
     else {
-        NSLog(@"Error : %@",error);
+        //TODO handle this
+        NSLog(@"FAILURE");
     }
 }
 
 //loads identities file from disk
-- (void)loadIdentities {
+- (void)loadIdentitiesWithReferrer:(NSString *)referrer {
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
     
     //load it and compare idfa
     //if they don't match, call /stdid
+    //if they do, call /open
     if(plistDict != nil) {
-        NSLog(@"CA EXISTE!!!");
+        NSString *idfaStrCached = (NSString *)[plistDict valueForKey:IDFA_KEY];
+        NSString *idfaStrLocal = [self.idfa UUIDString];
+        if(![idfaStrCached isEqualToString:idfaStrLocal]) {
+            [self stdid:[self stdidDictionary]
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSDictionary *responseDict = (NSDictionary *)responseObject;
+                    self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
+                    if(self.stdid) {
+                        [self updateIdentities];
+                    }
+                    else {
+                        //TODO handle this
+                        NSLog(@"FAILURE");
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    //TODO handle this
+                    NSLog(@"FAILURE");
+                }];
+        }
+        else {
+            [self open:[self openDictionaryWithReferrer:referrer]
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   //TODO nothing to be done?
+                   NSLog(@"SUCCESS");
+               }
+               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   //TODO handle this
+                   NSLog(@"FAILURE");
+               }];
+        }
     }
     //call /install and store stdid returned in new file
     else {
-        [self install:[self installDictionaryWithReferrer:@"www.facebook.com"] //TODO real value
+        [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   NSDictionary *responseDict = (NSDictionary *)responseObject;
-                  self.stdid = (NSString *)[responseDict valueForKey:@"stdid"];
+                  self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
                   if(self.stdid) {
                       [self updateIdentities];
                   }
@@ -117,7 +149,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                   //TODO handle this
                   NSLog(@"FAILURE");
               }];
-        NSLog(@"A-SA NON!!!");
     }
 }
 
@@ -201,6 +232,46 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return errorArray;
 }
 
+//returns JSON-ready dictionary for /install endpoint for specified referrer
+- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithInt:timestamp],@"timestamp",
+                                referrer,@"referrer",
+                                [self deviceDictionary],@"device",
+                                [self appDictionary],@"app",
+                                [self clientDictionary],@"client",
+                                nil];
+    return installObj;
+}
+
+//returns JSON-ready dictionary for /open endpoint for specified referrer
+- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             self.stdid,@"stdid",
+                             [NSNumber numberWithInt:timestamp],@"timestamp",
+                             referrer,@"referrer",
+                             [self deviceDictionary],@"device",
+                             [self appDictionary],@"app",
+                             [self clientDictionary],@"client",
+                             nil];
+    return openObj;
+}
+
+//returns JSON-ready dictionary for /stdid endpoint for specified referrer
+- (NSDictionary *)stdidDictionary {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             self.stdid,@"stdid",
+                             [NSNumber numberWithInt:timestamp],@"timestamp",
+                             [self deviceDictionary],@"device",
+                             [self appDictionary],@"app",
+                             [self clientDictionary],@"client",
+                             nil];
+    return openObj;
+}
+
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -215,19 +286,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                               nil];
     
     return shareObj;
-}
-
-//returns JSON-ready dictionary for /install endpoint for specified referrer
-- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSNumber numberWithInt:timestamp],@"timestamp",
-                                referrer,@"referrer",
-                                [self deviceDictionary],@"device",
-                                [self appDictionary],@"app",
-                                [self clientDictionary],@"client",
-                                nil];
-    return installObj;
 }
 
 //required subset of endpoint calls
@@ -279,6 +337,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                                LANGUAGE_VERSION,@"version",
                                nil];
     return clientObj;
+}
+
+- (void)stdid:(NSDictionary *)jsonDict
+      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    
 }
 
 - (void)install:(NSDictionary *)jsonDict

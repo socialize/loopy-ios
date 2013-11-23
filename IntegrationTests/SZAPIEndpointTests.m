@@ -27,7 +27,10 @@
     NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
     NSString *httpsPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
 
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix httpsPrefix:httpsPrefix];
+    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
+                                           httpsPrefix:httpsPrefix];
+    //TODO this will probably be its own test
+    [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"];
 }
 
 - (void)tearDown {

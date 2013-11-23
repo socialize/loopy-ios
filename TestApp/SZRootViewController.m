@@ -36,7 +36,9 @@ SZAPIClient *apiClient;
         NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
         NSString *urlHttpsPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
 
-        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix httpsPrefix:urlHttpsPrefix];
+        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
+                                               httpsPrefix:urlHttpsPrefix];
+        [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"];
         share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
