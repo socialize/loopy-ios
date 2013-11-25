@@ -1,10 +1,14 @@
 default: clean pods test integration-tests coverage
 
-clean:
+nopods: clean-nopods test integration-tests coverage
+
+clean-nopods:
 	xcodebuild -workspace Loopy.xcworkspace -scheme "TestApp" -configuration Release -sdk iphoneos clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "UnitTests" -configuration Debug -sdk iphonesimulator clean
 	xcodebuild -workspace Loopy.xcworkspace -scheme "IntegrationTests" -configuration Debug -sdk iphonesimulator clean
 	rm -rfd build
+
+clean: clean-nopods
 	rm -rfd Pods
 
 pods:

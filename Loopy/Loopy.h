@@ -10,6 +10,7 @@
 
 #import "SZConstants.h"
 #import "SZShare.h"
+#import "SZActivity.h"
 #import "SZFacebookActivity.h"
 #import "SZTwitterActivity.h"
 #import "SZAPIClient.h"

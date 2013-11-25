@@ -15,6 +15,7 @@
 
 extern NSString *const INSTALL;
 extern NSString *const OPEN;
+extern NSString *const STDID;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
 extern NSTimeInterval const TIMEOUT;
@@ -22,8 +23,11 @@ extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
 extern NSString *const API_KEY_VAL;
 extern NSString *const LOOPY_KEY_VAL;
+extern NSString *const IDFA_KEY;
+extern NSString *const STDID_KEY;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
+extern NSString *const IDENTITIES_FILENAME;
 
 @property (nonatomic, strong) NSString *httpsURLPrefix;
 @property (nonatomic, strong) NSString *urlPrefix;
@@ -36,6 +40,9 @@ extern NSString *const LANGUAGE_VERSION;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
 - (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL;
+- (void)loadIdentitiesWithReferrer:(NSString *)referrer
+                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
@@ -48,6 +55,7 @@ extern NSString *const LANGUAGE_VERSION;
                                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
+- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (void)install:(NSDictionary *)jsonDict

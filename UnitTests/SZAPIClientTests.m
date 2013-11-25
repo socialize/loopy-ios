@@ -12,13 +12,13 @@
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 #import <AFNetworking/AFNetworking.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface SZAPIClientTests : GHAsyncTestCase {
     SZAPIClient *apiClient;
     NSString *urlPrefix;
     NSString *httpsURLPrefix;
     NSString *endpoint;
-    BOOL mockInstallSucceeded;
 }
 @end
 
@@ -28,8 +28,8 @@
     urlPrefix = @"http://loopy.com:8080";
     httpsURLPrefix = @"https://loopy.com:8443";
     endpoint = @"/endpoint";
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix httpsPrefix:httpsURLPrefix];
-    mockInstallSucceeded = NO;
+    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
+                                           httpsPrefix:httpsURLPrefix];
 }
 
 - (void)testNewURLRequest {
@@ -94,9 +94,31 @@
     GHAssertNil(authChallengeBlock, @"");
 }
 
+- (void)testInstallDictionaryWithReferrer {
+    //simulate current location and stdid, if needed
+    if(!apiClient.currentLocation) {
+        apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
+    }
+    
+    NSDictionary *installDict = [apiClient installDictionaryWithReferrer:@"www.facebook.com"];
+    GHAssertNotNil(installDict, @"");
+    GHAssertNotNil([installDict valueForKey:@"timestamp"], @"");
+    GHAssertNotNil([installDict valueForKey:@"device"], @"");
+    GHAssertNotNil([installDict valueForKey:@"app"], @"");
+    GHAssertNotNil([installDict valueForKey:@"client"], @"");
+}
+
 - (void)testReportShareDictionary {
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";
+    
+    //simulate current location and stdid, if needed
+    if(!apiClient.currentLocation) {
+        apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
+    }
+    if(!apiClient.stdid) {
+        apiClient.stdid = @"ABCD-1234";
+    }
     
     NSDictionary *shareDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
     GHAssertNotNil(shareDict, @"");
