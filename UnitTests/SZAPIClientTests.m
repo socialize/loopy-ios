@@ -16,8 +16,6 @@
 
 @interface SZAPIClientTests : GHAsyncTestCase {
     SZAPIClient *apiClient;
-    NSString *urlPrefix;
-    NSString *httpsURLPrefix;
     NSString *endpoint;
 }
 @end
@@ -25,11 +23,9 @@
 @implementation SZAPIClientTests
 
 - (void)setUpClass {
-    urlPrefix = @"http://loopy.com:8080";
-    httpsURLPrefix = @"https://loopy.com:8443";
     endpoint = @"/endpoint";
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
-                                           httpsPrefix:httpsURLPrefix];
+    apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
 }
 
 - (void)testNewURLRequest {
@@ -56,23 +52,32 @@
     NSString *contentTypeVal = [request valueForHTTPHeaderField:@"Content-Type"];
     GHAssertEqualStrings(@"application/json", acceptVal, @"");
     GHAssertEqualStrings(@"application/json", contentTypeVal, @"");
-    
-    //verify URL
-    NSString *urlMatchStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
-    GHAssertEqualStrings(urlPrefix, apiClient.urlPrefix, @"");
-    NSURL *url = request.URL;
-    GHAssertEqualStrings(urlMatchStr, [url absoluteString], @"");
 }
 
 - (void)testNewHTTPSURLRequest {
+    BOOL containsAPIKey = NO;
+    BOOL containsLoopyKey = NO;
     NSData *dummyData = [[NSData alloc] init];
     NSURLRequest *request = [apiClient newHTTPSURLRequest:dummyData length:0 endpoint:endpoint];
     
-    //verify URL
-    NSString *urlMatchStr = [NSString stringWithFormat:@"%@%@", httpsURLPrefix, endpoint];
-    GHAssertEqualStrings(httpsURLPrefix, apiClient.httpsURLPrefix, @"");
-    NSURL *url = request.URL;
-    GHAssertEqualStrings(urlMatchStr, [url absoluteString], @"");
+    //verify header fields
+    NSDictionary *headerFields = [request allHTTPHeaderFields];
+    for(NSString *key in headerFields) {
+        id value = [headerFields valueForKey:key];
+        GHAssertNotNil(value, @"");
+        
+        if([key isEqualToString:API_KEY]) {
+            containsAPIKey = YES;
+        }
+        else if([key isEqualToString:LOOPY_KEY]) {
+            containsLoopyKey = YES;
+        }
+    }
+    GHAssertTrue(containsAPIKey && containsLoopyKey, @"");
+    NSString *acceptVal = [request valueForHTTPHeaderField:@"Accept"];
+    NSString *contentTypeVal = [request valueForHTTPHeaderField:@"Content-Type"];
+    GHAssertEqualStrings(@"application/json", acceptVal, @"");
+    GHAssertEqualStrings(@"application/json", contentTypeVal, @"");
 }
 
 - (void)testNewURLRequestOperation {

@@ -29,15 +29,8 @@ SZAPIClient *apiClient;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
-        NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
-        NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
-        NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
-        NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
-        NSString *urlHttpsPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
-
-        apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
-                                               httpsPrefix:urlHttpsPrefix];
+        apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+                                               loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
         [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //any operations post-successful /install or /open

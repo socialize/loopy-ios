@@ -21,14 +21,14 @@ extern NSString *const REPORT_SHARE;
 extern NSTimeInterval const TIMEOUT;
 extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
-extern NSString *const API_KEY_VAL;
-extern NSString *const LOOPY_KEY_VAL;
 extern NSString *const IDFA_KEY;
 extern NSString *const STDID_KEY;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
 extern NSString *const IDENTITIES_FILENAME;
 
+@property (nonatomic, strong) NSString *apiKey;
+@property (nonatomic, strong) NSString *loopyKey;
 @property (nonatomic, strong) NSString *httpsURLPrefix;
 @property (nonatomic, strong) NSString *urlPrefix;
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -39,7 +39,7 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) NSString *stdid;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
-- (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL;
+- (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey;
 - (void)loadIdentitiesWithReferrer:(NSString *)referrer
                        postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
