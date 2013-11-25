@@ -40,7 +40,9 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
 - (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL;
-- (void)loadIdentitiesWithReferrer:(NSString *)referrer;
+- (void)loadIdentitiesWithReferrer:(NSString *)referrer
+                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                          length:(NSNumber *)length
                        endpoint:(NSString *)endpoint;
@@ -54,8 +56,6 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)stdidDictionary;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (void)install:(NSDictionary *)jsonDict
@@ -63,10 +63,6 @@ extern NSString *const IDENTITIES_FILENAME;
         failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
 - (void)open:(NSDictionary *)jsonDict
-     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-
-- (void)stdid:(NSDictionary *)jsonDict
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 

@@ -29,11 +29,31 @@
 
     apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
                                            httpsPrefix:httpsPrefix];
-    //TODO this will probably be its own test
-    [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"];
 }
 
 - (void)tearDown {
+}
+
+- (void)testLoadIdentities {
+    [self prepare];
+    __block BOOL operationSucceeded = NO;
+
+    //insert mock IDFA if needed
+    if(!apiClient.idfa) {
+        apiClient.idfa = [NSUUID UUID];
+    }
+    [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+        postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            operationSucceeded = YES;
+            [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLoadIdentities)];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            operationSucceeded = NO;
+            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLoadIdentities)];
+        }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
 }
 
 //this uses the same JSON object used by unit tests

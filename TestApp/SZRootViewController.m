@@ -38,7 +38,14 @@ SZAPIClient *apiClient;
 
         apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
                                                httpsPrefix:urlHttpsPrefix];
-        [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"];
+        [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+            postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //any operations post-successful /install or /open
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //any failure operations
+            }];
+        
         share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
