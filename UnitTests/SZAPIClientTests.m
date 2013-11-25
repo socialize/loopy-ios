@@ -113,6 +113,24 @@
     GHAssertNotNil([installDict valueForKey:@"client"], @"");
 }
 
+- (void)testOpenDictionaryWithReferrer {
+    //simulate current location and stdid, if needed
+    if(!apiClient.currentLocation) {
+        apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
+    }
+    if(!apiClient.stdid) {
+        apiClient.stdid = @"ABCD-1234";
+    }
+    
+    NSDictionary *openDict = [apiClient openDictionaryWithReferrer:@"www.facebook.com"];
+    GHAssertNotNil(openDict, @"");
+    GHAssertNotNil([openDict valueForKey:@"stdid"], @"");
+    GHAssertNotNil([openDict valueForKey:@"timestamp"], @"");
+    GHAssertNotNil([openDict valueForKey:@"device"], @"");
+    GHAssertNotNil([openDict valueForKey:@"app"], @"");
+    GHAssertNotNil([openDict valueForKey:@"client"], @"");
+}
+
 - (void)testReportShareDictionary {
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";

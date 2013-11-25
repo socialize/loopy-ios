@@ -33,6 +33,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 
 @synthesize urlPrefix;
 @synthesize httpsURLPrefix;
+@synthesize apiKey;
+@synthesize loopyKey;
 @synthesize locationManager;
 @synthesize carrierName;
 @synthesize osVersion;
@@ -90,6 +92,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     [plistData writeToFile:filePath atomically:YES];
 }
 
+#pragma mark - Identities Handling
+
 //loads identities file from disk, and calls appropriate recording endpoint (/open or /install) as required
 - (void)loadIdentitiesWithReferrer:(NSString *)referrer
                        postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
@@ -110,11 +114,19 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
               failure:failureCallback];
     }
     else {
-        //this temporarily calls this to signify an install was already made
-        //this will be replaced with /open callback when that is implemented
-        postSuccessCallback(nil, nil);
+        //when /stdid is implemented, with will compare IDFAs
+        //for now, just use it as-is
+        self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
+        [self open:[self openDictionaryWithReferrer:referrer]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [self updateIdentities];
+                  postSuccessCallback(operation, responseObject);
+              }
+              failure:failureCallback];
     }
 }
+
+#pragma mark - URL Requests
 
 //factory method for URLRequest for specified JSON data and endpoint
 - (NSMutableURLRequest *)newHTTPSURLRequest:(NSData *)jsonData
@@ -196,6 +208,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return errorArray;
 }
 
+#pragma mark - JSON For Endpoints
+
 //returns JSON-ready dictionary for /install endpoint for specified referrer
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
     int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -207,6 +221,20 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                                 [self clientDictionary],@"client",
                                 nil];
     return installObj;
+}
+
+//returns JSON-ready dictionary for /open endpoint for specified referrer
+- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             self.stdid,@"stdid",
+                             [NSNumber numberWithInt:timestamp],@"timestamp",
+                             referrer,@"referrer",
+                             [self deviceDictionary],@"device",
+                             [self appDictionary],@"app",
+                             [self clientDictionary],@"client",
+                             nil];
+    return openObj;
 }
 
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
@@ -276,6 +304,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return clientObj;
 }
 
+#pragma mark - Calling Endpoints
+
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
         failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
@@ -335,6 +365,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                                                              failure:failureCallback];
     [operation start];
 }
+
+#pragma mark - Location And Device Information
 
 //location update
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
