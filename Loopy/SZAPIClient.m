@@ -18,7 +18,7 @@
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
-NSString *const STDID = @"/open";
+NSString *const STDID = @"/stdid";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 
