@@ -18,15 +18,13 @@
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
-NSString *const STDID = @"/open";
+NSString *const STDID = @"/stdid";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 
 NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
-NSString *const API_KEY_VAL = @"hkg435723o4tho95fh29"; //TODO real key
-NSString *const LOOPY_KEY_VAL = @"4q7cd6ngw3vu7gram5b9b9t6"; //TODO real key
 NSString *const IDFA_KEY = @"idfa";
 NSString *const STDID_KEY = @"stdid";
 NSString *const LANGUAGE_ID = @"objc";
@@ -45,11 +43,20 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 
 //constructor with specified endpoint
 //performs actions to check for stdid and calls "install" or "open" as required
-- (id)initWithURLPrefix:(NSString *)url httpsPrefix:(NSString *)httpsURL {
+- (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey {
     self = [super init];
     if(self) {
-        self.urlPrefix = url;
-        self.httpsURLPrefix = httpsURL;
+        //set keys
+        self.apiKey = key;
+        self.loopyKey = lkey;
+        
+        //set URLs
+        NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
+        NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
+        NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
+        NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
+        self.urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
+        self.httpsURLPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
         
         //device information cached for sharing and other operations
         self.locationManager = [[CLLocationManager alloc] init];
@@ -136,8 +143,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:API_KEY_VAL forHTTPHeaderField:API_KEY];
-    [request setValue:LOOPY_KEY_VAL forHTTPHeaderField:LOOPY_KEY];
+    [request setValue:self.apiKey forHTTPHeaderField:API_KEY];
+    [request setValue:self.loopyKey forHTTPHeaderField:LOOPY_KEY];
     [request setValue:[length stringValue] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:jsonData];
     

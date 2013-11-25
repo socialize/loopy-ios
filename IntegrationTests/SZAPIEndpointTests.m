@@ -20,15 +20,8 @@
 @implementation SZAPIEndpointTests
 
 - (void)setUp {
-    NSBundle *bundle =  [NSBundle bundleForClass:[self class]];
-    NSString *configPath = [bundle pathForResource:@"LoopyApiInfo" ofType:@"plist"];
-    NSDictionary *configurationDict = [[NSDictionary alloc]initWithContentsOfFile:configPath];
-    NSDictionary *apiInfoDict = [configurationDict objectForKey:@"Loopy API info"];
-    NSString *urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
-    NSString *httpsPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
-
-    apiClient = [[SZAPIClient alloc] initWithURLPrefix:urlPrefix
-                                           httpsPrefix:httpsPrefix];
+    apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
 }
 
 - (void)tearDown {
@@ -59,8 +52,13 @@
 //this uses the same JSON object used by unit tests
 - (void)testInstallEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForInstall];
     __block BOOL operationSucceeded = NO;
+    
+    //insert mock IDFA if needed
+    if(!apiClient.idfa) {
+        apiClient.idfa = [NSUUID UUID];
+    }
+    NSDictionary *jsonDict = [SZTestUtils jsonForInstall];
     
     [apiClient install:jsonDict
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
