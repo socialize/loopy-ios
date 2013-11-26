@@ -115,7 +115,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     }
     else {
         //load it and compare idfa
-        //if they don't match, call /stdid
+        //if they don't match, call /stdid, then /open with new stdid
         //if they do, call /open
         NSString *idfaStrCached = (NSString *)[plistDict valueForKey:IDFA_KEY];
         NSString *idfaStrLocal = [self.idfa UUIDString];
@@ -124,10 +124,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSDictionary *responseDict = (NSDictionary *)responseObject;
                     self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
-                    if(self.stdid) {
-                        [self updateIdentities];
-                    }
-                    postSuccessCallback(operation, responseObject);
+                    [self open:[self openDictionaryWithReferrer:referrer]
+                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                           [self updateIdentities];
+                           postSuccessCallback(operation, responseObject);
+                       }
+                       failure:failureCallback];
                 }
                 failure:failureCallback];
         }
