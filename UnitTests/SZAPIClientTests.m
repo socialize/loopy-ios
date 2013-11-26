@@ -99,6 +99,25 @@
     GHAssertNil(authChallengeBlock, @"");
 }
 
+- (void)testUpdateIdentities {
+    //insert mock IDFA and STDID
+    if(!apiClient.idfa) {
+        apiClient.idfa = [NSUUID UUID];
+    }
+    if(!apiClient.stdid) {
+        apiClient.stdid = [apiClient.idfa UUIDString];
+    }
+    [apiClient updateIdentities];
+    
+    //verify saved file contains correct values
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    GHAssertNotNil(plistDict, @"");
+    GHAssertEqualStrings(((NSString *)[plistDict valueForKey:STDID_KEY]), apiClient.stdid, @"");
+    GHAssertEqualStrings([plistDict valueForKey:IDFA_KEY], [apiClient.idfa UUIDString], @"");
+}
+
 - (void)testInstallDictionaryWithReferrer {
     //simulate current location and stdid, if needed
     if(!apiClient.currentLocation) {

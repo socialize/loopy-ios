@@ -43,6 +43,7 @@ extern NSString *const IDENTITIES_FILENAME;
 - (void)loadIdentitiesWithReferrer:(NSString *)referrer
                        postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+- (void)updateIdentities;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                                 length:(NSNumber *)length
                               endpoint:(NSString *)endpoint;

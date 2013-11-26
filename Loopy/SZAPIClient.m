@@ -124,9 +124,9 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSDictionary *responseDict = (NSDictionary *)responseObject;
                     self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
+                    [self updateIdentities];
                     [self open:[self openDictionaryWithReferrer:referrer]
                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           [self updateIdentities];
                            postSuccessCallback(operation, responseObject);
                        }
                        failure:failureCallback];

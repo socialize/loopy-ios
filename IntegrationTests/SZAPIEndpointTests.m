@@ -334,6 +334,7 @@
                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
                        [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
                              postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                 GHAssertTrue([fileMgr fileExistsAtPath:filePath], @"");
                                  //...then change the IDFA and try again
                                  apiClient.idfa = [NSUUID UUID];
                                  [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
