@@ -237,19 +237,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return openObj;
 }
 
-//returns JSON-ready dictionary for /stdid endpoint
-- (NSDictionary *)stdidDictionary {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *stdidObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              self.stdid,@"stdid",
-                              [NSNumber numberWithInt:timestamp],@"timestamp",
-                              [self deviceDictionary],@"device",
-                              [self appDictionary],@"app",
-                              [self clientDictionary],@"client",
-                              nil];
-    return stdidObj;
-}
-
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -329,12 +316,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
-}
-
-- (void)stdid:(NSDictionary *)jsonDict
-      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callHTTPSEndpoint:STDID json:jsonDict success:successCallback failure:failureCallback];
 }
 
 - (void)shortlink:(NSDictionary *)jsonDict

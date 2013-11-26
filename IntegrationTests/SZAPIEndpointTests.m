@@ -161,29 +161,6 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-- (void)testSTDIDEndpoint {
-    [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForSTDID];
-    __block BOOL operationSucceeded = NO;
-    [apiClient stdid:jsonDict
-             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSDictionary *responseDict = (NSDictionary *)responseObject;
-                 operationSucceeded = [[responseDict allKeys] containsObject:@"stdid"] && [responseDict objectForKey:@"stdid"];
-                 if(operationSucceeded) {
-                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSTDIDEndpoint)];
-                 }
-                 else {
-                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
-                 }
-             }
-             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 operationSucceeded = NO;
-                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
-             }];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
-}
-
 //this uses the same JSON object used by unit tests
 - (void)testShortlinkEndpoint {
     [self prepare];
