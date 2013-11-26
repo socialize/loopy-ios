@@ -118,11 +118,11 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         //for now, just use it as-is
         self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
         [self open:[self openDictionaryWithReferrer:referrer]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [self updateIdentities];
-                  postSuccessCallback(operation, responseObject);
-              }
-              failure:failureCallback];
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               [self updateIdentities];
+               postSuccessCallback(operation, responseObject);
+           }
+           failure:failureCallback];
     }
 }
 
@@ -130,16 +130,16 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 
 //factory method for URLRequest for specified JSON data and endpoint
 - (NSMutableURLRequest *)newHTTPSURLRequest:(NSData *)jsonData
-                                length:(NSNumber *)length
-                              endpoint:(NSString *)endpoint {
+                                     length:(NSNumber *)length
+                                   endpoint:(NSString *)endpoint {
     NSString *urlStr = [NSString stringWithFormat:@"%@%@", httpsURLPrefix, endpoint];
     return [self jsonURLRequestForURL:urlStr data:jsonData length:length];
 }
 
 //factory method for URLRequest for specified JSON data and endpoint
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
-                         length:(NSNumber *)length
-                       endpoint:(NSString *)endpoint {
+                                length:(NSNumber *)length
+                              endpoint:(NSString *)endpoint {
     NSString *urlStr = [NSString stringWithFormat:@"%@%@", urlPrefix, endpoint];
     return [self jsonURLRequestForURL:urlStr data:jsonData length:length];
 }
@@ -237,6 +237,19 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return openObj;
 }
 
+//returns JSON-ready dictionary for /stdid endpoint
+- (NSDictionary *)stdidDictionary {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *stdidObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                              self.stdid,@"stdid",
+                              [NSNumber numberWithInt:timestamp],@"timestamp",
+                              [self deviceDictionary],@"device",
+                              [self appDictionary],@"app",
+                              [self clientDictionary],@"client",
+                              nil];
+    return stdidObj;
+}
+
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -318,6 +331,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
 }
 
+- (void)stdid:(NSDictionary *)jsonDict
+      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callHTTPSEndpoint:STDID json:jsonDict success:successCallback failure:failureCallback];
+}
+
 - (void)shortlink:(NSDictionary *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
@@ -358,7 +377,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
     NSURLRequest *request = [self newURLRequest:jsonData
                                          length:jsonLength
-                                        endpoint:endpoint];
+                                       endpoint:endpoint];
     AFHTTPRequestOperation *operation = [self newURLRequestOperation:request
                                                              isHTTPS:NO
                                                              success:successCallback
