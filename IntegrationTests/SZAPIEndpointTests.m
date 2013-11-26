@@ -35,6 +35,10 @@
     if(!apiClient.idfa) {
         apiClient.idfa = [NSUUID UUID];
     }
+    //insert mock stdid -- it'll be replaced by the new one if needed
+    if(!apiClient.stdid) {
+        apiClient.stdid = [apiClient.idfa UUIDString];
+    }
     [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
                               postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                                   operationSucceeded = YES;
@@ -165,6 +169,15 @@
     [self prepare];
     NSDictionary *jsonDict = [SZTestUtils jsonForSTDID];
     __block BOOL operationSucceeded = NO;
+    
+    //insert mock IDFA if needed
+    if(!apiClient.idfa) {
+        apiClient.idfa = [NSUUID UUID];
+    }
+    //insert mock stdid -- it'll be replaced by the new one
+    if(!apiClient.stdid) {
+        apiClient.stdid = [apiClient.idfa UUIDString];
+    }
     [apiClient stdid:jsonDict
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSDictionary *responseDict = (NSDictionary *)responseObject;
@@ -283,7 +296,75 @@
                      }
                  }];
     
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:20.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
+//tests the following scenarios:
+//- no saved plist: calls install
+//- plist with unmatched IDFA: calls stdid
+//- plist with matching IDFA: calls open
+- (void)testSTDIDADFAIntegration {
+    [self prepare];
+    __block BOOL operationSucceeded = NO;
+    
+    //first remove whatever saved plist file may already exist -- to test install
+    NSError *error;
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    BOOL fileRemoved = NO;
+    if([fileMgr fileExistsAtPath:filePath]) {
+        fileRemoved = [fileMgr removeItemAtPath:filePath error:&error];
+    }
+    else {
+        fileRemoved = YES;
+    }
+    
+    if (fileRemoved) {
+        //then create new plist with IDFA
+        apiClient.stdid = nil;
+        //insert mock IDFA if needed
+        if(!apiClient.idfa) {
+            apiClient.idfa = [NSUUID UUID];
+        }
+        //try an install...
+        NSDictionary *installDict = [apiClient installDictionaryWithReferrer:@"www.facebook.com"];
+        [apiClient install:installDict
+                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                       [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+                             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                 //...then change the IDFA and try again
+                                 apiClient.idfa = [NSUUID UUID];
+                                 [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+                                       postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                           //...one last time to test the open endpoint
+                                           [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+                                                 postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                                     operationSucceeded = YES;
+                                                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSTDIDADFAIntegration)];
+                                                 }
+                                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
+                                                 }];
+                                       }
+                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                               [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
+                                           }];
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
+                             }];
+                   }
+                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
+                   }];
+        [self waitForStatus:kGHUnitWaitStatusSuccess timeout:20.0];
+    }
+    else {
+        GHAssertTrue(operationSucceeded, @"");
+    }
+    
     GHAssertTrue(operationSucceeded, @"");
 }
 @end
