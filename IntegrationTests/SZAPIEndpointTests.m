@@ -30,20 +30,20 @@
 - (void)testLoadIdentities {
     [self prepare];
     __block BOOL operationSucceeded = NO;
-
+    
     //insert mock IDFA if needed
     if(!apiClient.idfa) {
         apiClient.idfa = [NSUUID UUID];
     }
     [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
-        postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            operationSucceeded = YES;
-            [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLoadIdentities)];
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            operationSucceeded = NO;
-            [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLoadIdentities)];
-        }];
+                              postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  operationSucceeded = YES;
+                                  [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLoadIdentities)];
+                              }
+                                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                      operationSucceeded = NO;
+                                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLoadIdentities)];
+                                  }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
@@ -64,17 +64,17 @@
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    NSDictionary *responseDict = (NSDictionary *)responseObject;
                    operationSucceeded = [[responseDict allKeys] containsObject:@"stdid"] && [responseDict objectForKey:@"stdid"];
-                    if(operationSucceeded) {
-                        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testInstallEndpoint)];
-                    }
-                    else {
-                        [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testInstallEndpoint)];
-                    }
-                }
+                   if(operationSucceeded) {
+                       [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testInstallEndpoint)];
+                   }
+                   else {
+                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testInstallEndpoint)];
+                   }
+               }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    operationSucceeded = NO;
-                    [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testInstallEndpoint)];
-            }];
+                   operationSucceeded = NO;
+                   [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testInstallEndpoint)];
+               }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
@@ -85,23 +85,23 @@
     [self prepare];
     NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
     __block BOOL operationSucceeded = NO;
-
+    
     [apiClient open:jsonDict
-               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   NSDictionary *responseDict = (NSDictionary *)responseObject;
-                   if([responseDict count] == 0) {
-                       operationSucceeded = YES;
-                       [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpenEndpoint)];
-                   }
-                   else {
-                       operationSucceeded = NO;
-                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpoint)];
-                   }
-               }
-               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                   operationSucceeded = NO;
-                   [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpoint)];
-               }];
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *responseDict = (NSDictionary *)responseObject;
+                if([responseDict count] == 0) {
+                    operationSucceeded = YES;
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpenEndpoint)];
+                }
+                else {
+                    operationSucceeded = NO;
+                    [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpoint)];
+                }
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                operationSucceeded = NO;
+                [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpoint)];
+            }];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
 }
@@ -113,7 +113,7 @@
     NSMutableDictionary *jsonDictInvalid = [NSMutableDictionary dictionaryWithDictionary:jsonDict];
     [jsonDictInvalid removeObjectForKey:@"stdid"];
     __block BOOL operationSucceeded = NO;
-
+    
     [apiClient open:jsonDictInvalid
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 operationSucceeded = NO;
@@ -161,12 +161,35 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
+- (void)testSTDIDEndpoint {
+    [self prepare];
+    NSDictionary *jsonDict = [SZTestUtils jsonForSTDID];
+    __block BOOL operationSucceeded = NO;
+    [apiClient stdid:jsonDict
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSDictionary *responseDict = (NSDictionary *)responseObject;
+                 operationSucceeded = [[responseDict allKeys] containsObject:@"stdid"] && [responseDict objectForKey:@"stdid"];
+                 if(operationSucceeded) {
+                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSTDIDEndpoint)];
+                 }
+                 else {
+                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
+                 }
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 operationSucceeded = NO;
+                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
+             }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
 //this uses the same JSON object used by unit tests
 - (void)testShortlinkEndpoint {
     [self prepare];
     NSDictionary *jsonDict = [SZTestUtils jsonForShortlink];
     __block BOOL operationSucceeded = NO;
-
+    
     [apiClient shortlink:jsonDict
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      //check data that came back
@@ -187,8 +210,8 @@
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      operationSucceeded = NO;
                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkEndpoint)];
-            }];
-
+                 }];
+    
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
 }
@@ -215,7 +238,7 @@
                        operationSucceeded = NO;
                        [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
                    }];
-
+    
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
 }
@@ -227,7 +250,7 @@
     NSDictionary *shortlinkDict = [SZTestUtils jsonForShortlink];
     NSDictionary *shortlinkDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:shortlinkDict];
     __block BOOL operationSucceeded = NO;
-
+    
     [apiClient shortlink:shortlinkDictWithLatency
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      operationSucceeded = NO;
@@ -259,7 +282,7 @@
                                         }];
                      }
                  }];
-
+    
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
 }

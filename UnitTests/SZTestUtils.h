@@ -12,6 +12,7 @@
 
 + (NSDictionary *)jsonForInstall;
 + (NSDictionary *)jsonForOpen;
++ (NSDictionary *)jsonForSTDID;
 + (NSDictionary *)jsonForShortlink;
 + (NSDictionary *)jsonForShare;
 + (NSDictionary *)addLatencyToMock:(int)latency forDictionary:(NSDictionary *)originalDict;
