@@ -57,6 +57,7 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
+- (NSDictionary *)stdidDictionary;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (void)install:(NSDictionary *)jsonDict
@@ -66,6 +67,10 @@ extern NSString *const IDENTITIES_FILENAME;
 - (void)open:(NSDictionary *)jsonDict
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+- (void)stdid:(NSDictionary *)jsonDict
+      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
 - (void)shortlink:(NSDictionary *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
