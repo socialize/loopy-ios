@@ -56,6 +56,7 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
+- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (void)install:(NSDictionary *)jsonDict
