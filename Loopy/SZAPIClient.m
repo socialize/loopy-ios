@@ -114,15 +114,34 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
               failure:failureCallback];
     }
     else {
-        //when /stdid is implemented, with will compare IDFAs
-        //for now, just use it as-is
-        self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
-        [self open:[self openDictionaryWithReferrer:referrer]
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               [self updateIdentities];
-               postSuccessCallback(operation, responseObject);
-           }
-           failure:failureCallback];
+        //load it and compare idfa
+        //if they don't match, call /stdid, then /open with new stdid
+        //if they do, call /open
+        NSString *idfaStrCached = (NSString *)[plistDict valueForKey:IDFA_KEY];
+        NSString *idfaStrLocal = [self.idfa UUIDString];
+        if(![idfaStrCached isEqualToString:idfaStrLocal]) {
+            [self stdid:[self stdidDictionary]
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSDictionary *responseDict = (NSDictionary *)responseObject;
+                    self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
+                    [self updateIdentities];
+                    [self open:[self openDictionaryWithReferrer:referrer]
+                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                           postSuccessCallback(operation, responseObject);
+                       }
+                       failure:failureCallback];
+                }
+                failure:failureCallback];
+        }
+        else {
+            self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
+            [self open:[self openDictionaryWithReferrer:referrer]
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   [self updateIdentities];
+                   postSuccessCallback(operation, responseObject);
+               }
+               failure:failureCallback];
+        }
     }
 }
 
