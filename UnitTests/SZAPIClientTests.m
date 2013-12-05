@@ -193,4 +193,28 @@
     GHAssertNotNil([shareDict valueForKey:@"client"], @"");
 }
 
+- (void)testLogDictionary {
+    //simulate current location and stdid, if needed
+    if(!apiClient.currentLocation) {
+        apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
+    }
+    if(!apiClient.stdid) {
+        apiClient.stdid = @"ABCD-1234";
+    }
+    NSDictionary *logDict = [apiClient logDictionaryWithType:@"share" meta:[NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
+                                                                            @"value1",@"key1",
+                                                                            nil]];
+    GHAssertNotNil(logDict, @"");
+    GHAssertNotNil([logDict valueForKey:@"stdid"], @"");
+    GHAssertNotNil([logDict valueForKey:@"timestamp"], @"");
+    GHAssertNotNil([logDict valueForKey:@"device"], @"");
+    GHAssertNotNil([logDict valueForKey:@"app"], @"");
+    NSString *type = @"share";
+    GHAssertEqualStrings(type, (NSString *)[logDict valueForKey:@"type"], @"");
+    NSDictionary *meta = (NSDictionary *)[logDict valueForKey:@"meta"];
+    GHAssertNotNil(meta, @"");
+    GHAssertTrue([(NSString *)[meta valueForKey:@"key0"] isEqualToString:@"value0"], @"");
+    GHAssertTrue([(NSString *)[meta valueForKey:@"key1"] isEqualToString:@"value1"], @"");
+}
+
 @end

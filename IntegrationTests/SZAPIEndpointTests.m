@@ -368,4 +368,28 @@
     
     GHAssertTrue(operationSucceeded, @"");
 }
+
+- (void)testLogEndpoint {
+    [self prepare];
+    __block BOOL operationSucceeded = NO;
+    
+    NSDictionary *logDict = [SZTestUtils jsonForLog];
+    [apiClient log:logDict
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSDictionary *responseDict = (NSDictionary *)responseObject;
+               operationSucceeded = responseDict != nil;
+               if(operationSucceeded) {
+                   [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLogEndpoint)];
+               }
+               else {
+                   [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLogEndpoint)];
+               }
+             }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               operationSucceeded = NO;
+               [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLogEndpoint)];
+           }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
 @end

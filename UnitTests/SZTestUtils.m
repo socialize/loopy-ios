@@ -171,6 +171,47 @@
     return shareObj;
 }
 
+//test JSON object
++ (NSDictionary *)jsonForLog {
+    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithDouble:12.456],@"lat",
+                            [NSNumber numberWithDouble:78.900],@"lon",
+                            nil];
+    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"ABCDEFGHIJKLMNOP",@"id",
+                               @"iPhone 4S",@"model",
+                               @"ios",@"os",
+                               @"6.1",@"osv",
+                               @"verizon",@"carrier",
+                               @"on",@"wifi",
+                               geoObj,@"geo",
+                               nil];
+    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"com.socialize.appname",@"id",
+                            @"App Name",@"name",
+                            @"123.4",@"version",
+                            nil];
+    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"objc",@"lang",
+                               @"1.3",@"version",
+                               nil];
+    NSDictionary *eventObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                               @"share",@"type",
+                              [NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
+                                                                         @"value1",@"key1",
+                                                                         nil],@"meta",
+                               nil];
+    NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"69",@"stdid",
+                            [NSNumber numberWithInt:1234567890],@"timestamp",
+                            deviceObj,@"device",
+                            appObj,@"app",
+                            clientObj,@"client",
+                            eventObj,@"event",
+                            nil];
+    return logObj;
+}
+
 //adds latency to an existing mock object
 //dictionary passed in MUST have a "@mock" key with an NSDictionary as value
 + (NSDictionary *)addLatencyToMock:(int)latency forDictionary:(NSDictionary *)originalDict {

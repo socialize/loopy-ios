@@ -21,6 +21,7 @@ NSString *const OPEN = @"/open";
 NSString *const STDID = @"/stdid";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
+NSString *const LOG = @"/log";
 
 NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
@@ -285,6 +286,22 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return shareObj;
 }
 
+//returns JSON-ready dictionary for /log endpoint, based on type and meta
+- (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                            self.stdid,@"stdid",
+                            [NSNumber numberWithInt:timestamp],@"timestamp",
+                            [self deviceDictionary],@"device",
+                            [self appDictionary],@"app",
+                            [self clientDictionary],@"client",
+                            type,@"type",
+                            meta,@"meta",
+                            nil];
+    
+    return logObj;
+}
+
 //required subset of endpoint calls
 - (NSDictionary *)deviceDictionary {
     CLLocationCoordinate2D coordinate;
@@ -366,6 +383,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:REPORT_SHARE json:jsonDict success:successCallback failure:failureCallback];
+}
+
+- (void)log:(NSDictionary *)jsonDict
+        success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:LOG json:jsonDict success:successCallback failure:failureCallback];
 }
 
 //convenience method

@@ -18,6 +18,8 @@ extern NSString *const OPEN;
 extern NSString *const STDID;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
+extern NSString *const LOG;
+
 extern NSTimeInterval const TIMEOUT;
 extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
@@ -60,6 +62,7 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)stdidDictionary;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
+- (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta;
 
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
@@ -80,5 +83,10 @@ extern NSString *const IDENTITIES_FILENAME;
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+
+- (void)log:(NSDictionary *)jsonDict
+    success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+    failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
 @end
