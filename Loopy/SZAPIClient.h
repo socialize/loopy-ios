@@ -40,6 +40,7 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) NSString *stdid;
 @property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, strong) NSMutableDictionary *shortlinks;
 
 - (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey;
 - (void)loadIdentitiesWithReferrer:(NSString *)referrer

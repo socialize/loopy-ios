@@ -43,12 +43,16 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 @synthesize idfa;
 @synthesize stdid;
 @synthesize currentLocation;
+@synthesize shortlinks;
 
 //constructor with specified endpoint
 //performs actions to check for stdid and calls "install" or "open" as required
 - (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey {
     self = [super init];
     if(self) {
+        //init shortlink cache
+        self.shortlinks = [NSMutableDictionary dictionary];
+        
         //set keys
         self.apiKey = key;
         self.loopyKey = lkey;
@@ -376,7 +380,23 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 - (void)shortlink:(NSDictionary *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callEndpoint:SHORTLINK json:jsonDict success:successCallback failure:failureCallback];
+    //check the cache to see if shortlink already exists, and if so, simply call successCallback
+    NSDictionary *item = (NSDictionary *)[jsonDict valueForKey:@"item"];
+    NSString *url = (NSString *)[item valueForKey:@"url"];
+    if([self.shortlinks valueForKey:url]) {
+        NSDictionary *shortlinkDict = [NSDictionary dictionaryWithObjectsAndKeys:[self.shortlinks valueForKey:url], @"shortlink", nil];
+        successCallback(nil, shortlinkDict);
+    }
+    else {
+        [self callEndpoint:SHORTLINK json:jsonDict
+                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                       //cache the shortlink for future reuse
+                       NSDictionary *responseDict = (NSDictionary *)responseObject;
+                       [self.shortlinks setValue:[responseDict valueForKey:@"shortlink"] forKey:url];
+                       successCallback(operation, responseObject);
+                   }
+                   failure:failureCallback];
+    }
 }
 
 - (void)reportShare:(NSDictionary *)jsonDict
