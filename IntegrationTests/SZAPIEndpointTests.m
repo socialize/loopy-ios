@@ -243,23 +243,53 @@
 
     [apiClient shortlink:jsonDict
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     ///now try the shortlink call again, verifying that it's very fast (<50ms) as it's local
-                     NSDate *preSecondCall = [NSDate date];
-                     [apiClient shortlink:[NSMutableDictionary dictionaryWithDictionary:jsonDict] //new object just for safety
-                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                      NSDate *postSecondCall = [NSDate date];
-                                      NSTimeInterval interval = [postSecondCall timeIntervalSinceDate:preSecondCall];
-                                      operationSucceeded = interval < 0.05;
-                                      [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShortlinkCache)];
-                                  }
-                                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                      operationSucceeded = NO;
-                                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkCache)];
-                                  }];
+                     //now verify that it's in the cache -- this is sufficient as testing timing of response is fragile
+                     operationSucceeded = [apiClient.shortlinks valueForKey:cacheURL] != nil;
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      operationSucceeded = NO;
                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkCache)];
+                 }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
+//this uses the same JSON object used by unit tests (slightly modified for custom URL)
+- (void)testShortlinkClearCache {
+    [self prepare];
+    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShortlink]];
+    __block BOOL operationSucceeded = NO;
+    
+    //add custom URL
+    NSString *cacheURL = @"http://www.cacheurl.com";
+    NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[jsonDict valueForKey:@"item"]];
+    [item setValue:cacheURL forKey:@"url"];
+    [jsonDict setValue:item forKey:@"item"];
+    
+    [apiClient shortlink:jsonDict
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     //verify the cache contains the value
+                     GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] != nil, @"");
+                     //share the shortlink...
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
+                     NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                     NSMutableDictionary *shareDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
+                     [shareDict setValue:shortlink forKey:@"shortlink"];
+                     [apiClient reportShare:jsonDict
+                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                        //do nothing -- cache clearing is pre-call
+                                    }
+                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        operationSucceeded = NO;
+                                        [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkClearCache)];
+                                    }];
+                     //...and verify the cache has been cleared as a result
+                     GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] == nil, @"");
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     operationSucceeded = NO;
+                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkClearCache)];
                  }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];

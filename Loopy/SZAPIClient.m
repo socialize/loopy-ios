@@ -388,7 +388,8 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         successCallback(nil, shortlinkDict);
     }
     else {
-        [self callEndpoint:SHORTLINK json:jsonDict
+        [self callEndpoint:SHORTLINK
+                      json:jsonDict
                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
                        //cache the shortlink for future reuse
                        NSDictionary *responseDict = (NSDictionary *)responseObject;
@@ -402,6 +403,15 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    //remove current shortlink from cache
+    //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
+    //thus keys should contain only one element
+    NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
+    NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
+    for(id key in keys) {
+        [self.shortlinks removeObjectForKey:key];
+    }
+    
     [self callEndpoint:REPORT_SHARE json:jsonDict success:successCallback failure:failureCallback];
 }
 
