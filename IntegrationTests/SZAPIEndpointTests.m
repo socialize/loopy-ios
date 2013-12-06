@@ -21,7 +21,7 @@
 
 - (void)setUp {
     apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
-                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
+                                           loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
 }
 
 - (void)tearDown {
@@ -41,7 +41,7 @@
     }
     [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
                               postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                  operationSucceeded = YES;
+                                  operationSucceeded = apiClient.stdid != nil; //make sure it got generated and not nil'ed out
                                   [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLoadIdentities)];
                               }
                                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -66,8 +66,7 @@
     
     [apiClient install:jsonDict
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   NSDictionary *responseDict = (NSDictionary *)responseObject;
-                   operationSucceeded = [[responseDict allKeys] containsObject:@"stdid"] && [responseDict objectForKey:@"stdid"];
+                   operationSucceeded = apiClient.stdid != nil; //make sure it got generated
                    if(operationSucceeded) {
                        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testInstallEndpoint)];
                    }
@@ -161,38 +160,6 @@
                 }
             }];
     
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
-}
-
-- (void)testSTDIDEndpoint {
-    [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForSTDID];
-    __block BOOL operationSucceeded = NO;
-    
-    //insert mock IDFA if needed
-    if(!apiClient.idfa) {
-        apiClient.idfa = [NSUUID UUID];
-    }
-    //insert mock stdid -- it'll be replaced by the new one
-    if(!apiClient.stdid) {
-        apiClient.stdid = [apiClient.idfa UUIDString];
-    }
-    [apiClient stdid:jsonDict
-             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSDictionary *responseDict = (NSDictionary *)responseObject;
-                 operationSucceeded = [[responseDict allKeys] containsObject:@"stdid"] && [responseDict objectForKey:@"stdid"];
-                 if(operationSucceeded) {
-                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSTDIDEndpoint)];
-                 }
-                 else {
-                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
-                 }
-             }
-             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 operationSucceeded = NO;
-                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDEndpoint)];
-             }];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
 }

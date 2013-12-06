@@ -15,7 +15,6 @@
 
 extern NSString *const INSTALL;
 extern NSString *const OPEN;
-extern NSString *const STDID;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
 extern NSString *const LOG;
@@ -73,10 +72,6 @@ extern NSString *const IDENTITIES_FILENAME;
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)stdid:(NSDictionary *)jsonDict
-      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-
 - (void)shortlink:(NSDictionary *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
@@ -84,7 +79,6 @@ extern NSString *const IDENTITIES_FILENAME;
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-
 
 - (void)log:(NSDictionary *)jsonDict
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback

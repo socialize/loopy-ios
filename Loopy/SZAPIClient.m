@@ -18,7 +18,6 @@
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
-NSString *const STDID = @"/stdid";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 NSString *const LOG = @"/log";
@@ -107,46 +106,25 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
     
-    //call /install and store stdid returned in new file
+    //call /install and store a device-generated stdid in new file
     if(!plistDict) {
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSDictionary *responseDict = (NSDictionary *)responseObject;
-                  self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
+                  NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
+                  self.stdid = (NSString *)[stdidObj UUIDString];
                   [self updateIdentities];
                   postSuccessCallback(operation, responseObject);
               }
               failure:failureCallback];
     }
     else {
-        //load it and compare idfa
-        //if they don't match, call /stdid, then /open with new stdid
-        //if they do, call /open
-        NSString *idfaStrCached = (NSString *)[plistDict valueForKey:IDFA_KEY];
-        NSString *idfaStrLocal = [self.idfa UUIDString];
-        if(![idfaStrCached isEqualToString:idfaStrLocal]) {
-            [self stdid:[self stdidDictionary]
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSDictionary *responseDict = (NSDictionary *)responseObject;
-                    self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
-                    [self updateIdentities];
-                    [self open:[self openDictionaryWithReferrer:referrer]
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           postSuccessCallback(operation, responseObject);
-                       }
-                       failure:failureCallback];
-                }
-                failure:failureCallback];
-        }
-        else {
-            self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
-            [self open:[self openDictionaryWithReferrer:referrer]
-               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   [self updateIdentities];
-                   postSuccessCallback(operation, responseObject);
-               }
-               failure:failureCallback];
-        }
+        //this will be updated with new md5 and generated UUID for stdid as separate stories
+        [self open:[self openDictionaryWithReferrer:referrer]
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               [self updateIdentities];
+               postSuccessCallback(operation, responseObject);
+           }
+           failure:failureCallback];
     }
 }
 
@@ -369,12 +347,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
-}
-
-- (void)stdid:(NSDictionary *)jsonDict
-      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callHTTPSEndpoint:STDID json:jsonDict success:successCallback failure:failureCallback];
 }
 
 - (void)shortlink:(NSDictionary *)jsonDict
