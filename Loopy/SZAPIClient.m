@@ -403,21 +403,24 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    //remove current shortlink from cache
-    //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
-    //thus keys should contain only one element
-    NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
-    NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
-    for(id key in keys) {
-        [self.shortlinks removeObjectForKey:key];
-    }
-    
-    [self callEndpoint:REPORT_SHARE json:jsonDict success:successCallback failure:failureCallback];
+    [self callEndpoint:REPORT_SHARE json:jsonDict
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   //remove current shortlink from cache
+                   //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
+                   //thus keys should contain only one element
+                   NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
+                   NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
+                   for(id key in keys) {
+                       [self.shortlinks removeObjectForKey:key];
+                   }
+                   successCallback(operation, responseObject);
+               }
+               failure:failureCallback];
 }
 
 - (void)log:(NSDictionary *)jsonDict
-        success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+    failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:LOG json:jsonDict success:successCallback failure:failureCallback];
 }
 

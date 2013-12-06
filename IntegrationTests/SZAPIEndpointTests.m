@@ -278,14 +278,15 @@
                      [shareDict setValue:shortlink forKey:@"shortlink"];
                      [apiClient reportShare:jsonDict
                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                        //do nothing -- cache clearing is pre-call
+                                        //...and verify the cache has been cleared as a result
+                                        GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] == nil, @"");
+                                        operationSucceeded = YES;
+                                        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShortlinkClearCache)];
                                     }
                                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                         operationSucceeded = NO;
                                         [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkClearCache)];
                                     }];
-                     //...and verify the cache has been cleared as a result
-                     GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] == nil, @"");
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      operationSucceeded = NO;
