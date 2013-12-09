@@ -9,6 +9,7 @@
 #import "SZAPIClient.h"
 #import "SZJSONUtils.h"
 #import "Reachability.h"
+#import <CommonCrypto/CommonDigest.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <AdSupport/ASIdentifierManager.h>
@@ -27,6 +28,7 @@ NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
 NSString *const IDFA_KEY = @"idfa";
 NSString *const STDID_KEY = @"stdid";
+NSString *const MD5ID_KEY = @"md5id";
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
 NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
@@ -41,6 +43,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 @synthesize deviceModel;
 @synthesize idfa;
 @synthesize stdid;
+@synthesize md5id;
 @synthesize currentLocation;
 @synthesize shortlinks;
 
@@ -88,6 +91,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSMutableDictionary *identities = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                        [self.idfa UUIDString],IDFA_KEY,
                                        self.stdid,STDID_KEY,
+                                       self.md5id, MD5ID_KEY,
                                        nil];
     NSString *error;
     NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:(id)identities
@@ -98,7 +102,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 
 #pragma mark - Identities Handling
 
-//loads identities file from disk, and calls appropriate recording endpoint (/open or /install) as required
+//loads/updates identities file from disk, and calls appropriate recording endpoint (/open or /install) as required
 - (void)loadIdentitiesWithReferrer:(NSString *)referrer
                        postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
@@ -106,22 +110,28 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
     
-    //call /install and store a device-generated stdid in new file
-    //this will be updated with new md5'd idfa as separate stories
+    //no file -- call /install and store a device-generated stdid and md5id in new file
     if(!plistDict) {
         NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
         self.stdid = (NSString *)[stdidObj UUIDString];
+        self.md5id = [self md5FromString:[self.idfa UUIDString]];
+        [self updateIdentities];
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [self updateIdentities];
                   postSuccessCallback(operation, responseObject);
               }
               failure:failureCallback];
     }
+    //file exists -- call /open, updating the md5id if the idfa has changed
     else {
+        NSString *idfaStr = [self.idfa UUIDString];
+        NSString *cachedIDFAStr = (NSString *)[plistDict valueForKey:IDFA_KEY];
+        if(![idfaStr isEqualToString:cachedIDFAStr]) {
+            self.md5id = [self md5FromString:[self.idfa UUIDString]];
+        }
+        [self updateIdentities];
         [self open:[self openDictionaryWithReferrer:referrer]
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               [self updateIdentities];
                postSuccessCallback(operation, responseObject);
            }
            failure:failureCallback];
@@ -219,6 +229,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
                                 [NSNumber numberWithInt:timestamp],@"timestamp",
                                 referrer,@"referrer",
                                 self.stdid, @"stdid",
+                                self.md5id, @"md5id",
                                 [self deviceDictionary],@"device",
                                 [self appDictionary],@"app",
                                 [self clientDictionary],@"client",
@@ -231,6 +242,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.stdid,@"stdid",
+                             self.md5id, @"md5id",
                              [NSNumber numberWithInt:timestamp],@"timestamp",
                              referrer,@"referrer",
                              [self deviceDictionary],@"device",
@@ -240,24 +252,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return openObj;
 }
 
-//returns JSON-ready dictionary for /stdid endpoint
-- (NSDictionary *)stdidDictionary {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *stdidObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              self.stdid,@"stdid",
-                              [NSNumber numberWithInt:timestamp],@"timestamp",
-                              [self deviceDictionary],@"device",
-                              [self appDictionary],@"app",
-                              [self clientDictionary],@"client",
-                              nil];
-    return stdidObj;
-}
-
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
                               self.stdid,@"stdid",
+                              self.md5id, @"md5id",
                               [NSNumber numberWithInt:timestamp],@"timestamp",
                               [self deviceDictionary],@"device",
                               [self appDictionary],@"app",
@@ -272,17 +272,38 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 //returns JSON-ready dictionary for /log endpoint, based on type and meta
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta {
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *eventObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                              type,@"type",
+                              meta,@"meta",
+                              nil];
     NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.stdid,@"stdid",
+                            self.md5id, @"md5id",
                             [NSNumber numberWithInt:timestamp],@"timestamp",
                             [self deviceDictionary],@"device",
                             [self appDictionary],@"app",
                             [self clientDictionary],@"client",
-                            type,@"type",
-                            meta,@"meta",
+                            eventObj,@"event",
                             nil];
     
     return logObj;
+}
+
+//returns JSON-ready dictionary for /shortlink endpoint, based on link and tags
+- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             link,@"url",
+                             nil];
+    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  self.stdid,@"stdid",
+                                  self.md5id, @"md5id",
+                                  [NSNumber numberWithInt:timestamp],@"timestamp",
+                                  itemObj,@"item",
+                                  tags,@"tags",
+                                  nil];
+    
+    return shortlinkObj;
 }
 
 //required subset of endpoint calls
@@ -452,4 +473,19 @@ NSString *machineName() {
                               encoding:NSUTF8StringEncoding];
 }
 
+//convenience method to return MD% String
+//per http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
+- (NSString *)md5FromString:(NSString *)input {
+    const char *cStr = [input UTF8String];
+    unsigned char digest[16];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    
+    return output;
+}
 @end

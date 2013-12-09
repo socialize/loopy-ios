@@ -24,6 +24,7 @@ extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
 extern NSString *const IDFA_KEY;
 extern NSString *const STDID_KEY;
+extern NSString *const MD5ID_KEY;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
 extern NSString *const IDENTITIES_FILENAME;
@@ -38,6 +39,7 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) NSString *deviceModel;
 @property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) NSString *stdid;
+@property (nonatomic, strong) NSString *md5id;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) NSMutableDictionary *shortlinks;
 
@@ -60,9 +62,10 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)stdidDictionary;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta;
+- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags;
+- (NSString *)md5FromString:(NSString *)input;
 
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback

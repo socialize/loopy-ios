@@ -7,7 +7,6 @@
 //
 
 #import <GHUnitIOS/GHUnit.h>
-#import <SZNetworking/SZNetworking.h>
 #import "SZAPIClient.h"
 #import "SZTestUtils.h"
 #import "SZJSONUtils.h"
@@ -22,47 +21,26 @@
 - (void)setUp {
     apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
+    //insert mock IDFA, MD5ID and STDID
+    if(!apiClient.idfa) {
+        apiClient.idfa = [NSUUID UUID];
+    }
+    if(!apiClient.md5id) {
+        apiClient.md5id = [apiClient md5FromString:[apiClient.idfa UUIDString]];
+    }
+    if(!apiClient.stdid) {
+        apiClient.stdid = [apiClient.idfa UUIDString];
+    }
 }
 
 - (void)tearDown {
 }
 
-- (void)testLoadIdentities {
-    [self prepare];
-    __block BOOL operationSucceeded = NO;
-    
-    //insert mock IDFA if needed
-    if(!apiClient.idfa) {
-        apiClient.idfa = [NSUUID UUID];
-    }
-    //insert mock stdid -- it'll be replaced by the new one if needed
-    if(!apiClient.stdid) {
-        apiClient.stdid = [apiClient.idfa UUIDString];
-    }
-    [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
-                              postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                  operationSucceeded = apiClient.stdid != nil; //make sure it got generated and not nil'ed out
-                                  [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testLoadIdentities)];
-                              }
-                                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                      operationSucceeded = NO;
-                                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testLoadIdentities)];
-                                  }];
-    
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
-}
-
-//this uses the same JSON object used by unit tests
+//this uses the JSON object in the APIClient
 - (void)testInstallEndpoint {
     [self prepare];
     __block BOOL operationSucceeded = NO;
-    
-    //insert mock IDFA if needed
-    if(!apiClient.idfa) {
-        apiClient.idfa = [NSUUID UUID];
-    }
-    NSDictionary *jsonDict = [SZTestUtils jsonForInstall];
+    NSDictionary *jsonDict = [apiClient installDictionaryWithReferrer:@"http://www.facebook.com"];
     
     [apiClient install:jsonDict
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -83,10 +61,10 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the same JSON object used by unit tests
+//this uses the JSON object in the APIClient
 - (void)testOpenEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
     __block BOOL operationSucceeded = NO;
     
     [apiClient open:jsonDict
@@ -112,7 +90,7 @@
 //deliberately-mangled JSON to test error format
 - (void)testOpenEndpointInvalidJSON {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
     NSMutableDictionary *jsonDictInvalid = [NSMutableDictionary dictionaryWithDictionary:jsonDict];
     [jsonDictInvalid removeObjectForKey:@"stdid"];
     __block BOOL operationSucceeded = NO;
@@ -135,11 +113,11 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the same JSON object used by unit tests
+//this uses the JSON object in the APIClient
 //adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
 - (void)testOpenEndpointLatencyFail {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
+    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
     NSDictionary *jsonDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
     __block BOOL operationSucceeded = NO;
     
@@ -167,7 +145,8 @@
 //this uses the same JSON object used by unit tests
 - (void)testShortlinkEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForShortlink];
+    NSDictionary *jsonDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
     
     [apiClient shortlink:jsonDict
@@ -199,7 +178,8 @@
 //this uses the same JSON object used by unit tests (slightly modified for custom URL)
 - (void)testShortlinkCache {
     [self prepare];
-    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShortlink]];
+    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]]];
     __block BOOL operationSucceeded = NO;
 
     //add custom URL
@@ -212,6 +192,7 @@
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      //now verify that it's in the cache -- this is sufficient as testing timing of response is fragile
                      operationSucceeded = [apiClient.shortlinks valueForKey:cacheURL] != nil;
+                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShortlinkCache)];
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      operationSucceeded = NO;
@@ -225,14 +206,15 @@
 //this uses the same JSON object used by unit tests (slightly modified for custom URL)
 - (void)testShortlinkClearCache {
     [self prepare];
-    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShortlink]];
+    NSString *cacheURL = @"http://www.cacheurl.com";
+    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient shortlinkDictionary:cacheURL
+                                                                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]]];
     __block BOOL operationSucceeded = NO;
     
-    //add custom URL
-    NSString *cacheURL = @"http://www.cacheurl.com";
-    NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[jsonDict valueForKey:@"item"]];
-    [item setValue:cacheURL forKey:@"url"];
-    [jsonDict setValue:item forKey:@"item"];
+//    //add custom URL
+//    NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[jsonDict valueForKey:@"item"]];
+//    [item setValue:cacheURL forKey:@"url"];
+//    [jsonDict setValue:item forKey:@"item"];
     
     [apiClient shortlink:jsonDict
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -241,9 +223,9 @@
                      //share the shortlink...
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                      NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                     NSMutableDictionary *shareDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
-                     [shareDict setValue:shortlink forKey:@"shortlink"];
-                     [apiClient reportShare:jsonDict
+                     NSMutableDictionary *shareDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient reportShareDictionary:shortlink
+                                                                                                                             channel:@"http://www.facebook.com"]];
+                     [apiClient reportShare:shareDict
                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                         //...and verify the cache has been cleared as a result
                                         GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] == nil, @"");
@@ -264,10 +246,12 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the same JSON object used by unit tests
+//this uses the JSON object in the APIClient
 - (void)testShareEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [SZTestUtils jsonForShare];
+    NSString *dummyShortlink = @"www.shortlink.com";
+    NSString *dummyChannel = @"Facebook";
+    NSDictionary *jsonDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
     __block BOOL operationSucceeded = NO;
     
     [apiClient reportShare:jsonDict
@@ -291,11 +275,12 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the same JSON object used by unit tests
+//this uses the JSON object in the APIClient
 //adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
 - (void)testShortenShareLatencyFail {
     [self prepare];
-    NSDictionary *shortlinkDict = [SZTestUtils jsonForShortlink];
+    NSDictionary *shortlinkDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     NSDictionary *shortlinkDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:shortlinkDict];
     __block BOOL operationSucceeded = NO;
     
@@ -310,9 +295,10 @@
                          //now do the share with the original URL (and no latency)
                          NSDictionary *itemDict = (NSDictionary *)[shortlinkDictWithLatency valueForKey:@"item"];
                          NSString *url = (NSString *)[itemDict valueForKey:@"url"];
-                         NSMutableDictionary *shortlinkDict = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForShare]];
-                         [shortlinkDict setValue:url forKey:@"shortlink"];
-                         [apiClient reportShare:shortlinkDict
+                         NSMutableDictionary *shareDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient reportShareDictionary:url
+                                                                                                                                 channel:@"http://www.facebook.com"]];
+                         [shareDict setValue:url forKey:@"shortlink"];
+                         [apiClient reportShare:shareDict
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                             NSDictionary *responseDict = (NSDictionary *)responseObject;
                                             if([responseDict count] == 0) {
@@ -335,80 +321,15 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//tests the following scenarios:
-//- no saved plist: calls install
-//- plist with unmatched IDFA: calls stdid
-//- plist with matching IDFA: calls open
-- (void)testSTDIDADFAIntegration {
-    [self prepare];
-    __block BOOL operationSucceeded = NO;
-    
-    //first remove whatever saved plist file may already exist -- to test install
-    NSError *error;
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
-    BOOL fileRemoved = NO;
-    if([fileMgr fileExistsAtPath:filePath]) {
-        fileRemoved = [fileMgr removeItemAtPath:filePath error:&error];
-    }
-    else {
-        fileRemoved = YES;
-    }
-    
-    if (fileRemoved) {
-        //then create new plist with IDFA
-        apiClient.stdid = nil;
-        //insert mock IDFA if needed
-        if(!apiClient.idfa) {
-            apiClient.idfa = [NSUUID UUID];
-        }
-        //try an install...
-        NSDictionary *installDict = [apiClient installDictionaryWithReferrer:@"www.facebook.com"];
-        [apiClient install:installDict
-                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                       [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
-                             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
-                                 GHAssertTrue([fileMgr fileExistsAtPath:filePath], @"");
-                                 //...then change the IDFA and try again
-                                 apiClient.idfa = [NSUUID UUID];
-                                 [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
-                                       postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
-                                           //...one last time to test the open endpoint
-                                           [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
-                                                 postSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
-                                                     operationSucceeded = YES;
-                                                     [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSTDIDADFAIntegration)];
-                                                 }
-                                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
-                                                 }];
-                                       }
-                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                               [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
-                                           }];
-                             }
-                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
-                             }];
-                   }
-                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSTDIDADFAIntegration)];
-                   }];
-        [self waitForStatus:kGHUnitWaitStatusSuccess timeout:20.0];
-    }
-    else {
-        GHAssertTrue(operationSucceeded, @"");
-    }
-    
-    GHAssertTrue(operationSucceeded, @"");
-}
-
+//this uses the JSON object in the APIClient
 - (void)testLogEndpoint {
     [self prepare];
     __block BOOL operationSucceeded = NO;
     
-    NSDictionary *logDict = [SZTestUtils jsonForLog];
+    NSDictionary *meta = [NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
+                                                                    @"value1",@"key1",
+                                                                    nil];
+    NSDictionary *logDict = [apiClient logDictionaryWithType:@"share" meta:meta];
     [apiClient log:logDict
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDict = (NSDictionary *)responseObject;
