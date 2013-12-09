@@ -107,18 +107,18 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
     
     //call /install and store a device-generated stdid in new file
+    //this will be updated with new md5'd idfa as separate stories
     if(!plistDict) {
+        NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
+        self.stdid = (NSString *)[stdidObj UUIDString];
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
-                  self.stdid = (NSString *)[stdidObj UUIDString];
                   [self updateIdentities];
                   postSuccessCallback(operation, responseObject);
               }
               failure:failureCallback];
     }
     else {
-        //this will be updated with new md5 and generated UUID for stdid as separate stories
         [self open:[self openDictionaryWithReferrer:referrer]
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                [self updateIdentities];
@@ -218,6 +218,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [NSNumber numberWithInt:timestamp],@"timestamp",
                                 referrer,@"referrer",
+                                self.stdid, @"stdid",
                                 [self deviceDictionary],@"device",
                                 [self appDictionary],@"app",
                                 [self clientDictionary],@"client",

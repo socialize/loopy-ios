@@ -123,9 +123,13 @@
     if(!apiClient.currentLocation) {
         apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
     }
+    if(!apiClient.stdid) {
+        apiClient.stdid = @"ABCD-1234";
+    }
     
     NSDictionary *installDict = [apiClient installDictionaryWithReferrer:@"www.facebook.com"];
     GHAssertNotNil(installDict, @"");
+    GHAssertNotNil([installDict valueForKey:@"stdid"], @"");
     GHAssertNotNil([installDict valueForKey:@"timestamp"], @"");
     GHAssertNotNil([installDict valueForKey:@"device"], @"");
     GHAssertNotNil([installDict valueForKey:@"app"], @"");
