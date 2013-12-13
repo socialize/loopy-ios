@@ -92,7 +92,7 @@ NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
         ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.idfa = idManager.advertisingIdentifier;
         if(self.idfa) {
-            self.md5id = [self md5FromString:[idfa UUIDString]];
+            self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
     }
     return self;
@@ -313,19 +313,33 @@ NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
     return logObj;
 }
 
-//returns JSON-ready dictionary for /shortlink endpoint, based on link and tags
-- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags {
+//returns JSON-ready dictionary for /shortlink endpoint, based on link, title, meta, and tags
+//Either link OR title may be nil, but not both
+//Meta may be nil, or may contain various OG keys
+- (NSDictionary *)shortlinkDictionary:(NSString *)link
+                                title:(NSString *)title
+                                 meta:(NSDictionary *)meta
+                                 tags:(NSArray *)tags {
     int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             link,@"url",
-                             nil];
-    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  self.stdid,@"stdid",
-                                  self.md5id, @"md5id",
-                                  [NSNumber numberWithInt:timestamp],@"timestamp",
-                                  itemObj,@"item",
-                                  tags,@"tags",
-                                  nil];
+    NSMutableDictionary *itemObj = [NSMutableDictionary dictionary];
+    if(link != nil) {
+        [itemObj setValue:link forKey:@"url"];
+    }
+    if(title != nil) {
+        [itemObj setValue:title forKey:@"title"];
+    }
+    if(meta != nil) {
+        [itemObj setValue:meta forKey:@"meta"];
+    }
+    NSMutableDictionary *shortlinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         self.stdid,@"stdid",
+                                         self.md5id, @"md5id",
+                                         [NSNumber numberWithInt:timestamp],@"timestamp",
+                                         itemObj,@"item",
+                                         nil];
+    if(tags != nil) {
+        [shortlinkObj setValue:tags forKey:@"tags"];
+    }
     
     return shortlinkObj;
 }

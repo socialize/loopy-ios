@@ -66,7 +66,10 @@ extern NSString *const SESSION_DATA_FILENAME;
 - (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta;
-- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags;
+- (NSDictionary *)shortlinkDictionary:(NSString *)link
+                                title:(NSString *)title
+                                 meta:(NSDictionary *)meta
+                                 tags:(NSArray *)tags;
 - (NSString *)md5FromString:(NSString *)input;
 
 - (void)install:(NSDictionary *)jsonDict

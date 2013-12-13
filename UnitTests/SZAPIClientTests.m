@@ -139,6 +139,13 @@
 
 - (void)testShortlinkDictionary {
     NSDictionary *shortlinkDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                           title:@"Share This"
+                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"A description should go here.", @"og:description",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                                  nil]
                                                             tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     GHAssertNotNil(shortlinkDict, @"");
     GHAssertNotNil([shortlinkDict valueForKey:@"stdid"], @"");
@@ -146,6 +153,10 @@
     GHAssertNotNil([shortlinkDict valueForKey:@"timestamp"], @"");
     GHAssertNotNil([shortlinkDict valueForKey:@"item"], @"");
     GHAssertNotNil([shortlinkDict valueForKey:@"tags"], @"");
+    
+    NSDictionary *itemDict = (NSDictionary *)[shortlinkDict valueForKey:@"item"];
+    GHAssertNotNil([itemDict valueForKey:@"title"], @"");
+    GHAssertNotNil([itemDict valueForKey:@"meta"], @"");
 }
 
 - (void)testReportShareDictionary {
