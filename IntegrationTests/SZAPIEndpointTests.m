@@ -154,6 +154,13 @@
 - (void)testShortlinkEndpoint {
     [self prepare];
     NSDictionary *jsonDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                      title:@"Share This"
+                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             @"A description should go here.", @"og:description",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                             nil]
                                                        tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
     
@@ -186,8 +193,15 @@
 //this uses the same JSON object used by unit tests (slightly modified for custom URL)
 - (void)testShortlinkCache {
     [self prepare];
-    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient shortlinkDictionary:@"http://www.facebook.com"
-                                                                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]]];
+    NSDictionary *jsonDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                           title:@"Share This"
+                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"A description should go here.", @"og:description",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                                  nil]
+                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
 
     //add custom URL
@@ -215,8 +229,15 @@
 - (void)testShortlinkClearCache {
     [self prepare];
     NSString *cacheURL = @"http://www.cacheurl.com";
-    NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient shortlinkDictionary:cacheURL
-                                                                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]]];
+    NSDictionary *jsonDict = [apiClient shortlinkDictionary:cacheURL
+                                                      title:@"Share This"
+                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             @"A description should go here.", @"og:description",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                             @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                             nil]
+                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
     
     [apiClient shortlink:jsonDict
@@ -283,6 +304,13 @@
 - (void)testShortenShareLatencyFail {
     [self prepare];
     NSDictionary *shortlinkDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
+                                                           title:@"Share This"
+                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"A description should go here.", @"og:description",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                                  nil]
                                                             tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     NSDictionary *shortlinkDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:shortlinkDict];
     __block BOOL operationSucceeded = NO;
