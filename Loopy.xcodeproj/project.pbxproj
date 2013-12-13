@@ -65,7 +65,7 @@
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2C5ADD4818185FE700BAC4DC /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
 		2C5ADD4B181879EC00BAC4DC /* SZShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */; };
-		2C5F2EBA185685110032BA75 /* SZAPIIdentitiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F2EB9185685110032BA75 /* SZAPIIdentitiesTests.m */; };
+		2C5F2EBA185685110032BA75 /* SZAPISessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F2EB9185685110032BA75 /* SZAPISessionTests.m */; };
 		2C64D41F18187A5100D6CE6C /* SZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* SZShare.m */; };
 		2C64D42018187A5100D6CE6C /* SZFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* SZFacebookActivity.m */; };
 		2C64D42118187A5100D6CE6C /* SZTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* SZTwitterActivity.m */; };
@@ -183,7 +183,7 @@
 		2C5ADD4618185FE700BAC4DC /* SZShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZShare.h; sourceTree = "<group>"; };
 		2C5ADD4718185FE700BAC4DC /* SZShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZShare.m; sourceTree = "<group>"; };
 		2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZShareTests.m; sourceTree = "<group>"; };
-		2C5F2EB9185685110032BA75 /* SZAPIIdentitiesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPIIdentitiesTests.m; sourceTree = "<group>"; };
+		2C5F2EB9185685110032BA75 /* SZAPISessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZAPISessionTests.m; sourceTree = "<group>"; };
 		2C66953918297A0700AB8C08 /* share_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = share_dialog.h; path = Documentation/sphinx/source/snippets/share_dialog.h; sourceTree = SOURCE_ROOT; };
 		2C66953A18297A0700AB8C08 /* share_dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = share_dialog.m; path = Documentation/sphinx/source/snippets/share_dialog.m; sourceTree = SOURCE_ROOT; };
 		2C66953D18299EA700AB8C08 /* custom_share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = custom_share.h; path = Documentation/sphinx/source/snippets/custom_share.h; sourceTree = SOURCE_ROOT; };
@@ -320,7 +320,7 @@
 		2C1B5B9B17E2783D00855D0D /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C5F2EB9185685110032BA75 /* SZAPIIdentitiesTests.m */,
+				2C5F2EB9185685110032BA75 /* SZAPISessionTests.m */,
 				2C34326B17FB40E10039A2D8 /* SZAPIEndpointTests.m */,
 				2C3C15EC1819C71E00793F9B /* SZShareCallbackTests.m */,
 				2C1B5BD217E2791C00855D0D /* Supporting Files */,
@@ -912,7 +912,7 @@
 				2C34326D17FB6CE60039A2D8 /* SZTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* SZShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* SZAPIEndpointTests.m in Sources */,
-				2C5F2EBA185685110032BA75 /* SZAPIIdentitiesTests.m in Sources */,
+				2C5F2EBA185685110032BA75 /* SZAPISessionTests.m in Sources */,
 				2C3FE374183C2EAA005621B0 /* Reachability.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);

@@ -31,7 +31,7 @@ SZAPIClient *apiClient;
     if (self) {
         apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                                loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
-        [apiClient loadIdentitiesWithReferrer:@"www.facebook.com"
+        [apiClient getSessionWithReferrer:@"www.facebook.com"
             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //any operations post-successful /install or /open
             }

@@ -26,19 +26,21 @@
     endpoint = @"/endpoint";
     apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
-    //simulate current location and stdid, if needed
+    
+    //simulate current location, IDFA, and stdid
+    //IDFA and corresponding MD5ID will not be generated on headless simulators
     if(!apiClient.currentLocation) {
         apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
     }
-    //insert mock IDFA, MD5ID and STDID
+    if(!apiClient.stdid) {
+        NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
+        apiClient.stdid = (NSString *)[stdidObj UUIDString];
+    }
     if(!apiClient.idfa) {
-        apiClient.idfa = [NSUUID UUID];
+        apiClient.idfa = (NSUUID *)[NSUUID UUID];
     }
     if(!apiClient.md5id) {
         apiClient.md5id = [apiClient md5FromString:[apiClient.idfa UUIDString]];
-    }
-    if(!apiClient.stdid) {
-        apiClient.stdid = [apiClient.idfa UUIDString];
     }
 }
 
@@ -111,19 +113,6 @@
     GHAssertTrue([httpsOperation.responseSerializer isKindOfClass:[AFJSONResponseSerializer class]], @"");
     authChallengeBlock = [operation valueForKey:authChallengeName];
     GHAssertNil(authChallengeBlock, @"");
-}
-
-- (void)testUpdateIdentities {
-    [apiClient updateIdentities];
-    
-    //verify saved file contains correct values
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
-    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-    GHAssertNotNil(plistDict, @"");
-    GHAssertEqualStrings(((NSString *)[plistDict valueForKey:STDID_KEY]), apiClient.stdid, @"");
-    GHAssertEqualStrings([plistDict valueForKey:IDFA_KEY], [apiClient.idfa UUIDString], @"");
-    GHAssertEqualStrings([plistDict valueForKey:MD5ID_KEY], apiClient.md5id, @"");
 }
 
 - (void)testInstallDictionaryWithReferrer {

@@ -21,15 +21,21 @@
 - (void)setUp {
     apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
-    //insert mock IDFA, MD5ID and STDID
+    
+    //simulate current location, IDFA, and stdid
+    //IDFA and corresponding MD5ID will not be generated on headless simulators
+    if(!apiClient.currentLocation) {
+        apiClient.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
+    }
+    if(!apiClient.stdid) {
+        NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
+        apiClient.stdid = (NSString *)[stdidObj UUIDString];
+    }
     if(!apiClient.idfa) {
-        apiClient.idfa = [NSUUID UUID];
+        apiClient.idfa = (NSUUID *)[NSUUID UUID];
     }
     if(!apiClient.md5id) {
         apiClient.md5id = [apiClient md5FromString:[apiClient.idfa UUIDString]];
-    }
-    if(!apiClient.stdid) {
-        apiClient.stdid = [apiClient.idfa UUIDString];
     }
 }
 
@@ -44,11 +50,13 @@
     
     [apiClient install:jsonDict
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   operationSucceeded = apiClient.stdid != nil; //make sure it got generated
-                   if(operationSucceeded) {
+                   NSDictionary *responseDict = (NSDictionary *)responseObject;
+                   if([responseDict count] == 0) {
+                       operationSucceeded = YES;
                        [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testInstallEndpoint)];
                    }
                    else {
+                       operationSucceeded = NO;
                        [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testInstallEndpoint)];
                    }
                }
@@ -210,11 +218,6 @@
     NSMutableDictionary *jsonDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient shortlinkDictionary:cacheURL
                                                                                                             tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]]];
     __block BOOL operationSucceeded = NO;
-    
-//    //add custom URL
-//    NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[jsonDict valueForKey:@"item"]];
-//    [item setValue:cacheURL forKey:@"url"];
-//    [jsonDict setValue:item forKey:@"item"];
     
     [apiClient shortlink:jsonDict
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {

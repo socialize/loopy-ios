@@ -19,16 +19,19 @@ extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
 extern NSString *const LOG;
 
-extern NSTimeInterval const TIMEOUT;
+extern NSString *const OPEN_TIMEOUT_KEY;
+extern NSString *const CALL_TIMEOUT_KEY;
 extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
-extern NSString *const IDFA_KEY;
 extern NSString *const STDID_KEY;
 extern NSString *const MD5ID_KEY;
+extern NSString *const LAST_OPEN_TIME_KEY;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
-extern NSString *const IDENTITIES_FILENAME;
+extern NSString *const SESSION_DATA_FILENAME;
 
+@property (nonatomic) NSTimeInterval callTimeout;
+@property (nonatomic) NSTimeInterval openTimeout;
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *loopyKey;
 @property (nonatomic, strong) NSString *httpsURLPrefix;
@@ -37,17 +40,16 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) NSString *carrierName;
 @property (nonatomic, strong) NSString *osVersion;
 @property (nonatomic, strong) NSString *deviceModel;
-@property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) NSString *stdid;
 @property (nonatomic, strong) NSString *md5id;
+@property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) NSMutableDictionary *shortlinks;
 
 - (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey;
-- (void)loadIdentitiesWithReferrer:(NSString *)referrer
-                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
-                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-- (void)updateIdentities;
+- (void)getSessionWithReferrer:(NSString *)referrer
+                   postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                       failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                                 length:(NSNumber *)length
                               endpoint:(NSString *)endpoint;

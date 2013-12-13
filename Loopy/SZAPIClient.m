@@ -23,16 +23,17 @@ NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 NSString *const LOG = @"/log";
 
-NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
-NSString *const IDFA_KEY = @"idfa";
 NSString *const STDID_KEY = @"stdid";
 NSString *const MD5ID_KEY = @"md5id";
+NSString *const LAST_OPEN_TIME_KEY = @"lastOpenTime";
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
-NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
+NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
 
+@synthesize callTimeout = _callTimeout;
+@synthesize openTimeout = _openTimeout;
 @synthesize urlPrefix;
 @synthesize httpsURLPrefix;
 @synthesize apiKey;
@@ -41,15 +42,16 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 @synthesize carrierName;
 @synthesize osVersion;
 @synthesize deviceModel;
-@synthesize idfa;
 @synthesize stdid;
 @synthesize md5id;
+@synthesize idfa;
 @synthesize currentLocation;
 @synthesize shortlinks;
 
 //constructor with specified endpoint
 //performs actions to check for stdid and calls "install" or "open" as required
-- (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey {
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey {
     self = [super init];
     if(self) {
         //init shortlink cache
@@ -67,6 +69,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         self.urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
         self.httpsURLPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
         
+        //set timeouts
+        NSNumber *callTimeoutMillis = [apiInfoDict objectForKey:@"callTimeoutInMillis"];
+        NSNumber *openTimeoutMillis = [apiInfoDict objectForKey:@"openTimeoutInMillis"];
+        _callTimeout = [callTimeoutMillis floatValue] / 1000.0f;
+        _openTimeout = [openTimeoutMillis floatValue] / 1000.0f;
+        
         //device information cached for sharing and other operations
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -75,66 +83,77 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [networkInfo subscriberCellularProvider];
         UIDevice *device = [UIDevice currentDevice];
-        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
-        self.carrierName = [carrier carrierName];
+        self.carrierName = [carrier carrierName] != nil ? [carrier carrierName] : @"none";
         self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
+        
+        //md5 hash of IDFA
+        //IDFA is cached for dependency injection purposes
+        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.idfa = idManager.advertisingIdentifier;
+        if(self.idfa) {
+            self.md5id = [self md5FromString:[idfa UUIDString]];
+        }
     }
     return self;
 }
 
-//updates identities file
-- (void)updateIdentities {
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
-    NSMutableDictionary *identities = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       [self.idfa UUIDString],IDFA_KEY,
-                                       self.stdid,STDID_KEY,
-                                       self.md5id, MD5ID_KEY,
-                                       nil];
-    NSString *error;
-    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:(id)identities
-                                                                   format:NSPropertyListXMLFormat_v1_0
-                                                         errorDescription:&error];
-    [plistData writeToFile:filePath atomically:YES];
-}
-
 #pragma mark - Identities Handling
 
-//loads/updates identities file from disk, and calls appropriate recording endpoint (/open or /install) as required
-- (void)loadIdentitiesWithReferrer:(NSString *)referrer
-                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
-                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+//creates/loads session file from disk, and calls appropriate recording endpoint (/open or /install) as required
+- (void)getSessionWithReferrer:(NSString *)referrer
+                   postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                       failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:SESSION_DATA_FILENAME];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    NSDate *now = [NSDate date];
+    NSNumber *nowNum = [NSNumber numberWithDouble:[now timeIntervalSince1970]];
+    NSString *error = nil;
+    NSData *plistData = nil;
     
-    //no file -- call /install and store a device-generated stdid and md5id in new file
+    //no file -- call /install and store device-generated stdid in new file
     if(!plistDict) {
         NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
         self.stdid = (NSString *)[stdidObj UUIDString];
-        self.md5id = [self md5FromString:[self.idfa UUIDString]];
-        [self updateIdentities];
+        NSMutableDictionary *newPlistDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                             self.stdid,STDID_KEY,
+                                             nowNum,LAST_OPEN_TIME_KEY,
+                                             nil];
+        plistData = [NSPropertyListSerialization dataFromPropertyList:(id)newPlistDict
+                                                               format:NSPropertyListXMLFormat_v1_0
+                                                     errorDescription:&error];
+        [plistData writeToFile:filePath atomically:YES];
+        
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   postSuccessCallback(operation, responseObject);
               }
               failure:failureCallback];
     }
-    //file exists -- call /open, updating the md5id if the idfa has changed
+    //file exists -- call /open with stdid from file if timeout has been hit
+    //store updated timestamp in file if new open needs to be called
     else {
-        NSString *idfaStr = [self.idfa UUIDString];
-        NSString *cachedIDFAStr = (NSString *)[plistDict valueForKey:IDFA_KEY];
-        if(![idfaStr isEqualToString:cachedIDFAStr]) {
-            self.md5id = [self md5FromString:[self.idfa UUIDString]];
+        self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
+        NSNumber *lastOpenNum = (NSNumber *)[plistDict valueForKey:LAST_OPEN_TIME_KEY];
+        double diff = [nowNum doubleValue] - [lastOpenNum doubleValue];
+        
+        if(diff > _openTimeout) {
+            plistData = [NSPropertyListSerialization dataFromPropertyList:(id)plistDict
+                                                                   format:NSPropertyListXMLFormat_v1_0
+                                                         errorDescription:&error];
+            [plistData writeToFile:filePath atomically:YES];
+            
+            [self open:[self openDictionaryWithReferrer:referrer]
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   postSuccessCallback(operation, responseObject);
+               }
+               failure:failureCallback];
         }
-        [self updateIdentities];
-        [self open:[self openDictionaryWithReferrer:referrer]
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               postSuccessCallback(operation, responseObject);
-           }
-           failure:failureCallback];
+        //bogus call to success to indicating no open needed
+        else {
+            postSuccessCallback(nil, nil);
+        }
     }
 }
 
@@ -163,7 +182,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:TIMEOUT];
+                                                       timeoutInterval:_callTimeout];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -225,12 +244,17 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 //returns JSON-ready dictionary for /install endpoint for specified referrer
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    //add IDFA to device dictionary -- install only
+    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithDictionary:[self deviceDictionary]];
+    [deviceObj setObject:[self.idfa UUIDString] forKey:@"id"];
+    
     NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [NSNumber numberWithInt:timestamp],@"timestamp",
                                 referrer,@"referrer",
                                 self.stdid, @"stdid",
                                 self.md5id, @"md5id",
-                                [self deviceDictionary],@"device",
+                                deviceObj,@"device",
                                 [self appDictionary],@"app",
                                 [self clientDictionary],@"client",
                                 nil];
@@ -313,7 +337,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
     NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                      [self.idfa UUIDString],@"id",
                                       self.deviceModel,@"model",
                                       @"ios",@"os",
                                       self.osVersion,@"osv",
