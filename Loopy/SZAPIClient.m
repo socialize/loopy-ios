@@ -9,6 +9,7 @@
 #import "SZAPIClient.h"
 #import "SZJSONUtils.h"
 #import "Reachability.h"
+#import <CommonCrypto/CommonDigest.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <AdSupport/ASIdentifierManager.h>
@@ -18,20 +19,21 @@
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
-NSString *const STDID = @"/stdid";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
 NSString *const LOG = @"/log";
 
-NSTimeInterval const TIMEOUT = 1.0f;
 NSString *const API_KEY = @"X-LoopyAppID";
 NSString *const LOOPY_KEY = @"X-LoopyKey";
-NSString *const IDFA_KEY = @"idfa";
 NSString *const STDID_KEY = @"stdid";
+NSString *const MD5ID_KEY = @"md5id";
+NSString *const LAST_OPEN_TIME_KEY = @"lastOpenTime";
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
-NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
+NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
 
+@synthesize callTimeout = _callTimeout;
+@synthesize openTimeout = _openTimeout;
 @synthesize urlPrefix;
 @synthesize httpsURLPrefix;
 @synthesize apiKey;
@@ -40,14 +42,16 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 @synthesize carrierName;
 @synthesize osVersion;
 @synthesize deviceModel;
-@synthesize idfa;
 @synthesize stdid;
+@synthesize md5id;
+@synthesize idfa;
 @synthesize currentLocation;
 @synthesize shortlinks;
 
 //constructor with specified endpoint
 //performs actions to check for stdid and calls "install" or "open" as required
-- (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey {
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey {
     self = [super init];
     if(self) {
         //init shortlink cache
@@ -65,6 +69,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         self.urlPrefix = [apiInfoDict objectForKey:@"urlPrefix"];
         self.httpsURLPrefix = [apiInfoDict objectForKey:@"urlHttpsPrefix"];
         
+        //set timeouts
+        NSNumber *callTimeoutMillis = [apiInfoDict objectForKey:@"callTimeoutInMillis"];
+        NSNumber *openTimeoutMillis = [apiInfoDict objectForKey:@"openTimeoutInMillis"];
+        _callTimeout = [callTimeoutMillis floatValue] / 1000.0f;
+        _openTimeout = [openTimeoutMillis floatValue] / 1000.0f;
+        
         //device information cached for sharing and other operations
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -73,79 +83,76 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
         CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [networkInfo subscriberCellularProvider];
         UIDevice *device = [UIDevice currentDevice];
-        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
-        self.carrierName = [carrier carrierName];
+        self.carrierName = [carrier carrierName] != nil ? [carrier carrierName] : @"none";
         self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
+        
+        //md5 hash of IDFA
+        //IDFA is cached for dependency injection purposes
+        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.idfa = idManager.advertisingIdentifier;
+        if(self.idfa) {
+            self.md5id = [self md5FromString:[idfa UUIDString]];
+        }
     }
     return self;
 }
 
-//updates identities file
-- (void)updateIdentities {
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
-    NSMutableDictionary *identities = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       [self.idfa UUIDString],IDFA_KEY,
-                                       self.stdid,STDID_KEY,
-                                       nil];
-    NSString *error;
-    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:(id)identities
-                                                                   format:NSPropertyListXMLFormat_v1_0
-                                                         errorDescription:&error];
-    [plistData writeToFile:filePath atomically:YES];
-}
-
 #pragma mark - Identities Handling
 
-//loads identities file from disk, and calls appropriate recording endpoint (/open or /install) as required
-- (void)loadIdentitiesWithReferrer:(NSString *)referrer
-                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
-                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+//creates/loads session file from disk, and calls appropriate recording endpoint (/open or /install) as required
+- (void)getSessionWithReferrer:(NSString *)referrer
+                   postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                       failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:IDENTITIES_FILENAME];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:SESSION_DATA_FILENAME];
     NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    NSDate *now = [NSDate date];
+    NSNumber *nowNum = [NSNumber numberWithDouble:[now timeIntervalSince1970]];
+    NSString *error = nil;
+    NSData *plistData = nil;
     
-    //call /install and store stdid returned in new file
+    //no file -- call /install and store device-generated stdid in new file
     if(!plistDict) {
+        NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
+        self.stdid = (NSString *)[stdidObj UUIDString];
+        NSMutableDictionary *newPlistDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                             self.stdid,STDID_KEY,
+                                             nowNum,LAST_OPEN_TIME_KEY,
+                                             nil];
+        plistData = [NSPropertyListSerialization dataFromPropertyList:(id)newPlistDict
+                                                               format:NSPropertyListXMLFormat_v1_0
+                                                     errorDescription:&error];
+        [plistData writeToFile:filePath atomically:YES];
+        
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSDictionary *responseDict = (NSDictionary *)responseObject;
-                  self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
-                  [self updateIdentities];
                   postSuccessCallback(operation, responseObject);
               }
               failure:failureCallback];
     }
+    //file exists -- call /open with stdid from file if timeout has been hit
+    //store updated timestamp in file if new open needs to be called
     else {
-        //load it and compare idfa
-        //if they don't match, call /stdid, then /open with new stdid
-        //if they do, call /open
-        NSString *idfaStrCached = (NSString *)[plistDict valueForKey:IDFA_KEY];
-        NSString *idfaStrLocal = [self.idfa UUIDString];
-        if(![idfaStrCached isEqualToString:idfaStrLocal]) {
-            [self stdid:[self stdidDictionary]
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSDictionary *responseDict = (NSDictionary *)responseObject;
-                    self.stdid = (NSString *)[responseDict valueForKey:STDID_KEY];
-                    [self updateIdentities];
-                    [self open:[self openDictionaryWithReferrer:referrer]
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           postSuccessCallback(operation, responseObject);
-                       }
-                       failure:failureCallback];
-                }
-                failure:failureCallback];
-        }
-        else {
-            self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
+        self.stdid = (NSString *)[plistDict valueForKey:STDID_KEY];
+        NSNumber *lastOpenNum = (NSNumber *)[plistDict valueForKey:LAST_OPEN_TIME_KEY];
+        double diff = [nowNum doubleValue] - [lastOpenNum doubleValue];
+        
+        if(diff > _openTimeout) {
+            plistData = [NSPropertyListSerialization dataFromPropertyList:(id)plistDict
+                                                                   format:NSPropertyListXMLFormat_v1_0
+                                                         errorDescription:&error];
+            [plistData writeToFile:filePath atomically:YES];
+            
             [self open:[self openDictionaryWithReferrer:referrer]
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   [self updateIdentities];
                    postSuccessCallback(operation, responseObject);
                }
                failure:failureCallback];
+        }
+        //bogus call to success to indicating no open needed
+        else {
+            postSuccessCallback(nil, nil);
         }
     }
 }
@@ -175,7 +182,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:TIMEOUT];
+                                                       timeoutInterval:_callTimeout];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -237,10 +244,17 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 //returns JSON-ready dictionary for /install endpoint for specified referrer
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    //add IDFA to device dictionary -- install only
+    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithDictionary:[self deviceDictionary]];
+    [deviceObj setObject:[self.idfa UUIDString] forKey:@"id"];
+    
     NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [NSNumber numberWithInt:timestamp],@"timestamp",
                                 referrer,@"referrer",
-                                [self deviceDictionary],@"device",
+                                self.stdid, @"stdid",
+                                self.md5id, @"md5id",
+                                deviceObj,@"device",
                                 [self appDictionary],@"app",
                                 [self clientDictionary],@"client",
                                 nil];
@@ -252,6 +266,7 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.stdid,@"stdid",
+                             self.md5id, @"md5id",
                              [NSNumber numberWithInt:timestamp],@"timestamp",
                              referrer,@"referrer",
                              [self deviceDictionary],@"device",
@@ -261,24 +276,12 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     return openObj;
 }
 
-//returns JSON-ready dictionary for /stdid endpoint
-- (NSDictionary *)stdidDictionary {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *stdidObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              self.stdid,@"stdid",
-                              [NSNumber numberWithInt:timestamp],@"timestamp",
-                              [self deviceDictionary],@"device",
-                              [self appDictionary],@"app",
-                              [self clientDictionary],@"client",
-                              nil];
-    return stdidObj;
-}
-
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
                               self.stdid,@"stdid",
+                              self.md5id, @"md5id",
                               [NSNumber numberWithInt:timestamp],@"timestamp",
                               [self deviceDictionary],@"device",
                               [self appDictionary],@"app",
@@ -293,17 +296,38 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
 //returns JSON-ready dictionary for /log endpoint, based on type and meta
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta {
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *eventObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                              type,@"type",
+                              meta,@"meta",
+                              nil];
     NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.stdid,@"stdid",
+                            self.md5id, @"md5id",
                             [NSNumber numberWithInt:timestamp],@"timestamp",
                             [self deviceDictionary],@"device",
                             [self appDictionary],@"app",
                             [self clientDictionary],@"client",
-                            type,@"type",
-                            meta,@"meta",
+                            eventObj,@"event",
                             nil];
     
     return logObj;
+}
+
+//returns JSON-ready dictionary for /shortlink endpoint, based on link and tags
+- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                             link,@"url",
+                             nil];
+    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  self.stdid,@"stdid",
+                                  self.md5id, @"md5id",
+                                  [NSNumber numberWithInt:timestamp],@"timestamp",
+                                  itemObj,@"item",
+                                  tags,@"tags",
+                                  nil];
+    
+    return shortlinkObj;
 }
 
 //required subset of endpoint calls
@@ -313,7 +337,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
     NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                      [self.idfa UUIDString],@"id",
                                       self.deviceModel,@"model",
                                       @"ios",@"os",
                                       self.osVersion,@"osv",
@@ -369,12 +392,6 @@ NSString *const IDENTITIES_FILENAME = @"SZIdentities.plist";
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
-}
-
-- (void)stdid:(NSDictionary *)jsonDict
-      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callHTTPSEndpoint:STDID json:jsonDict success:successCallback failure:failureCallback];
 }
 
 - (void)shortlink:(NSDictionary *)jsonDict
@@ -479,4 +496,19 @@ NSString *machineName() {
                               encoding:NSUTF8StringEncoding];
 }
 
+//convenience method to return MD% String
+//per http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
+- (NSString *)md5FromString:(NSString *)input {
+    const char *cStr = [input UTF8String];
+    unsigned char digest[16];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    
+    return output;
+}
 @end

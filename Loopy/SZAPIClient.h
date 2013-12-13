@@ -15,20 +15,23 @@
 
 extern NSString *const INSTALL;
 extern NSString *const OPEN;
-extern NSString *const STDID;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
 extern NSString *const LOG;
 
-extern NSTimeInterval const TIMEOUT;
+extern NSString *const OPEN_TIMEOUT_KEY;
+extern NSString *const CALL_TIMEOUT_KEY;
 extern NSString *const API_KEY;
 extern NSString *const LOOPY_KEY;
-extern NSString *const IDFA_KEY;
 extern NSString *const STDID_KEY;
+extern NSString *const MD5ID_KEY;
+extern NSString *const LAST_OPEN_TIME_KEY;
 extern NSString *const LANGUAGE_ID;
 extern NSString *const LANGUAGE_VERSION;
-extern NSString *const IDENTITIES_FILENAME;
+extern NSString *const SESSION_DATA_FILENAME;
 
+@property (nonatomic) NSTimeInterval callTimeout;
+@property (nonatomic) NSTimeInterval openTimeout;
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *loopyKey;
 @property (nonatomic, strong) NSString *httpsURLPrefix;
@@ -37,16 +40,16 @@ extern NSString *const IDENTITIES_FILENAME;
 @property (nonatomic, strong) NSString *carrierName;
 @property (nonatomic, strong) NSString *osVersion;
 @property (nonatomic, strong) NSString *deviceModel;
-@property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) NSString *stdid;
+@property (nonatomic, strong) NSString *md5id;
+@property (nonatomic, strong) NSUUID *idfa;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) NSMutableDictionary *shortlinks;
 
 - (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey;
-- (void)loadIdentitiesWithReferrer:(NSString *)referrer
-                       postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
-                           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-- (void)updateIdentities;
+- (void)getSessionWithReferrer:(NSString *)referrer
+                   postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
+                       failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                                 length:(NSNumber *)length
                               endpoint:(NSString *)endpoint;
@@ -61,9 +64,10 @@ extern NSString *const IDENTITIES_FILENAME;
 - (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
 - (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
 - (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)stdidDictionary;
 - (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta;
+- (NSDictionary *)shortlinkDictionary:(NSString *)link tags:(NSArray *)tags;
+- (NSString *)md5FromString:(NSString *)input;
 
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
@@ -73,10 +77,6 @@ extern NSString *const IDENTITIES_FILENAME;
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)stdid:(NSDictionary *)jsonDict
-      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-
 - (void)shortlink:(NSDictionary *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
@@ -84,7 +84,6 @@ extern NSString *const IDENTITIES_FILENAME;
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-
 
 - (void)log:(NSDictionary *)jsonDict
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback

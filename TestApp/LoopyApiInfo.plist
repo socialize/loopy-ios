@@ -4,6 +4,10 @@
 <dict>
 	<key>Loopy API info</key>
 	<dict>
+		<key>callTimeoutInMillis</key>
+		<integer>1000</integer>
+		<key>openTimeoutInMillis</key>
+		<integer>10000</integer>
 		<key>urlHttpsPrefix</key>
 		<string>https://ec2-54-226-117-50.compute-1.amazonaws.com:8443/loopy-mock/v1</string>
 		<key>urlPrefix</key>
