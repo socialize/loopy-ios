@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version      = "1.0.0-RC2"
   s.summary      = "iOS SDK for the Loopy Social Analytics Platform."
   s.description  = "Allows iOS applications to interact with the Loopy API to provide rich sharing analytics."
-  s.homepage     = "https://github.com/socialize/socialize-networking"
+  s.homepage     = "https://github.com/socialize/loopy-sdk-ios"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "David Jedeikin" => "djedeikin@sharethis.com" }
   s.dependency     'AFNetworking'
