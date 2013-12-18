@@ -11,7 +11,6 @@
 #import "SZAPIClient.h"
 #import "SZTestUtils.h"
 #import "SZJSONUtils.h"
-#import <SZNetworking/SZNetworking.h>
 
 @implementation SZTestAppDelegate
 

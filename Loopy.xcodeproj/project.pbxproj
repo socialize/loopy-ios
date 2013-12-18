@@ -130,7 +130,6 @@
 		2CEFADAB1833000200841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
 		2CEFADAC1833000E00841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
 		2CEFADAD1833001B00841C33 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
-		2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */; };
 		2CF9E02E18440E2C00ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
 		2CF9E02F18440E3600ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
 		2CF9E03018440E4200ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
@@ -247,8 +246,6 @@
 		2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2CEFADA81832FFEF00841C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SZURLRequestOperation+Testing.h"; sourceTree = "<group>"; };
-		2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SZURLRequestOperation+Testing.m"; sourceTree = "<group>"; };
 		2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -535,7 +532,6 @@
 			isa = PBXGroup;
 			children = (
 				2C66953C18299D9A00AB8C08 /* Snippets */,
-				2CF669CB17FF4B7700F5060D /* Test Helpers */,
 				2C314A0817E13143003CA1A0 /* SZAPIClientTests.m */,
 				2C3E069117FA26B700FF751B /* SZJSONUtilsTests.m */,
 				2C5ADD4A181879EC00BAC4DC /* SZShareTests.m */,
@@ -557,15 +553,6 @@
 				2CDE0E7B17E122A30048B055 /* UnitTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CF669CB17FF4B7700F5060D /* Test Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				2CF669CC17FF4B8300F5060D /* SZURLRequestOperation+Testing.h */,
-				2CF669CD17FF4B8300F5060D /* SZURLRequestOperation+Testing.m */,
-			);
-			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -966,7 +953,6 @@
 				2C5ADD4B181879EC00BAC4DC /* SZShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* SZTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* SZJSONUtilsTests.m in Sources */,
-				2CF669CE17FF4B8300F5060D /* SZURLRequestOperation+Testing.m in Sources */,
 				2CA3360D18345245003D7498 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
