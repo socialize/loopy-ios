@@ -8,8 +8,8 @@
 
 #import "custom_share.h"
 #import "custom_activity.h"
-#import "SZAPIClient.h"
-#import "SZActivity.h"
+#import "STAPIClient.h"
+#import "STActivity.h"
 #import <Social/Social.h>
 
 @implementation CustomShareViewController
@@ -18,7 +18,7 @@
 
 //Returns a shortened URL
 - (void)shortenURL:(NSString *)url {
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
     NSDictionary *jsonDict = [self jsonForShortlink:url];
     [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         id responseData = [data objectFromJSONData];

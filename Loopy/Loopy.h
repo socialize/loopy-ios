@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SZConstants.h"
-#import "SZShare.h"
-#import "SZActivity.h"
-#import "SZFacebookActivity.h"
-#import "SZTwitterActivity.h"
-#import "SZAPIClient.h"
-#import "SZJSONUtils.h"
+#import "STConstants.h"
+#import "STShare.h"
+#import "STActivity.h"
+#import "STFacebookActivity.h"
+#import "STTwitterActivity.h"
+#import "STAPIClient.h"
+#import "STJSONUtils.h"

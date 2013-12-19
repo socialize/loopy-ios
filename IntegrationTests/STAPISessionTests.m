@@ -1,5 +1,5 @@
 //
-//  SZAPISessionTests.m
+//  STAPISessionTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 12/9/13.
@@ -7,17 +7,17 @@
 //
 
 #import "GHAsyncTestCase.h"
-#import "SZAPIClient.h"
+#import "STAPIClient.h"
 
-@interface SZAPISessionTests : GHAsyncTestCase {
-    SZAPIClient *apiClient;
+@interface STAPISessionTests : GHAsyncTestCase {
+    STAPIClient *apiClient;
 }
 @end
 
-@implementation SZAPISessionTests
+@implementation STAPISessionTests
 
 - (void)setUp {
-    apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+    apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators

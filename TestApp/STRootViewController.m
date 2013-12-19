@@ -1,26 +1,26 @@
 //
-//  SZRootViewController.m
+//  STRootViewController.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/8/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZRootViewController.h"
-#import "SZShare.h"
-#import "SZAPIClient.h"
-#import "SZJSONUtils.h"
+#import "STRootViewController.h"
+#import "STShare.h"
+#import "STAPIClient.h"
+#import "STJSONUtils.h"
 #import <Social/Social.h>
 #import <AFNetworking/AFNetworking.h>
-#import "SZTestUtils.h"
+#import "STTestUtils.h"
 
-@interface SZRootViewController ()
+@interface STRootViewController ()
 @end
 
-@implementation SZRootViewController
+@implementation STRootViewController
 
-SZShare *share;
-SZAPIClient *apiClient;
+STShare *share;
+STAPIClient *apiClient;
 
 @synthesize textField;
 @synthesize installButton;
@@ -29,7 +29,7 @@ SZAPIClient *apiClient;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+        apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                                loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
         [apiClient getSessionWithReferrer:@"www.facebook.com"
             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -39,7 +39,7 @@ SZAPIClient *apiClient;
                 //any failure operations
             }];
         
-        share = [[SZShare alloc] initWithParent:self apiClient:apiClient];
+        share = [[STShare alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
 }

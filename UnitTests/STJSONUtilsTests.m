@@ -1,5 +1,5 @@
 //
-//  SZJSONUtilsTests.m
+//  STJSONUtilsTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/30/13.
@@ -8,20 +8,20 @@
 
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
-#import "SZJSONUtils.h"
-#import "SZTestUtils.h"
+#import "STJSONUtils.h"
+#import "STTestUtils.h"
 
-@interface SZJSONUtilsTests : GHTestCase {}
+@interface STJSONUtilsTests : GHTestCase {}
 @end
 
-@implementation SZJSONUtilsTests
+@implementation STJSONUtilsTests
 
 //test toJSONData from both file and hardcoded dictionary
 - (void)testToJSONData {
     //read from hardcoded dictionary and convert to JSON NSData
-    NSDictionary *openObj = [SZTestUtils jsonForOpen];
+    NSDictionary *openObj = [STTestUtils jsonForOpen];
     GHAssertTrue([NSJSONSerialization isValidJSONObject:openObj], nil);
-    NSData *jsonDictData = [SZJSONUtils toJSONData:openObj];
+    NSData *jsonDictData = [STJSONUtils toJSONData:openObj];
     GHAssertNotNil(jsonDictData, nil);
     
     //read from file and convert to JSON NSData
@@ -35,15 +35,15 @@
     NSDictionary *fileDict = [NSJSONSerialization JSONObjectWithData:[fileString dataUsingEncoding:NSUTF8StringEncoding]
                                                              options:NSJSONReadingMutableContainers
                                                                error:&fileAsDictError];
-    NSData *jsonFileData = [SZJSONUtils toJSONData:fileDict];
+    NSData *jsonFileData = [STJSONUtils toJSONData:fileDict];
     GHAssertNotNil(jsonFileData, nil);
 }
 
 - (void)testToJSONDictionary {
     //read from hardcoded dictionary and convert to JSON NSData
-    NSDictionary *openObj = [SZTestUtils jsonForOpen];
-    NSData *jsonDictData = [SZJSONUtils toJSONData:openObj];
-    NSDictionary *matchObj = [SZJSONUtils toJSONDictionary:jsonDictData];
+    NSDictionary *openObj = [STTestUtils jsonForOpen];
+    NSData *jsonDictData = [STJSONUtils toJSONData:openObj];
+    NSDictionary *matchObj = [STJSONUtils toJSONDictionary:jsonDictData];
     NSArray *matchObjKeys = [matchObj allKeys];
     NSArray *openObjKeys = [openObj allKeys];
     GHAssertNotNil(matchObj, @"");
@@ -60,18 +60,18 @@
 
 //deliberately create bad JSON to see what happens
 - (void)testToInvalidJSONData {
-    NSMutableDictionary *openObj = [NSMutableDictionary dictionaryWithDictionary:[SZTestUtils jsonForOpen]];
+    NSMutableDictionary *openObj = [NSMutableDictionary dictionaryWithDictionary:[STTestUtils jsonForOpen]];
     NSDate *bogusDate = [NSDate date];
     [openObj setValue:bogusDate forKey:@"stdid"];
-    NSData *jsonDictData = [SZJSONUtils toJSONData:openObj];
+    NSData *jsonDictData = [STJSONUtils toJSONData:openObj];
     GHAssertNil(jsonDictData, @"");
 }
 
 //test toJSONString from both file and hardcoded dictionary
 - (void)testToJSONString {
-    NSDictionary *openObj = [SZTestUtils jsonForOpen];
-    NSData *jsonData = [SZJSONUtils toJSONData:openObj];
-    NSString *jsonString = [SZJSONUtils toJSONString:jsonData];
+    NSDictionary *openObj = [STTestUtils jsonForOpen];
+    NSData *jsonData = [STJSONUtils toJSONData:openObj];
+    NSString *jsonString = [STJSONUtils toJSONString:jsonData];
     GHAssertNotNil(jsonString, nil);
     
     //read from file and compare

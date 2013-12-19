@@ -1,5 +1,5 @@
 //
-//  SZConstants.h
+//  STConstants.h
 //  Loopy
 //
 //  Created by David Jedeikin on 10/22/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SZConstants : NSObject
+@interface STConstants : NSObject
 
 extern NSString * const BeginShareNotification;
 extern NSString * const EndShareNotification;

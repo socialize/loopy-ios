@@ -1,30 +1,30 @@
 //
-//  SZAPIClientTests.m
+//  STAPIClientTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/11/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZAPIClient.h"
-#import "SZJSONUtils.h"
-#import "SZTestUtils.h"
+#import "STAPIClient.h"
+#import "STJSONUtils.h"
+#import "STTestUtils.h"
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 #import <AFNetworking/AFNetworking.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface SZAPIClientTests : GHAsyncTestCase {
-    SZAPIClient *apiClient;
+@interface STAPIClientTests : GHAsyncTestCase {
+    STAPIClient *apiClient;
     NSString *endpoint;
 }
 @end
 
-@implementation SZAPIClientTests
+@implementation STAPIClientTests
 
 - (void)setUpClass {
     endpoint = @"/endpoint";
-    apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+    apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
     
     //simulate current location, IDFA, and stdid

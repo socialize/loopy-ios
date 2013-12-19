@@ -1,5 +1,5 @@
 //
-//  SZRootViewController.h
+//  STRootViewController.h
 //  Loopy
 //
 //  Created by David Jedeikin on 10/8/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SZRootViewController : UIViewController
+@interface STRootViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIButton *installButton;

@@ -1,33 +1,33 @@
 //
-//  SZActivityTests.m
+//  STActivityTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/24/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZShare.h"
-#import "SZFacebookActivity.h"
-#import "SZTwitterActivity.h"
-#import "SZConstants.h"
+#import "STShare.h"
+#import "STFacebookActivity.h"
+#import "STTwitterActivity.h"
+#import "STConstants.h"
 #import <Social/Social.h>
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 
-@interface SZActivityTests : GHTestCase {
-    SZFacebookActivity *facebookActivity;
-    SZTwitterActivity *twitterActivity;
+@interface STActivityTests : GHTestCase {
+    STFacebookActivity *facebookActivity;
+    STTwitterActivity *twitterActivity;
     NSArray *dummyShareItems;
 }
 
 @end
 
-@implementation SZActivityTests
+@implementation STActivityTests
 
 - (void)setUpClass {
     dummyShareItems = @[@"MyShareItem1", @"MyShareItem2"];
-    facebookActivity = [[SZFacebookActivity alloc] init];
-    twitterActivity = [[SZTwitterActivity alloc] init];
+    facebookActivity = [[STFacebookActivity alloc] init];
+    twitterActivity = [[STTwitterActivity alloc] init];
 }
 
 //TODO these may become more meaningful

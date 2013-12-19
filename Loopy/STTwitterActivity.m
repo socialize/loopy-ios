@@ -1,16 +1,16 @@
 //
-//  SZTwitterActivity.m
+//  STTwitterActivity.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/17/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZTwitterActivity.h"
-#import "SZConstants.h"
+#import "STTwitterActivity.h"
+#import "STConstants.h"
 #import <Social/Social.h>
 
-@implementation SZTwitterActivity
+@implementation STTwitterActivity
 
 @synthesize shareItems;
 

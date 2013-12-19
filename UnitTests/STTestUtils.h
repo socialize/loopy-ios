@@ -1,5 +1,5 @@
 //
-//  SZTestUtils.h
+//  STTestUtils.h
 //  Loopy
 //
 //  Created by David Jedeikin on 9/30/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SZTestUtils : NSObject
+@interface STTestUtils : NSObject
 
 + (NSDictionary *)jsonForInstall;
 + (NSDictionary *)jsonForOpen;

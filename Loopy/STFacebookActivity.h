@@ -1,15 +1,15 @@
 //
-//  SZFacebookActivity.h
+//  STFacebookActivity.h
 //  Loopy
 //
 //  Created by David Jedeikin on 10/17/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZActivity.h"
+#import "STActivity.h"
 #import <UIKit/UIKit.h>
 
-@interface SZFacebookActivity : UIActivity <SZActivity>
+@interface STFacebookActivity : UIActivity <STActivity>
 
 @property (nonatomic, strong) NSArray *shareItems;
 

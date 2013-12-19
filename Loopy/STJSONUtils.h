@@ -1,5 +1,5 @@
 //
-//  SZJSONUtils.h
+//  STJSONUtils.h
 //  Loopy
 //
 //  Created by David Jedeikin on 9/13/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SZJSONUtils : NSObject
+@interface STJSONUtils : NSObject
 
 + (NSData *)toJSONData:(NSDictionary *)jsonDict;
 + (NSString *)toJSONString:(NSData *)jsonData;

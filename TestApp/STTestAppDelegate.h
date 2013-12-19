@@ -1,5 +1,5 @@
 //
-//  SZTestAppDelegate.h
+//  STTestAppDelegate.h
 //  Loopy
 //
 //  Created by David Jedeikin on 9/10/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SZTestAppDelegate : UIResponder <UIApplicationDelegate>
+@interface STTestAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 

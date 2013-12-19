@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SZRootViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STRootViewController">
             <connections>
                 <outlet property="installButton" destination="va9-of-7sa" id="g5h-os-hIG"/>
                 <outlet property="shareButton" destination="oRg-NG-mTh" id="bGr-KI-deG"/>

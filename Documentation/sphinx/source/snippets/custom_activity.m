@@ -7,7 +7,7 @@
 //
 
 #import "custom_activity.h"
-#import "SZConstants.h"
+#import "STConstants.h"
 
 // begin-custom-activity-snippet
 

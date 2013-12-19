@@ -1,14 +1,14 @@
 //
-//  SZTestUtils.m
+//  STTestUtils.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/30/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZTestUtils.h"
+#import "STTestUtils.h"
 
-@implementation SZTestUtils
+@implementation STTestUtils
 
 + (NSDictionary *)jsonForInstall {
     NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:

@@ -1,16 +1,16 @@
 //
-//  SZFacebookActivity.m
+//  STFacebookActivity.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/17/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZFacebookActivity.h"
-#import "SZConstants.h"
+#import "STFacebookActivity.h"
+#import "STConstants.h"
 #import <Social/Social.h>
 
-@implementation SZFacebookActivity
+@implementation STFacebookActivity
 
 @synthesize shareItems;
 

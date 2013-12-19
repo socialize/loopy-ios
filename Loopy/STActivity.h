@@ -1,5 +1,5 @@
 //
-//  SZActivity.h
+//  STActivity.h
 //  Loopy
 //
 //  Created by David Jedeikin on 10/29/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SZActivity <NSObject>
+@protocol STActivity <NSObject>
 
 @property (nonatomic, strong) NSArray *shareItems;
 

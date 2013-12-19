@@ -1,22 +1,22 @@
 //
-//  SZShareCallbackTests.m
+//  STShareCallbackTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/24/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZShare.h"
-#import "SZFacebookActivity.h"
-#import "SZTwitterActivity.h"
-#import "SZConstants.h"
+#import "STShare.h"
+#import "STFacebookActivity.h"
+#import "STTwitterActivity.h"
+#import "STConstants.h"
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 
-@interface SZShareCallbackTests : GHAsyncTestCase {
+@interface STShareCallbackTests : GHAsyncTestCase {
     id share;
-    SZFacebookActivity *facebookActivity;
-    SZTwitterActivity *twitterActivity;
+    STFacebookActivity *facebookActivity;
+    STTwitterActivity *twitterActivity;
     NSArray *shareItems;
     NSArray *activities;
     BOOL facebookShared;
@@ -25,13 +25,13 @@
 
 @end
 
-@implementation SZShareCallbackTests
+@implementation STShareCallbackTests
 
 - (void)setUpClass {
-    facebookActivity = [[SZFacebookActivity alloc] init];
-    twitterActivity = [[SZTwitterActivity alloc] init];
+    facebookActivity = [[STFacebookActivity alloc] init];
+    twitterActivity = [[STTwitterActivity alloc] init];
     
-    share = [[SZShare alloc] initWithParent:nil apiClient:nil];
+    share = [[STShare alloc] initWithParent:nil apiClient:nil];
     activities = @[facebookActivity, twitterActivity];
     shareItems = @[@"ShareItem1",@"ShareItem2"];
 
@@ -78,7 +78,7 @@
 
 //TODO the share complete callback doesn't do anything yet...
 - (void)testHandleShareComplete {
-    SZFacebookActivity *dummyActivity = [[SZFacebookActivity alloc] init];
+    STFacebookActivity *dummyActivity = [[STFacebookActivity alloc] init];
     dummyActivity.shareItems = shareItems;
     NSNotification *dummyNotification = [NSNotification notificationWithName:EndShareNotification object:dummyActivity];
     [share handleShareComplete:dummyNotification];

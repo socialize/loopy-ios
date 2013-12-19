@@ -1,14 +1,14 @@
 //
-//  SZJSONUtils.m
+//  STJSONUtils.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/13/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZJSONUtils.h"
+#import "STJSONUtils.h"
 
-@implementation SZJSONUtils
+@implementation STJSONUtils
 
 //convert JSON dictionary to NSData
 + (NSData *)toJSONData:(NSDictionary *)jsonDict {

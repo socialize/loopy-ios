@@ -1,23 +1,23 @@
 //
-//  SZShare.m
+//  STShare.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/23/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZShare.h"
-#import "SZActivity.h"
-#import "SZFacebookActivity.h"
-#import "SZTwitterActivity.h"
-#import "SZConstants.h"
+#import "STShare.h"
+#import "STActivity.h"
+#import "STFacebookActivity.h"
+#import "STTwitterActivity.h"
+#import "STConstants.h"
 
-@implementation SZShare
+@implementation STShare
 
 @synthesize parentController;
 @synthesize apiClient;
 
-- (id)initWithParent:(UIViewController *)parent apiClient:(SZAPIClient *)client {
+- (id)initWithParent:(UIViewController *)parent apiClient:(STAPIClient *)client {
     self = [super init];
     if(self) {
         self.parentController = parent;
@@ -39,8 +39,8 @@
 //Returns the default set of Activities using the specified activity items
 //These are newly-created each time as activities will vary
 - (NSArray *)getDefaultActivities:(NSArray *)activityItems {
-    SZFacebookActivity *fbActivity = [[SZFacebookActivity alloc] init];
-    SZTwitterActivity *twitterActivity = [[SZTwitterActivity alloc] init];
+    STFacebookActivity *fbActivity = [[STFacebookActivity alloc] init];
+    STTwitterActivity *twitterActivity = [[STTwitterActivity alloc] init];
     
     return @[fbActivity, twitterActivity];
 }
@@ -66,8 +66,8 @@
     NSArray *activityItems = nil;
     SLComposeViewController *controller = nil;
     
-    if([[activityObj class] conformsToProtocol:@protocol(SZActivity)]) {
-        id<SZActivity> activity = (id<SZActivity>)activityObj;
+    if([[activityObj class] conformsToProtocol:@protocol(STActivity)]) {
+        id<STActivity> activity = (id<STActivity>)activityObj;
         activityItems = [activity shareItems];
         slServiceType = [activity activityType];
     }
@@ -93,7 +93,7 @@
 
 //Shows specific share dialog for selected service
 - (void)handleShowActivityShare:(NSNotification *)notification {
-    __block id<SZActivity> activity = (id<SZActivity>)[notification object];
+    __block id<STActivity> activity = (id<STActivity>)[notification object];
     //dismiss share selector and bring up activity-specific share dialog
     [self.parentController dismissViewControllerAnimated:YES completion:^ {
         SLComposeViewController *controller = [self newActivityShareController:activity];
@@ -114,7 +114,7 @@
 
 //calls out to API to report share
 - (void)handleShareComplete:(NSNotification *)notification {
-    id<SZActivity> activity = (id<SZActivity>)[notification object];
+    id<STActivity> activity = (id<STActivity>)[notification object];
     NSArray *shareItems = activity.shareItems;
     NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
     NSDictionary *shareDict = [self.apiClient reportShareDictionary:shareItem

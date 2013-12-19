@@ -9,9 +9,9 @@
 // begin-custom-activity-snippet-header
 
 #import <UIKit/UIKit.h>
-#import "SZActivity.h"
+#import "STActivity.h"
 
-@interface MyCustomActivity : UIActivity<SZActivity>
+@interface MyCustomActivity : UIActivity<STActivity>
 
 @property (nonatomic, strong) NSArray *shareItems;
 

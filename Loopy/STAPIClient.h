@@ -1,5 +1,5 @@
 //
-//  SZAPIClient.h
+//  STAPIClient.h
 //  Loopy
 //
 //  Created by David Jedeikin on 9/10/13.
@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
 
-@interface SZAPIClient : NSObject <NSURLConnectionDataDelegate,CLLocationManagerDelegate>
+@interface STAPIClient : NSObject <NSURLConnectionDataDelegate,CLLocationManagerDelegate>
 
 extern NSString *const INSTALL;
 extern NSString *const OPEN;

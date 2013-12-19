@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SZTestAppDelegate.h"
+#import "STTestAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SZTestAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([STTestAppDelegate class]));
     }
 }

@@ -1,39 +1,25 @@
 //
-//  SZTestAppDelegate.m
+//  STTestAppDelegate.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/10/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZTestAppDelegate.h"
-#import "SZRootViewController.h"
-#import "SZAPIClient.h"
-#import "SZTestUtils.h"
-#import "SZJSONUtils.h"
+#import "STTestAppDelegate.h"
+#import "STRootViewController.h"
+#import "STAPIClient.h"
+#import "STTestUtils.h"
+#import "STJSONUtils.h"
 
-@implementation SZTestAppDelegate
+@implementation STTestAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[SZRootViewController alloc] initWithNibName:@"SZRootViewController" bundle:nil];
+    self.window.rootViewController = [[STRootViewController alloc] initWithNibName:@"STRootViewController" bundle:nil];
     [self.window makeKeyAndVisible];
-    
-    //SIMPLE TEST -- this calls open on the APIClient
-//    NSDictionary *jsonDict = [SZTestUtils jsonForOpen];
-//    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://ec2-54-227-157-217.compute-1.amazonaws.com:8080/loopymock/v1"];
-//    [apiClient open:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        if(error == nil) {
-//            NSLog(@"EPIC SUCCEED!");
-//            id result = [data objectFromJSONData];
-//            NSLog(@"%@", result);
-//        }
-//        else {
-//            NSLog(@"#FAIL! Error code: %d", error.code);
-//        }
-//    }];
     
     return YES;
 }

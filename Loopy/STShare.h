@@ -1,21 +1,21 @@
 //
-//  SZShare.h
+//  STShare.h
 //  Loopy
 //
 //  Created by David Jedeikin on 10/23/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZAPIClient.h"
+#import "STAPIClient.h"
 #import <Foundation/Foundation.h>
 #import <Social/Social.h>
 
-@interface SZShare : NSObject
+@interface STShare : NSObject
 
 @property (nonatomic, strong) UIViewController *parentController;
-@property (nonatomic, strong) SZAPIClient *apiClient;
+@property (nonatomic, strong) STAPIClient *apiClient;
 
-- (id)initWithParent:(UIViewController *)parent apiClient:(SZAPIClient *)client;
+- (id)initWithParent:(UIViewController *)parent apiClient:(STAPIClient *)client;
 - (NSArray *)getDefaultActivities:(NSArray *)activityItems;
 - (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities;
 - (SLComposeViewController *)newActivityShareController:(id)activityObj;

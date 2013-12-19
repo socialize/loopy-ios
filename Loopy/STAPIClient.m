@@ -1,21 +1,21 @@
 //
-//  SZAPIClient.m
+//  STAPIClient.m
 //  Loopy
 //
 //  Created by David Jedeikin on 9/10/13.
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "SZAPIClient.h"
-#import "SZJSONUtils.h"
-#import "Reachability.h"
+#import "STAPIClient.h"
+#import "STJSONUtils.h"
+#import "STReachability.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <AdSupport/ASIdentifierManager.h>
 #import <sys/utsname.h>
 
-@implementation SZAPIClient
+@implementation STAPIClient
 
 NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
@@ -30,7 +30,7 @@ NSString *const MD5ID_KEY = @"md5id";
 NSString *const LAST_OPEN_TIME_KEY = @"lastOpenTime";
 NSString *const LANGUAGE_ID = @"objc";
 NSString *const LANGUAGE_VERSION = @"1.3";
-NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
+NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 
 @synthesize callTimeout = _callTimeout;
 @synthesize openTimeout = _openTimeout;
@@ -347,7 +347,7 @@ NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
 //required subset of endpoint calls
 - (NSDictionary *)deviceDictionary {
     CLLocationCoordinate2D coordinate;
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    STReachability *reachability = [STReachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
     NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -460,8 +460,8 @@ NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
                      json:(NSDictionary *)jsonDict
                   success:(void(^)(AFHTTPRequestOperation *, id))successCallback
                   failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
-    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
+    NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
+    NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
     NSURLRequest *request = [self newHTTPSURLRequest:jsonData
                                               length:jsonLength
@@ -478,8 +478,8 @@ NSString *const SESSION_DATA_FILENAME = @"SZSessionData.plist";
                 json:(NSDictionary *)jsonDict
              success:(void(^)(AFHTTPRequestOperation *, id))successCallback
              failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    NSData *jsonData = [SZJSONUtils toJSONData:jsonDict];
-    NSString *jsonStr = [SZJSONUtils toJSONString:jsonData];
+    NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
+    NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
     NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
     NSURLRequest *request = [self newURLRequest:jsonData
                                          length:jsonLength

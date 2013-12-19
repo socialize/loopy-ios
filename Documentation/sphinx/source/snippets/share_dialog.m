@@ -8,8 +8,8 @@
 
 #import "share_dialog.h"
 #import "custom_activity.h"
-#import "SZShare.h"
-#import "SZAPIClient.h"
+#import "STShare.h"
+#import "STAPIClient.h"
 #import <Social/Social.h>
 
 @implementation ShareDialogViewController
@@ -18,8 +18,8 @@
 
 //Returns a shortened URL then launches the Share Dialog
 - (IBAction)shareButtonPressed:(id)sender {
-    SZShare *share = [[SZShare alloc] initWithParent:self];
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    STShare *share = [[STShare alloc] initWithParent:self];
+    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
     NSDictionary *jsonDict = [self jsonForShortlink:@"www.very-long-url.com"];
     [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         id responseData = [data objectFromJSONData];
@@ -63,7 +63,7 @@
 
 //This is an example of an activity controller with custom UIActivities added in
 - (UIActivityViewController *)activityControllerWithCustomActivities:(NSArray *)activityItems {
-    SZShare *share = [[SZShare alloc] initWithParent:self];
+    STShare *share = [[STShare alloc] initWithParent:self];
     NSArray *defaultActivities = [share getDefaultActivities:activityItems];
     
     //add in any custom activities

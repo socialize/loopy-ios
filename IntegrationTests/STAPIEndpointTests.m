@@ -1,5 +1,5 @@
 //
-//  SZAPIEndpointTests.m
+//  STAPIEndpointTests.m
 //  Loopy
 //
 //  Created by David Jedeikin on 10/1/13.
@@ -7,19 +7,19 @@
 //
 
 #import <GHUnitIOS/GHUnit.h>
-#import "SZAPIClient.h"
-#import "SZTestUtils.h"
-#import "SZJSONUtils.h"
+#import "STAPIClient.h"
+#import "STTestUtils.h"
+#import "STJSONUtils.h"
 
-@interface SZAPIEndpointTests : GHAsyncTestCase {
-    SZAPIClient *apiClient;
+@interface STAPIEndpointTests : GHAsyncTestCase {
+    STAPIClient *apiClient;
 }
 @end
 
-@implementation SZAPIEndpointTests
+@implementation STAPIEndpointTests
 
 - (void)setUp {
-    apiClient = [[SZAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
+    apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
     
     //simulate current location, IDFA, and stdid
@@ -122,11 +122,11 @@
 }
 
 //this uses the JSON object in the APIClient
-//adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
+//adds latency far greater than the NSURLRequest TIMEOUT setting in STAPIClient
 - (void)testOpenEndpointLatencyFail {
     [self prepare];
     NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
-    NSDictionary *jsonDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
+    NSDictionary *jsonDictWithLatency = [STTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
     __block BOOL operationSucceeded = NO;
     
     [apiClient open:jsonDictWithLatency
@@ -300,7 +300,7 @@
 }
 
 //this uses the JSON object in the APIClient
-//adds latency far greater than the NSURLRequest TIMEOUT setting in SZAPIClient
+//adds latency far greater than the NSURLRequest TIMEOUT setting in STAPIClient
 - (void)testShortenShareLatencyFail {
     [self prepare];
     NSDictionary *shortlinkDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
@@ -312,7 +312,7 @@
                                                                   @"http://someimageurl.com/foobar.jpg", @"og:video:type",
                                                                   nil]
                                                             tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
-    NSDictionary *shortlinkDictWithLatency = [SZTestUtils addLatencyToMock:5000 forDictionary:shortlinkDict];
+    NSDictionary *shortlinkDictWithLatency = [STTestUtils addLatencyToMock:5000 forDictionary:shortlinkDict];
     __block BOOL operationSucceeded = NO;
     
     [apiClient shortlink:shortlinkDictWithLatency

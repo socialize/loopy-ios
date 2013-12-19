@@ -52,7 +52,7 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 
-#import "Reachability.h"
+#import "STReachability.h"
 
 
 NSString *kReachabilityChangedNotification = @"kNetworkReachabilityChangedNotification";
@@ -83,7 +83,7 @@ static void PrintReachabilityFlags(SCNetworkReachabilityFlags flags, const char*
 
 #pragma mark - Reachability implementation
 
-@implementation Reachability {
+@implementation STReachability {
 	BOOL localWiFiRef;
 	SCNetworkReachabilityRef reachabilityRef;
 }
@@ -91,7 +91,7 @@ static void PrintReachabilityFlags(SCNetworkReachabilityFlags flags, const char*
 + (instancetype)reachabilityWithAddress:(const struct sockaddr_in *)hostAddress; {
 	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr *)hostAddress);
 
-	Reachability* returnValue = NULL;
+	STReachability* returnValue = NULL;
 
 	if (reachability != NULL)
 	{
