@@ -22,7 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2C0ECE9618174C46005965D0 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
 		2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -32,17 +31,13 @@
 		2C250E2D1804C8EC00A788AC /* STRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C250E2B1804C8EC00A788AC /* STRootViewController.xib */; };
 		2C314A0917E13143003CA1A0 /* STAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* STAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
-		2C314A1B17E13702003CA1A0 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
 		2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34326B17FB40E10039A2D8 /* STAPIEndpointTests.m */; };
 		2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* STTestUtils.m */; };
-		2C34326E17FB6CFA0039A2D8 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
-		2C34326F17FB6D130039A2D8 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
 		2C34327017FB70270039A2D8 /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* STTestUtils.m */; };
 		2C3C15EA1819C1FB00793F9B /* STActivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15E91819C1FB00793F9B /* STActivityTests.m */; };
 		2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15EC1819C71E00793F9B /* STShareCallbackTests.m */; };
 		2C3E069217FA26B700FF751B /* STJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* STJSONUtilsTests.m */; };
 		2C3E069517FA418C00FF751B /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* STTestUtils.m */; };
-		2C3FE374183C2EAA005621B0 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
 		2C44DDDA182036400026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C44DDDB182036470026938A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2C44DDE118207EC20026938A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
@@ -62,36 +57,23 @@
 		2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
 		2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
-		2C5ADD4818185FE700BAC4DC /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShare.m */; };
 		2C5ADD4B181879EC00BAC4DC /* STShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4A181879EC00BAC4DC /* STShareTests.m */; };
 		2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F2EB9185685110032BA75 /* STAPISessionTests.m */; };
-		2C64D41F18187A5100D6CE6C /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShare.m */; };
-		2C64D42018187A5100D6CE6C /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
-		2C64D42118187A5100D6CE6C /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
 		2C64D42218187A6900D6CE6C /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
 		2C64D42318187A6900D6CE6C /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
 		2C64D42418187A6900D6CE6C /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
 		2C64D42518187A6900D6CE6C /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
 		2C64D42618187A6900D6CE6C /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
-		2C64D42818187AB100D6CE6C /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
-		2C698F2918172D20003643B0 /* PinterestLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2618172D20003643B0 /* PinterestLogo43x43.png */; };
-		2C698F2A18172D20003643B0 /* PinterestLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2718172D20003643B0 /* PinterestLogo60x60.png */; };
-		2C698F2B18172D20003643B0 /* PinterestLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C698F2818172D20003643B0 /* PinterestLogo76x76.png */; };
 		2C698F5418173F5E003643B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
-		2C6D367417E3AD0300CF1199 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
-		2C6D367517E3B85E00CF1199 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
 		2C742AA417F371620063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AA017F371620063653A /* libPods.a */; };
 		2C742AD217F3912E0063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742ACE17F3912E0063653A /* libPods.a */; };
 		2C742AD617F391440063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AD517F391440063653A /* libPods.a */; };
-		2C8C1E1817E10BB80075B527 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
 		2C8C1E1C17E10BB80075B527 /* STTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1517E10BB80075B527 /* STTestAppDelegate.m */; };
 		2C8D99E01834519E00D9BB4E /* STReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8D99DE1834519E00D9BB4E /* STReachability.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2C8D99E11834519E00D9BB4E /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
-		2CA3360D18345245003D7498 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
-		2CA3360E1834524D003D7498 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
 		2CA33610183452E5003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
 		2CA33611183452FC003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
 		2CA3361218345307003D7498 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA3360F183452E5003D7498 /* SystemConfiguration.framework */; };
@@ -99,19 +81,10 @@
 		2CA3DCF01811E8AD005E9159 /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
 		2CA3DCF11811E8AD005E9159 /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
 		2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
-		2CA3DCF31811E8AD005E9159 /* GooglePlusLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */; };
-		2CA3DCF41811E8AD005E9159 /* GooglePlusLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */; };
-		2CA3DCF51811E8AD005E9159 /* GooglePlusLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */; };
 		2CA3DCF61811E8AD005E9159 /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
 		2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
-		2CA3DCF91811E8AD005E9159 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
-		2CA3DCFB1811E8AD005E9159 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
 		2CBFAEA81863A17E00BBFCC7 /* STActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBFAEA71863A17E00BBFCC7 /* STActivity.h */; };
-		2CD55AFE1819C9FA0051C842 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShare.m */; };
-		2CD55AFF1819C9FA0051C842 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
-		2CD55B001819C9FA0051C842 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
-		2CD55B011819CA140051C842 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -130,10 +103,31 @@
 		2CEFADAB1833000200841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
 		2CEFADAC1833000E00841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
 		2CEFADAD1833001B00841C33 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
-		2CF9E02E18440E2C00ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
-		2CF9E02F18440E3600ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
-		2CF9E03018440E4200ED52F7 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
-		2CF9E03118440E6100ED52F7 /* LoopyApiInfo.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */; };
+		2CF479BC18649F2B00150721 /* LoopyApiInfo.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
+		2CF479C61864A01900150721 /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C44DDE018207EC20026938A /* libLoopy.a */; };
+		2CF479C71864A05E00150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
+		2CF479C91864A16000150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
+		2CF479CB1864A17F00150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
+		2CF479CC1864A20A00150721 /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
+		2CF479CD1864A20A00150721 /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
+		2CF479CE1864A20A00150721 /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
+		2CF479CF1864A20A00150721 /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
+		2CF479D01864A20A00150721 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
+		2CF479D11864A20A00150721 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
+		2CF479D21864B2C100150721 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
+		2CF479D31864B2C100150721 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
+		2CF479D41864B2C100150721 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShare.m */; };
+		2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
+		2CF479D61864B2C100150721 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
+		2CF479D71864B2C100150721 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
+		2CF479D81864B2C100150721 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
+		2CF479D91864B2D800150721 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
+		2CF479DA1864B2D800150721 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
+		2CF479DB1864B2D800150721 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShare.m */; };
+		2CF479DC1864B2D800150721 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
+		2CF479DD1864B2D800150721 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
+		2CF479DE1864B2D800150721 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
+		2CF479DF1864B2D800150721 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,7 +137,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				2CF9E03118440E6100ED52F7 /* LoopyApiInfo.plist in CopyFiles */,
+				2CF479BC18649F2B00150721 /* LoopyApiInfo.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,9 +181,6 @@
 		2C66953A18297A0700AB8C08 /* share_dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = share_dialog.m; path = Documentation/sphinx/source/snippets/share_dialog.m; sourceTree = SOURCE_ROOT; };
 		2C66953D18299EA700AB8C08 /* custom_share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = custom_share.h; path = Documentation/sphinx/source/snippets/custom_share.h; sourceTree = SOURCE_ROOT; };
 		2C66953E18299EA700AB8C08 /* custom_share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = custom_share.m; path = Documentation/sphinx/source/snippets/custom_share.m; sourceTree = SOURCE_ROOT; };
-		2C698F2618172D20003643B0 /* PinterestLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo43x43.png; sourceTree = "<group>"; };
-		2C698F2718172D20003643B0 /* PinterestLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo60x60.png; sourceTree = "<group>"; };
-		2C698F2818172D20003643B0 /* PinterestLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PinterestLogo76x76.png; sourceTree = "<group>"; };
 		2C698F5318173F5E003643B0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2C6D367217E3AD0300CF1199 /* STJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STJSONUtils.h; sourceTree = "<group>"; };
 		2C6D367317E3AD0300CF1199 /* STJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STJSONUtils.m; sourceTree = "<group>"; };
@@ -223,9 +214,6 @@
 		2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue43x43.png; sourceTree = "<group>"; };
 		2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue60x60.png; sourceTree = "<group>"; };
 		2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue76x76.png; sourceTree = "<group>"; };
-		2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo43x43.png; sourceTree = "<group>"; };
-		2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo60x60.png; sourceTree = "<group>"; };
-		2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GooglePlusLogo76x76.png; sourceTree = "<group>"; };
 		2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo43x43.png; sourceTree = "<group>"; };
 		2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo60x60.png; sourceTree = "<group>"; };
 		2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo76x76.png; sourceTree = "<group>"; };
@@ -246,7 +234,7 @@
 		2CE78B991831AAC9004EBB82 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2CEFADA81832FFEF00841C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
+		2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +271,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF479C61864A01900150721 /* libLoopy.a in Frameworks */,
 				2C742AD617F391440063653A /* libPods.a in Frameworks */,
 				2C698F5418173F5E003643B0 /* Social.framework in Frameworks */,
 				2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */,
@@ -448,7 +437,7 @@
 		2C8C1E0B17E10BB80075B527 /* Loopy */ = {
 			isa = PBXGroup;
 			children = (
-				2CC32EA518342D3B0025FCD2 /* Resources */,
+				2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */,
 				2C44DDE518207EC20026938A /* Loopy.h */,
 				2C0ECE9418174C46005965D0 /* STConstants.h */,
 				2C0ECE9518174C46005965D0 /* STConstants.m */,
@@ -506,26 +495,11 @@
 				2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */,
 				2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */,
 				2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */,
-				2CA3DCE41811E8AD005E9159 /* GooglePlusLogo43x43.png */,
-				2CA3DCE51811E8AD005E9159 /* GooglePlusLogo60x60.png */,
-				2CA3DCE61811E8AD005E9159 /* GooglePlusLogo76x76.png */,
-				2C698F2618172D20003643B0 /* PinterestLogo43x43.png */,
-				2C698F2718172D20003643B0 /* PinterestLogo60x60.png */,
-				2C698F2818172D20003643B0 /* PinterestLogo76x76.png */,
 				2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */,
 				2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */,
 				2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		2CC32EA518342D3B0025FCD2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				2CF9E02D1844096E00ED52F7 /* LoopyApiInfo.plist */,
-			);
-			name = Resources;
-			path = ../TestApp;
 			sourceTree = "<group>";
 		};
 		2CDE0E7317E122A30048B055 /* UnitTests */ = {
@@ -695,8 +669,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF479CC1864A20A00150721 /* FacebookLogoNoBlue43x43.png in Resources */,
+				2CF479CD1864A20A00150721 /* FacebookLogoNoBlue60x60.png in Resources */,
+				2CF479CE1864A20A00150721 /* FacebookLogoNoBlue76x76.png in Resources */,
+				2CF479CF1864A20A00150721 /* TwitterLogo43x43.png in Resources */,
+				2CF479D01864A20A00150721 /* TwitterLogo60x60.png in Resources */,
+				2CF479D11864A20A00150721 /* TwitterLogo76x76.png in Resources */,
 				2C1B5BD517E2793000855D0D /* InfoPlist.strings in Resources */,
-				2CF9E02E18440E2C00ED52F7 /* LoopyApiInfo.plist in Resources */,
+				2CF479CB1864A17F00150721 /* LoopyApiInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,20 +684,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF479C71864A05E00150721 /* LoopyApiInfo.plist in Resources */,
 				2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */,
-				2CF9E03018440E4200ED52F7 /* LoopyApiInfo.plist in Resources */,
 				2CA3DCF01811E8AD005E9159 /* FacebookLogoNoBlue43x43.png in Resources */,
-				2C698F2B18172D20003643B0 /* PinterestLogo76x76.png in Resources */,
-				2C698F2918172D20003643B0 /* PinterestLogo43x43.png in Resources */,
 				2CA3DCF61811E8AD005E9159 /* TwitterLogo43x43.png in Resources */,
-				2CA3DCF31811E8AD005E9159 /* GooglePlusLogo43x43.png in Resources */,
-				2CA3DCF41811E8AD005E9159 /* GooglePlusLogo60x60.png in Resources */,
 				2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */,
-				2C698F2A18172D20003643B0 /* PinterestLogo60x60.png in Resources */,
 				2CA3DCF11811E8AD005E9159 /* FacebookLogoNoBlue60x60.png in Resources */,
 				2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */,
 				2CA3DCF21811E8AD005E9159 /* FacebookLogoNoBlue76x76.png in Resources */,
-				2CA3DCF51811E8AD005E9159 /* GooglePlusLogo76x76.png in Resources */,
 				2C250E2D1804C8EC00A788AC /* STRootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +700,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF479C91864A16000150721 /* LoopyApiInfo.plist in Resources */,
 				2C64D42218187A6900D6CE6C /* FacebookLogoNoBlue43x43.png in Resources */,
 				2C64D42318187A6900D6CE6C /* FacebookLogoNoBlue60x60.png in Resources */,
 				2C64D42418187A6900D6CE6C /* FacebookLogoNoBlue76x76.png in Resources */,
@@ -734,7 +709,6 @@
 				2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */,
 				2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */,
 				2CDE0E7817E122A30048B055 /* InfoPlist.strings in Resources */,
-				2CF9E02F18440E3600ED52F7 /* LoopyApiInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,17 +864,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CD55B011819CA140051C842 /* STConstants.m in Sources */,
-				2CD55AFE1819C9FA0051C842 /* STShare.m in Sources */,
-				2CD55AFF1819C9FA0051C842 /* STFacebookActivity.m in Sources */,
-				2CD55B001819C9FA0051C842 /* STTwitterActivity.m in Sources */,
-				2C34326F17FB6D130039A2D8 /* STAPIClient.m in Sources */,
-				2C34326E17FB6CFA0039A2D8 /* STJSONUtils.m in Sources */,
+				2CF479D91864B2D800150721 /* STConstants.m in Sources */,
+				2CF479DA1864B2D800150721 /* STReachability.m in Sources */,
+				2CF479DB1864B2D800150721 /* STShare.m in Sources */,
+				2CF479DC1864B2D800150721 /* STFacebookActivity.m in Sources */,
+				2CF479DD1864B2D800150721 /* STTwitterActivity.m in Sources */,
+				2CF479DE1864B2D800150721 /* STAPIClient.m in Sources */,
+				2CF479DF1864B2D800150721 /* STJSONUtils.m in Sources */,
 				2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */,
 				2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */,
-				2C3FE374183C2EAA005621B0 /* STReachability.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,17 +897,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5ADD4818185FE700BAC4DC /* STShare.m in Sources */,
 				2C34327017FB70270039A2D8 /* STTestUtils.m in Sources */,
-				2CA3DCF91811E8AD005E9159 /* STFacebookActivity.m in Sources */,
-				2CA3DCFB1811E8AD005E9159 /* STTwitterActivity.m in Sources */,
-				2C6D367417E3AD0300CF1199 /* STJSONUtils.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
 				2C250E2C1804C8EC00A788AC /* STRootViewController.m in Sources */,
-				2C0ECE9618174C46005965D0 /* STConstants.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* STTestAppDelegate.m in Sources */,
-				2C8C1E1817E10BB80075B527 /* STAPIClient.m in Sources */,
-				2CA3360E1834524D003D7498 /* STReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,19 +908,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C64D42818187AB100D6CE6C /* STConstants.m in Sources */,
+				2CF479D21864B2C100150721 /* STConstants.m in Sources */,
+				2CF479D31864B2C100150721 /* STReachability.m in Sources */,
+				2CF479D41864B2C100150721 /* STShare.m in Sources */,
+				2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */,
+				2CF479D61864B2C100150721 /* STTwitterActivity.m in Sources */,
+				2CF479D71864B2C100150721 /* STAPIClient.m in Sources */,
+				2CF479D81864B2C100150721 /* STJSONUtils.m in Sources */,
 				2C3C15EA1819C1FB00793F9B /* STActivityTests.m in Sources */,
-				2C64D41F18187A5100D6CE6C /* STShare.m in Sources */,
-				2C64D42018187A5100D6CE6C /* STFacebookActivity.m in Sources */,
-				2C64D42118187A5100D6CE6C /* STTwitterActivity.m in Sources */,
-				2C6D367517E3B85E00CF1199 /* STJSONUtils.m in Sources */,
-				2C314A1B17E13702003CA1A0 /* STAPIClient.m in Sources */,
 				2C314A0917E13143003CA1A0 /* STAPIClientTests.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
 				2C5ADD4B181879EC00BAC4DC /* STShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* STTestUtils.m in Sources */,
 				2C3E069217FA26B700FF751B /* STJSONUtilsTests.m in Sources */,
-				2CA3360D18345245003D7498 /* STReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
