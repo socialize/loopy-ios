@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using the Share Dialog &mdash; Loopy iOS SDK 0.1.0 documentation</title>
+    <title>Using the Share Dialog &mdash; Loopy iOS SDK 1.0.0-rc2 documentation</title>
     
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '1.0.0-rc2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
-    <link rel="top" title="Loopy iOS SDK 0.1.0 documentation" href="index.html" />
+    <link rel="top" title="Loopy iOS SDK 1.0.0-rc2 documentation" href="index.html" />
     <link rel="next" title="Using a Custom Share UI" href="custom_share.html" />
     <link rel="prev" title="Upgrading Loopy" href="upgrading.html" />
 <script type="text/javascript" src="static/loopy.js"></script>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="upgrading.html" title="Upgrading Loopy"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS SDK 1.0.0-rc2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -94,8 +94,8 @@
 <div class="highlight-objective-c"><pre>
 //Returns a shortened URL then launches the Share Dialog
 - (IBAction)shareButtonPressed:(id)sender {
-    SZShare *share = [[SZShare alloc] initWithParent:self];
-    SZAPIClient *apiClient = [[SZAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    STShare *share = [[STShare alloc] initWithParent:self];
+    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
     NSDictionary *jsonDict = [self jsonForShortlink:@"www.very-long-url.com"];
     [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         id responseData = [data objectFromJSONData];
@@ -136,9 +136,9 @@
 </div>
 <p>To add additional <strong>UIActivity</strong> classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the <strong>SZActivity</strong> protocol; <strong>your header and implementation files should contain the following:</strong></p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-<span class="cp">#import &quot;SZActivity.h&quot;</span>
+<span class="cp">#import &quot;STActivity.h&quot;</span>
 
-<span class="k">@interface</span> <span class="nc">MyCustomActivity</span> : <span class="nc">UIActivity</span><span class="o">&lt;</span><span class="n">SZActivity</span><span class="o">&gt;</span>
+<span class="k">@interface</span> <span class="nc">MyCustomActivity</span> : <span class="nc">UIActivity</span><span class="o">&lt;</span><span class="n">STActivity</span><span class="o">&gt;</span>
 
 <span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">shareItems</span><span class="p">;</span>
 
@@ -189,7 +189,7 @@
 <p>Include the custom activity in the NSArray passed in to SZShare&#8217;s UIActivityViewController, as follows:</p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">//This is an example of an activity controller with custom UIActivities added in</span>
 <span class="k">-</span> <span class="p">(</span><span class="n">UIActivityViewController</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityControllerWithCustomActivities:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">activityItems</span> <span class="p">{</span>
-    <span class="n">SZShare</span> <span class="o">*</span><span class="n">share</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SZShare</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithParent</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+    <span class="n">STShare</span> <span class="o">*</span><span class="n">share</span> <span class="o">=</span> <span class="p">[[</span><span class="n">STShare</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithParent</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
     <span class="n">NSArray</span> <span class="o">*</span><span class="n">defaultActivities</span> <span class="o">=</span> <span class="p">[</span><span class="n">share</span> <span class="n">getDefaultActivities</span><span class="o">:</span><span class="n">activityItems</span><span class="p">];</span>
     
     <span class="c1">//add in any custom activities</span>
@@ -249,11 +249,11 @@
         <li class="right" >
           <a href="upgrading.html" title="Upgrading Loopy"
              >previous</a> |</li>
-        <li><a href="index.html">Loopy iOS SDK 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS SDK 1.0.0-rc2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013, ShareThis Inc.
+        &copy; Copyright 2014, ShareThis Inc.
     </div>
   </body>
 </html>
