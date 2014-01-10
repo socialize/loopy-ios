@@ -19,6 +19,10 @@
 - (void)setUp {
     apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
                                            loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
+    //for now, use mock API
+    apiClient.urlPrefix = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
+    apiClient.httpsURLPrefix = @"https://ec2-54-226-117-50.compute-1.amazonaws.com:8443/loopy-mock/v1";
+    
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators
     if(!apiClient.currentLocation) {

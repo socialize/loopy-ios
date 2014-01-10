@@ -127,7 +127,9 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         
         [self install:[self installDictionaryWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  postSuccessCallback(operation, responseObject);
+                  if(postSuccessCallback != nil) {
+                      postSuccessCallback(operation, responseObject);
+                  }
               }
               failure:failureCallback];
     }
@@ -146,13 +148,17 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
             
             [self open:[self openDictionaryWithReferrer:referrer]
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   postSuccessCallback(operation, responseObject);
+                   if(postSuccessCallback != nil) {
+                       postSuccessCallback(operation, responseObject);
+                   }
                }
                failure:failureCallback];
         }
         //bogus call to success to indicating no open needed
         else {
-            postSuccessCallback(nil, nil);
+            if(postSuccessCallback != nil) {
+                postSuccessCallback(nil, nil);
+            }
         }
     }
 }
