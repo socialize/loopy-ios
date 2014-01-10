@@ -3,3 +3,8 @@ Loopy/Resources/.DS_Store
 TestApp/.DS_Store
 UnitTests/.DS_Store
 XcodeCoverage/*
+build
+*xcuserdata*
+xcuserdata
+Pods
+Podfile.lock
