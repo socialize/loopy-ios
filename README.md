@@ -1,5 +1,5 @@
-loopy-sdk-ios
-=============
+loopy-ios
+=========
 
 iOS Library for the Loopy Social Analytics Platform
 
