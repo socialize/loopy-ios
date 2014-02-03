@@ -1,6 +1,6 @@
 
-Loopy iOS SDK
-=============
+Loopy iOS Library
+=================
 
 Contents:
 

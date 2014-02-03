@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting Started &mdash; Loopy iOS SDK 1.0.0-RC3 documentation</title>
+    <title>Getting Started &mdash; Loopy iOS Library 1.0.0-RC3 documentation</title>
     
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
-    <link rel="top" title="Loopy iOS SDK 1.0.0-RC3 documentation" href="index.html" />
+    <link rel="top" title="Loopy iOS Library 1.0.0-RC3 documentation" href="index.html" />
     <link rel="next" title="Upgrading Loopy" href="upgrading.html" />
-    <link rel="prev" title="Loopy iOS SDK" href="index.html" />
+    <link rel="prev" title="Loopy iOS Library" href="index.html" />
 <script type="text/javascript" src="static/loopy.js"></script>
 
   </head>
@@ -39,9 +39,9 @@
           <a href="upgrading.html" title="Upgrading Loopy"
              accesskey="N">next</a></li>
         <li class="right" >
-          <a href="index.html" title="Loopy iOS SDK"
+          <a href="index.html" title="Loopy iOS Library"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Loopy iOS SDK 1.0.0-RC3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.0.0-RC3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -64,7 +64,7 @@
   feedback_widget_options.placement = "right";
   feedback_widget_options.color = "#222";
   feedback_widget_options.style = "idea";
-  feedback_widget_options.product = "socialize_ios_sdk";
+  feedback_widget_options.product = "socialize_ios_lib";
   feedback_widget_options.tag = "Feedback";
 
   feedback_widget_options.limit = "3";
@@ -80,33 +80,33 @@
 <ul class="simple">
 <li><a class="reference internal" href="#getting-started" id="id1">Getting Started</a><ul>
 <li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
-<li><a class="reference internal" href="#installing-the-sdk" id="id3">Installing the SDK</a></li>
+<li><a class="reference internal" href="#installing-the-library" id="id3">Installing the Library</a></li>
 <li><a class="reference internal" href="#installing-with-cocoapods" id="id4">Installing with CocoaPods</a><ul>
 <li><a class="reference internal" href="#step-1-install-rubygems-cocoapods-one-time-operation" id="id5">Step 1: Install RubyGems &amp; CocoaPods (One-Time Operation)</a></li>
 <li><a class="reference internal" href="#step-2-install-loopy-as-a-cocoapod" id="id6">Step 2: Install Loopy as a CocoaPod</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#implementing-the-sdk-lifecycle-in-your-activity" id="id7">Implementing the SDK Lifecycle in Your Activity</a></li>
+<li><a class="reference internal" href="#implementing-the-library-lifecycle-in-your-activity" id="id7">Implementing the Library Lifecycle in Your Activity</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="introduction">
 <h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The Loopy SDK provides a simple set of classes and methods built upon the Loopy REST API.</p>
+<p>The Loopy Library provides a simple set of classes and methods built upon the Loopy REST API.</p>
 <p>App developers can elect to use either the pre-defined user interface controls provided in the Loopy UI
-framework, or &#8220;roll their own&#8221; using direct SDK calls.</p>
-<p>All calls to the Loopy SDK are <em>asynchronous</em>, meaning that your application will not &#8220;block&#8221; while
+framework, or &#8220;roll their own&#8221; using direct Library calls.</p>
+<p>All calls to the Loopy Library are <em>asynchronous</em>, meaning that your application will not &#8220;block&#8221; while
 waiting for a response from the Loopy server.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
-<li>iOS 6.1 is the minimum version supported by this SDK</li>
+<li>iOS 6.1 is the minimum version supported by this Library</li>
 </ul>
 </div>
 </div>
-<div class="section" id="installing-the-sdk">
-<h2><a class="toc-backref" href="#id3">Installing the SDK</a><a class="headerlink" href="#installing-the-sdk" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-the-library">
+<h2><a class="toc-backref" href="#id3">Installing the Library</a><a class="headerlink" href="#installing-the-library" title="Permalink to this headline">¶</a></h2>
 <p>If you are upgrading from a previous release, check out the <a class="reference external" href="upgrading.html">Upgrading Guide</a>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -164,8 +164,8 @@ pod 'Loopy'</pre>
 </ul>
 </div>
 </div>
-<div class="section" id="implementing-the-sdk-lifecycle-in-your-activity">
-<h2><a class="toc-backref" href="#id7">Implementing the SDK Lifecycle in Your Activity</a><a class="headerlink" href="#implementing-the-sdk-lifecycle-in-your-activity" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="implementing-the-library-lifecycle-in-your-activity">
+<h2><a class="toc-backref" href="#id7">Implementing the Library Lifecycle in Your Activity</a><a class="headerlink" href="#implementing-the-library-lifecycle-in-your-activity" title="Permalink to this headline">¶</a></h2>
 <p>In order for Loopy to track install and open events (as well as enable itself for recording other operations), it must be initialized. To do so, add the following code to your AppDelegate:</p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span> <span class="p">{</span>
     <span class="n">loopyAPIClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">STAPIClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithAPIKey</span><span class="o">:</span><span class="s">@&quot;&lt;YOUR-API-KEY&gt;&quot;</span>
@@ -199,9 +199,9 @@ pod 'Loopy'</pre>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-sdk">Installing the SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-library">Installing the Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-with-cocoapods">Installing with CocoaPods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#implementing-the-sdk-lifecycle-in-your-activity">Implementing the SDK Lifecycle in Your Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-the-library-lifecycle-in-your-activity">Implementing the Library Lifecycle in Your Activity</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading Loopy</a></li>
@@ -235,9 +235,9 @@ pod 'Loopy'</pre>
           <a href="upgrading.html" title="Upgrading Loopy"
              >next</a></li>
         <li class="right" >
-          <a href="index.html" title="Loopy iOS SDK"
+          <a href="index.html" title="Loopy iOS Library"
              >previous</a> |</li>
-        <li><a href="index.html">Loopy iOS SDK 1.0.0-RC3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.0.0-RC3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
