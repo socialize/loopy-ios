@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Loopy iOS SDK documentation build configuration file, created by
+# Loopy iOS Library documentation build configuration file, created by
 # sphinx-quickstart on Tue Oct 29 14:32:30 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Loopy iOS SDK'
+project = u'Loopy iOS Library'
 copyright = u'2014, ShareThis Inc'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -168,7 +168,7 @@ html_show_copyright = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'LoopyiOSSDKdoc'
+htmlhelp_basename = 'LoopyiOSLibrarydoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -187,7 +187,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'LoopyiOSSDK.tex', u'Loopy iOS SDK Documentation',
+  ('index', 'LoopyiOSLibrary.tex', u'Loopy iOS Library Documentation',
    u'ShareThis Inc', 'manual'),
 ]
 
@@ -217,7 +217,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'loopyiossdk', u'Loopy iOS SDK Documentation',
+    ('index', 'loopyioslibrary', u'Loopy iOS Library Documentation',
      [u'ShareThis Inc'], 1)
 ]
 
@@ -231,8 +231,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'LoopyiOSSDK', u'Loopy iOS SDK Documentation',
-   u'ShareThis Inc', 'LoopyiOSSDK', 'One line description of project.',
+  ('index', 'LoopyiOSLibrary', u'Loopy iOS Library Documentation',
+   u'ShareThis Inc', 'LoopyiOSLibrary', 'One line description of project.',
    'Miscellaneous'),
 ]
 

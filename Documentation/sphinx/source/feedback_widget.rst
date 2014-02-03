@@ -14,7 +14,7 @@
       feedback_widget_options.placement = "right";
       feedback_widget_options.color = "#222";
       feedback_widget_options.style = "idea";
-      feedback_widget_options.product = "socialize_ios_sdk";
+      feedback_widget_options.product = "socialize_ios_lib";
       feedback_widget_options.tag = "Feedback";
   
       feedback_widget_options.limit = "3";

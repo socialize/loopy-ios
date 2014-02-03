@@ -9,18 +9,18 @@ Getting Started
 
 Introduction
 ------------
-The Loopy SDK provides a simple set of classes and methods built upon the Loopy REST API.
+The Loopy Library provides a simple set of classes and methods built upon the Loopy REST API.
 
 App developers can elect to use either the pre-defined user interface controls provided in the Loopy UI 
-framework, or "roll their own" using direct SDK calls.
+framework, or "roll their own" using direct Library calls.
 
-All calls to the Loopy SDK are *asynchronous*, meaning that your application will not "block" while 
+All calls to the Loopy Library are *asynchronous*, meaning that your application will not "block" while 
 waiting for a response from the Loopy server.
 
-.. note:: * iOS 6.1 is the minimum version supported by this SDK
+.. note:: * iOS 6.1 is the minimum version supported by this Library
 
-Installing the SDK
-------------------
+Installing the Library
+----------------------
 
 If you are upgrading from a previous release, check out the `Upgrading Guide`_.
 
@@ -95,8 +95,8 @@ Step 2: Install Loopy as a CocoaPod
 - After Loopy CocoaPod is created in your project, **you must use the Xcode workspace (YourProject.xcworkspace) to use the CocoaPod.** All your project settings should still be available to you from the workspace. **DO NOT open the .xcodeproj directly.**
 
 
-Implementing the SDK Lifecycle in Your Activity
------------------------------------------------
+Implementing the Library Lifecycle in Your Activity
+---------------------------------------------------
 
 In order for Loopy to track install and open events (as well as enable itself for recording other operations), it must be initialized. To do so, add the following code to your AppDelegate:
 
