@@ -1,12 +1,12 @@
 loopy-sdk-ios
 =============
 
-iOS SDK for the Loopy Social Analytics Platform
+iOS Library for the Loopy Social Analytics Platform
 
 Documentation:
 
-http://socialize.github.io/loopy-sdk-ios/
+http://socialize.github.io/loopy-ios/
 
-Cocopod Spec:
+CocoaPod Spec:
 
 https://github.com/CocoaPods/Specs/tree/master/Loopy
