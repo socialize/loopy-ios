@@ -5,60 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5EAB97AD-69A9-4AB6-A70D-672664BB46B7</string>
+	<string>5C76AB98-96B5-4642-BA6E-76C98ED414C2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Loopy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>15702542-3CA2-44C4-89F4-B919C5A91A63</key>
-		<string>https://github.com/socialize/loopy-sdk-ios.git</string>
-		<key>2DB69A4E-21FE-43DF-84D8-5650B8CED9F6</key>
-		<string>https://github.com/socialize/gh-unit.git</string>
-		<key>DDCB075E-DFAE-4ADB-8386-D690A3E6E0EF</key>
-		<string>https://github.com/socialize/ocmock.git</string>
+		<key>BE339428-F6B3-445A-B18C-7A54C3C5F5C8</key>
+		<string>ssh://github.com/socialize/loopy-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Loopy.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>15702542-3CA2-44C4-89F4-B919C5A91A63</key>
+		<key>BE339428-F6B3-445A-B18C-7A54C3C5F5C8</key>
 		<string>..</string>
-		<key>2DB69A4E-21FE-43DF-84D8-5650B8CED9F6</key>
-		<string>../ThirdParty/gh-unit</string>
-		<key>DDCB075E-DFAE-4ADB-8386-D690A3E6E0EF</key>
-		<string>../ThirdParty/ocmock</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/socialize/loopy-sdk-ios.git</string>
+	<string>ssh://github.com/socialize/loopy-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>15702542-3CA2-44C4-89F4-B919C5A91A63</string>
+	<string>BE339428-F6B3-445A-B18C-7A54C3C5F5C8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2DB69A4E-21FE-43DF-84D8-5650B8CED9F6</string>
+			<string>BE339428-F6B3-445A-B18C-7A54C3C5F5C8</string>
 			<key>IDESourceControlWCCName</key>
-			<string>gh-unit</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>15702542-3CA2-44C4-89F4-B919C5A91A63</string>
-			<key>IDESourceControlWCCName</key>
-			<string>loopy-sdk-ios</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DDCB075E-DFAE-4ADB-8386-D690A3E6E0EF</string>
-			<key>IDESourceControlWCCName</key>
-			<string>ocmock</string>
+			<string>loopy-ios</string>
 		</dict>
 	</array>
 </dict>
