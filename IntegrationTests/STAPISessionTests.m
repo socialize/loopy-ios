@@ -17,11 +17,11 @@
 @implementation STAPISessionTests
 
 - (void)setUp {
-    apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
-                                           loopyKey:@"4q7cd6ngw3vu7gram5b9b9t6"];
+    apiClient = [[STAPIClient alloc] initWithAPIKey:@"c64fc5c7-2379-4249-8ccd-ef33d5bfac52"
+                                           loopyKey:@"_sandbox_key_sandbox"];
     //for now, use mock API
-    apiClient.urlPrefix = @"http://ec2-54-226-117-50.compute-1.amazonaws.com:8080/loopy-mock/v1";
-    apiClient.httpsURLPrefix = @"https://ec2-54-226-117-50.compute-1.amazonaws.com:8443/loopy-mock/v1";
+    apiClient.urlPrefix = @"http://stage.api.loopy.getsocialize.com:8080/v1";
+    apiClient.httpsURLPrefix = @"http://stage.api.loopy.getsocialize.com:8080/v1";
     
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators
