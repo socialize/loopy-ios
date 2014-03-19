@@ -21,6 +21,7 @@ NSString *const INSTALL = @"/install";
 NSString *const OPEN = @"/open";
 NSString *const SHORTLINK = @"/shortlink";
 NSString *const REPORT_SHARE = @"/share";
+NSString *const SHARELINK = @"/sharelink";
 NSString *const LOG = @"/log";
 
 NSString *const API_KEY = @"X-LoopyAppID";
@@ -299,6 +300,41 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     return shareObj;
 }
 
+//returns JSON-ready dictionary for /sharelink endpoint
+- (NSDictionary *)sharelinkDictionary:(NSString *)link
+                              channel:(NSString *)socialChannel
+                                title:(NSString *)title
+                                 meta:(NSDictionary *)meta
+                                 tags:(NSArray *)tags {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSMutableDictionary *itemObj = [NSMutableDictionary dictionary];
+    if(link != nil) {
+        [itemObj setValue:link forKey:@"url"];
+    }
+    if(title != nil) {
+        [itemObj setValue:title forKey:@"title"];
+    }
+    if(meta != nil) {
+        [itemObj setValue:meta forKey:@"meta"];
+    }
+    NSMutableDictionary *sharelinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         self.stdid,@"stdid",
+                                         self.md5id, @"md5id",
+                                         [NSNumber numberWithInt:timestamp],@"timestamp",
+                                         [self deviceDictionary],@"device",
+                                         [self appDictionary],@"app",
+                                         socialChannel,@"channel",
+                                         [self clientDictionary],@"client",
+                                         itemObj,@"item",
+                                         nil];
+    
+    if(tags != nil) {
+        [sharelinkObj setValue:tags forKey:@"tags"];
+    }
+
+    return sharelinkObj;
+}
+
 //returns JSON-ready dictionary for /log endpoint, based on type and meta
 - (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta {
     int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -440,7 +476,26 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callEndpoint:REPORT_SHARE json:jsonDict
+    [self callEndpoint:REPORT_SHARE
+                  json:jsonDict
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   //remove current shortlink from cache
+                   //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
+                   //thus keys should contain only one element
+                   NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
+                   NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
+                   for(id key in keys) {
+                       [self.shortlinks removeObjectForKey:key];
+                   }
+                   successCallback(operation, responseObject);
+               }
+               failure:failureCallback];
+}
+- (void)sharelink:(NSDictionary *)jsonDict
+          success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+          failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:SHARELINK
+                  json:jsonDict
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    //remove current shortlink from cache
                    //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique

@@ -13,8 +13,10 @@
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIButton *installButton;
 @property (nonatomic, strong) IBOutlet UIButton *shareButton;
+@property (nonatomic, strong) IBOutlet UIButton *sharelinkButton;
 
 - (IBAction)installButtonPressed:(id)sender;
 - (IBAction)shareButtonPressed:(id)sender;
+- (IBAction)sharelinkButtonPressed:(id)sender;
 
 @end
