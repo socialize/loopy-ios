@@ -159,6 +159,33 @@
     GHAssertNotNil([itemDict valueForKey:@"meta"], @"");
 }
 
+- (void)testSharelinkDictionary {
+    NSString *dummyChannel = @"Facebook";
+    NSDictionary *sharelinkDict = [apiClient sharelinkDictionary:@"http://www.facebook.com"
+                                                         channel:dummyChannel
+                                                           title:@"Share This"
+                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"A description should go here.", @"og:description",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                                  nil]
+                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    GHAssertNotNil(sharelinkDict, @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"stdid"], @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"md5id"], @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"timestamp"], @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"item"], @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"tags"], @"");
+    GHAssertNotNil([sharelinkDict valueForKey:@"app"], @"");
+    NSString *channel = [sharelinkDict valueForKey:@"channel"];
+    GHAssertEqualStrings(channel, dummyChannel, @"");
+    
+    NSDictionary *itemDict = (NSDictionary *)[sharelinkDict valueForKey:@"item"];
+    GHAssertNotNil([itemDict valueForKey:@"title"], @"");
+    GHAssertNotNil([itemDict valueForKey:@"meta"], @"");
+}
+
 - (void)testReportShareDictionary {
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";

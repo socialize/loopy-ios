@@ -124,35 +124,6 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the JSON object in the APIClient
-//adds latency far greater than the NSURLRequest TIMEOUT setting in STAPIClient
-//- (void)testOpenEndpointLatencyFail {
-//    [self prepare];
-//    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
-//    NSDictionary *jsonDictWithLatency = [STTestUtils addLatencyToMock:5000 forDictionary:jsonDict];
-//    __block BOOL operationSucceeded = NO;
-//    
-//    [apiClient open:jsonDictWithLatency
-//            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                operationSucceeded = NO;
-//                [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointLatencyFail)];
-//            }
-//            //this scenario EXPECTS an error with code -1001 (request timeout)
-//            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                if([error code] == -1001) {
-//                    operationSucceeded = YES;
-//                    [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testOpenEndpointLatencyFail)];
-//                }
-//                else {
-//                    operationSucceeded = NO;
-//                    [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointLatencyFail)];
-//                }
-//            }];
-//    
-//    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-//    GHAssertTrue(operationSucceeded, @"");
-//}
-
 //this uses the same JSON object used by unit tests
 - (void)testShortlinkEndpoint {
     [self prepare];
@@ -187,6 +158,47 @@
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      operationSucceeded = NO;
                      [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShortlinkEndpoint)];
+                 }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
+
+//this uses the same JSON object used by unit tests
+- (void)testSharelinkEndpoint {
+    [self prepare];
+    NSDictionary *jsonDict = [apiClient sharelinkDictionary:@"http://www.facebook.com"
+                                                    channel:@"Facebook"
+                                                      title:@"Share This"
+                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                  @"A description should go here.", @"og:description",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                                  nil]
+                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    __block BOOL operationSucceeded = NO;
+    [apiClient sharelink:jsonDict
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     //check data that came back
+                     if([responseObject isKindOfClass:[NSDictionary class]]) {
+                         NSDictionary *responseDict = (NSDictionary *)responseObject;
+                         if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
+                             NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                             GHAssertTrue([shortlink length] > 0, @"shortlink length");
+                             operationSucceeded = YES;
+                             [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSharelinkEndpoint)];
+                         }
+                         else {
+                             operationSucceeded = NO;
+                             [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
+                         }
+                     }
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     operationSucceeded = NO;
+                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
                  }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];

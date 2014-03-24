@@ -17,6 +17,7 @@ extern NSString *const INSTALL;
 extern NSString *const OPEN;
 extern NSString *const SHORTLINK;
 extern NSString *const REPORT_SHARE;
+extern NSString *const SHARELINK;
 extern NSString *const LOG;
 
 extern NSString *const OPEN_TIMEOUT_KEY;
@@ -70,6 +71,11 @@ extern NSString *const SESSION_DATA_FILENAME;
                                 title:(NSString *)title
                                  meta:(NSDictionary *)meta
                                  tags:(NSArray *)tags;
+- (NSDictionary *)sharelinkDictionary:(NSString *)link
+                              channel:(NSString *)socialChannel
+                                title:(NSString *)title
+                                 meta:(NSDictionary *)meta
+                                 tags:(NSArray *)tags;
 - (NSString *)md5FromString:(NSString *)input;
 
 - (void)install:(NSDictionary *)jsonDict
@@ -87,6 +93,10 @@ extern NSString *const SESSION_DATA_FILENAME;
 - (void)reportShare:(NSDictionary *)jsonDict
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
+- (void)sharelink:(NSDictionary *)jsonDict
+          success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+          failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
 - (void)log:(NSDictionary *)jsonDict
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback

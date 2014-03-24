@@ -25,12 +25,16 @@ STAPIClient *apiClient;
 @synthesize textField;
 @synthesize installButton;
 @synthesize shareButton;
+@synthesize sharelinkButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
-                                               loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
+        apiClient = [[STAPIClient alloc] initWithAPIKey:@"12a05e3e-e522-4c81-b4bb-89d3be94d122"
+                                               loopyKey:@"9c313d12-f34c-4172-9909-180384c724fd"];
+        //for now, use mock API
+        apiClient.urlPrefix = @"http://stage.api.loopy.getsocialize.com:80/v1";
+        apiClient.httpsURLPrefix = @"http://stage.api.loopy.getsocialize.com:80/v1";
         [apiClient getSessionWithReferrer:@"www.facebook.com"
             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 //any operations post-successful /install or /open
@@ -65,6 +69,23 @@ STAPIClient *apiClient;
                      else {
                          NSLog(@"FAILURE");
                      }
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"FAILURE");
+                 }];
+}
+
+//shorten then share in one operation
+- (IBAction)sharelinkButtonPressed:(id)sender {
+    NSArray *tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
+    NSDictionary *jsonDict = [apiClient sharelinkDictionary:self.textField.text
+                                                    channel:@"facebook"
+                                                      title:nil
+                                                       meta:nil
+                                                       tags:tags];
+    [apiClient sharelink:jsonDict
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                      NSLog(@"FAILURE");
