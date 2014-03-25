@@ -25,7 +25,6 @@ STAPIClient *apiClient;
 @synthesize textField;
 @synthesize installButton;
 @synthesize shareButton;
-@synthesize sharelinkButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

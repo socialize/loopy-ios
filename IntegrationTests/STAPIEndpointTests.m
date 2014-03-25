@@ -19,11 +19,12 @@
 @implementation STAPIEndpointTests
 
 - (void)setUp {
-    apiClient = [[STAPIClient alloc] initWithAPIKey:@"12a05e3e-e522-4c81-b4bb-89d3be94d122"
-                                           loopyKey:@"9c313d12-f34c-4172-9909-180384c724fd"];
+    apiClient = [[STAPIClient alloc] initWithAPIKey:@"73e0eeb1-5a3e-4603-b85a-21025d9847fc"
+                                           loopyKey:@"nq225rg5m4ekx87uss9te56e"];
     //for now, use stage API
-    apiClient.urlPrefix = @"http://stage.api.loopy.getsocialize.com:80/v1";
-    apiClient.httpsURLPrefix = @"http://stage.api.loopy.getsocialize.com:80/v1";
+    //for testing, use internal API for now
+    apiClient.urlPrefix = @"http://internal.loopy.getsocialize.com/v1";
+    apiClient.httpsURLPrefix = @"http://internal.loopy.getsocialize.com/v1";
     
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators
