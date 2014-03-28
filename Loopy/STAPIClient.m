@@ -467,7 +467,9 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                        //cache the shortlink for future reuse
                        NSDictionary *responseDict = (NSDictionary *)responseObject;
                        [self.shortlinks setValue:[responseDict valueForKey:@"shortlink"] forKey:url];
-                       successCallback(operation, responseObject);
+                       if(successCallback != nil) {
+                           successCallback(operation, responseObject);
+                       }
                    }
                    failure:failureCallback];
     }
@@ -487,7 +489,9 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                    for(id key in keys) {
                        [self.shortlinks removeObjectForKey:key];
                    }
-                   successCallback(operation, responseObject);
+                   if(successCallback != nil) {
+                       successCallback(operation, responseObject);
+                   }
                }
                failure:failureCallback];
 }
@@ -505,7 +509,9 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                    for(id key in keys) {
                        [self.shortlinks removeObjectForKey:key];
                    }
-                   successCallback(operation, responseObject);
+                   if(successCallback != nil) {
+                       successCallback(operation, responseObject);
+                   }
                }
                failure:failureCallback];
 }
