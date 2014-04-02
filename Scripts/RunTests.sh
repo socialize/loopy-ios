@@ -5,22 +5,18 @@ if [ "$GHUNIT_CLI" = "" ] && [ "$GHUNIT_AUTORUN" = "" ]; then
   exit 0
 fi
 
+# DOES NOT WORK with 7.1 simulator; force version to 7.0
+export SDKROOT="$DEVELOPER_DIR/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/"
 export DYLD_ROOT_PATH="$SDKROOT"
 export DYLD_FRAMEWORK_PATH="$CONFIGURATION_BUILD_DIR"
 export IPHONE_SIMULATOR_ROOT="$SDKROOT"
-#export CFFIXED_USER_HOME="$TEMP_FILES_DIR/iPhone Simulator User Dir" # Be compatible with google-toolbox-for-mac
-
-#if [ -d $"CFFIXED_USER_HOME" ]; then
-#  rm -rf "$CFFIXED_USER_HOME"
-#fi
-#mkdir -p "$CFFIXED_USER_HOME"
+echo "SDKROOT =" $SDKROOT
 
 export NSDebugEnabled=YES
 export NSZombieEnabled=YES
 export NSDeallocateZombies=NO
 export NSHangOnUncaughtException=YES
 export NSAutoreleaseFreedObjectCheckEnabled=YES
-
 export DYLD_FRAMEWORK_PATH="$CONFIGURATION_BUILD_DIR"
 
 TEST_TARGET_EXECUTABLE_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_PATH"
@@ -36,12 +32,9 @@ if [ ! -e "$TEST_TARGET_EXECUTABLE_PATH" ]; then
   exit 1
 fi
 
-# If trapping fails, make sure we kill any running securityd
-#launchctl list | grep GHUNIT_RunIPhoneSecurityd && launchctl remove GHUNIT_RunIPhoneSecurityd
 SCRIPTS_PATH=`cd $(dirname $0); pwd`
-#launchctl submit -l GHUNIT_RunIPhoneSecurityd -- "$SCRIPTS_PATH"/RunIPhoneSecurityd.sh $IPHONE_SIMULATOR_ROOT $CFFIXED_USER_HOME
-#trap "launchctl remove GHUNIT_RunIPhoneSecurityd" EXIT TERM INT
 
+killall "iPhone Simulator" >/dev/null 2>&1
 RUN_CMD="\"$TEST_TARGET_EXECUTABLE_PATH\" -RegisterForSystemEvents"
 
 echo "Running: $RUN_CMD"

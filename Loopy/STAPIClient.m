@@ -534,7 +534,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                                               length:jsonLength
                                             endpoint:endpoint];
     AFHTTPRequestOperation *operation = [self newURLRequestOperation:request
-                                                             isHTTPS:NO //TEMPORARY
+                                                             isHTTPS:YES
                                                              success:successCallback
                                                              failure:failureCallback];
     [operation start];

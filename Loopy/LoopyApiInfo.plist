@@ -9,7 +9,7 @@
 		<key>openTimeoutInMillis</key>
 		<integer>10000</integer>
 		<key>urlHttpsPrefix</key>
-		<string>http://loopy.getsocialize.com/v1</string>
+		<string>https://loopy.getsocialize.com/v1</string>
 		<key>urlPrefix</key>
 		<string>http://loopy.getsocialize.com/v1</string>
 	</dict>
