@@ -49,10 +49,11 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 @synthesize currentLocation;
 @synthesize shortlinks;
 
-//constructor with specified endpoint
-//performs actions to check for stdid and calls "install" or "open" as required
+//init API with specified keys
+//does NOT call any endpoints
 - (id)initWithAPIKey:(NSString *)key
-            loopyKey:(NSString *)lkey {
+            loopyKey:(NSString *)lkey
+   locationsDisabled:(BOOL)locationServicesDisabled {
     self = [super init];
     if(self) {
         //init shortlink cache
@@ -97,6 +98,13 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         }
     }
     return self;
+}
+
+//init API with specified keys and with location services enabled
+//does NOT call any endpoints
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey {
+    return [self initWithAPIKey:key loopyKey:lkey locationsDisabled:NO];
 }
 
 #pragma mark - Identities Handling
@@ -402,12 +410,16 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     NSDictionary *geoObj = nil;
     if(self.currentLocation) {
         coordinate = self.currentLocation.coordinate;
-        geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                  [NSNumber numberWithDouble:coordinate.latitude],@"lat",
-                  [NSNumber numberWithDouble:coordinate.longitude],@"lon",
-                  nil];
-        [deviceObj setObject:geoObj forKey:@"geo"];
     }
+    //location management disabled; simply set to 0,0
+    else {
+        coordinate = CLLocationCoordinate2DMake(0.0, 0.0);
+    }
+    geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
+              [NSNumber numberWithDouble:coordinate.latitude],@"lat",
+              [NSNumber numberWithDouble:coordinate.longitude],@"lon",
+              nil];
+    [deviceObj setObject:geoObj forKey:@"geo"];
     
     return deviceObj;
 }

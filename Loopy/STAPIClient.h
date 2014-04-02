@@ -47,7 +47,11 @@ extern NSString *const SESSION_DATA_FILENAME;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) NSMutableDictionary *shortlinks;
 
-- (id)initWithAPIKey:(NSString *)key loopyKey:(NSString *)lkey;
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey;
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey
+   locationsDisabled:(BOOL)locationServicesDisabled;
 - (void)getSessionWithReferrer:(NSString *)referrer
                    postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
