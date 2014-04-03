@@ -30,7 +30,8 @@ STAPIClient *apiClient;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         apiClient = [[STAPIClient alloc] initWithAPIKey:@"73e0eeb1-5a3e-4603-b85a-21025d9847fc"
-                                               loopyKey:@"nq225rg5m4ekx87uss9te56e"];
+                                               loopyKey:@"nq225rg5m4ekx87uss9te56e"
+                                      locationsDisabled:NO];
         //for testing, use internal API for now
         apiClient.urlPrefix = @"http://internal.loopy.getsocialize.com/v1";
         apiClient.httpsURLPrefix = @"http://internal.loopy.getsocialize.com/v1";

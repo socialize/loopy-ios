@@ -78,10 +78,12 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         _openTimeout = [openTimeoutMillis floatValue] / 1000.0f;
         
         //device information cached for sharing and other operations
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-        self.locationManager.delegate = self;
-        [self.locationManager startUpdatingLocation];
+        if(!locationServicesDisabled) {
+            self.locationManager = [[CLLocationManager alloc] init];
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+            self.locationManager.delegate = self;
+            [self.locationManager startUpdatingLocation];
+        }
         CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [networkInfo subscriberCellularProvider];
         UIDevice *device = [UIDevice currentDevice];
