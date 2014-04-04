@@ -98,6 +98,11 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         if(self.idfa) {
             self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
+        //for headless devices
+        else {
+            self.idfa = [NSUUID UUID];
+            self.md5id = [self md5FromString:[self.idfa UUIDString]];
+        }
     }
     return self;
 }
