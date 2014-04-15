@@ -85,6 +85,10 @@
 		2CA3DCF71811E8AD005E9159 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2CA3DCF81811E8AD005E9159 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
 		2CBFAEA81863A17E00BBFCC7 /* STActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBFAEA71863A17E00BBFCC7 /* STActivity.h */; };
+		2CCDBC5418FDD2A900DB2215 /* STDeviceSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CCDBC5218FDD2A900DB2215 /* STDeviceSettings.h */; };
+		2CCDBC5518FDD2A900DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
+		2CCDBC5618FDE4A900DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
+		2CCDBC5718FDE4AA00DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -224,6 +228,8 @@
 		2CB4EF171832E11A00A0AA0B /* custom_activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = custom_activity.h; path = Documentation/sphinx/source/snippets/custom_activity.h; sourceTree = SOURCE_ROOT; };
 		2CB4EF181832E11A00A0AA0B /* custom_activity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = custom_activity.m; path = Documentation/sphinx/source/snippets/custom_activity.m; sourceTree = SOURCE_ROOT; };
 		2CBFAEA71863A17E00BBFCC7 /* STActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STActivity.h; sourceTree = "<group>"; };
+		2CCDBC5218FDD2A900DB2215 /* STDeviceSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDeviceSettings.h; sourceTree = "<group>"; };
+		2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDeviceSettings.m; sourceTree = "<group>"; };
 		2CDE0E6F17E122A20048B055 /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDE0E7517E122A30048B055 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		2CDE0E7717E122A30048B055 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -421,6 +427,8 @@
 			children = (
 				2C8C1E0C17E10BB80075B527 /* STAPIClient.h */,
 				2C8C1E0D17E10BB80075B527 /* STAPIClient.m */,
+				2CCDBC5218FDD2A900DB2215 /* STDeviceSettings.h */,
+				2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */,
 			);
 			name = "API Client";
 			sourceTree = "<group>";
@@ -542,6 +550,7 @@
 				2C44DE0D1820808B0026938A /* STFacebookActivity.h in Headers */,
 				2CBFAEA81863A17E00BBFCC7 /* STActivity.h in Headers */,
 				2C44DE0E182080900026938A /* STTwitterActivity.h in Headers */,
+				2CCDBC5418FDD2A900DB2215 /* STDeviceSettings.h in Headers */,
 				2C44DE0F1820809B0026938A /* STAPIClient.h in Headers */,
 				2C44DE10182080A40026938A /* STJSONUtils.h in Headers */,
 				2C8D99E01834519E00D9BB4E /* STReachability.h in Headers */,
@@ -634,7 +643,7 @@
 		2C48EAE717DF87F100181C3E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = SZ;
+				CLASSPREFIX = ST;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = ShareThis;
 				TargetAttributes = {
@@ -874,6 +883,7 @@
 				2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */,
+				2CCDBC5718FDE4AA00DB2215 /* STDeviceSettings.m in Sources */,
 				2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
@@ -888,6 +898,7 @@
 				2C44DE13182081260026938A /* STFacebookActivity.m in Sources */,
 				2C8D99E11834519E00D9BB4E /* STReachability.m in Sources */,
 				2C44DE141820812A0026938A /* STTwitterActivity.m in Sources */,
+				2CCDBC5518FDD2A900DB2215 /* STDeviceSettings.m in Sources */,
 				2C44DE151820812E0026938A /* STAPIClient.m in Sources */,
 				2C44DE16182081300026938A /* STJSONUtils.m in Sources */,
 			);
@@ -909,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF479D21864B2C100150721 /* STConstants.m in Sources */,
+				2CCDBC5618FDE4A900DB2215 /* STDeviceSettings.m in Sources */,
 				2CF479D31864B2C100150721 /* STReachability.m in Sources */,
 				2CF479D41864B2C100150721 /* STShare.m in Sources */,
 				2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */,

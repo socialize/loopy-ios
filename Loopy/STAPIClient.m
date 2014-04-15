@@ -9,11 +9,6 @@
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
 #import "STReachability.h"
-#import <CommonCrypto/CommonDigest.h>
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <AdSupport/ASIdentifierManager.h>
-#import <sys/utsname.h>
 
 @implementation STAPIClient
 
@@ -39,14 +34,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 @synthesize httpsURLPrefix;
 @synthesize apiKey;
 @synthesize loopyKey;
-@synthesize locationManager;
-@synthesize carrierName;
-@synthesize osVersion;
-@synthesize deviceModel;
 @synthesize stdid;
-@synthesize md5id;
-@synthesize idfa;
-@synthesize currentLocation;
 @synthesize shortlinks;
 
 //init API with specified keys
@@ -56,6 +44,9 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
    locationsDisabled:(BOOL)locationServicesDisabled {
     self = [super init];
     if(self) {
+        //device info
+        self.deviceSettings = [[STDeviceSettings alloc] initWithLocationsDisabled:locationServicesDisabled];
+        
         //init shortlink cache
         self.shortlinks = [NSMutableDictionary dictionary];
         
@@ -76,33 +67,6 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         NSNumber *openTimeoutMillis = [apiInfoDict objectForKey:@"openTimeoutInMillis"];
         _callTimeout = [callTimeoutMillis floatValue] / 1000.0f;
         _openTimeout = [openTimeoutMillis floatValue] / 1000.0f;
-        
-        //device information cached for sharing and other operations
-        if(!locationServicesDisabled) {
-            self.locationManager = [[CLLocationManager alloc] init];
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-            self.locationManager.delegate = self;
-            [self.locationManager startUpdatingLocation];
-        }
-        CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-        CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-        UIDevice *device = [UIDevice currentDevice];
-        self.carrierName = [carrier carrierName] != nil ? [carrier carrierName] : @"none";
-        self.deviceModel = machineName();
-        self.osVersion = device.systemVersion;
-        
-        //md5 hash of IDFA
-        //IDFA is cached for dependency injection purposes
-        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
-        self.idfa = idManager.advertisingIdentifier;
-        if(self.idfa) {
-            self.md5id = [self md5FromString:[self.idfa UUIDString]];
-        }
-        //for headless devices
-        else {
-            self.idfa = [NSUUID UUID];
-            self.md5id = [self md5FromString:[self.idfa UUIDString]];
-        }
     }
     return self;
 }
@@ -268,16 +232,16 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     //add IDFA to device dictionary -- install only
-    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithDictionary:[self deviceDictionary]];
-    [deviceObj setObject:[self.idfa UUIDString] forKey:@"id"];
+    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithDictionary:[self.deviceSettings deviceDictionary]];
+    [deviceObj setObject:[self.deviceSettings.idfa UUIDString] forKey:@"id"];
     
     NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [NSNumber numberWithInt:timestamp],@"timestamp",
                                 referrer,@"referrer",
                                 self.stdid, @"stdid",
-                                self.md5id, @"md5id",
+                                self.deviceSettings.md5id, @"md5id",
                                 deviceObj,@"device",
-                                [self appDictionary],@"app",
+                                [self.deviceSettings appDictionary],@"app",
                                 [self clientDictionary],@"client",
                                 nil];
     return installObj;
@@ -288,11 +252,11 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.stdid,@"stdid",
-                             self.md5id, @"md5id",
+                             self.deviceSettings.md5id, @"md5id",
                              [NSNumber numberWithInt:timestamp],@"timestamp",
                              referrer,@"referrer",
-                             [self deviceDictionary],@"device",
-                             [self appDictionary],@"app",
+                             [self.deviceSettings deviceDictionary],@"device",
+                             [self.deviceSettings appDictionary],@"app",
                              [self clientDictionary],@"client",
                              nil];
     return openObj;
@@ -303,10 +267,10 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
                               self.stdid,@"stdid",
-                              self.md5id, @"md5id",
+                              self.deviceSettings.md5id, @"md5id",
                               [NSNumber numberWithInt:timestamp],@"timestamp",
-                              [self deviceDictionary],@"device",
-                              [self appDictionary],@"app",
+                              [self.deviceSettings deviceDictionary],@"device",
+                              [self.deviceSettings appDictionary],@"app",
                               socialChannel,@"channel",
                               shortlink,@"shortlink",
                               [self clientDictionary],@"client",
@@ -334,10 +298,10 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     }
     NSMutableDictionary *sharelinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          self.stdid,@"stdid",
-                                         self.md5id, @"md5id",
+                                         self.deviceSettings.md5id, @"md5id",
                                          [NSNumber numberWithInt:timestamp],@"timestamp",
-                                         [self deviceDictionary],@"device",
-                                         [self appDictionary],@"app",
+                                         [self.deviceSettings deviceDictionary],@"device",
+                                         [self.deviceSettings appDictionary],@"app",
                                          socialChannel,@"channel",
                                          [self clientDictionary],@"client",
                                          itemObj,@"item",
@@ -359,10 +323,10 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                               nil];
     NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.stdid,@"stdid",
-                            self.md5id, @"md5id",
+                            self.deviceSettings.md5id, @"md5id",
                             [NSNumber numberWithInt:timestamp],@"timestamp",
-                            [self deviceDictionary],@"device",
-                            [self appDictionary],@"app",
+                            [self.deviceSettings deviceDictionary],@"device",
+                            [self.deviceSettings appDictionary],@"app",
                             [self clientDictionary],@"client",
                             eventObj,@"event",
                             nil];
@@ -390,7 +354,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     }
     NSMutableDictionary *shortlinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          self.stdid,@"stdid",
-                                         self.md5id, @"md5id",
+                                         self.deviceSettings.md5id, @"md5id",
                                          [NSNumber numberWithInt:timestamp],@"timestamp",
                                          itemObj,@"item",
                                          nil];
@@ -399,51 +363,6 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     }
     
     return shortlinkObj;
-}
-
-//required subset of endpoint calls
-- (NSDictionary *)deviceDictionary {
-    CLLocationCoordinate2D coordinate;
-    STReachability *reachability = [STReachability reachabilityForInternetConnection];
-    NetworkStatus netStatus = [reachability currentReachabilityStatus];
-    NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
-    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                      self.deviceModel,@"model",
-                                      @"ios",@"os",
-                                      self.osVersion,@"osv",
-                                      self.carrierName,@"carrier",
-                                      wifiStatus,@"wifi",
-                                      nil];
-    NSDictionary *geoObj = nil;
-    if(self.currentLocation) {
-        coordinate = self.currentLocation.coordinate;
-    }
-    //location management disabled; simply set to 0,0
-    else {
-        coordinate = CLLocationCoordinate2DMake(0.0, 0.0);
-    }
-    geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
-              [NSNumber numberWithDouble:coordinate.latitude],@"lat",
-              [NSNumber numberWithDouble:coordinate.longitude],@"lon",
-              nil];
-    [deviceObj setObject:geoObj forKey:@"geo"];
-    
-    return deviceObj;
-}
-
-//required subset of endpoint calls
-- (NSDictionary *)appDictionary {
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSDictionary *info = [bundle infoDictionary];
-    NSString *appID = [info valueForKey:@"CFBundleIdentifier"];
-    NSString *appName = [info valueForKey:@"CFBundleName"];
-    NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
-    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            appID,@"id",
-                            appName,@"name",
-                            appVersion,@"version",
-                            nil];
-    return appObj;
 }
 
 //required subset of endpoint calls
@@ -548,7 +467,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                   failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
     NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
-    NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
+    NSNumber *jsonLength = [NSNumber numberWithLong:[jsonStr length]];
     NSURLRequest *request = [self newHTTPSURLRequest:jsonData
                                               length:jsonLength
                                             endpoint:endpoint];
@@ -566,7 +485,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
              failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
     NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
-    NSNumber *jsonLength = [NSNumber numberWithInt:[jsonStr length]];
+    NSNumber *jsonLength = [NSNumber numberWithLong:[jsonStr length]];
     NSURLRequest *request = [self newURLRequest:jsonData
                                          length:jsonLength
                                        endpoint:endpoint];
@@ -577,38 +496,4 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     [operation start];
 }
 
-#pragma mark - Location And Device Information
-
-//location update
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    if(locations.lastObject) {
-        currentLocation = (CLLocation *)locations.lastObject;
-    }
-}
-
-//convenience method to return "real" device name
-//per http://stackoverflow.com/questions/11197509/ios-iphone-get-device-model-and-make
-NSString *machineName() {
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    
-    return [NSString stringWithCString:systemInfo.machine
-                              encoding:NSUTF8StringEncoding];
-}
-
-//convenience method to return MD% String
-//per http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
-- (NSString *)md5FromString:(NSString *)input {
-    const char *cStr = [input UTF8String];
-    unsigned char digest[16];
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
-    
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-        [output appendFormat:@"%02x", digest[i]];
-    }
-    
-    return output;
-}
 @end

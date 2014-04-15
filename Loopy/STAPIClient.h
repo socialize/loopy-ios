@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
+#import "STDeviceSettings.h"
 
-@interface STAPIClient : NSObject <NSURLConnectionDataDelegate,CLLocationManagerDelegate>
+@interface STAPIClient : NSObject <NSURLConnectionDataDelegate>
 
 extern NSString *const INSTALL;
 extern NSString *const OPEN;
@@ -37,15 +37,9 @@ extern NSString *const SESSION_DATA_FILENAME;
 @property (nonatomic, strong) NSString *loopyKey;
 @property (nonatomic, strong) NSString *httpsURLPrefix;
 @property (nonatomic, strong) NSString *urlPrefix;
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) NSString *carrierName;
-@property (nonatomic, strong) NSString *osVersion;
-@property (nonatomic, strong) NSString *deviceModel;
 @property (nonatomic, strong) NSString *stdid;
-@property (nonatomic, strong) NSString *md5id;
-@property (nonatomic, strong) NSUUID *idfa;
-@property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) NSMutableDictionary *shortlinks;
+@property (nonatomic, strong) STDeviceSettings *deviceSettings;
 
 - (id)initWithAPIKey:(NSString *)key
             loopyKey:(NSString *)lkey;
@@ -80,7 +74,6 @@ extern NSString *const SESSION_DATA_FILENAME;
                                 title:(NSString *)title
                                  meta:(NSDictionary *)meta
                                  tags:(NSArray *)tags;
-- (NSString *)md5FromString:(NSString *)input;
 
 - (void)install:(NSDictionary *)jsonDict
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
