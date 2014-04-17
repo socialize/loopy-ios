@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 ShareThis. All rights reserved.
 //
 
+#import "STDevice.h"
+#import "STApp.h"
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -25,8 +27,15 @@
 @property (nonatomic, strong) NSString *deviceModel;
 
 - (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled;
+- (STDevice *)device;
+- (STApp *)app;
+- (NSString *)md5FromString:(NSString *)input;
+
+
+
+
+
 - (NSDictionary *)deviceDictionary;
 - (NSDictionary *)appDictionary;
-- (NSString *)md5FromString:(NSString *)input;
 
 @end

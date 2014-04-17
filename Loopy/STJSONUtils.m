@@ -10,7 +10,7 @@
 
 @implementation STJSONUtils
 
-//convert JSON dictionary to NSData
+//convert JSON dictionary to JSON-ready NSData
 + (NSData *)toJSONData:(NSDictionary *)jsonDict {
     NSError *jsonError;
     NSData *jsonObj = nil;
@@ -54,5 +54,17 @@
 #endif
     }
 }
+
+//convert STObject to JSON-ready NSData
++ (NSData *)toJSONDataFromObject:(STObject *)obj {
+    NSDictionary *dict = [obj toDictionary];
+    return [STJSONUtils toJSONData:dict];
+}
+
+//convert JSON NSData to STObject
++ (STObject *)toObject:(NSData *)jsonData {
+    return nil; //TODO
+}
+
 
 @end

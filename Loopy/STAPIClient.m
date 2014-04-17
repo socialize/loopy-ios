@@ -9,6 +9,9 @@
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
 #import "STReachability.h"
+#import "STClient.h"
+#import "STGeo.h"
+#import "STItem.h"
 
 @implementation STAPIClient
 
@@ -24,8 +27,6 @@ NSString *const LOOPY_KEY = @"X-LoopyKey";
 NSString *const STDID_KEY = @"stdid";
 NSString *const MD5ID_KEY = @"md5id";
 NSString *const LAST_OPEN_TIME_KEY = @"lastOpenTime";
-NSString *const LANGUAGE_ID = @"objc";
-NSString *const LANGUAGE_VERSION = @"1.3";
 NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 
 @synthesize callTimeout = _callTimeout;
@@ -105,7 +106,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                                                      errorDescription:&error];
         [plistData writeToFile:filePath atomically:YES];
         
-        [self install:[self installDictionaryWithReferrer:referrer]
+        [self install:[self installWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   if(postSuccessCallback != nil) {
                       postSuccessCallback(operation, responseObject);
@@ -126,7 +127,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                                                          errorDescription:&error];
             [plistData writeToFile:filePath atomically:YES];
             
-            [self open:[self openDictionaryWithReferrer:referrer]
+            [self open:[self openWithReferrer:referrer]//[self openDictionaryWithReferrer:referrer]
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    if(postSuccessCallback != nil) {
                        postSuccessCallback(operation, responseObject);
@@ -225,182 +226,192 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     return errorArray;
 }
 
-#pragma mark - JSON For Endpoints
+#pragma mark - Objects For Endpoints
 
-//returns JSON-ready dictionary for /install endpoint for specified referrer
-- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer {
+//returns JSON-ready object for /install endpoint for specified referrer
+- (STInstall *)installWithReferrer:(NSString *)referrer {
+    STInstall *installObj = [STInstall installWithReferrer:referrer];
+    
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    installObj.timestamp = [NSNumber numberWithInt:timestamp];
+    installObj.stdid = self.stdid;
+    installObj.md5id = self.deviceSettings.md5id;
+    installObj.device = self.deviceSettings.device;
+    installObj.app = self.deviceSettings.app;
+    installObj.client = [STClient client];
     
-    //add IDFA to device dictionary -- install only
-    NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithDictionary:[self.deviceSettings deviceDictionary]];
-    [deviceObj setObject:[self.deviceSettings.idfa UUIDString] forKey:@"id"];
-    
-    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSNumber numberWithInt:timestamp],@"timestamp",
-                                referrer,@"referrer",
-                                self.stdid, @"stdid",
-                                self.deviceSettings.md5id, @"md5id",
-                                deviceObj,@"device",
-                                [self.deviceSettings appDictionary],@"app",
-                                [self clientDictionary],@"client",
-                                nil];
     return installObj;
 }
 
-//returns JSON-ready dictionary for /open endpoint for specified referrer
-- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer {
+//returns JSON-ready object for /open endpoint for specified referrer
+- (STOpen *)openWithReferrer:(NSString *)referrer {
+    STOpen *openObj = [STOpen openWithReferrer:referrer];
+    
     int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *openObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             self.stdid,@"stdid",
-                             self.deviceSettings.md5id, @"md5id",
-                             [NSNumber numberWithInt:timestamp],@"timestamp",
-                             referrer,@"referrer",
-                             [self.deviceSettings deviceDictionary],@"device",
-                             [self.deviceSettings appDictionary],@"app",
-                             [self clientDictionary],@"client",
-                             nil];
+    openObj.timestamp = [NSNumber numberWithInt:timestamp];
+    openObj.stdid = self.stdid;
+    openObj.md5id = self.deviceSettings.md5id;
+    openObj.device = self.deviceSettings.device;
+    openObj.app = self.deviceSettings.app;
+    openObj.client = [STClient client];
+    
     return openObj;
 }
 
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
-- (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *shareObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              self.stdid,@"stdid",
-                              self.deviceSettings.md5id, @"md5id",
-                              [NSNumber numberWithInt:timestamp],@"timestamp",
-                              [self.deviceSettings deviceDictionary],@"device",
-                              [self.deviceSettings appDictionary],@"app",
-                              socialChannel,@"channel",
-                              shortlink,@"shortlink",
-                              [self clientDictionary],@"client",
-                              nil];
-    
-    return shareObj;
-}
+- (STReportShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel {
+    STReportShare *reportShareObj = [[STReportShare alloc] init];
 
-//returns JSON-ready dictionary for /sharelink endpoint
-- (NSDictionary *)sharelinkDictionary:(NSString *)link
-                              channel:(NSString *)socialChannel
-                                title:(NSString *)title
-                                 meta:(NSDictionary *)meta
-                                 tags:(NSArray *)tags {
     int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSMutableDictionary *itemObj = [NSMutableDictionary dictionary];
-    if(link != nil) {
-        [itemObj setValue:link forKey:@"url"];
-    }
-    if(title != nil) {
-        [itemObj setValue:title forKey:@"title"];
-    }
-    if(meta != nil) {
-        [itemObj setValue:meta forKey:@"meta"];
-    }
-    NSMutableDictionary *sharelinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         self.stdid,@"stdid",
-                                         self.deviceSettings.md5id, @"md5id",
-                                         [NSNumber numberWithInt:timestamp],@"timestamp",
-                                         [self.deviceSettings deviceDictionary],@"device",
-                                         [self.deviceSettings appDictionary],@"app",
-                                         socialChannel,@"channel",
-                                         [self clientDictionary],@"client",
-                                         itemObj,@"item",
-                                         nil];
+    reportShareObj.timestamp = [NSNumber numberWithInt:timestamp];
+    reportShareObj.stdid = self.stdid;
+    reportShareObj.md5id = self.deviceSettings.md5id;
+    reportShareObj.shortlink = shortlink;
+    reportShareObj.channel = socialChannel;
+    reportShareObj.device = self.deviceSettings.device;
+    reportShareObj.app = self.deviceSettings.app;
+    reportShareObj.client = [STClient client];
     
-    if(tags != nil) {
-        [sharelinkObj setValue:tags forKey:@"tags"];
-    }
-
-    return sharelinkObj;
-}
-
-//returns JSON-ready dictionary for /log endpoint, based on type and meta
-- (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *eventObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              type,@"type",
-                              meta,@"meta",
-                              nil];
-    NSDictionary *logObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            self.stdid,@"stdid",
-                            self.deviceSettings.md5id, @"md5id",
-                            [NSNumber numberWithInt:timestamp],@"timestamp",
-                            [self.deviceSettings deviceDictionary],@"device",
-                            [self.deviceSettings appDictionary],@"app",
-                            [self clientDictionary],@"client",
-                            eventObj,@"event",
-                            nil];
-    
-    return logObj;
+    return reportShareObj;
 }
 
 //returns JSON-ready dictionary for /shortlink endpoint, based on link, title, meta, and tags
 //Either link OR title may be nil, but not both
 //Meta may be nil, or may contain various OG keys
-- (NSDictionary *)shortlinkDictionary:(NSString *)link
-                                title:(NSString *)title
-                                 meta:(NSDictionary *)meta
-                                 tags:(NSArray *)tags {
+- (STShortlink *)shortlinkWithURL:(NSString *)link
+                     title:(NSString *)title
+                      meta:(NSDictionary *)meta
+                      tags:(NSArray *)tags {
+    STShortlink *shortlinkObj = [[STShortlink alloc] init];
+    shortlinkObj.stdid = self.stdid;
+    shortlinkObj.md5id = self.deviceSettings.md5id;
+    
     int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSMutableDictionary *itemObj = [NSMutableDictionary dictionary];
+    shortlinkObj.timestamp = [NSNumber numberWithInt:timestamp];
+    
+    STItem *item = [[STItem alloc] init];
     if(link != nil) {
-        [itemObj setValue:link forKey:@"url"];
+        item.url = link;
     }
     if(title != nil) {
-        [itemObj setValue:title forKey:@"title"];
+        item.title = title;
     }
     if(meta != nil) {
-        [itemObj setValue:meta forKey:@"meta"];
+        item.meta = meta;
     }
-    NSMutableDictionary *shortlinkObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         self.stdid,@"stdid",
-                                         self.deviceSettings.md5id, @"md5id",
-                                         [NSNumber numberWithInt:timestamp],@"timestamp",
-                                         itemObj,@"item",
-                                         nil];
+    shortlinkObj.item = item;
+
     if(tags != nil) {
-        [shortlinkObj setValue:tags forKey:@"tags"];
+        shortlinkObj.tags = tags;
     }
     
     return shortlinkObj;
 }
 
-//required subset of endpoint calls
-- (NSDictionary *)clientDictionary {
-    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               LANGUAGE_ID,@"lang",
-                               LANGUAGE_VERSION,@"version",
-                               nil];
-    return clientObj;
+//returns JSON-ready object for /sharelink endpoint
+- (STSharelink *)sharelinkWithURL:(NSString *)link
+                          channel:(NSString *)socialChannel
+                            title:(NSString *)title
+                             meta:(NSDictionary *)meta
+                             tags:(NSArray *)tags {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    STSharelink *sharelinkObj = [[STSharelink alloc] init];
+
+    sharelinkObj.stdid = self.stdid;
+    sharelinkObj.md5id = self.deviceSettings.md5id;
+    sharelinkObj.timestamp = [NSNumber numberWithInt:timestamp];
+    sharelinkObj.channel = socialChannel;
+    sharelinkObj.device = self.deviceSettings.device;
+    sharelinkObj.app = self.deviceSettings.app;
+    sharelinkObj.client = [STClient client];
+
+    STItem *item = [[STItem alloc] init];
+    if(link != nil) {
+        item.url = link;
+    }
+    if(title != nil) {
+        item.title = title;
+    }
+    if(meta != nil) {
+        item.meta = meta;
+    }
+    sharelinkObj.item = item;
+    
+    
+    if(tags != nil) {
+        sharelinkObj.tags = tags;
+    }
+
+    return sharelinkObj;
+}
+
+//returns JSON-ready object for /log endpoint, based on type and meta
+- (STLog *)logWithType:(NSString *)type meta:(NSDictionary *)meta {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    STEvent *eventObj = [[STEvent alloc] init];
+    eventObj.type = type;
+    eventObj.meta = meta;
+
+    STLog *logObj = [[STLog alloc] init];
+    logObj.stdid = self.stdid;
+    logObj.md5id = self.deviceSettings.md5id;
+    logObj.timestamp = [NSNumber numberWithInt:timestamp];
+    logObj.device = self.deviceSettings.device;
+    logObj.app = self.deviceSettings.app;
+    logObj.event = eventObj;
+    logObj.client = [STClient client];
+   
+    return logObj;
 }
 
 #pragma mark - Calling Endpoints
 
-- (void)install:(NSDictionary *)jsonDict
+- (void)install:(STInstall *)installObj
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
         failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callHTTPSEndpoint:INSTALL json:jsonDict success:successCallback failure:failureCallback];
+    [self callHTTPSEndpoint:INSTALL json:installObj success:successCallback failure:failureCallback];
 }
 
-- (void)open:(NSDictionary *)jsonDict
+- (void)open:(STOpen *)openObj
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callEndpoint:OPEN json:jsonDict success:successCallback failure:failureCallback];
+    [self callEndpoint:OPEN json:openObj success:successCallback failure:failureCallback];
 }
 
-- (void)shortlink:(NSDictionary *)jsonDict
+- (void)reportShare:(STReportShare *)reportShareObj
+            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
+            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
+    [self callEndpoint:REPORT_SHARE
+                  json:reportShareObj
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   //remove current shortlink from cache
+                   //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
+                   //thus keys should contain only one element
+                   NSString *shortlink = reportShareObj.shortlink;
+                   NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
+                   for(id key in keys) {
+                       [self.shortlinks removeObjectForKey:key];
+                   }
+                   if(successCallback != nil) {
+                       successCallback(operation, responseObject);
+                   }
+               }
+               failure:failureCallback];
+}
+
+- (void)shortlink:(STShortlink *)jsonObj
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     //check the cache to see if shortlink already exists, and if so, simply call successCallback
-    NSDictionary *item = (NSDictionary *)[jsonDict valueForKey:@"item"];
-    NSString *url = (NSString *)[item valueForKey:@"url"];
+    STItem *item = jsonObj.item;
+    NSString *url = item.url;
     if([self.shortlinks valueForKey:url]) {
         NSDictionary *shortlinkDict = [NSDictionary dictionaryWithObjectsAndKeys:[self.shortlinks valueForKey:url], @"shortlink", nil];
         successCallback(nil, shortlinkDict);
     }
     else {
         [self callEndpoint:SHORTLINK
-                      json:jsonDict
+                      json:jsonObj
                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
                        //cache the shortlink for future reuse
                        NSDictionary *responseDict = (NSDictionary *)responseObject;
@@ -413,36 +424,17 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     }
 }
 
-- (void)reportShare:(NSDictionary *)jsonDict
-            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
-            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callEndpoint:REPORT_SHARE
-                  json:jsonDict
-               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   //remove current shortlink from cache
-                   //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
-                   //thus keys should contain only one element
-                   NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
-                   NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
-                   for(id key in keys) {
-                       [self.shortlinks removeObjectForKey:key];
-                   }
-                   if(successCallback != nil) {
-                       successCallback(operation, responseObject);
-                   }
-               }
-               failure:failureCallback];
-}
-- (void)sharelink:(NSDictionary *)jsonDict
+- (void)sharelink:(STSharelink *)jsonObj
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:SHARELINK
-                  json:jsonDict
+                  json:jsonObj
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    //remove current shortlink from cache
                    //although shortlinks are the values (not keys) of the shortlinks dictionary, they should be unique
                    //thus keys should contain only one element
-                   NSString *shortlink = (NSString *)[jsonDict objectForKey:@"shortlink"];
+                   NSDictionary *responseDict = (NSDictionary *)responseObject;
+                   NSString *shortlink = (NSString *)[responseDict objectForKey:@"shortlink"];
                    NSArray *keys = [self.shortlinks allKeysForObject:shortlink];
                    for(id key in keys) {
                        [self.shortlinks removeObjectForKey:key];
@@ -454,6 +446,17 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                failure:failureCallback];
 }
 
+
+
+
+
+
+
+
+
+
+
+//TODO CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 - (void)log:(NSDictionary *)jsonDict
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
@@ -462,11 +465,21 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 
 //convenience method
 - (void)callHTTPSEndpoint:(NSString *)endpoint
-                     json:(NSDictionary *)jsonDict
+                     json:(id)jsonObj
                   success:(void(^)(AFHTTPRequestOperation *, id))successCallback
                   failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
-    NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
+    NSData *jsonData = nil;
+    NSString *jsonStr = nil;
+    //allow dictionaries at this level, though all higher-level calls now expect objects
+    if([jsonObj isKindOfClass:[NSDictionary class]]) {
+        jsonData = [STJSONUtils toJSONData:jsonObj];
+    }
+    else if([jsonObj isKindOfClass:[STObject class]]) {
+        STObject *obj = (STObject *)jsonObj;
+        jsonData = [STJSONUtils toJSONDataFromObject:obj];
+    }
+    jsonStr = [STJSONUtils toJSONString:jsonData];
+    
     NSNumber *jsonLength = [NSNumber numberWithLong:[jsonStr length]];
     NSURLRequest *request = [self newHTTPSURLRequest:jsonData
                                               length:jsonLength
@@ -480,11 +493,21 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 
 //convenience method
 - (void)callEndpoint:(NSString *)endpoint
-                json:(NSDictionary *)jsonDict
+                json:(id)jsonObj
              success:(void(^)(AFHTTPRequestOperation *, id))successCallback
              failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    NSData *jsonData = [STJSONUtils toJSONData:jsonDict];
-    NSString *jsonStr = [STJSONUtils toJSONString:jsonData];
+    NSData *jsonData = nil;
+    NSString *jsonStr = nil;
+    //allow dictionaries at this level, though all higher-level calls now expect objects
+    if([jsonObj isKindOfClass:[NSDictionary class]]) {
+        jsonData = [STJSONUtils toJSONData:jsonObj];
+    }
+    else if([jsonObj isKindOfClass:[STObject class]]) {
+        STObject *obj = (STObject *)jsonObj;
+        jsonData = [STJSONUtils toJSONDataFromObject:obj];
+    }
+    jsonStr = [STJSONUtils toJSONString:jsonData];
+
     NSNumber *jsonLength = [NSNumber numberWithLong:[jsonStr length]];
     NSURLRequest *request = [self newURLRequest:jsonData
                                          length:jsonLength

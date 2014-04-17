@@ -10,6 +10,13 @@
 #import "STAPIClient.h"
 #import "STTestUtils.h"
 #import "STJSONUtils.h"
+#import "STInstall.h"
+#import "STOpen.h"
+#import "STReportShare.h"
+#import "STShortlink.h"
+#import "STSharelink.h"
+#import "STItem.h"
+#import "STLog.h"
 
 @interface STAPIEndpointTests : GHAsyncTestCase {
     STAPIClient *apiClient;
@@ -47,9 +54,9 @@
 - (void)testInstallEndpoint {
     [self prepare];
     __block BOOL operationSucceeded = NO;
-    NSDictionary *jsonDict = [apiClient installDictionaryWithReferrer:@"http://www.facebook.com"];
     
-    [apiClient install:jsonDict
+    STInstall *installObj = [apiClient installWithReferrer:@"www.facebook.com"];
+    [apiClient install:installObj
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    NSDictionary *responseDict = (NSDictionary *)responseObject;
                    if([responseDict count] == 0) {
@@ -73,10 +80,10 @@
 //this uses the JSON object in the APIClient
 - (void)testOpenEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
+    STOpen *openObj = [apiClient openWithReferrer:@"www.facebook.com"];
     __block BOOL operationSucceeded = NO;
     
-    [apiClient open:jsonDict
+    [apiClient open:openObj
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *responseDict = (NSDictionary *)responseObject;
                 if([responseDict count] == 0) {
@@ -99,12 +106,11 @@
 //deliberately-mangled JSON to test error format
 - (void)testOpenEndpointInvalidJSON {
     [self prepare];
-    NSDictionary *jsonDict = [apiClient openDictionaryWithReferrer:@"http://www.facebook.com"];
-    NSMutableDictionary *jsonDictInvalid = [NSMutableDictionary dictionaryWithDictionary:jsonDict];
-    [jsonDictInvalid removeObjectForKey:@"stdid"];
+    STOpen *openInvalid = [apiClient openWithReferrer:@"http://www.facebook.com"];
+    openInvalid.stdid = nil;
     __block BOOL operationSucceeded = NO;
     
-    [apiClient open:jsonDictInvalid
+    [apiClient open:openInvalid
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 operationSucceeded = NO;
                 [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testOpenEndpointInvalidJSON)];
@@ -122,21 +128,50 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
+//this uses the JSON object in the APIClient
+- (void)testShareEndpoint {
+    [self prepare];
+    NSString *dummyShortlink = @"www.shortlink.com";
+    NSString *dummyChannel = @"Facebook";
+    STReportShare *jsonObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
+    __block BOOL operationSucceeded = NO;
+    
+    [apiClient reportShare:jsonObj
+                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                       NSDictionary *responseDict = (NSDictionary *)responseObject;
+                       if([responseDict count] == 0) {
+                           operationSucceeded = YES;
+                           [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShareEndpoint)];
+                       }
+                       else {
+                           operationSucceeded = NO;
+                           [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
+                       }
+                   }
+                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                       operationSucceeded = NO;
+                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
+                   }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+    GHAssertTrue(operationSucceeded, @"");
+}
+
 //this uses the same JSON object used by unit tests
 - (void)testShortlinkEndpoint {
     [self prepare];
-    NSDictionary *jsonDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
-                                                      title:@"Share This"
-                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                             @"A description should go here.", @"og:description",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                             nil]
-                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    STShortlink *jsonObj = [apiClient shortlinkWithURL:@"http://www.facebook.com"
+                                          title:@"Share This"
+                                           meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 @"A description should go here.", @"og:description",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                 nil]
+                                           tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
     
-    [apiClient shortlink:jsonDict
+    [apiClient shortlink:jsonObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      //check data that came back
                      if([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -162,68 +197,26 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-
-//this uses the same JSON object used by unit tests
-- (void)testSharelinkEndpoint {
-    [self prepare];
-    NSDictionary *jsonDict = [apiClient sharelinkDictionary:@"http://www.facebook.com"
-                                                    channel:@"Facebook"
-                                                      title:@"Share This"
-                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"A description should go here.", @"og:description",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                                  nil]
-                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
-    __block BOOL operationSucceeded = NO;
-    [apiClient sharelink:jsonDict
-                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     //check data that came back
-                     if([responseObject isKindOfClass:[NSDictionary class]]) {
-                         NSDictionary *responseDict = (NSDictionary *)responseObject;
-                         if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
-                             NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                             GHAssertTrue([shortlink length] > 0, @"shortlink length");
-                             operationSucceeded = YES;
-                             [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSharelinkEndpoint)];
-                         }
-                         else {
-                             operationSucceeded = NO;
-                             [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
-                         }
-                     }
-                 }
-                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     operationSucceeded = NO;
-                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
-                 }];
-    
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
-    GHAssertTrue(operationSucceeded, @"");
-}
-
 //this uses the same JSON object used by unit tests (slightly modified for custom URL)
 - (void)testShortlinkCache {
     [self prepare];
-    NSDictionary *jsonDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
-                                                           title:@"Share This"
-                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"A description should go here.", @"og:description",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                                  nil]
-                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    STShortlink *jsonObj = [apiClient shortlinkWithURL:@"http://www.facebook.com"
+                                          title:@"Share This"
+                                           meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 @"A description should go here.", @"og:description",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                 nil]
+                                           tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
-
+    
     //add custom URL
     NSString *cacheURL = @"http://www.cacheurl.com";
-    NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[jsonDict valueForKey:@"item"]];
-    [item setValue:cacheURL forKey:@"url"];
-    [jsonDict setValue:item forKey:@"item"];
-
-    [apiClient shortlink:jsonDict
+    STItem *item = jsonObj.item;
+    item.url = cacheURL;
+    
+    [apiClient shortlink:jsonObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      //now verify that it's in the cache -- this is sufficient as testing timing of response is fragile
                      operationSucceeded = [apiClient.shortlinks valueForKey:cacheURL] != nil;
@@ -242,27 +235,27 @@
 - (void)testShortlinkClearCache {
     [self prepare];
     NSString *cacheURL = @"http://www.cacheurl.com";
-    NSDictionary *jsonDict = [apiClient shortlinkDictionary:cacheURL
-                                                      title:@"Share This"
-                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                             @"A description should go here.", @"og:description",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                             @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                             nil]
-                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    STShortlink *jsonObj = [apiClient shortlinkWithURL:cacheURL
+                                          title:@"Share This"
+                                           meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 @"A description should go here.", @"og:description",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                 @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                 nil]
+                                           tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
     
-    [apiClient shortlink:jsonDict
+    [apiClient shortlink:jsonObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      //verify the cache contains the value
                      GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] != nil, @"");
                      //share the shortlink...
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                      NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                     NSMutableDictionary *shareDict = [NSMutableDictionary dictionaryWithDictionary:[apiClient reportShareDictionary:shortlink
-                                                                                                                             channel:@"http://www.facebook.com"]];
-                     [apiClient reportShare:shareDict
+                     STReportShare *shareObj = [apiClient reportShareWithShortlink:shortlink channel:@"http://www.facebook.com"];
+
+                     [apiClient reportShare:shareObj
                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                         //...and verify the cache has been cleared as a result
                                         GHAssertTrue([apiClient.shortlinks valueForKey:cacheURL] == nil, @"");
@@ -283,30 +276,41 @@
     GHAssertTrue(operationSucceeded, @"");
 }
 
-//this uses the JSON object in the APIClient
-- (void)testShareEndpoint {
+//this uses the same JSON object used by unit tests
+- (void)testSharelinkEndpoint {
     [self prepare];
-    NSString *dummyShortlink = @"www.shortlink.com";
-    NSString *dummyChannel = @"Facebook";
-    NSDictionary *jsonDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
+    STSharelink *jsonObj = [apiClient sharelinkWithURL:@"http://www.facebook.com"
+                                               channel:@"Facebook"
+                                                 title:@"Share This"
+                                                  meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                        @"A description should go here.", @"og:description",
+                                                        @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                        @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                        @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                        nil]
+                                                  tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
     __block BOOL operationSucceeded = NO;
-    
-    [apiClient reportShare:jsonDict
-                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                       NSDictionary *responseDict = (NSDictionary *)responseObject;
-                       if([responseDict count] == 0) {
-                           operationSucceeded = YES;
-                           [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testShareEndpoint)];
-                       }
-                       else {
-                           operationSucceeded = NO;
-                           [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
-                       }
-                   }
-                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                       operationSucceeded = NO;
-                       [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testShareEndpoint)];
-                   }];
+    [apiClient sharelink:jsonObj
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     //check data that came back
+                     if([responseObject isKindOfClass:[NSDictionary class]]) {
+                         NSDictionary *responseDict = (NSDictionary *)responseObject;
+                         if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
+                             NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                             GHAssertTrue([shortlink length] > 0, @"shortlink length");
+                             operationSucceeded = YES;
+                             [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testSharelinkEndpoint)];
+                         }
+                         else {
+                             operationSucceeded = NO;
+                             [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
+                         }
+                     }
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     operationSucceeded = NO;
+                     [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testSharelinkEndpoint)];
+                 }];
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
     GHAssertTrue(operationSucceeded, @"");
@@ -373,8 +377,9 @@
     NSDictionary *meta = [NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
                                                                     @"value1",@"key1",
                                                                     nil];
-    NSDictionary *logDict = [apiClient logDictionaryWithType:@"share" meta:meta];
-    [apiClient log:logDict
+    
+    STLog *logObj = [apiClient logWithType:@"share" meta:meta];
+    [apiClient log:logObj
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDict = (NSDictionary *)responseObject;
                operationSucceeded = responseDict != nil;

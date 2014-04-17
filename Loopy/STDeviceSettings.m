@@ -8,6 +8,9 @@
 
 #import "STDeviceSettings.h"
 #import "STReachability.h"
+#import "STDevice.h"
+#import "STApp.h"
+#import "STGeo.h"
 
 @implementation STDeviceSettings
 
@@ -54,11 +57,117 @@
 }
 
 //required subset of endpoint calls
+- (STDevice *)device {
+    CLLocationCoordinate2D coordinate;
+    STReachability *reachability = [STReachability reachabilityForInternetConnection];
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
+    NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
+    NSString *idStr = [self.idfa UUIDString];
+    
+    STDevice *device = [[STDevice alloc] init];
+    device.id = idStr;
+    device.model = self.deviceModel;
+    device.os = @"ios";
+    device.osv = self.osVersion;
+    device.carrier = self.carrierName;
+    device.wifi = wifiStatus;
+    
+    STGeo *geo = nil;
+    if(self.currentLocation) {
+        coordinate = self.currentLocation.coordinate;
+    }
+    //location management disabled; simply set to 0,0
+    else {
+        coordinate = CLLocationCoordinate2DMake(0.0, 0.0);
+    }
+    geo = [[STGeo alloc] init];
+    geo.lat = [NSNumber numberWithDouble:coordinate.latitude];
+    geo.lon = [NSNumber numberWithDouble:coordinate.longitude];
+    device.geo = geo;
+    
+    return device;
+}
+
+//required subset of endpoint calls
+- (STApp *)app {
+    STApp *app = [[STApp alloc] init];
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+    NSString *appID = [info valueForKey:@"CFBundleIdentifier"];
+    NSString *appName = [info valueForKey:@"CFBundleName"];
+    NSString *appVersion = [info valueForKey:@"CFBundleVersion"];
+    
+    app.id = appID;
+    app.name = appName;
+    app.version = appVersion;
+    
+    return app;
+}
+
+#pragma mark - Location And Device Information
+
+//location update
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    if(locations.lastObject) {
+        self.currentLocation = (CLLocation *)locations.lastObject;
+    }
+}
+
+//convenience method to return "real" device name
+//per http://stackoverflow.com/questions/11197509/ios-iphone-get-device-model-and-make
+NSString *machineName() {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+}
+
+//convenience method to return MD5 String
+//per http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
+- (NSString *)md5FromString:(NSString *)input {
+    const char *cStr = [input UTF8String];
+    unsigned char digest[16];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    
+    return output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//required subset of endpoint calls
 - (NSDictionary *)deviceDictionary {
     CLLocationCoordinate2D coordinate;
     STReachability *reachability = [STReachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
+    
     NSMutableDictionary *deviceObj = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                       self.deviceModel,@"model",
                                       @"ios",@"os",
@@ -96,41 +205,6 @@
                             appVersion,@"version",
                             nil];
     return appObj;
-}
-
-#pragma mark - Location And Device Information
-
-//location update
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    if(locations.lastObject) {
-        self.currentLocation = (CLLocation *)locations.lastObject;
-    }
-}
-
-//convenience method to return "real" device name
-//per http://stackoverflow.com/questions/11197509/ios-iphone-get-device-model-and-make
-NSString *machineName() {
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    
-    return [NSString stringWithCString:systemInfo.machine
-                              encoding:NSUTF8StringEncoding];
-}
-
-//convenience method to return MD5 String
-//per http://www.makebetterthings.com/iphone/how-to-get-md5-and-sha1-in-objective-c-ios-sdk/
-- (NSString *)md5FromString:(NSString *)input {
-    const char *cStr = [input UTF8String];
-    unsigned char digest[16];
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
-    
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-        [output appendFormat:@"%02x", digest[i]];
-    }
-    
-    return output;
 }
 
 @end

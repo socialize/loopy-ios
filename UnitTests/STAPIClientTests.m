@@ -9,6 +9,17 @@
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
 #import "STTestUtils.h"
+#import "STObject.h"
+#import "STInstall.h"
+#import "STOpen.h"
+#import "STReportShare.h"
+#import "STShortlink.h"
+#import "STSharelink.h"
+#import "STDevice.h"
+#import "STApp.h"
+#import "STClient.h"
+#import "STGeo.h"
+#import "STItem.h"
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 #import <AFNetworking/AFNetworking.h>
@@ -115,114 +126,230 @@
     GHAssertNil(authChallengeBlock, @"");
 }
 
-- (void)testInstallDictionaryWithReferrer {
-    NSDictionary *installDict = [apiClient installDictionaryWithReferrer:@"www.facebook.com"];
-    GHAssertNotNil(installDict, @"");
-    GHAssertNotNil([installDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([installDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([installDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([installDict valueForKey:@"device"], @"");
-    GHAssertNotNil([installDict valueForKey:@"app"], @"");
-    GHAssertNotNil([installDict valueForKey:@"client"], @"");
-}
-
-- (void)testOpenDictionaryWithReferrer {
-    NSDictionary *openDict = [apiClient openDictionaryWithReferrer:@"www.facebook.com"];
-    GHAssertNotNil(openDict, @"");
-    GHAssertNotNil([openDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([openDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([openDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([openDict valueForKey:@"device"], @"");
-    GHAssertNotNil([openDict valueForKey:@"app"], @"");
-    GHAssertNotNil([openDict valueForKey:@"client"], @"");
-}
-
-- (void)testShortlinkDictionary {
-    NSDictionary *shortlinkDict = [apiClient shortlinkDictionary:@"http://www.facebook.com"
-                                                           title:@"Share This"
-                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"A description should go here.", @"og:description",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                                  nil]
-                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
-    GHAssertNotNil(shortlinkDict, @"");
-    GHAssertNotNil([shortlinkDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([shortlinkDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([shortlinkDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([shortlinkDict valueForKey:@"item"], @"");
-    GHAssertNotNil([shortlinkDict valueForKey:@"tags"], @"");
+- (void)testInstallObjectWithReferrer {
+    STInstall *installObj = [apiClient installWithReferrer:@"www.facebook.com"];
+    GHAssertNotNil(installObj, @"");
+    GHAssertNotNil(installObj.stdid, @"");
+    GHAssertNotNil(installObj.md5id, @"");
+    GHAssertNotNil(installObj.timestamp, @"");
+    GHAssertNotNil(installObj.device, @"");
+    GHAssertNotNil(installObj.app, @"");
+    GHAssertNotNil(installObj.client, @"");
     
-    NSDictionary *itemDict = (NSDictionary *)[shortlinkDict valueForKey:@"item"];
-    GHAssertNotNil([itemDict valueForKey:@"title"], @"");
-    GHAssertNotNil([itemDict valueForKey:@"meta"], @"");
-}
-
-- (void)testSharelinkDictionary {
-    NSString *dummyChannel = @"Facebook";
-    NSDictionary *sharelinkDict = [apiClient sharelinkDictionary:@"http://www.facebook.com"
-                                                         channel:dummyChannel
-                                                           title:@"Share This"
-                                                            meta:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                  @"A description should go here.", @"og:description",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:image",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video",
-                                                                  @"http://someimageurl.com/foobar.jpg", @"og:video:type",
-                                                                  nil]
-                                                            tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
-    GHAssertNotNil(sharelinkDict, @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"item"], @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"tags"], @"");
-    GHAssertNotNil([sharelinkDict valueForKey:@"app"], @"");
-    NSString *channel = [sharelinkDict valueForKey:@"channel"];
-    GHAssertEqualStrings(channel, dummyChannel, @"");
+    //test subsidiary objects
+    STDevice *device = installObj.device;
+    GHAssertNotNil(device.id, @"");
+    GHAssertNotNil(device.carrier, @"");
+    GHAssertNotNil(device.model, @"");
+    GHAssertNotNil(device.os, @"");
+    GHAssertNotNil(device.osv, @"");
+    GHAssertNotNil(device.wifi, @"");
+    GHAssertNotNil(device.geo, @"");
     
-    NSDictionary *itemDict = (NSDictionary *)[sharelinkDict valueForKey:@"item"];
-    GHAssertNotNil([itemDict valueForKey:@"title"], @"");
-    GHAssertNotNil([itemDict valueForKey:@"meta"], @"");
+    STGeo *geo = device.geo;
+    GHAssertNotNil(geo.lat, @"");
+    GHAssertNotNil(geo.lon, @"");
+
+    STApp *app = installObj.app;
+    GHAssertNotNil(app.id, @"");
+    GHAssertNotNil(app.name, @"");
+    GHAssertNotNil(app.version, @"");
+
+    STClient *client = installObj.client;
+    GHAssertNotNil(client.lang, @"");
+    GHAssertNotNil(client.version, @"");
 }
 
-- (void)testReportShareDictionary {
+- (void)testOpenObjectWithReferrer {
+    STOpen *openObj = [apiClient openWithReferrer:@"www.facebook.com"];
+    GHAssertNotNil(openObj, @"");
+    GHAssertNotNil(openObj.stdid, @"");
+    GHAssertNotNil(openObj.md5id, @"");
+    GHAssertNotNil(openObj.timestamp, @"");
+    GHAssertNotNil(openObj.device, @"");
+    GHAssertNotNil(openObj.app, @"");
+    GHAssertNotNil(openObj.client, @"");
+    
+    //test subsidiary objects
+    STDevice *device = openObj.device;
+    GHAssertNotNil(device.id, @"");
+    GHAssertNotNil(device.carrier, @"");
+    GHAssertNotNil(device.model, @"");
+    GHAssertNotNil(device.os, @"");
+    GHAssertNotNil(device.osv, @"");
+    GHAssertNotNil(device.wifi, @"");
+    GHAssertNotNil(device.geo, @"");
+    
+    STGeo *geo = device.geo;
+    GHAssertNotNil(geo.lat, @"");
+    GHAssertNotNil(geo.lon, @"");
+    
+    STApp *app = openObj.app;
+    GHAssertNotNil(app.id, @"");
+    GHAssertNotNil(app.name, @"");
+    GHAssertNotNil(app.version, @"");
+    
+    STClient *client = openObj.client;
+    GHAssertNotNil(client.lang, @"");
+    GHAssertNotNil(client.version, @"");
+}
+
+- (void)testReportShareObject {
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";
-
-    NSDictionary *shareDict = [apiClient reportShareDictionary:dummyShortlink channel:dummyChannel];
-    GHAssertNotNil(shareDict, @"");
-    GHAssertNotNil([shareDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([shareDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([shareDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([shareDict valueForKey:@"device"], @"");
-    GHAssertNotNil([shareDict valueForKey:@"app"], @"");
-    NSString *channel = [shareDict valueForKey:@"channel"];
+    
+    STReportShare *shareObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
+    GHAssertNotNil(shareObj, @"");
+    GHAssertNotNil(shareObj.stdid, @"");
+    GHAssertNotNil(shareObj.md5id, @"");
+    GHAssertNotNil(shareObj.timestamp, @"");
+    GHAssertNotNil(shareObj.device, @"");
+    GHAssertNotNil(shareObj.app, @"");
+    NSString *channel = shareObj.channel;
     GHAssertEqualStrings(channel, dummyChannel, @"");
-    NSString *shortlink = [shareDict valueForKey:@"shortlink"];
+    NSString *shortlink = shareObj.shortlink;
     GHAssertEqualStrings(shortlink, dummyShortlink, @"");
-    GHAssertNotNil([shareDict valueForKey:@"client"], @"");
+    GHAssertNotNil(shareObj.client, @"");
+    
+    //test subsidiary objects
+    STDevice *device = shareObj.device;
+    GHAssertNotNil(device.id, @"");
+    GHAssertNotNil(device.carrier, @"");
+    GHAssertNotNil(device.model, @"");
+    GHAssertNotNil(device.os, @"");
+    GHAssertNotNil(device.osv, @"");
+    GHAssertNotNil(device.wifi, @"");
+    GHAssertNotNil(device.geo, @"");
+    
+    STGeo *geo = device.geo;
+    GHAssertNotNil(geo.lat, @"");
+    GHAssertNotNil(geo.lon, @"");
+    
+    STApp *app = shareObj.app;
+    GHAssertNotNil(app.id, @"");
+    GHAssertNotNil(app.name, @"");
+    GHAssertNotNil(app.version, @"");
+    
+    STClient *client = shareObj.client;
+    GHAssertNotNil(client.lang, @"");
+    GHAssertNotNil(client.version, @"");
 }
 
-- (void)testLogDictionary {
-    NSDictionary *logDict = [apiClient logDictionaryWithType:@"share" meta:[NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
-                                                                            @"value1",@"key1",
-                                                                            nil]];
-    GHAssertNotNil(logDict, @"");
-    GHAssertNotNil([logDict valueForKey:@"stdid"], @"");
-    GHAssertNotNil([logDict valueForKey:@"md5id"], @"");
-    GHAssertNotNil([logDict valueForKey:@"timestamp"], @"");
-    GHAssertNotNil([logDict valueForKey:@"device"], @"");
-    GHAssertNotNil([logDict valueForKey:@"app"], @"");
-    GHAssertNotNil([logDict valueForKey:@"client"], @"");
-    GHAssertNotNil([logDict valueForKey:@"event"], @"");
-    NSDictionary *eventDict = (NSDictionary *)[logDict valueForKey:@"event"];
+- (void)testShortlinkObject {
+    STShortlink *shortlinkObj = [apiClient shortlinkWithURL:@"http://www.facebook.com"
+                                               title:@"Share This"
+                                                meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                      @"A description should go here.", @"og:description",
+                                                      @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                      @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                      @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                      nil]
+                                                tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+
+    GHAssertNotNil(shortlinkObj, @"");
+    GHAssertNotNil(shortlinkObj.stdid, @"");
+    GHAssertNotNil(shortlinkObj.md5id, @"");
+    GHAssertNotNil(shortlinkObj.timestamp, @"");
+    GHAssertNotNil(shortlinkObj.item, @"");
+    GHAssertNotNil(shortlinkObj.tags, @"");
+    
+    STItem *item = (STItem *)shortlinkObj.item;
+    GHAssertNotNil(item.title, @"");
+    GHAssertNotNil(item.meta, @"");
+}
+
+- (void)testSharelinkObject {
+    NSString *dummyChannel = @"Facebook";
+    STSharelink *sharelinkObj = [apiClient sharelinkWithURL:@"http://www.facebook.com"
+                                                    channel:dummyChannel
+                                                      title:@"Share This"
+                                                       meta:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                            @"A description should go here.", @"og:description",
+                                                            @"http://someimageurl.com/foobar.jpg", @"og:image",
+                                                            @"http://someimageurl.com/foobar.jpg", @"og:video",
+                                                            @"http://someimageurl.com/foobar.jpg", @"og:video:type",
+                                                            nil]
+                                                       tags:[NSArray arrayWithObjects:@"sports", @"movies", @"music", nil]];
+    GHAssertNotNil(sharelinkObj, @"");
+    GHAssertNotNil(sharelinkObj.stdid, @"");
+    GHAssertNotNil(sharelinkObj.md5id, @"");
+    GHAssertNotNil(sharelinkObj.timestamp, @"");
+    GHAssertNotNil(sharelinkObj.item, @"");
+    GHAssertNotNil(sharelinkObj.tags, @"");
+    GHAssertNotNil(sharelinkObj.app, @"");
+    NSString *channel = sharelinkObj.channel;
+    GHAssertEqualStrings(channel, dummyChannel, @"");
+    
+    STItem *item = (STItem *)sharelinkObj.item;
+    GHAssertNotNil(item.title, @"");
+    GHAssertNotNil(item.meta, @"");
+    
+    STDevice *device = sharelinkObj.device;
+    GHAssertNotNil(device.id, @"");
+    GHAssertNotNil(device.carrier, @"");
+    GHAssertNotNil(device.model, @"");
+    GHAssertNotNil(device.os, @"");
+    GHAssertNotNil(device.osv, @"");
+    GHAssertNotNil(device.wifi, @"");
+    GHAssertNotNil(device.geo, @"");
+    
+    STGeo *geo = device.geo;
+    GHAssertNotNil(geo.lat, @"");
+    GHAssertNotNil(geo.lon, @"");
+    
+    STApp *app = sharelinkObj.app;
+    GHAssertNotNil(app.id, @"");
+    GHAssertNotNil(app.name, @"");
+    GHAssertNotNil(app.version, @"");
+    
+    STClient *client = sharelinkObj.client;
+    GHAssertNotNil(client.lang, @"");
+    GHAssertNotNil(client.version, @"");
+}
+
+- (void)testLogObject {
+    STLog *logObj = [apiClient logWithType:@"share"
+                                      meta:[NSDictionary dictionaryWithObjectsAndKeys:@"value0",@"key0",
+                                                                                      @"value1",@"key1",
+                                                                                      nil]];
+    GHAssertNotNil(logObj, @"");
+    GHAssertNotNil(logObj.stdid, @"");
+    GHAssertNotNil(logObj.md5id, @"");
+    GHAssertNotNil(logObj.timestamp, @"");
+    GHAssertNotNil(logObj.device, @"");
+    GHAssertNotNil(logObj.app, @"");
+    GHAssertNotNil(logObj.client, @"");
+    GHAssertNotNil(logObj.event, @"");
+    
+    STEvent *eventObj = logObj.event;
     NSString *type = @"share";
-    GHAssertEqualStrings(type, (NSString *)[eventDict valueForKey:@"type"], @"");
-    NSDictionary *meta = (NSDictionary *)[eventDict valueForKey:@"meta"];
+    GHAssertEqualStrings(type, eventObj.type, @"");
+    NSDictionary *meta = eventObj.meta;
     GHAssertNotNil(meta, @"");
     GHAssertTrue([(NSString *)[meta valueForKey:@"key0"] isEqualToString:@"value0"], @"");
     GHAssertTrue([(NSString *)[meta valueForKey:@"key1"] isEqualToString:@"value1"], @"");
+    
+    STDevice *device = logObj.device;
+    GHAssertNotNil(device.id, @"");
+    GHAssertNotNil(device.carrier, @"");
+    GHAssertNotNil(device.model, @"");
+    GHAssertNotNil(device.os, @"");
+    GHAssertNotNil(device.osv, @"");
+    GHAssertNotNil(device.wifi, @"");
+    GHAssertNotNil(device.geo, @"");
+    
+    STGeo *geo = device.geo;
+    GHAssertNotNil(geo.lat, @"");
+    GHAssertNotNil(geo.lon, @"");
+    
+    STApp *app = logObj.app;
+    GHAssertNotNil(app.id, @"");
+    GHAssertNotNil(app.name, @"");
+    GHAssertNotNil(app.version, @"");
+    
+    STClient *client = logObj.client;
+    GHAssertNotNil(client.lang, @"");
+    GHAssertNotNil(client.version, @"");
 }
 
 @end
