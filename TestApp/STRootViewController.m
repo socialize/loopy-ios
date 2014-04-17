@@ -8,6 +8,7 @@
 
 #import "STRootViewController.h"
 #import "STShare.h"
+#import "STSharelink.h"
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
 #import <Social/Social.h>
@@ -79,12 +80,12 @@ STAPIClient *apiClient;
 //shorten then share in one operation
 - (IBAction)sharelinkButtonPressed:(id)sender {
     NSArray *tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
-    NSDictionary *jsonDict = [apiClient sharelinkDictionary:self.textField.text
-                                                    channel:@"facebook"
-                                                      title:nil
-                                                       meta:nil
-                                                       tags:tags];
-    [apiClient sharelink:jsonDict
+    NSDictionary *jsonObj = [apiClient sharelinkWithURL:self.textField.text
+                                                channel:@"facebook"
+                                                  title:nil
+                                                   meta:nil
+                                                   tags:tags];
+    [apiClient sharelink:jsonObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                  }

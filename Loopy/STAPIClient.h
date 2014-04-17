@@ -10,6 +10,12 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 #import "STDeviceSettings.h"
+#import "STInstall.h"
+#import "STOpen.h"
+#import "STReportShare.h"
+#import "STShortlink.h"
+#import "STSharelink.h"
+#import "STLog.h"
 
 @interface STAPIClient : NSObject <NSURLConnectionDataDelegate>
 
@@ -27,8 +33,6 @@ extern NSString *const LOOPY_KEY;
 extern NSString *const STDID_KEY;
 extern NSString *const MD5ID_KEY;
 extern NSString *const LAST_OPEN_TIME_KEY;
-extern NSString *const LANGUAGE_ID;
-extern NSString *const LANGUAGE_VERSION;
 extern NSString *const SESSION_DATA_FILENAME;
 
 @property (nonatomic) NSTimeInterval callTimeout;
@@ -43,59 +47,72 @@ extern NSString *const SESSION_DATA_FILENAME;
 
 - (id)initWithAPIKey:(NSString *)key
             loopyKey:(NSString *)lkey;
+
 - (id)initWithAPIKey:(NSString *)key
             loopyKey:(NSString *)lkey
    locationsDisabled:(BOOL)locationServicesDisabled;
+
 - (void)getSessionWithReferrer:(NSString *)referrer
                    postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
+
 - (NSMutableURLRequest *)newURLRequest:(NSData *)jsonData
                                 length:(NSNumber *)length
                               endpoint:(NSString *)endpoint;
+
 - (NSMutableURLRequest *)newHTTPSURLRequest:(NSData *)jsonData
                                      length:(NSNumber *)length
                                    endpoint:(NSString *)endpoint;
+
 - (AFHTTPRequestOperation *)newURLRequestOperation:(NSURLRequest *)request
                                            isHTTPS:(BOOL)https
                                            success:(void(^)(AFHTTPRequestOperation *, id))successCallback
                                            failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
-- (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
-- (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
-- (NSDictionary *)installDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)openDictionaryWithReferrer:(NSString *)referrer;
-- (NSDictionary *)reportShareDictionary:(NSString *)shortlink channel:(NSString *)socialChannel;
-- (NSDictionary *)logDictionaryWithType:(NSString *)type meta:(NSDictionary *)meta;
-- (NSDictionary *)shortlinkDictionary:(NSString *)link
-                                title:(NSString *)title
-                                 meta:(NSDictionary *)meta
-                                 tags:(NSArray *)tags;
-- (NSDictionary *)sharelinkDictionary:(NSString *)link
-                              channel:(NSString *)socialChannel
-                                title:(NSString *)title
-                                 meta:(NSDictionary *)meta
-                                 tags:(NSArray *)tags;
 
-- (void)install:(NSDictionary *)jsonDict
+- (NSNumber *)loopyErrorCode:(NSDictionary *)errorDict;
+
+- (NSArray *)loopyErrorArray:(NSDictionary *)errorDict;
+
+- (STInstall *)installWithReferrer:(NSString *)referrer;
+
+- (STOpen *)openWithReferrer:(NSString *)referrer;
+
+- (STReportShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel;
+
+- (STShortlink *)shortlinkWithURL:(NSString *)link
+                            title:(NSString *)title
+                             meta:(NSDictionary *)meta
+                             tags:(NSArray *)tags;
+
+- (STSharelink *)sharelinkWithURL:(NSString *)link
+                          channel:(NSString *)socialChannel
+                            title:(NSString *)title
+                             meta:(NSDictionary *)meta
+                             tags:(NSArray *)tags;
+
+- (STLog *)logWithType:(NSString *)type meta:(NSDictionary *)meta;
+
+- (void)install:(STInstall *)jsonObj
         success:(void(^)(AFHTTPRequestOperation *, id))successCallback
         failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)open:(NSDictionary *)jsonDict
+- (void)open:(STOpen *)jsonObj
      success:(void(^)(AFHTTPRequestOperation *, id))successCallback
      failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)shortlink:(NSDictionary *)jsonDict
+- (void)shortlink:(STShortlink *)jsonDict
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)reportShare:(NSDictionary *)jsonDict
+- (void)reportShare:(STReportShare *)reportShareObj
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)sharelink:(NSDictionary *)jsonDict
+- (void)sharelink:(STSharelink *)jsonObj
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)log:(NSDictionary *)jsonDict
+- (void)log:(STLog *)jsonObj
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 

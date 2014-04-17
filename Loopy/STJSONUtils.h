@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "STObject.h"
 
 @interface STJSONUtils : NSObject
 
 + (NSData *)toJSONData:(NSDictionary *)jsonDict;
 + (NSString *)toJSONString:(NSData *)jsonData;
 + (NSDictionary *)toJSONDictionary:(NSData *)jsonData;
++ (NSData *)toJSONDataFromObject:(STObject *)obj;
++ (STObject *)toObject:(NSData *)jsonData;
 
 @end

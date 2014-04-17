@@ -22,6 +22,73 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2C11FCE018FF34F7004733C5 /* STDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCDE18FF34F7004733C5 /* STDevice.h */; };
+		2C11FCE118FF34F7004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
+		2C11FCE418FF3794004733C5 /* STGeo.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCE218FF3794004733C5 /* STGeo.h */; };
+		2C11FCE518FF3794004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
+		2C11FCE818FF390D004733C5 /* STApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCE618FF390D004733C5 /* STApp.h */; };
+		2C11FCE918FF390D004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
+		2C11FCEC18FF3A9F004733C5 /* STInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCEA18FF3A9F004733C5 /* STInstall.h */; };
+		2C11FCED18FF3A9F004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
+		2C11FCF018FF3DEA004733C5 /* STClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCEE18FF3DEA004733C5 /* STClient.h */; };
+		2C11FCF118FF3DEA004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
+		2C11FCF418FF486D004733C5 /* STOpen.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCF218FF486D004733C5 /* STOpen.h */; };
+		2C11FCF518FF486D004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
+		2C11FCF618FF4B2F004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
+		2C11FCF718FF4B30004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
+		2C11FCF818FF4B32004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
+		2C11FCF918FF4B33004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
+		2C11FCFA18FF4B35004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
+		2C11FCFB18FF4B36004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
+		2C11FCFC18FF4B39004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
+		2C11FCFD18FF4B39004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
+		2C11FCFE18FF4B3C004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
+		2C11FCFF18FF4B3C004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
+		2C11FD0018FF4B3F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
+		2C11FD0118FF4B3F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
+		2C11FD0218FF4B9E004733C5 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
+		2C11FD0318FF4B9E004733C5 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
+		2C11FD0C18FF50E9004733C5 /* STObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD0A18FF50E9004733C5 /* STObject.h */; };
+		2C11FD0E18FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
+		2C11FD0F18FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
+		2C11FD1018FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
+		2C11FD1B19005990004733C5 /* STReportShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD1919005990004733C5 /* STReportShare.h */; };
+		2C11FD1D19005990004733C5 /* STReportShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STReportShare.m */; };
+		2C11FD1E19005990004733C5 /* STReportShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STReportShare.m */; };
+		2C11FD1F19005990004733C5 /* STReportShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STReportShare.m */; };
+		2C11FD2219007192004733C5 /* STShortlink.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD2019007192004733C5 /* STShortlink.h */; };
+		2C11FD2419007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
+		2C11FD2519007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
+		2C11FD2619007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
+		2C11FD29190071DC004733C5 /* STItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD27190071DC004733C5 /* STItem.h */; };
+		2C11FD2B190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
+		2C11FD2C190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
+		2C11FD2D190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
+		2C11FD3719008C75004733C5 /* STSharelink.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD3519008C75004733C5 /* STSharelink.h */; };
+		2C11FD3919008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
+		2C11FD3A19008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
+		2C11FD3B19008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
+		2C11FD3C1900986F004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
+		2C11FD3D1900986F004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
+		2C11FD3E1900986F004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
+		2C11FD3F1900986F004733C5 /* STReportShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STReportShare.m */; };
+		2C11FD401900986F004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
+		2C11FD411900986F004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
+		2C11FD421900986F004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
+		2C11FD431900986F004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
+		2C11FD441900986F004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
+		2C11FD451900986F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
+		2C11FD461900986F004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
+		2C11FD4919009A9E004733C5 /* STLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD4719009A9E004733C5 /* STLog.h */; };
+		2C11FD4A19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
+		2C11FD4B19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
+		2C11FD4C19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
+		2C11FD4D19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
+		2C11FD5019009BCB004733C5 /* STEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD4E19009BCB004733C5 /* STEvent.h */; };
+		2C11FD5119009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
+		2C11FD5219009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
+		2C11FD5319009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
+		2C11FD5419009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
 		2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -152,6 +219,32 @@
 		20AC7383AFAB491BB995F927 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2C0ECE9418174C46005965D0 /* STConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConstants.h; sourceTree = "<group>"; };
 		2C0ECE9518174C46005965D0 /* STConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConstants.m; sourceTree = "<group>"; };
+		2C11FCDE18FF34F7004733C5 /* STDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDevice.h; sourceTree = "<group>"; };
+		2C11FCDF18FF34F7004733C5 /* STDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDevice.m; sourceTree = "<group>"; };
+		2C11FCE218FF3794004733C5 /* STGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STGeo.h; sourceTree = "<group>"; };
+		2C11FCE318FF3794004733C5 /* STGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STGeo.m; sourceTree = "<group>"; };
+		2C11FCE618FF390D004733C5 /* STApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STApp.h; sourceTree = "<group>"; };
+		2C11FCE718FF390D004733C5 /* STApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STApp.m; sourceTree = "<group>"; };
+		2C11FCEA18FF3A9F004733C5 /* STInstall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STInstall.h; sourceTree = "<group>"; };
+		2C11FCEB18FF3A9F004733C5 /* STInstall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STInstall.m; sourceTree = "<group>"; };
+		2C11FCEE18FF3DEA004733C5 /* STClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STClient.h; sourceTree = "<group>"; };
+		2C11FCEF18FF3DEA004733C5 /* STClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STClient.m; sourceTree = "<group>"; };
+		2C11FCF218FF486D004733C5 /* STOpen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOpen.h; sourceTree = "<group>"; };
+		2C11FCF318FF486D004733C5 /* STOpen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOpen.m; sourceTree = "<group>"; };
+		2C11FD0A18FF50E9004733C5 /* STObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STObject.h; sourceTree = "<group>"; };
+		2C11FD0B18FF50E9004733C5 /* STObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STObject.m; sourceTree = "<group>"; };
+		2C11FD1919005990004733C5 /* STReportShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STReportShare.h; sourceTree = "<group>"; };
+		2C11FD1A19005990004733C5 /* STReportShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STReportShare.m; sourceTree = "<group>"; };
+		2C11FD2019007192004733C5 /* STShortlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STShortlink.h; sourceTree = "<group>"; };
+		2C11FD2119007192004733C5 /* STShortlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STShortlink.m; sourceTree = "<group>"; };
+		2C11FD27190071DC004733C5 /* STItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STItem.h; sourceTree = "<group>"; };
+		2C11FD28190071DC004733C5 /* STItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STItem.m; sourceTree = "<group>"; };
+		2C11FD3519008C75004733C5 /* STSharelink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSharelink.h; sourceTree = "<group>"; };
+		2C11FD3619008C75004733C5 /* STSharelink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSharelink.m; sourceTree = "<group>"; };
+		2C11FD4719009A9E004733C5 /* STLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLog.h; sourceTree = "<group>"; };
+		2C11FD4819009A9E004733C5 /* STLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLog.m; sourceTree = "<group>"; };
+		2C11FD4E19009BCB004733C5 /* STEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STEvent.h; sourceTree = "<group>"; };
+		2C11FD4F19009BCB004733C5 /* STEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STEvent.m; sourceTree = "<group>"; };
 		2C1B5B9717E2783D00855D0D /* IntegrationTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntegrationTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1B5BCD17E278FC00855D0D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C1B5BCF17E2790500855D0D /* IntegrationTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "IntegrationTests-Info.plist"; sourceTree = "<group>"; };
@@ -309,6 +402,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C11FD11190033DE004733C5 /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				2C11FD0A18FF50E9004733C5 /* STObject.h */,
+				2C11FD0B18FF50E9004733C5 /* STObject.m */,
+				2C11FCEA18FF3A9F004733C5 /* STInstall.h */,
+				2C11FCEB18FF3A9F004733C5 /* STInstall.m */,
+				2C11FCF218FF486D004733C5 /* STOpen.h */,
+				2C11FCF318FF486D004733C5 /* STOpen.m */,
+				2C11FD1919005990004733C5 /* STReportShare.h */,
+				2C11FD1A19005990004733C5 /* STReportShare.m */,
+				2C11FD2019007192004733C5 /* STShortlink.h */,
+				2C11FD2119007192004733C5 /* STShortlink.m */,
+				2C11FD3519008C75004733C5 /* STSharelink.h */,
+				2C11FD3619008C75004733C5 /* STSharelink.m */,
+				2C11FD4719009A9E004733C5 /* STLog.h */,
+				2C11FD4819009A9E004733C5 /* STLog.m */,
+				2C11FCDE18FF34F7004733C5 /* STDevice.h */,
+				2C11FCDF18FF34F7004733C5 /* STDevice.m */,
+				2C11FCE618FF390D004733C5 /* STApp.h */,
+				2C11FCE718FF390D004733C5 /* STApp.m */,
+				2C11FCEE18FF3DEA004733C5 /* STClient.h */,
+				2C11FCEF18FF3DEA004733C5 /* STClient.m */,
+				2C11FCE218FF3794004733C5 /* STGeo.h */,
+				2C11FCE318FF3794004733C5 /* STGeo.m */,
+				2C11FD27190071DC004733C5 /* STItem.h */,
+				2C11FD28190071DC004733C5 /* STItem.m */,
+				2C11FD4E19009BCB004733C5 /* STEvent.h */,
+				2C11FD4F19009BCB004733C5 /* STEvent.m */,
+			);
+			name = DataObjects;
+			sourceTree = "<group>";
+		};
 		2C1B5B9B17E2783D00855D0D /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +555,7 @@
 				2C8C1E0D17E10BB80075B527 /* STAPIClient.m */,
 				2CCDBC5218FDD2A900DB2215 /* STDeviceSettings.h */,
 				2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */,
+				2C11FD11190033DE004733C5 /* DataObjects */,
 			);
 			name = "API Client";
 			sourceTree = "<group>";
@@ -544,16 +671,29 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C11FD5019009BCB004733C5 /* STEvent.h in Headers */,
 				2C44DDE618207EC20026938A /* Loopy.h in Headers */,
+				2C11FCEC18FF3A9F004733C5 /* STInstall.h in Headers */,
 				2C44DE0318207FDC0026938A /* STConstants.h in Headers */,
+				2C11FCF018FF3DEA004733C5 /* STClient.h in Headers */,
+				2C11FD29190071DC004733C5 /* STItem.h in Headers */,
 				2C44DE0418207FE80026938A /* STShare.h in Headers */,
+				2C11FD1B19005990004733C5 /* STReportShare.h in Headers */,
+				2C11FCE818FF390D004733C5 /* STApp.h in Headers */,
+				2C11FCE418FF3794004733C5 /* STGeo.h in Headers */,
+				2C11FCF418FF486D004733C5 /* STOpen.h in Headers */,
 				2C44DE0D1820808B0026938A /* STFacebookActivity.h in Headers */,
 				2CBFAEA81863A17E00BBFCC7 /* STActivity.h in Headers */,
+				2C11FD4919009A9E004733C5 /* STLog.h in Headers */,
 				2C44DE0E182080900026938A /* STTwitterActivity.h in Headers */,
 				2CCDBC5418FDD2A900DB2215 /* STDeviceSettings.h in Headers */,
 				2C44DE0F1820809B0026938A /* STAPIClient.h in Headers */,
 				2C44DE10182080A40026938A /* STJSONUtils.h in Headers */,
 				2C8D99E01834519E00D9BB4E /* STReachability.h in Headers */,
+				2C11FD0C18FF50E9004733C5 /* STObject.h in Headers */,
+				2C11FD2219007192004733C5 /* STShortlink.h in Headers */,
+				2C11FCE018FF34F7004733C5 /* STDevice.h in Headers */,
+				2C11FD3719008C75004733C5 /* STSharelink.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,16 +1015,29 @@
 			files = (
 				2CF479D91864B2D800150721 /* STConstants.m in Sources */,
 				2CF479DA1864B2D800150721 /* STReachability.m in Sources */,
+				2C11FCF918FF4B33004733C5 /* STOpen.m in Sources */,
+				2C11FD2519007192004733C5 /* STShortlink.m in Sources */,
+				2C11FD2C190071DC004733C5 /* STItem.m in Sources */,
 				2CF479DB1864B2D800150721 /* STShare.m in Sources */,
 				2CF479DC1864B2D800150721 /* STFacebookActivity.m in Sources */,
+				2C11FD0118FF4B3F004733C5 /* STGeo.m in Sources */,
+				2C11FD3A19008C75004733C5 /* STSharelink.m in Sources */,
 				2CF479DD1864B2D800150721 /* STTwitterActivity.m in Sources */,
+				2C11FD0F18FF50E9004733C5 /* STObject.m in Sources */,
 				2CF479DE1864B2D800150721 /* STAPIClient.m in Sources */,
+				2C11FCFF18FF4B3C004733C5 /* STClient.m in Sources */,
 				2CF479DF1864B2D800150721 /* STJSONUtils.m in Sources */,
 				2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */,
+				2C11FCFD18FF4B39004733C5 /* STApp.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */,
 				2CCDBC5718FDE4AA00DB2215 /* STDeviceSettings.m in Sources */,
+				2C11FCFB18FF4B36004733C5 /* STDevice.m in Sources */,
+				2C11FD1E19005990004733C5 /* STReportShare.m in Sources */,
+				2C11FD5319009BCB004733C5 /* STEvent.m in Sources */,
 				2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */,
+				2C11FCF718FF4B30004733C5 /* STInstall.m in Sources */,
+				2C11FD4C19009A9E004733C5 /* STLog.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -893,11 +1046,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C11FD2619007192004733C5 /* STShortlink.m in Sources */,
+				2C11FD1F19005990004733C5 /* STReportShare.m in Sources */,
+				2C11FCED18FF3A9F004733C5 /* STInstall.m in Sources */,
+				2C11FD4D19009A9E004733C5 /* STLog.m in Sources */,
+				2C11FD2D190071DC004733C5 /* STItem.m in Sources */,
+				2C11FD3B19008C75004733C5 /* STSharelink.m in Sources */,
+				2C11FD5419009BCB004733C5 /* STEvent.m in Sources */,
+				2C11FCE918FF390D004733C5 /* STApp.m in Sources */,
+				2C11FD1018FF50E9004733C5 /* STObject.m in Sources */,
 				2C44DE11182081210026938A /* STConstants.m in Sources */,
 				2C44DE12182081240026938A /* STShare.m in Sources */,
 				2C44DE13182081260026938A /* STFacebookActivity.m in Sources */,
 				2C8D99E11834519E00D9BB4E /* STReachability.m in Sources */,
 				2C44DE141820812A0026938A /* STTwitterActivity.m in Sources */,
+				2C11FCF118FF3DEA004733C5 /* STClient.m in Sources */,
+				2C11FCF518FF486D004733C5 /* STOpen.m in Sources */,
+				2C11FCE118FF34F7004733C5 /* STDevice.m in Sources */,
+				2C11FCE518FF3794004733C5 /* STGeo.m in Sources */,
 				2CCDBC5518FDD2A900DB2215 /* STDeviceSettings.m in Sources */,
 				2C44DE151820812E0026938A /* STAPIClient.m in Sources */,
 				2C44DE16182081300026938A /* STJSONUtils.m in Sources */,
@@ -908,9 +1074,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C11FD3C1900986F004733C5 /* STObject.m in Sources */,
 				2C34327017FB70270039A2D8 /* STTestUtils.m in Sources */,
+				2C11FD3F1900986F004733C5 /* STReportShare.m in Sources */,
+				2C11FD4A19009A9E004733C5 /* STLog.m in Sources */,
+				2C11FD401900986F004733C5 /* STShortlink.m in Sources */,
+				2C11FD451900986F004733C5 /* STGeo.m in Sources */,
+				2C11FD431900986F004733C5 /* STApp.m in Sources */,
+				2C11FD3E1900986F004733C5 /* STOpen.m in Sources */,
+				2C11FD0318FF4B9E004733C5 /* STDeviceSettings.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
+				2C11FD3D1900986F004733C5 /* STInstall.m in Sources */,
+				2C11FD411900986F004733C5 /* STSharelink.m in Sources */,
+				2C11FD5119009BCB004733C5 /* STEvent.m in Sources */,
+				2C11FD421900986F004733C5 /* STDevice.m in Sources */,
+				2C11FD0218FF4B9E004733C5 /* STAPIClient.m in Sources */,
+				2C11FD461900986F004733C5 /* STItem.m in Sources */,
 				2C250E2C1804C8EC00A788AC /* STRootViewController.m in Sources */,
+				2C11FD441900986F004733C5 /* STClient.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* STTestAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,16 +1103,29 @@
 				2CF479D21864B2C100150721 /* STConstants.m in Sources */,
 				2CCDBC5618FDE4A900DB2215 /* STDeviceSettings.m in Sources */,
 				2CF479D31864B2C100150721 /* STReachability.m in Sources */,
+				2C11FD3919008C75004733C5 /* STSharelink.m in Sources */,
 				2CF479D41864B2C100150721 /* STShare.m in Sources */,
+				2C11FCFA18FF4B35004733C5 /* STDevice.m in Sources */,
+				2C11FD5219009BCB004733C5 /* STEvent.m in Sources */,
+				2C11FD2419007192004733C5 /* STShortlink.m in Sources */,
 				2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */,
 				2CF479D61864B2C100150721 /* STTwitterActivity.m in Sources */,
+				2C11FCF618FF4B2F004733C5 /* STInstall.m in Sources */,
+				2C11FD2B190071DC004733C5 /* STItem.m in Sources */,
 				2CF479D71864B2C100150721 /* STAPIClient.m in Sources */,
 				2CF479D81864B2C100150721 /* STJSONUtils.m in Sources */,
 				2C3C15EA1819C1FB00793F9B /* STActivityTests.m in Sources */,
 				2C314A0917E13143003CA1A0 /* STAPIClientTests.m in Sources */,
+				2C11FCFC18FF4B39004733C5 /* STApp.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
+				2C11FD0E18FF50E9004733C5 /* STObject.m in Sources */,
+				2C11FCFE18FF4B3C004733C5 /* STClient.m in Sources */,
+				2C11FD4B19009A9E004733C5 /* STLog.m in Sources */,
+				2C11FCF818FF4B32004733C5 /* STOpen.m in Sources */,
+				2C11FD0018FF4B3F004733C5 /* STGeo.m in Sources */,
 				2C5ADD4B181879EC00BAC4DC /* STShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* STTestUtils.m in Sources */,
+				2C11FD1D19005990004733C5 /* STReportShare.m in Sources */,
 				2C3E069217FA26B700FF751B /* STJSONUtilsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

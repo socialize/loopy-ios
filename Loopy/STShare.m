@@ -11,6 +11,7 @@
 #import "STFacebookActivity.h"
 #import "STTwitterActivity.h"
 #import "STConstants.h"
+#import "STReportShare.h"
 
 @implementation STShare
 
@@ -117,9 +118,9 @@
     id<STActivity> activity = (id<STActivity>)[notification object];
     NSArray *shareItems = activity.shareItems;
     NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
-    NSDictionary *shareDict = [self.apiClient reportShareDictionary:shareItem
-                                                            channel:activity.activityType];
-    [self.apiClient reportShare:shareDict
+    STReportShare *shareObj = [self.apiClient reportShareWithShortlink:shareItem
+                                                               channel:activity.activityType];
+    [self.apiClient reportShare:shareObj
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             //Currently no response is needed after success
                         }
