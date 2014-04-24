@@ -42,7 +42,7 @@
 //error logging (debug mode only)
 + (void)logError:(NSError *)error {
 #if DEBUG
-    NSLog(@"ERROR code: %d", error.code);
+    NSLog(@"ERROR code: %ld", (long)error.code);
 #endif
     for(id key in error.userInfo) {
         id value = [error.userInfo objectForKey:key];
