@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "STShare.h"
+#import "STShareActivityUI.h"
 #import "STActivity.h"
 #import "STFacebookActivity.h"
 #import "STTwitterActivity.h"
@@ -17,7 +17,7 @@
 #import <OCMock/OCMock.h>
 
 @interface STShareTests : GHTestCase {
-    STShare *share;
+    STShareActivityUI *share;
     NSArray *dummyActivities;
     NSArray *dummyShareItems;
 }
@@ -28,7 +28,7 @@
 - (void)setUpClass {
     UIViewController *dummyController = (UIViewController *)[OCMockObject mockForClass:[UIViewController class]];
     STAPIClient *dummyAPIClient = (STAPIClient *)[OCMockObject mockForClass:[STAPIClient class]];
-    share = [[STShare alloc] initWithParent:dummyController apiClient:dummyAPIClient];
+    share = [[STShareActivityUI alloc] initWithParent:dummyController apiClient:dummyAPIClient];
     dummyShareItems = @[@"www.shortlink.com", @"More information about this site"];
     
     //add activity items as a setter (i.e. no notification of intent to share)

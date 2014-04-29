@@ -12,7 +12,7 @@
 #import "STJSONUtils.h"
 #import "STInstall.h"
 #import "STOpen.h"
-#import "STReportShare.h"
+#import "STShare.h"
 #import "STShortlink.h"
 #import "STSharelink.h"
 #import "STItem.h"
@@ -133,7 +133,7 @@
     [self prepare];
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";
-    STReportShare *jsonObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
+    STShare *jsonObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
     __block BOOL operationSucceeded = NO;
     
     [apiClient reportShare:jsonObj
@@ -253,7 +253,7 @@
                      //share the shortlink...
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                      NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-                     STReportShare *shareObj = [apiClient reportShareWithShortlink:shortlink channel:@"http://www.facebook.com"];
+                     STShare *shareObj = [apiClient reportShareWithShortlink:shortlink channel:@"http://www.facebook.com"];
 
                      [apiClient reportShare:shareObj
                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {

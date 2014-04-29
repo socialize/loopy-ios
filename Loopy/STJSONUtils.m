@@ -61,10 +61,5 @@
     return [STJSONUtils toJSONData:dict];
 }
 
-//convert JSON NSData to STObject
-+ (STObject *)toObject:(NSData *)jsonData {
-    return nil; //TODO
-}
-
 
 @end

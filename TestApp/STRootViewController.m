@@ -7,7 +7,7 @@
 //
 
 #import "STRootViewController.h"
-#import "STShare.h"
+#import "STShareActivityUI.h"
 #import "STSharelink.h"
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
@@ -20,7 +20,7 @@
 
 @implementation STRootViewController
 
-STShare *share;
+STShareActivityUI *share;
 STAPIClient *apiClient;
 
 @synthesize textField;
@@ -45,7 +45,7 @@ STAPIClient *apiClient;
                 //any failure operations
             }];
         
-        share = [[STShare alloc] initWithParent:self apiClient:apiClient];
+        share = [[STShareActivityUI alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
 }

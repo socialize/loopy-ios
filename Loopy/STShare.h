@@ -1,25 +1,26 @@
 //
-//  STShare.h
+//  STReportShare.h
 //  Loopy
 //
-//  Created by David Jedeikin on 10/23/13.
-//  Copyright (c) 2013 ShareThis. All rights reserved.
+//  Created by David Jedeikin on 4/17/14.
+//  Copyright (c) 2014 ShareThis. All rights reserved.
 //
 
-#import "STAPIClient.h"
-#import <Foundation/Foundation.h>
-#import <Social/Social.h>
+#import "STObject.h"
+#import "STDevice.h"
+#import "STClient.h"
+#import "STApp.h"
 
-@interface STShare : NSObject
+@interface STShare : STObject
 
-@property (nonatomic, strong) UIViewController *parentController;
-@property (nonatomic, strong) STAPIClient *apiClient;
+@property (nonatomic,strong) NSNumber *timestamp;
+@property (nonatomic,strong) NSString *stdid;
+@property (nonatomic, strong) NSString *md5id;
+@property (nonatomic,strong) NSString *referrer;
+@property (nonatomic, strong) NSString *channel;
+@property (nonatomic, strong) NSString *shortlink;
+@property (nonatomic,strong) STDevice *device;
+@property (nonatomic,strong) STApp *app;
+@property (nonatomic,strong) STClient *client;
 
-- (id)initWithParent:(UIViewController *)parent apiClient:(STAPIClient *)client;
-- (NSArray *)getDefaultActivities:(NSArray *)activityItems;
-- (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities;
-- (SLComposeViewController *)newActivityShareController:(id)activityObj;
-- (void)showActivityViewDialog:(UIActivityViewController *)activityController completion:(void (^)(void))completion;
-- (void)handleShowActivityShare:(NSNotification *)notification;
-- (void)handleShareComplete:(NSNotification *)notification;
 @end
