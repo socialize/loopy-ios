@@ -31,11 +31,4 @@
 - (STApp *)app;
 - (NSString *)md5FromString:(NSString *)input;
 
-
-
-
-
-- (NSDictionary *)deviceDictionary;
-- (NSDictionary *)appDictionary;
-
 @end
