@@ -12,7 +12,13 @@
 #import "STApp.h"
 #import "STGeo.h"
 
+//set to 1 to use it, 0 to use generic UUID that's cached
+#define SHOULD_USE_IDFA 0
+
 @implementation STDeviceSettings
+
+NSString *const DEVICE_DATA_FILENAME = @"STDeviceData.plist";
+NSString *const DEVICE_ID_KEY = @"DeviceID";
 
 @synthesize locationManager;
 @synthesize carrierName;
@@ -42,8 +48,30 @@
         
         //md5 hash of IDFA
         //IDFA is cached for dependency injection purposes
+        //conditional code for compliance purposes as Apple does not permit apps that don't serve ads to use IDFA
+#if SHOULD_USE_IDFA
         ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.idfa = idManager.advertisingIdentifier;
+#else
+        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *filePath = [rootPath stringByAppendingPathComponent:DEVICE_DATA_FILENAME];
+        NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+
+        //no file -- create stdid
+        if(!plistDict) {
+            self.idfa = (NSUUID *)[NSUUID UUID];
+            plistDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                                 [self.idfa UUIDString],DEVICE_ID_KEY,
+                                                 nil];
+            [plistDict writeToFile:filePath atomically:YES];
+        }
+        //file exists -- read it and use ID
+        else {
+            NSString *idfaString = (NSString *)[plistDict objectForKey:DEVICE_ID_KEY];
+            self.idfa = [[NSUUID alloc] initWithUUIDString:idfaString];
+        }
+#endif
+        
         if(self.idfa) {
             self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
