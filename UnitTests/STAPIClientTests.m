@@ -12,7 +12,7 @@
 #import "STObject.h"
 #import "STInstall.h"
 #import "STOpen.h"
-#import "STReportShare.h"
+#import "STShare.h"
 #import "STShortlink.h"
 #import "STSharelink.h"
 #import "STDevice.h"
@@ -198,7 +198,7 @@
     NSString *dummyShortlink = @"www.shortlink.com";
     NSString *dummyChannel = @"Facebook";
     
-    STReportShare *shareObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
+    STShare *shareObj = [apiClient reportShareWithShortlink:dummyShortlink channel:dummyChannel];
     GHAssertNotNil(shareObj, @"");
     GHAssertNotNil(shareObj.stdid, @"");
     GHAssertNotNil(shareObj.md5id, @"");

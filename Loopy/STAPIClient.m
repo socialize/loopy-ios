@@ -259,8 +259,8 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 }
 
 //returns JSON-ready dictionary for /share endpoint, based on shortlink and channel
-- (STReportShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel {
-    STReportShare *reportShareObj = [[STReportShare alloc] init];
+- (STShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel {
+    STShare *reportShareObj = [[STShare alloc] init];
 
     int timestamp = [[NSDate date] timeIntervalSince1970];
     reportShareObj.timestamp = [NSNumber numberWithInt:timestamp];
@@ -378,7 +378,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
     [self callEndpoint:OPEN json:openObj success:successCallback failure:failureCallback];
 }
 
-- (void)reportShare:(STReportShare *)reportShareObj
+- (void)reportShare:(STShare *)reportShareObj
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
     [self callEndpoint:REPORT_SHARE
@@ -446,21 +446,10 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
                failure:failureCallback];
 }
 
-
-
-
-
-
-
-
-
-
-
-//TODO CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-- (void)log:(NSDictionary *)jsonDict
+- (void)log:(STLog *)jsonObj
     success:(void(^)(AFHTTPRequestOperation *, id))successCallback
     failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    [self callEndpoint:LOG json:jsonDict success:successCallback failure:failureCallback];
+    [self callEndpoint:LOG json:jsonObj success:successCallback failure:failureCallback];
 }
 
 //convenience method

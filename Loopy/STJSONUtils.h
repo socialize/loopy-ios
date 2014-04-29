@@ -15,6 +15,5 @@
 + (NSString *)toJSONString:(NSData *)jsonData;
 + (NSDictionary *)toJSONDictionary:(NSData *)jsonData;
 + (NSData *)toJSONDataFromObject:(STObject *)obj;
-+ (STObject *)toObject:(NSData *)jsonData;
 
 @end

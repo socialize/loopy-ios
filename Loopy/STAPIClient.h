@@ -12,7 +12,7 @@
 #import "STDeviceSettings.h"
 #import "STInstall.h"
 #import "STOpen.h"
-#import "STReportShare.h"
+#import "STShare.h"
 #import "STShortlink.h"
 #import "STSharelink.h"
 #import "STLog.h"
@@ -77,7 +77,7 @@ extern NSString *const SESSION_DATA_FILENAME;
 
 - (STOpen *)openWithReferrer:(NSString *)referrer;
 
-- (STReportShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel;
+- (STShare *)reportShareWithShortlink:(NSString *)shortlink channel:(NSString *)socialChannel;
 
 - (STShortlink *)shortlinkWithURL:(NSString *)link
                             title:(NSString *)title
@@ -104,7 +104,7 @@ extern NSString *const SESSION_DATA_FILENAME;
           success:(void(^)(AFHTTPRequestOperation *, id))successCallback
           failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 
-- (void)reportShare:(STReportShare *)reportShareObj
+- (void)reportShare:(STShare *)reportShareObj
             success:(void(^)(AFHTTPRequestOperation *, id))successCallback
             failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;
 

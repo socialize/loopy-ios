@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "STShare.h"
+#import "STShareActivityUI.h"
 #import "STFacebookActivity.h"
 #import "STTwitterActivity.h"
 #import "STConstants.h"

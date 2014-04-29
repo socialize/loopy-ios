@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 ShareThis. All rights reserved.
 //
 
-#import "STShare.h"
+#import "STShareActivityUI.h"
 #import "STFacebookActivity.h"
 #import "STTwitterActivity.h"
 #import "STConstants.h"
@@ -31,7 +31,7 @@
     facebookActivity = [[STFacebookActivity alloc] init];
     twitterActivity = [[STTwitterActivity alloc] init];
     
-    share = [[STShare alloc] initWithParent:nil apiClient:nil];
+    share = [[STShareActivityUI alloc] initWithParent:nil apiClient:nil];
     activities = @[facebookActivity, twitterActivity];
     shareItems = @[@"ShareItem1",@"ShareItem2"];
 
