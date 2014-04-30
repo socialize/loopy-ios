@@ -13,7 +13,7 @@
 #import "STGeo.h"
 
 //set to 1 to use it, 0 to use generic UUID that's cached
-#define SHOULD_USE_IDFA 0
+#define SHOULD_USE_IDFA 1
 
 @implementation STDeviceSettings
 
@@ -26,6 +26,7 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
 @synthesize deviceModel;
 @synthesize md5id;
 @synthesize idfa;
+@synthesize idfv;
 @synthesize currentLocation;
 
 - (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled {
@@ -45,6 +46,7 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
         self.carrierName = [carrier carrierName] != nil ? [carrier carrierName] : @"none";
         self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
+        self.idfv = device.identifierForVendor;
         
         //md5 hash of IDFA
         //IDFA is cached for dependency injection purposes
@@ -52,32 +54,19 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
 #if SHOULD_USE_IDFA
         ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
         self.idfa = idManager.advertisingIdentifier;
-#else
-        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *filePath = [rootPath stringByAppendingPathComponent:DEVICE_DATA_FILENAME];
-        NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-
-        //no file -- create stdid
-        if(!plistDict) {
-            self.idfa = device.identifierForVendor;
-            plistDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                                 [self.idfa UUIDString],DEVICE_ID_KEY,
-                                                 nil];
-            [plistDict writeToFile:filePath atomically:YES];
-        }
-        //file exists -- read it and use ID
-        else {
-            NSString *idfaString = (NSString *)[plistDict objectForKey:DEVICE_ID_KEY];
-            self.idfa = [[NSUUID alloc] initWithUUIDString:idfaString];
-        }
 #endif
         
         if(self.idfa) {
             self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
+        //for other circumstances prohibiting idfa
+        else if(self.md5id) {
+            self.md5id = [self md5FromString:[self.idfv UUIDString]];
+        }
         //for headless devices
         else {
             self.idfa = [NSUUID UUID];
+            self.idfv = [NSUUID UUID];
             self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
     }
@@ -90,10 +79,12 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
     STReachability *reachability = [STReachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
-    NSString *idStr = [self.idfa UUIDString];
+    NSString *idStr = self.idfa ? [self.idfa UUIDString] : @"UNAVAILABLE";
+    NSString *idfvStr = [self.idfv UUIDString];
     
     STDevice *device = [[STDevice alloc] init];
     device.id = idStr;
+    device.idv = idfvStr;
     device.model = self.deviceModel;
     device.os = @"ios";
     device.osv = self.osVersion;
