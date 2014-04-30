@@ -59,7 +59,7 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
 
         //no file -- create stdid
         if(!plistDict) {
-            self.idfa = (NSUUID *)[NSUUID UUID];
+            self.idfa = device.identifierForVendor;
             plistDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                                  [self.idfa UUIDString],DEVICE_ID_KEY,
                                                  nil];
