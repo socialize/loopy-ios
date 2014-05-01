@@ -60,7 +60,7 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
             self.md5id = [self md5FromString:[self.idfa UUIDString]];
         }
         //for other circumstances prohibiting idfa
-        else if(self.md5id) {
+        else if(self.idfv) {
             self.md5id = [self md5FromString:[self.idfv UUIDString]];
         }
         //for headless devices
