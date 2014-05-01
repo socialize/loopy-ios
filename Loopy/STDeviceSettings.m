@@ -12,7 +12,7 @@
 #import "STApp.h"
 #import "STGeo.h"
 
-//set to 1 to use it, 0 to use generic UUID that's cached
+//set to 1 to use IDFA, 0 to use IDFV and set IDFA String to "UNAVAILABLE"
 #define SHOULD_USE_IDFA 1
 
 @implementation STDeviceSettings
