@@ -79,6 +79,7 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
     STReachability *reachability = [STReachability reachabilityForInternetConnection];
     NetworkStatus netStatus = [reachability currentReachabilityStatus];
     NSString *wifiStatus = netStatus == ReachableViaWiFi ? @"on" : @"off";
+    //set to UNAVAILABLE if IDFA isn't allowed
     NSString *idStr = self.idfa ? [self.idfa UUIDString] : @"UNAVAILABLE";
     NSString *idfvStr = [self.idfv UUIDString];
     
