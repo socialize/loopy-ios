@@ -13,6 +13,7 @@
 @interface STDevice : STObject
 
 @property (nonatomic,strong) NSString *id;
+@property (nonatomic,strong) NSString *idv;
 @property (nonatomic,strong) NSString *carrier;
 @property (nonatomic,strong) NSString *model;
 @property (nonatomic,strong) NSString *os;

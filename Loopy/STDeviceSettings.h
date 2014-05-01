@@ -18,8 +18,12 @@
 
 @interface STDeviceSettings : NSObject<CLLocationManagerDelegate>
 
+extern NSString *const DEVICE_DATA_FILENAME;
+extern NSString *const DEVICE_ID_KEY;
+
 @property (nonatomic, strong) NSString *md5id;
 @property (nonatomic, strong) NSUUID *idfa;
+@property (nonatomic, strong) NSUUID *idfv;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSString *carrierName;

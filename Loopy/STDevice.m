@@ -11,6 +11,7 @@
 @implementation STDevice
 
 @synthesize id;
+@synthesize idv;
 @synthesize carrier;
 @synthesize model;
 @synthesize os;
