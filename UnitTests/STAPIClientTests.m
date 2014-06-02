@@ -20,6 +20,7 @@
 #import "STClient.h"
 #import "STGeo.h"
 #import "STItem.h"
+#import "STIdentifier.h"
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 #import <AFNetworking/AFNetworking.h>
@@ -36,7 +37,9 @@
 - (void)setUpClass {
     endpoint = @"/endpoint";
     apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
-                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
+                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"
+                                  locationsDisabled:NO
+                                     identifierType:STIdentifierTypeHeadless];
     
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators

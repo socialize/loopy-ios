@@ -8,9 +8,9 @@
 
 #import "STDevice.h"
 #import "STApp.h"
+#import "STIdentifier.h"
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <CommonCrypto/CommonDigest.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <AdSupport/ASIdentifierManager.h>
@@ -30,7 +30,7 @@ extern NSString *const DEVICE_ID_KEY;
 @property (nonatomic, strong) NSString *osVersion;
 @property (nonatomic, strong) NSString *deviceModel;
 
-- (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled;
+- (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled identifierType:(STIdentifierType)type;
 - (STDevice *)device;
 - (STApp *)app;
 - (NSString *)md5FromString:(NSString *)input;
