@@ -7,6 +7,7 @@
 //
 
 #import "STDeviceSettings.h"
+#import "STIdentifierFactory.h"
 #import "STReachability.h"
 #import "STDevice.h"
 #import "STApp.h"
@@ -29,7 +30,8 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
 @synthesize idfv;
 @synthesize currentLocation;
 
-- (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled {
+- (id)initWithLocationsDisabled:(BOOL)locationServicesDisabled
+                 identifierType:(STIdentifierType)identifierType {
     self = [super init];
     
     if(self) {
@@ -46,29 +48,13 @@ NSString *const DEVICE_ID_KEY = @"DeviceID";
         self.carrierName = [carrier carrierName] != nil ? [carrier carrierName] : @"none";
         self.deviceModel = machineName();
         self.osVersion = device.systemVersion;
-        self.idfv = device.identifierForVendor;
         
-        //md5 hash of IDFA
-        //IDFA is cached for dependency injection purposes
-        //conditional code for compliance purposes as Apple does not permit apps that don't serve ads to use IDFA
-#if SHOULD_USE_IDFA
-        ASIdentifierManager *idManager = [ASIdentifierManager sharedManager];
-        self.idfa = idManager.advertisingIdentifier;
-#endif
-        
-        if(self.idfa) {
-            self.md5id = [self md5FromString:[self.idfa UUIDString]];
-        }
-        //for other circumstances prohibiting idfa
-        else if(self.idfv) {
-            self.md5id = [self md5FromString:[self.idfv UUIDString]];
-        }
-        //for headless devices
-        else {
-            self.idfa = [NSUUID UUID];
-            self.idfv = [NSUUID UUID];
-            self.md5id = [self md5FromString:[self.idfa UUIDString]];
-        }
+        //identifier settings come from object built by factory
+        STIdentifierFactory *identifierFactory = (STIdentifierFactory *)[STIdentifierFactory instance];
+        STIdentifier *identifier = [identifierFactory identifierForKey:identifierType];
+        self.idfv = identifier.idfv;
+        self.idfa = identifier.idfa;
+        self.md5id = identifier.md5id;
     }
     return self;
 }

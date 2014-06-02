@@ -52,6 +52,11 @@ extern NSString *const SESSION_DATA_FILENAME;
             loopyKey:(NSString *)lkey
    locationsDisabled:(BOOL)locationServicesDisabled;
 
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey
+   locationsDisabled:(BOOL)locationServicesDisabled
+      identifierType:(STIdentifierType)identifierType;
+
 - (void)getSessionWithReferrer:(NSString *)referrer
                    postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback;

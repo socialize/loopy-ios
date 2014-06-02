@@ -20,6 +20,7 @@
 #import "STClient.h"
 #import "STGeo.h"
 #import "STItem.h"
+#import "STIdentifier.h"
 #import <GHUnitIOS/GHUnit.h>
 #import <OCMock/OCMock.h>
 #import <AFNetworking/AFNetworking.h>
@@ -36,22 +37,17 @@
 - (void)setUpClass {
     endpoint = @"/endpoint";
     apiClient = [[STAPIClient alloc] initWithAPIKey:@"hkg435723o4tho95fh29"
-                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"];
+                                           loopyKey: @"4q7cd6ngw3vu7gram5b9b9t6"
+                                  locationsDisabled:NO
+                                     identifierType:STIdentifierTypeHeadless];
     
-    //simulate current location, IDFA, and stdid
-    //IDFA and corresponding MD5ID will not be generated on headless simulators
+    //simulate current location and stdid
     if(!apiClient.deviceSettings.currentLocation) {
         apiClient.deviceSettings.currentLocation = [[CLLocation alloc] initWithLatitude:45.0f longitude:45.0f];
     }
     if(!apiClient.stdid) {
         NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
         apiClient.stdid = (NSString *)[stdidObj UUIDString];
-    }
-    if(!apiClient.deviceSettings.idfa) {
-        apiClient.deviceSettings.idfa = (NSUUID *)[NSUUID UUID];
-    }
-    if(!apiClient.deviceSettings.md5id) {
-        apiClient.deviceSettings.md5id = [apiClient.deviceSettings md5FromString:[apiClient.deviceSettings.idfa UUIDString]];
     }
 }
 

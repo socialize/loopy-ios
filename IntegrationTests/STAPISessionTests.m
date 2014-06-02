@@ -19,7 +19,8 @@
 - (void)setUp {
     apiClient = [[STAPIClient alloc] initWithAPIKey:@"be6a5004-6abb-4382-a131-8d6812a9e74b"
                                            loopyKey:@"3d4pnhzpar8bz8t44w7hb42k"
-                                  locationsDisabled:YES];
+                                  locationsDisabled:YES
+                                     identifierType:STIdentifierTypeHeadless];
     
     //simulate current location, IDFA, and stdid
     //IDFA and corresponding MD5ID will not be generated on headless simulators
@@ -29,12 +30,6 @@
     if(!apiClient.stdid) {
         NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
         apiClient.stdid = (NSString *)[stdidObj UUIDString];
-    }
-    if(!apiClient.deviceSettings.idfa) {
-        apiClient.deviceSettings.idfa = (NSUUID *)[NSUUID UUID];
-    }
-    if(!apiClient.deviceSettings.md5id) {
-        apiClient.deviceSettings.md5id = [apiClient.deviceSettings md5FromString:[apiClient.deviceSettings.idfa UUIDString]];
     }
 }
 

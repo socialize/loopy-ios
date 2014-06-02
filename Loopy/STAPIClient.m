@@ -9,9 +9,12 @@
 #import "STAPIClient.h"
 #import "STJSONUtils.h"
 #import "STReachability.h"
+#import "STIdentifier.h"
+#import "STIdentifierFactory.h"
 #import "STClient.h"
 #import "STGeo.h"
 #import "STItem.h"
+#import "STIdentifier.h"
 
 @implementation STAPIClient
 
@@ -38,15 +41,39 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 @synthesize stdid;
 @synthesize shortlinks;
 
-//init API with specified keys
+#pragma  mark - Constructors
+
+//init API with specified keys and with location services enabled
+//does NOT call any endpoints
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey {
+    return [self initWithAPIKey:key
+                       loopyKey:lkey
+              locationsDisabled:NO];
+}
+
+//init API with specified keys and default identifier types
 //does NOT call any endpoints
 - (id)initWithAPIKey:(NSString *)key
             loopyKey:(NSString *)lkey
    locationsDisabled:(BOOL)locationServicesDisabled {
+    return [self initWithAPIKey:key
+                       loopyKey:lkey
+              locationsDisabled:locationServicesDisabled
+                 identifierType:STIdentifierTypeStandard];
+}
+
+//init API with specified keys
+//does NOT call any endpoints
+- (id)initWithAPIKey:(NSString *)key
+            loopyKey:(NSString *)lkey
+   locationsDisabled:(BOOL)locationServicesDisabled
+      identifierType:(STIdentifierType)identifierType {
     self = [super init];
     if(self) {
         //device info
-        self.deviceSettings = [[STDeviceSettings alloc] initWithLocationsDisabled:locationServicesDisabled];
+        self.deviceSettings = [[STDeviceSettings alloc] initWithLocationsDisabled:locationServicesDisabled
+                                                                   identifierType:identifierType];
         
         //init shortlink cache
         self.shortlinks = [NSMutableDictionary dictionary];
@@ -70,13 +97,6 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         _openTimeout = [openTimeoutMillis floatValue] / 1000.0f;
     }
     return self;
-}
-
-//init API with specified keys and with location services enabled
-//does NOT call any endpoints
-- (id)initWithAPIKey:(NSString *)key
-            loopyKey:(NSString *)lkey {
-    return [self initWithAPIKey:key loopyKey:lkey locationsDisabled:NO];
 }
 
 #pragma mark - Identities Handling
