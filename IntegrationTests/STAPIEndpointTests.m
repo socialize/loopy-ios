@@ -40,12 +40,6 @@
         NSUUID *stdidObj = (NSUUID *)[NSUUID UUID];
         apiClient.stdid = (NSString *)[stdidObj UUIDString];
     }
-    if(!apiClient.deviceSettings.idfa) {
-        apiClient.deviceSettings.idfa = (NSUUID *)[NSUUID UUID];
-    }
-    if(!apiClient.deviceSettings.md5id) {
-        apiClient.deviceSettings.md5id = [apiClient.deviceSettings md5FromString:[apiClient.deviceSettings.idfa UUIDString]];
-    }
 }
 
 - (void)tearDown {
