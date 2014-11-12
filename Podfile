@@ -6,5 +6,5 @@ inhibit_all_warnings!
 
 xcodeproj 'Loopy'
 
-link_with ['Loopy','TestApp']
+link_with 'Loopy'
 pod 'AFNetworking', '~> 2.2'
