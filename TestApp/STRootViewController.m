@@ -7,20 +7,22 @@
 //
 
 #import "STRootViewController.h"
-//#import "STShareActivityUI.h"
-//#import "STSharelink.h"
-//#import "STAPIClient.h"
-//#import "STJSONUtils.h"
+#import "STShareActivityUI.h"
+#import "STSharelink.h"
+#import "STAPIClient.h"
+#import "STJSONUtils.h"
+#import "STObject.h"
+#import "STIdentifier.h"
 #import <Social/Social.h>
-//#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface STRootViewController ()
 @end
 
 @implementation STRootViewController
 
-//STShareActivityUI *share;
-//STAPIClient *apiClient;
+STShareActivityUI *share;
+STAPIClient *apiClient;
 
 @synthesize textField;
 @synthesize installButton;
@@ -29,23 +31,23 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        apiClient = [[STAPIClient alloc] initWithAPIKey:@"73e0eeb1-5a3e-4603-b85a-21025d9847fc"
-//                                               loopyKey:@"nq225rg5m4ekx87uss9te56e"
-//                                      locationsDisabled:NO];
-//        
-//        //for testing, use internal API for now
-//        apiClient.urlPrefix = @"http://internal.loopy.getsocialize.com/v1";
-//        apiClient.httpsURLPrefix = @"http://internal.loopy.getsocialize.com/v1";
-//
-//        [apiClient getSessionWithReferrer:@"www.facebook.com"
-//            postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                //any operations post-successful /install or /open
-//            }
-//            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                //any failure operations
-//            }];
-//        
-//        share = [[STShareActivityUI alloc] initWithParent:self apiClient:apiClient];
+        apiClient = [[STAPIClient alloc] initWithAPIKey:@"73e0eeb1-5a3e-4603-b85a-21025d9847fc"
+                                               loopyKey:@"nq225rg5m4ekx87uss9te56e"
+                                      locationsDisabled:NO];
+
+        //for testing, use internal API for now
+        apiClient.urlPrefix = @"http://internal.loopy.getsocialize.com/v1";
+        apiClient.httpsURLPrefix = @"http://internal.loopy.getsocialize.com/v1";
+
+        [apiClient getSessionWithReferrer:@"www.facebook.com"
+            postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //any operations post-successful /install or /open
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //any failure operations
+            }];
+        
+        share = [[STShareActivityUI alloc] initWithParent:self apiClient:apiClient];
     }
     return self;
 }
@@ -56,25 +58,25 @@
 
 //shorten then share
 - (IBAction)shareButtonPressed:(id)sender {
-//    NSDictionary *jsonDict = [self jsonForShortlink:self.textField.text];
-//    [apiClient shortlink:(NSDictionary *)jsonDict
-//                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                     NSDictionary *responseDict = (NSDictionary *)responseObject;
-//                     if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
-//                         NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
-//                         NSArray *activityItems = @[shortlink];
-//                         NSArray *activities = [share getDefaultActivities:activityItems];
-//                         UIActivityViewController * activityController = [share newActivityViewController:activityItems
-//                                                                                          withActivities:activities];
-//                         [share showActivityViewDialog:activityController completion:nil];
-//                     }
-//                     else {
-//                         NSLog(@"FAILURE");
-//                     }
-//                 }
-//                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                     NSLog(@"FAILURE");
-//                 }];
+    NSDictionary *jsonDict = [self jsonForShortlink:self.textField.text];
+    [apiClient shortlink:(NSDictionary *)jsonDict
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
+                     if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
+                         NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                         NSArray *activityItems = @[shortlink];
+                         NSArray *activities = [share getDefaultActivities:activityItems];
+                         UIActivityViewController * activityController = [share newActivityViewController:activityItems
+                                                                                          withActivities:activities];
+                         [share showActivityViewDialog:activityController completion:nil];
+                     }
+                     else {
+                         NSLog(@"FAILURE");
+                     }
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"FAILURE");
+                 }];
 }
 
 //shorten then share in one operation
