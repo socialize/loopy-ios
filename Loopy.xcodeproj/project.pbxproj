@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1CB707645259CAD0D62685AF /* libPods-IntegrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B62D1EB89700DDAFB7D12F /* libPods-IntegrationTests.a */; };
 		2C05A934193928F70010CA08 /* STIdentifierFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C05A932193928F70010CA08 /* STIdentifierFactory.h */; };
 		2C05A935193928F70010CA08 /* STIdentifierFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A933193928F70010CA08 /* STIdentifierFactory.m */; };
 		2C11FCE018FF34F7004733C5 /* STDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCDE18FF34F7004733C5 /* STDevice.h */; };
@@ -36,60 +37,19 @@
 		2C11FCF118FF3DEA004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
 		2C11FCF418FF486D004733C5 /* STOpen.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FCF218FF486D004733C5 /* STOpen.h */; };
 		2C11FCF518FF486D004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
-		2C11FCF618FF4B2F004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
-		2C11FCF718FF4B30004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
-		2C11FCF818FF4B32004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
-		2C11FCF918FF4B33004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
-		2C11FCFA18FF4B35004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
-		2C11FCFB18FF4B36004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
-		2C11FCFC18FF4B39004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
-		2C11FCFD18FF4B39004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
-		2C11FCFE18FF4B3C004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
-		2C11FCFF18FF4B3C004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
-		2C11FD0018FF4B3F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
-		2C11FD0118FF4B3F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
-		2C11FD0218FF4B9E004733C5 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
-		2C11FD0318FF4B9E004733C5 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
 		2C11FD0C18FF50E9004733C5 /* STObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD0A18FF50E9004733C5 /* STObject.h */; };
-		2C11FD0E18FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
-		2C11FD0F18FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
 		2C11FD1018FF50E9004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
 		2C11FD1B19005990004733C5 /* STShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD1919005990004733C5 /* STShare.h */; };
-		2C11FD1D19005990004733C5 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STShare.m */; };
-		2C11FD1E19005990004733C5 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STShare.m */; };
 		2C11FD1F19005990004733C5 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STShare.m */; };
 		2C11FD2219007192004733C5 /* STShortlink.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD2019007192004733C5 /* STShortlink.h */; };
-		2C11FD2419007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
-		2C11FD2519007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
 		2C11FD2619007192004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
 		2C11FD29190071DC004733C5 /* STItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD27190071DC004733C5 /* STItem.h */; };
-		2C11FD2B190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
-		2C11FD2C190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
 		2C11FD2D190071DC004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
 		2C11FD3719008C75004733C5 /* STSharelink.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD3519008C75004733C5 /* STSharelink.h */; };
-		2C11FD3919008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
-		2C11FD3A19008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
 		2C11FD3B19008C75004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
-		2C11FD3C1900986F004733C5 /* STObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD0B18FF50E9004733C5 /* STObject.m */; };
-		2C11FD3D1900986F004733C5 /* STInstall.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEB18FF3A9F004733C5 /* STInstall.m */; };
-		2C11FD3E1900986F004733C5 /* STOpen.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCF318FF486D004733C5 /* STOpen.m */; };
-		2C11FD3F1900986F004733C5 /* STShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD1A19005990004733C5 /* STShare.m */; };
-		2C11FD401900986F004733C5 /* STShortlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD2119007192004733C5 /* STShortlink.m */; };
-		2C11FD411900986F004733C5 /* STSharelink.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD3619008C75004733C5 /* STSharelink.m */; };
-		2C11FD421900986F004733C5 /* STDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCDF18FF34F7004733C5 /* STDevice.m */; };
-		2C11FD431900986F004733C5 /* STApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE718FF390D004733C5 /* STApp.m */; };
-		2C11FD441900986F004733C5 /* STClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCEF18FF3DEA004733C5 /* STClient.m */; };
-		2C11FD451900986F004733C5 /* STGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FCE318FF3794004733C5 /* STGeo.m */; };
-		2C11FD461900986F004733C5 /* STItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD28190071DC004733C5 /* STItem.m */; };
 		2C11FD4919009A9E004733C5 /* STLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD4719009A9E004733C5 /* STLog.h */; };
-		2C11FD4A19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
-		2C11FD4B19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
-		2C11FD4C19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
 		2C11FD4D19009A9E004733C5 /* STLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4819009A9E004733C5 /* STLog.m */; };
 		2C11FD5019009BCB004733C5 /* STEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C11FD4E19009BCB004733C5 /* STEvent.h */; };
-		2C11FD5119009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
-		2C11FD5219009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
-		2C11FD5319009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
 		2C11FD5419009BCB004733C5 /* STEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C11FD4F19009BCB004733C5 /* STEvent.m */; };
 		2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
@@ -101,8 +61,6 @@
 		2C314A0917E13143003CA1A0 /* STAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C314A0817E13143003CA1A0 /* STAPIClientTests.m */; };
 		2C314A1317E1354A003CA1A0 /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C314A1217E1354A003CA1A0 /* OpenJSONTest.txt */; };
 		2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34326B17FB40E10039A2D8 /* STAPIEndpointTests.m */; };
-		2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* STTestUtils.m */; };
-		2C34327017FB70270039A2D8 /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069417FA418C00FF751B /* STTestUtils.m */; };
 		2C3C15EA1819C1FB00793F9B /* STActivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15E91819C1FB00793F9B /* STActivityTests.m */; };
 		2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C15EC1819C71E00793F9B /* STShareCallbackTests.m */; };
 		2C3E069217FA26B700FF751B /* STJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E069117FA26B700FF751B /* STJSONUtilsTests.m */; };
@@ -128,6 +86,9 @@
 		2C48EAF717DF87F200181C3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2C5ADD4B181879EC00BAC4DC /* STShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4A181879EC00BAC4DC /* STShareTests.m */; };
 		2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F2EB9185685110032BA75 /* STAPISessionTests.m */; };
+		2C61E9151A12CB3C00E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C44DDE018207EC20026938A /* libLoopy.a */; };
+		2C61E9161A12CB4100E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C44DDE018207EC20026938A /* libLoopy.a */; };
+		2C61E9171A12D2B500E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C44DDE018207EC20026938A /* libLoopy.a */; };
 		2C64D42218187A6900D6CE6C /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE11811E8AD005E9159 /* FacebookLogoNoBlue43x43.png */; };
 		2C64D42318187A6900D6CE6C /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE21811E8AD005E9159 /* FacebookLogoNoBlue60x60.png */; };
 		2C64D42418187A6900D6CE6C /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE31811E8AD005E9159 /* FacebookLogoNoBlue76x76.png */; };
@@ -135,9 +96,6 @@
 		2C64D42618187A6900D6CE6C /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2C64D42718187A6900D6CE6C /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
 		2C698F5418173F5E003643B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
-		2C742AA417F371620063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AA017F371620063653A /* libPods.a */; };
-		2C742AD217F3912E0063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742ACE17F3912E0063653A /* libPods.a */; };
-		2C742AD617F391440063653A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C742AD517F391440063653A /* libPods.a */; };
 		2C8C1E1917E10BB80075B527 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0F17E10BB80075B527 /* InfoPlist.strings */; };
 		2C8C1E1B17E10BB80075B527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1317E10BB80075B527 /* main.m */; };
 		2C8C1E1C17E10BB80075B527 /* STTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E1517E10BB80075B527 /* STTestAppDelegate.m */; };
@@ -159,23 +117,9 @@
 		2CBE9144193CE41800A93CD6 /* STDefaultIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9142193CE41800A93CD6 /* STDefaultIdentifier.m */; };
 		2CBE9147193CE42800A93CD6 /* STHeadlessIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBE9145193CE42800A93CD6 /* STHeadlessIdentifier.h */; };
 		2CBE9148193CE42800A93CD6 /* STHeadlessIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9146193CE42800A93CD6 /* STHeadlessIdentifier.m */; };
-		2CBE914B193D0AA300A93CD6 /* STIdentifierFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A933193928F70010CA08 /* STIdentifierFactory.m */; };
-		2CBE914C193D0AA300A93CD6 /* STIdentifierFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A933193928F70010CA08 /* STIdentifierFactory.m */; };
-		2CBE914D193D0AA400A93CD6 /* STIdentifierFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A933193928F70010CA08 /* STIdentifierFactory.m */; };
-		2CBE914E193D0AA800A93CD6 /* STIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE913E193CE40200A93CD6 /* STIdentifier.m */; };
-		2CBE914F193D0AA900A93CD6 /* STIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE913E193CE40200A93CD6 /* STIdentifier.m */; };
-		2CBE9150193D0AA900A93CD6 /* STIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE913E193CE40200A93CD6 /* STIdentifier.m */; };
-		2CBE9151193D0AAD00A93CD6 /* STDefaultIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9142193CE41800A93CD6 /* STDefaultIdentifier.m */; };
-		2CBE9152193D0AAE00A93CD6 /* STDefaultIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9142193CE41800A93CD6 /* STDefaultIdentifier.m */; };
-		2CBE9153193D0AAE00A93CD6 /* STDefaultIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9142193CE41800A93CD6 /* STDefaultIdentifier.m */; };
-		2CBE9154193D0AB200A93CD6 /* STHeadlessIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9146193CE42800A93CD6 /* STHeadlessIdentifier.m */; };
-		2CBE9155193D0AB300A93CD6 /* STHeadlessIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9146193CE42800A93CD6 /* STHeadlessIdentifier.m */; };
-		2CBE9156193D0AB300A93CD6 /* STHeadlessIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE9146193CE42800A93CD6 /* STHeadlessIdentifier.m */; };
 		2CBFAEA81863A17E00BBFCC7 /* STActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBFAEA71863A17E00BBFCC7 /* STActivity.h */; };
 		2CCDBC5418FDD2A900DB2215 /* STDeviceSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CCDBC5218FDD2A900DB2215 /* STDeviceSettings.h */; };
 		2CCDBC5518FDD2A900DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
-		2CCDBC5618FDE4A900DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
-		2CCDBC5718FDE4AA00DB2215 /* STDeviceSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDBC5318FDD2A900DB2215 /* STDeviceSettings.m */; };
 		2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF417DF87F200181C3E /* Foundation.framework */; };
 		2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF617DF87F200181C3E /* CoreGraphics.framework */; };
 		2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C48EAF217DF87F200181C3E /* UIKit.framework */; };
@@ -195,7 +139,6 @@
 		2CEFADAC1833000E00841C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEFADA81832FFEF00841C33 /* AdSupport.framework */; };
 		2CEFADAD1833001B00841C33 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C698F5318173F5E003643B0 /* Social.framework */; };
 		2CF479BC18649F2B00150721 /* LoopyApiInfo.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
-		2CF479C61864A01900150721 /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C44DDE018207EC20026938A /* libLoopy.a */; };
 		2CF479C71864A05E00150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
 		2CF479C91864A16000150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
 		2CF479CB1864A17F00150721 /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */; };
@@ -205,21 +148,8 @@
 		2CF479CF1864A20A00150721 /* TwitterLogo43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE71811E8AD005E9159 /* TwitterLogo43x43.png */; };
 		2CF479D01864A20A00150721 /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE81811E8AD005E9159 /* TwitterLogo60x60.png */; };
 		2CF479D11864A20A00150721 /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA3DCE91811E8AD005E9159 /* TwitterLogo76x76.png */; };
-		2CF479D21864B2C100150721 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
-		2CF479D31864B2C100150721 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
-		2CF479D41864B2C100150721 /* STShareActivityUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShareActivityUI.m */; };
-		2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
-		2CF479D61864B2C100150721 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
-		2CF479D71864B2C100150721 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
-		2CF479D81864B2C100150721 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
-		2CF479D91864B2D800150721 /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ECE9518174C46005965D0 /* STConstants.m */; };
-		2CF479DA1864B2D800150721 /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D99DF1834519E00D9BB4E /* STReachability.m */; };
-		2CF479DB1864B2D800150721 /* STShareActivityUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5ADD4718185FE700BAC4DC /* STShareActivityUI.m */; };
-		2CF479DC1864B2D800150721 /* STFacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEB1811E8AD005E9159 /* STFacebookActivity.m */; };
-		2CF479DD1864B2D800150721 /* STTwitterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DCEF1811E8AD005E9159 /* STTwitterActivity.m */; };
-		2CF479DE1864B2D800150721 /* STAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1E0D17E10BB80075B527 /* STAPIClient.m */; };
-		2CF479DF1864B2D800150721 /* STJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D367317E3AD0300CF1199 /* STJSONUtils.m */; };
 		4006680A21E673E2C9EA6A77 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FF3B14B1414F9D8911EA25 /* libPods.a */; };
+		F7B354CAD2046B82359224A8 /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3383B68B749FB21F77F7228D /* libPods-UnitTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -362,7 +292,13 @@
 		2CE78B9C1831B0C9004EBB82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2CEFADA81832FFEF00841C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2CF479BB18649EFF00150721 /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
+		3383B68B749FB21F77F7228D /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C952FD299A8FB29C6D18838 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		446347AC2392A71510243362 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		47922663B0A4B126A6593639 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6894535D7453FC0C67D2AA77 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		85B62D1EB89700DDAFB7D12F /* libPods-IntegrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntegrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5AF8F22C804A58CB9859F14 /* Pods-IntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -371,7 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C742AD217F3912E0063653A /* libPods.a in Frameworks */,
+				2C61E9161A12CB4100E456DA /* libLoopy.a in Frameworks */,
 				2C1B5B9917E2783D00855D0D /* CoreGraphics.framework in Frameworks */,
 				2C1B5B9A17E2783D00855D0D /* UIKit.framework in Frameworks */,
 				2C1B5B9817E2783D00855D0D /* Foundation.framework in Frameworks */,
@@ -380,6 +316,7 @@
 				2CE78BA11831B100004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CEFADA91832FFEF00841C33 /* AdSupport.framework in Frameworks */,
 				2CA3361218345307003D7498 /* SystemConfiguration.framework in Frameworks */,
+				1CB707645259CAD0D62685AF /* libPods-IntegrationTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,8 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CF479C61864A01900150721 /* libLoopy.a in Frameworks */,
-				2C742AD617F391440063653A /* libPods.a in Frameworks */,
+				2C61E9171A12D2B500E456DA /* libLoopy.a in Frameworks */,
 				2C698F5418173F5E003643B0 /* Social.framework in Frameworks */,
 				2C48EAF317DF87F200181C3E /* UIKit.framework in Frameworks */,
 				2C48EAF517DF87F200181C3E /* Foundation.framework in Frameworks */,
@@ -418,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C742AA417F371620063653A /* libPods.a in Frameworks */,
+				2C61E9151A12CB3C00E456DA /* libLoopy.a in Frameworks */,
 				2CDE0E7117E122A30048B055 /* CoreGraphics.framework in Frameworks */,
 				2CDE0E7217E122A30048B055 /* UIKit.framework in Frameworks */,
 				2CDE0E7017E122A30048B055 /* Foundation.framework in Frameworks */,
@@ -427,6 +363,7 @@
 				2CE78BA01831B0EA004EBB82 /* CoreLocation.framework in Frameworks */,
 				2CEFADAA1832FFF800841C33 /* AdSupport.framework in Frameworks */,
 				2CA33611183452FC003D7498 /* SystemConfiguration.framework in Frameworks */,
+				F7B354CAD2046B82359224A8 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +499,8 @@
 				2C48EAF617DF87F200181C3E /* CoreGraphics.framework */,
 				2CDE0E8617E122A30048B055 /* XCTest.framework */,
 				04FF3B14B1414F9D8911EA25 /* libPods.a */,
+				85B62D1EB89700DDAFB7D12F /* libPods-IntegrationTests.a */,
+				3383B68B749FB21F77F7228D /* libPods-UnitTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -708,6 +647,10 @@
 			children = (
 				47922663B0A4B126A6593639 /* Pods.debug.xcconfig */,
 				C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */,
+				6894535D7453FC0C67D2AA77 /* Pods-IntegrationTests.debug.xcconfig */,
+				B5AF8F22C804A58CB9859F14 /* Pods-IntegrationTests.release.xcconfig */,
+				446347AC2392A71510243362 /* Pods-UnitTests.debug.xcconfig */,
+				3C952FD299A8FB29C6D18838 /* Pods-UnitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -756,12 +699,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C1B5BC617E2783D00855D0D /* Build configuration list for PBXNativeTarget "IntegrationTests" */;
 			buildPhases = (
+				8328AC2B96C9AD8D7D72AE10 /* Check Pods Manifest.lock */,
 				2C1B5B9317E2783D00855D0D /* Sources */,
 				2C1B5B9417E2783D00855D0D /* Frameworks */,
 				2C1B5B9517E2783D00855D0D /* Resources */,
 				2C3FE4BF18033E3C00BAF591 /* ShellScript */,
 				2C34327E17FB90160039A2D8 /* ShellScript */,
 				2CB8BF2B1804A4EA009DCB50 /* ShellScript */,
+				FDCDB73A292699A46F70E9AB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -815,12 +760,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CDE0E9417E122A30048B055 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
+				86D2BCA0A8F1CDE2FCDA52D7 /* Check Pods Manifest.lock */,
 				2CDE0E6B17E122A20048B055 /* Sources */,
 				2CDE0E6C17E122A20048B055 /* Frameworks */,
 				2CDE0E6D17E122A20048B055 /* Resources */,
 				2C522CD317FF7F3F009C1F43 /* ShellScript */,
 				2C34327117FB883D0039A2D8 /* ShellScript */,
 				2CE116D21803627A00EFF9E4 /* ShellScript */,
+				FFC50284A7A6E2B0D6B47BE1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1075,6 +1022,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		8328AC2B96C9AD8D7D72AE10 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		86D2BCA0A8F1CDE2FCDA52D7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		DD6F2D2342F9CC02A4D6842F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1090,6 +1067,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FDCDB73A292699A46F70E9AB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFC50284A7A6E2B0D6B47BE1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1097,35 +1104,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CF479D91864B2D800150721 /* STConstants.m in Sources */,
-				2CF479DA1864B2D800150721 /* STReachability.m in Sources */,
-				2C11FCF918FF4B33004733C5 /* STOpen.m in Sources */,
-				2CBE914E193D0AA800A93CD6 /* STIdentifier.m in Sources */,
-				2C11FD2519007192004733C5 /* STShortlink.m in Sources */,
-				2C11FD2C190071DC004733C5 /* STItem.m in Sources */,
-				2CF479DB1864B2D800150721 /* STShareActivityUI.m in Sources */,
-				2CF479DC1864B2D800150721 /* STFacebookActivity.m in Sources */,
-				2C11FD0118FF4B3F004733C5 /* STGeo.m in Sources */,
-				2C11FD3A19008C75004733C5 /* STSharelink.m in Sources */,
-				2CF479DD1864B2D800150721 /* STTwitterActivity.m in Sources */,
-				2C11FD0F18FF50E9004733C5 /* STObject.m in Sources */,
-				2CF479DE1864B2D800150721 /* STAPIClient.m in Sources */,
-				2C11FCFF18FF4B3C004733C5 /* STClient.m in Sources */,
-				2CF479DF1864B2D800150721 /* STJSONUtils.m in Sources */,
-				2C34326D17FB6CE60039A2D8 /* STTestUtils.m in Sources */,
 				2C3C15ED1819C71E00793F9B /* STShareCallbackTests.m in Sources */,
-				2C11FCFD18FF4B39004733C5 /* STApp.m in Sources */,
-				2CBE9154193D0AB200A93CD6 /* STHeadlessIdentifier.m in Sources */,
 				2C34326C17FB40E10039A2D8 /* STAPIEndpointTests.m in Sources */,
-				2CCDBC5718FDE4AA00DB2215 /* STDeviceSettings.m in Sources */,
-				2CBE914B193D0AA300A93CD6 /* STIdentifierFactory.m in Sources */,
-				2C11FCFB18FF4B36004733C5 /* STDevice.m in Sources */,
-				2CBE9151193D0AAD00A93CD6 /* STDefaultIdentifier.m in Sources */,
-				2C11FD1E19005990004733C5 /* STShare.m in Sources */,
-				2C11FD5319009BCB004733C5 /* STEvent.m in Sources */,
 				2C5F2EBA185685110032BA75 /* STAPISessionTests.m in Sources */,
-				2C11FCF718FF4B30004733C5 /* STInstall.m in Sources */,
-				2C11FD4C19009A9E004733C5 /* STLog.m in Sources */,
 				2C1B5BCE17E278FC00855D0D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1166,28 +1147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C11FD3C1900986F004733C5 /* STObject.m in Sources */,
-				2C34327017FB70270039A2D8 /* STTestUtils.m in Sources */,
-				2CBE914D193D0AA400A93CD6 /* STIdentifierFactory.m in Sources */,
-				2C11FD3F1900986F004733C5 /* STShare.m in Sources */,
-				2C11FD4A19009A9E004733C5 /* STLog.m in Sources */,
-				2CBE9153193D0AAE00A93CD6 /* STDefaultIdentifier.m in Sources */,
-				2C11FD401900986F004733C5 /* STShortlink.m in Sources */,
-				2C11FD451900986F004733C5 /* STGeo.m in Sources */,
-				2C11FD431900986F004733C5 /* STApp.m in Sources */,
-				2C11FD3E1900986F004733C5 /* STOpen.m in Sources */,
-				2C11FD0318FF4B9E004733C5 /* STDeviceSettings.m in Sources */,
 				2C8C1E1B17E10BB80075B527 /* main.m in Sources */,
-				2C11FD3D1900986F004733C5 /* STInstall.m in Sources */,
-				2CBE9156193D0AB300A93CD6 /* STHeadlessIdentifier.m in Sources */,
-				2C11FD411900986F004733C5 /* STSharelink.m in Sources */,
-				2C11FD5119009BCB004733C5 /* STEvent.m in Sources */,
-				2C11FD421900986F004733C5 /* STDevice.m in Sources */,
-				2C11FD0218FF4B9E004733C5 /* STAPIClient.m in Sources */,
-				2C11FD461900986F004733C5 /* STItem.m in Sources */,
-				2CBE9150193D0AA900A93CD6 /* STIdentifier.m in Sources */,
 				2C250E2C1804C8EC00A788AC /* STRootViewController.m in Sources */,
-				2C11FD441900986F004733C5 /* STClient.m in Sources */,
 				2C8C1E1C17E10BB80075B527 /* STTestAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1196,36 +1157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CBE9155193D0AB300A93CD6 /* STHeadlessIdentifier.m in Sources */,
-				2CF479D21864B2C100150721 /* STConstants.m in Sources */,
-				2CBE9152193D0AAE00A93CD6 /* STDefaultIdentifier.m in Sources */,
-				2CCDBC5618FDE4A900DB2215 /* STDeviceSettings.m in Sources */,
-				2CF479D31864B2C100150721 /* STReachability.m in Sources */,
-				2C11FD3919008C75004733C5 /* STSharelink.m in Sources */,
-				2CF479D41864B2C100150721 /* STShareActivityUI.m in Sources */,
-				2C11FCFA18FF4B35004733C5 /* STDevice.m in Sources */,
-				2C11FD5219009BCB004733C5 /* STEvent.m in Sources */,
-				2C11FD2419007192004733C5 /* STShortlink.m in Sources */,
-				2CF479D51864B2C100150721 /* STFacebookActivity.m in Sources */,
-				2CF479D61864B2C100150721 /* STTwitterActivity.m in Sources */,
-				2C11FCF618FF4B2F004733C5 /* STInstall.m in Sources */,
-				2C11FD2B190071DC004733C5 /* STItem.m in Sources */,
-				2CF479D71864B2C100150721 /* STAPIClient.m in Sources */,
-				2CF479D81864B2C100150721 /* STJSONUtils.m in Sources */,
 				2C3C15EA1819C1FB00793F9B /* STActivityTests.m in Sources */,
 				2C314A0917E13143003CA1A0 /* STAPIClientTests.m in Sources */,
-				2C11FCFC18FF4B39004733C5 /* STApp.m in Sources */,
-				2CBE914F193D0AA900A93CD6 /* STIdentifier.m in Sources */,
 				2CDE0E7A17E122A30048B055 /* main.m in Sources */,
-				2CBE914C193D0AA300A93CD6 /* STIdentifierFactory.m in Sources */,
-				2C11FD0E18FF50E9004733C5 /* STObject.m in Sources */,
-				2C11FCFE18FF4B3C004733C5 /* STClient.m in Sources */,
-				2C11FD4B19009A9E004733C5 /* STLog.m in Sources */,
-				2C11FCF818FF4B32004733C5 /* STOpen.m in Sources */,
-				2C11FD0018FF4B3F004733C5 /* STGeo.m in Sources */,
 				2C5ADD4B181879EC00BAC4DC /* STShareTests.m in Sources */,
 				2C3E069517FA418C00FF751B /* STTestUtils.m in Sources */,
-				2C11FD1D19005990004733C5 /* STShare.m in Sources */,
 				2C3E069217FA26B700FF751B /* STJSONUtilsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1262,7 +1198,7 @@
 /* Begin XCBuildConfiguration section */
 		2C1B5BBB17E2783D00855D0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47922663B0A4B126A6593639 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6894535D7453FC0C67D2AA77 /* Pods-IntegrationTests.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1282,17 +1218,27 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers\"",
-					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
-					"\"${PODS_ROOT}/Headers/OCMock\"",
-					"\"${PODS_ROOT}/Headers/SZNetworking\"",
+					"\"$(SRCROOT)/Pods/Headers/Public\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
 				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-l\"Pods-UnitTests-GHUnitIOS\"",
+					"-l\"Pods-UnitTests-OCMock\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1301,7 +1247,7 @@
 		};
 		2C1B5BBC17E2783D00855D0D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */;
+			baseConfigurationReference = B5AF8F22C804A58CB9859F14 /* Pods-IntegrationTests.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1318,17 +1264,27 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers\"",
-					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
-					"\"${PODS_ROOT}/Headers/OCMock\"",
-					"\"${PODS_ROOT}/Headers/SZNetworking\"",
+					"\"$(SRCROOT)/Pods/Headers/Public\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
 				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-l\"Pods-UnitTests-GHUnitIOS\"",
+					"-l\"Pods-UnitTests-OCMock\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1452,7 +1408,6 @@
 		};
 		2C48EB0D17DF87F200181C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47922663B0A4B126A6593639 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1460,7 +1415,9 @@
 				GCC_PREFIX_HEADER = "TestApp/Loopy-Prefix.pch";
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TestApp/Loopy-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1469,7 +1426,6 @@
 		};
 		2C48EB0E17DF87F200181C3E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1477,7 +1433,9 @@
 				GCC_PREFIX_HEADER = "TestApp/Loopy-Prefix.pch";
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "TestApp/Loopy-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1486,7 +1444,6 @@
 		};
 		2CA668A818218334003D0AF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47922663B0A4B126A6593639 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1494,7 +1451,6 @@
 		};
 		2CA668A918218334003D0AF1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1502,7 +1458,7 @@
 		};
 		2CDE0E9517E122A30048B055 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47922663B0A4B126A6593639 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 446347AC2392A71510243362 /* Pods-UnitTests.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1525,18 +1481,27 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers\"",
-					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
-					"\"${PODS_ROOT}/Headers/OCMock\"",
-					"\"${PODS_ROOT}/Headers/SZNetworking\"",
+					"\"$(SRCROOT)/Pods/Headers/Public\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-l\"Pods-UnitTests-GHUnitIOS\"",
+					"-l\"Pods-UnitTests-OCMock\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1545,7 +1510,7 @@
 		};
 		2CDE0E9617E122A30048B055 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C20AEFFB8B51C80682C410E2 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 3C952FD299A8FB29C6D18838 /* Pods-UnitTests.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1565,18 +1530,27 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers\"",
-					"\"${PODS_ROOT}/Headers/GHUnitIOS\"",
-					"\"${PODS_ROOT}/Headers/OCMock\"",
-					"\"${PODS_ROOT}/Headers/SZNetworking\"",
+					"\"$(SRCROOT)/Pods/Headers/Public\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
+					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
 				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-l\"Pods-UnitTests-GHUnitIOS\"",
+					"-l\"Pods-UnitTests-OCMock\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
