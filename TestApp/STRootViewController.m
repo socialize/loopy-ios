@@ -7,20 +7,20 @@
 //
 
 #import "STRootViewController.h"
-#import "STShareActivityUI.h"
-#import "STSharelink.h"
-#import "STAPIClient.h"
-#import "STJSONUtils.h"
+//#import "STShareActivityUI.h"
+//#import "STSharelink.h"
+//#import "STAPIClient.h"
+//#import "STJSONUtils.h"
 #import <Social/Social.h>
-#import <AFNetworking/AFNetworking.h>
+//#import <AFNetworking/AFNetworking.h>
 
 @interface STRootViewController ()
 @end
 
 @implementation STRootViewController
 
-STShareActivityUI *share;
-STAPIClient *apiClient;
+//STShareActivityUI *share;
+//STAPIClient *apiClient;
 
 @synthesize textField;
 @synthesize installButton;
@@ -36,7 +36,7 @@ STAPIClient *apiClient;
 //        //for testing, use internal API for now
 //        apiClient.urlPrefix = @"http://internal.loopy.getsocialize.com/v1";
 //        apiClient.httpsURLPrefix = @"http://internal.loopy.getsocialize.com/v1";
-//        
+//
 //        [apiClient getSessionWithReferrer:@"www.facebook.com"
 //            postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 //                //any operations post-successful /install or /open
