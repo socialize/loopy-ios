@@ -9,12 +9,12 @@ xcodeproj 'Loopy'
 link_with 'Loopy'
 pod 'AFNetworking', '~> 2.2'
 
-target :UnitTests do
+target :UnitTests, :exclusive => true do
   pod 'GHUnitIOS', :podspec => 'https://raw.githubusercontent.com/socialize/gh-unit/master/GHUnitIOS.podspec'
   pod 'OCMock', :podspec => 'https://raw.githubusercontent.com/socialize/ocmock/master/OCMock.podspec'
 end
 
-target :IntegrationTests do
+target :IntegrationTests, :exclusive => true do
   pod 'GHUnitIOS', :podspec => 'https://raw.githubusercontent.com/socialize/gh-unit/master/GHUnitIOS.podspec'
   pod 'OCMock', :podspec => 'https://raw.githubusercontent.com/socialize/ocmock/master/OCMock.podspec'
 end

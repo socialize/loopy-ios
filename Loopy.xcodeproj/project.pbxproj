@@ -1217,29 +1217,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Pods/Headers/Public\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-l\"Pods-UnitTests-GHUnitIOS\"",
-					"-l\"Pods-UnitTests-OCMock\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1263,29 +1246,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Pods/Headers/Public\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-l\"Pods-UnitTests-GHUnitIOS\"",
-					"-l\"Pods-UnitTests-OCMock\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1480,29 +1446,12 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GENERATE_PROFILING_CODE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Pods/Headers/Public\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-l\"Pods-UnitTests-GHUnitIOS\"",
-					"-l\"Pods-UnitTests-OCMock\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1529,29 +1478,12 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GENERATE_PROFILING_CODE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Pods/Headers/Public\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/GHUnitIOS\"",
-					"\"$(SRCROOT)/Pods/Headers/Public/OCMock\"",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-l\"Pods-UnitTests-GHUnitIOS\"",
-					"-l\"Pods-UnitTests-OCMock\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
