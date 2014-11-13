@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using a Custom Share UI &mdash; Loopy iOS Library 1.0.0 documentation</title>
+    <title>Using a Custom Share UI &mdash; Loopy iOS Library 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.0',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,14 +25,14 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
-    <link rel="top" title="Loopy iOS Library 1.0.0 documentation" href="index.html" />
+    <link rel="top" title="Loopy iOS Library 1.1.0 documentation" href="index.html" />
     <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Using the Share Dialog" href="share_dialog.html" />
 <script type="text/javascript" src="static/loopy.js"></script>
 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -41,14 +41,14 @@
         <li class="right" >
           <a href="share_dialog.html" title="Using the Share Dialog"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Loopy iOS Library 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
@@ -78,20 +78,19 @@
 <p>If you have your own custom implementation of a share UI you can still benefit from the Loopy™ social analytics platform by creating a trackable URL to be shared, and notifying the analytics platform when the share was successful.</p>
 <p>Simply use the <strong>[SZAPIClient shortlink:withCallback:]</strong> method to create a trackable URL for sharing when the user executes a share. Then, once sharing is complete, ensure you call <strong>[SZAPIClient reportShare:withCallback:]</strong> to record the share.</p>
 <p>This can be implemented as follows:</p>
-<div class="highlight-objective-c"><pre>
-//Returns a shortened URL
+<div class="highlight-objective-c"><div class="highlight"><pre>//Returns a shortened URL
 - (void)shortenURL:(NSString *)url {
-    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@"http://loopy-api-url-prefix"];
+    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@&quot;http://loopy-api-url-prefix&quot;];
     NSDictionary *jsonDict = [self jsonForShortlink:url];
     [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
         id responseData = [data objectFromJSONData];
         BOOL success = (error == nil) &amp;&amp; ([responseData isKindOfClass:[NSDictionary class]]);
         if(success) {
             NSDictionary *responseDict = (NSDictionary *)responseData;
-            if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@"shortlink"]) {
+            if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@&quot;shortlink&quot;]) {
                 
                 //initialization code for UIActivity
-                NSString *shortlink = (NSString *)[responseDict valueForKey:@"shortlink"];
+                NSString *shortlink = (NSString *)[responseDict valueForKey:@&quot;shortlink&quot;];
                 NSArray *activityItems = @[shortlink];
                 MyCustomActivity *activity = [MyCustomActivity initWithActivityItems:activityItems];
                 
@@ -107,22 +106,21 @@
     }];
 }
 
-//This is a sample of JSON needed for the "shortlink" API call
+//This is a sample of JSON needed for the &quot;shortlink&quot; API call
 - (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
     NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             urlStr,@"url",
+                             urlStr,@&quot;url&quot;,
                              nil];
     NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"69",@"stdid",
-                                  [NSNumber numberWithInt:1234567890],@"timestamp",
-                                  itemObj,@"item",
-                                  [NSArray arrayWithObjects:@"sports", @"entertainment", nil],@"tags",
+                                  @&quot;69&quot;,@&quot;stdid&quot;,
+                                  [NSNumber numberWithInt:1234567890],@&quot;timestamp&quot;,
+                                  itemObj,@&quot;item&quot;,
+                                  [NSArray arrayWithObjects:@&quot;sports&quot;, @&quot;entertainment&quot;, nil],@&quot;tags&quot;,
                                   nil];
     
     return shortlinkObj;
 }
-
-</pre>
+</pre></div>
 </div>
 </div>
 
@@ -130,7 +128,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h3><a href="index.html">Table Of Contents</a></h3>
 <ul class="current">
@@ -142,7 +140,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting Help</a></li>
 </ul>
 
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -159,7 +157,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -168,10 +166,10 @@
         <li class="right" >
           <a href="share_dialog.html" title="Using the Share Dialog"
              >previous</a> |</li>
-        <li><a href="index.html">Loopy iOS Library 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, ShareThis Inc.
     </div>
   </body>
