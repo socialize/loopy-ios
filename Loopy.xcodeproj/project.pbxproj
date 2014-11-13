@@ -79,7 +79,8 @@
 		2C61EF8B1A15570600E456DA /* STAPIEndpointTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF881A15570600E456DA /* STAPIEndpointTests.m */; };
 		2C61EF8C1A15570600E456DA /* STAPISessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF891A15570600E456DA /* STAPISessionTests.m */; };
 		2C61EF8D1A15570600E456DA /* STShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF8A1A15570600E456DA /* STShareCallbackTests.m */; };
-		2C61EF8F1A15575800E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF8E1A15575800E456DA /* LaunchScreen.xib */; };
+		2C61EF941A155A9900E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF921A155A9900E456DA /* LaunchScreen.xib */; };
+		2C61EF981A155AAC00E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF961A155AAC00E456DA /* LaunchScreen.xib */; };
 		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -218,7 +219,8 @@
 		2C61EF881A15570600E456DA /* STAPIEndpointTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPIEndpointTests.m; sourceTree = "<group>"; };
 		2C61EF891A15570600E456DA /* STAPISessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPISessionTests.m; sourceTree = "<group>"; };
 		2C61EF8A1A15570600E456DA /* STShareCallbackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STShareCallbackTests.m; sourceTree = "<group>"; };
-		2C61EF8E1A15575800E456DA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		2C61EF931A155A9900E456DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		2C61EF971A155AAC00E456DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		5F68C55D5BEE34A40857B68A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -426,12 +428,12 @@
 		2C61EC651A141F1400E456DA /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				2C61EF8E1A15575800E456DA /* LaunchScreen.xib */,
 				2C61EC6E1A141F1400E456DA /* STTestAppDelegate.h */,
 				2C61EC6F1A141F1400E456DA /* STTestAppDelegate.m */,
 				2C61EC6B1A141F1400E456DA /* STRootViewController.h */,
 				2C61EC6C1A141F1400E456DA /* STRootViewController.m */,
 				2C61EC6D1A141F1400E456DA /* STRootViewController.xib */,
+				2C61EF911A155A9900E456DA /* Base.lproj */,
 				2C61EC681A141F1400E456DA /* Images.xcassets */,
 				2C61EF901A15585B00E456DA /* Supporting Files */,
 			);
@@ -499,6 +501,7 @@
 				2C61EF881A15570600E456DA /* STAPIEndpointTests.m */,
 				2C61EF891A15570600E456DA /* STAPISessionTests.m */,
 				2C61EF8A1A15570600E456DA /* STShareCallbackTests.m */,
+				2C61EF951A155AAC00E456DA /* Base.lproj */,
 				2C61EF711A15569500E456DA /* Images.xcassets */,
 				2C61EF641A15569500E456DA /* Supporting Files */,
 			);
@@ -521,6 +524,22 @@
 				2C61EC691A141F1400E456DA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C61EF911A155A9900E456DA /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				2C61EF921A155A9900E456DA /* LaunchScreen.xib */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		2C61EF951A155AAC00E456DA /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				2C61EF961A155AAC00E456DA /* LaunchScreen.xib */,
+			);
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		3A758B1737514E1ECC2A4DC8 /* Pods */ = {
@@ -725,7 +744,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C61EF8F1A15575800E456DA /* LaunchScreen.xib in Resources */,
 				2C61EC9A1A142D5000E456DA /* FacebookLogoNoBlue76x76.png in Resources */,
 				2C61EC9B1A142D5000E456DA /* TwitterLogo43x43.png in Resources */,
 				2C61EC981A142D5000E456DA /* FacebookLogoNoBlue43x43.png in Resources */,
@@ -735,6 +753,7 @@
 				2C61EC721A141F1400E456DA /* Info.plist in Resources */,
 				2C61EC9C1A142D5000E456DA /* TwitterLogo60x60.png in Resources */,
 				2C61EC751A141F1400E456DA /* STRootViewController.xib in Resources */,
+				2C61EF941A155A9900E456DA /* LaunchScreen.xib in Resources */,
 				2C61EC9F1A142D5800E456DA /* LoopyApiInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -762,6 +781,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C61EF981A155AAC00E456DA /* LaunchScreen.xib in Resources */,
 				2C61EF721A15569500E456DA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,6 +953,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C61EF451A15476A00E456DA /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		2C61EF921A155A9900E456DA /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C61EF931A155A9900E456DA /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		2C61EF961A155AAC00E456DA /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C61EF971A155AAC00E456DA /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
