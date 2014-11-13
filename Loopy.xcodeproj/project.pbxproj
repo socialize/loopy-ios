@@ -57,7 +57,6 @@
 		2C61EC871A1425D600E456DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBD91A13F98300E456DA /* Foundation.framework */; };
 		2C61EC881A1425D600E456DA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBDA1A13F98300E456DA /* Social.framework */; };
 		2C61EC891A1425D600E456DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBDB1A13F98300E456DA /* SystemConfiguration.framework */; };
-		2C61EC8F1A1427E400E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
 		2C61EC981A142D5000E456DA /* FacebookLogoNoBlue43x43.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC921A142D5000E456DA /* FacebookLogoNoBlue43x43.png */; };
 		2C61EC991A142D5000E456DA /* FacebookLogoNoBlue60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC931A142D5000E456DA /* FacebookLogoNoBlue60x60.png */; };
 		2C61EC9A1A142D5000E456DA /* FacebookLogoNoBlue76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC941A142D5000E456DA /* FacebookLogoNoBlue76x76.png */; };
@@ -65,6 +64,8 @@
 		2C61EC9C1A142D5000E456DA /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC961A142D5000E456DA /* TwitterLogo60x60.png */; };
 		2C61EC9D1A142D5000E456DA /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC971A142D5000E456DA /* TwitterLogo76x76.png */; };
 		2C61EC9F1A142D5800E456DA /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC901A142D3F00E456DA /* LoopyApiInfo.plist */; };
+		2C61EF181A15403D00E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
+		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 
 /* Begin PBXFileReference section */
 		20783FCDF6ED69621565551F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		222E95F3C8F14C38914732E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C61EB881A13EBFB00E456DA /* libLoopy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C61EB8B1A13EBFB00E456DA /* Loopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loopy.h; sourceTree = "<group>"; };
 		2C61EB8D1A13EBFB00E456DA /* Loopy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Loopy.m; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				2C61EBDF1A13F98300E456DA /* Foundation.framework in Frameworks */,
 				2C61EBE01A13F98300E456DA /* Social.framework in Frameworks */,
 				2C61EBE11A13F98300E456DA /* SystemConfiguration.framework in Frameworks */,
+				DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C61EC8F1A1427E400E456DA /* libLoopy.a in Frameworks */,
+				2C61EF181A15403D00E456DA /* libLoopy.a in Frameworks */,
 				2C61EC831A1425D600E456DA /* UIKit.framework in Frameworks */,
 				2C61EC841A1425D600E456DA /* AdSupport.framework in Frameworks */,
 				2C61EC851A1425D600E456DA /* CoreLocation.framework in Frameworks */,
@@ -426,6 +429,7 @@
 				2C61EBD91A13F98300E456DA /* Foundation.framework */,
 				2C61EBDA1A13F98300E456DA /* Social.framework */,
 				2C61EBDB1A13F98300E456DA /* SystemConfiguration.framework */,
+				222E95F3C8F14C38914732E6 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
