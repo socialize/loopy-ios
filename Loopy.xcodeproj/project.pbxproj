@@ -65,6 +65,16 @@
 		2C61EC9D1A142D5000E456DA /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC971A142D5000E456DA /* TwitterLogo76x76.png */; };
 		2C61EC9F1A142D5800E456DA /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC901A142D3F00E456DA /* LoopyApiInfo.plist */; };
 		2C61EF181A15403D00E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
+		2C61EF531A15476A00E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF441A15476A00E456DA /* LaunchScreen.xib */; };
+		2C61EF551A15476A00E456DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF481A15476A00E456DA /* Images.xcassets */; };
+		2C61EF561A15476A00E456DA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF491A15476A00E456DA /* Info.plist */; };
+		2C61EF571A15476A00E456DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF4A1A15476A00E456DA /* main.m */; };
+		2C61EF581A15476A00E456DA /* OpenJSONTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF4C1A15476A00E456DA /* OpenJSONTest.txt */; };
+		2C61EF591A15476A00E456DA /* STActivityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF4D1A15476A00E456DA /* STActivityTests.m */; };
+		2C61EF5A1A15476A00E456DA /* STAPIClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF4E1A15476A00E456DA /* STAPIClientTests.m */; };
+		2C61EF5B1A15476A00E456DA /* STJSONUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF4F1A15476A00E456DA /* STJSONUtilsTests.m */; };
+		2C61EF5C1A15476A00E456DA /* STShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF501A15476A00E456DA /* STShareTests.m */; };
+		2C61EF5D1A15476A00E456DA /* STTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF521A15476A00E456DA /* STTestUtils.m */; };
 		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +195,18 @@
 		2C61EC951A142D5000E456DA /* TwitterLogo43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo43x43.png; sourceTree = "<group>"; };
 		2C61EC961A142D5000E456DA /* TwitterLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo60x60.png; sourceTree = "<group>"; };
 		2C61EC971A142D5000E456DA /* TwitterLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo76x76.png; sourceTree = "<group>"; };
+		2C61EF1D1A1546FB00E456DA /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C61EF451A15476A00E456DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		2C61EF481A15476A00E456DA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2C61EF491A15476A00E456DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C61EF4A1A15476A00E456DA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2C61EF4C1A15476A00E456DA /* OpenJSONTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenJSONTest.txt; sourceTree = "<group>"; };
+		2C61EF4D1A15476A00E456DA /* STActivityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STActivityTests.m; sourceTree = "<group>"; };
+		2C61EF4E1A15476A00E456DA /* STAPIClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAPIClientTests.m; sourceTree = "<group>"; };
+		2C61EF4F1A15476A00E456DA /* STJSONUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STJSONUtilsTests.m; sourceTree = "<group>"; };
+		2C61EF501A15476A00E456DA /* STShareTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STShareTests.m; sourceTree = "<group>"; };
+		2C61EF511A15476A00E456DA /* STTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestUtils.h; sourceTree = "<group>"; };
+		2C61EF521A15476A00E456DA /* STTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestUtils.m; sourceTree = "<group>"; };
 		5F68C55D5BEE34A40857B68A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +256,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C61EF1A1A1546FB00E456DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -244,6 +273,7 @@
 				2C61EB971A13EBFB00E456DA /* LoopyTests */,
 				2C61EC651A141F1400E456DA /* TestApp */,
 				2C61EC771A141F3300E456DA /* TestAppTests */,
+				2C61EF1E1A1546FB00E456DA /* UnitTests */,
 				2C61EB891A13EBFB00E456DA /* Products */,
 				3A758B1737514E1ECC2A4DC8 /* Pods */,
 				C448A77273A39D43FF7CFC3B /* Frameworks */,
@@ -257,6 +287,7 @@
 				2C61EB931A13EBFB00E456DA /* LoopyTests.xctest */,
 				2C61EC3F1A141EA200E456DA /* TestApp.app */,
 				2C61EC571A141EA200E456DA /* TestAppTests.xctest */,
+				2C61EF1D1A1546FB00E456DA /* UnitTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +439,40 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		2C61EF1E1A1546FB00E456DA /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C61EF431A15476A00E456DA /* Base.lproj */,
+				2C61EF481A15476A00E456DA /* Images.xcassets */,
+				2C61EF4B1A15476A00E456DA /* Resources */,
+				2C61EF491A15476A00E456DA /* Info.plist */,
+				2C61EF4A1A15476A00E456DA /* main.m */,
+				2C61EF4D1A15476A00E456DA /* STActivityTests.m */,
+				2C61EF4E1A15476A00E456DA /* STAPIClientTests.m */,
+				2C61EF4F1A15476A00E456DA /* STJSONUtilsTests.m */,
+				2C61EF501A15476A00E456DA /* STShareTests.m */,
+				2C61EF511A15476A00E456DA /* STTestUtils.h */,
+				2C61EF521A15476A00E456DA /* STTestUtils.m */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		2C61EF431A15476A00E456DA /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				2C61EF441A15476A00E456DA /* LaunchScreen.xib */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		2C61EF4B1A15476A00E456DA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C61EF4C1A15476A00E456DA /* OpenJSONTest.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		3A758B1737514E1ECC2A4DC8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +576,23 @@
 			productReference = 2C61EC571A141EA200E456DA /* TestAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		2C61EF1C1A1546FB00E456DA /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C61EF411A1546FB00E456DA /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				2C61EF191A1546FB00E456DA /* Sources */,
+				2C61EF1A1A1546FB00E456DA /* Frameworks */,
+				2C61EF1B1A1546FB00E456DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 2C61EF1D1A1546FB00E456DA /* UnitTests.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -533,6 +615,9 @@
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = 2C61EC3E1A141EA200E456DA;
 					};
+					2C61EF1C1A1546FB00E456DA = {
+						CreatedOnToolsVersion = 6.1;
+					};
 				};
 			};
 			buildConfigurationList = 2C61EB831A13EBFB00E456DA /* Build configuration list for PBXProject "Loopy" */;
@@ -552,6 +637,7 @@
 				2C61EB921A13EBFB00E456DA /* LoopyTests */,
 				2C61EC3E1A141EA200E456DA /* TestApp */,
 				2C61EC561A141EA200E456DA /* TestAppTests */,
+				2C61EF1C1A1546FB00E456DA /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -587,6 +673,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C61EC7A1A141F3300E456DA /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C61EF1B1A1546FB00E456DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C61EF561A15476A00E456DA /* Info.plist in Resources */,
+				2C61EF551A15476A00E456DA /* Images.xcassets in Resources */,
+				2C61EF581A15476A00E456DA /* OpenJSONTest.txt in Resources */,
+				2C61EF531A15476A00E456DA /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +810,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2C61EF191A1546FB00E456DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C61EF571A15476A00E456DA /* main.m in Sources */,
+				2C61EF5A1A15476A00E456DA /* STAPIClientTests.m in Sources */,
+				2C61EF5D1A15476A00E456DA /* STTestUtils.m in Sources */,
+				2C61EF5B1A15476A00E456DA /* STJSONUtilsTests.m in Sources */,
+				2C61EF5C1A15476A00E456DA /* STShareTests.m in Sources */,
+				2C61EF591A15476A00E456DA /* STActivityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -733,6 +843,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C61EC671A141F1400E456DA /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		2C61EF441A15476A00E456DA /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C61EF451A15476A00E456DA /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -960,6 +1078,34 @@
 			};
 			name = Release;
 		};
+		2C61EF3D1A1546FB00E456DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2C61EF3E1A1546FB00E456DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1007,6 +1153,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2C61EF411A1546FB00E456DA /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C61EF3D1A1546FB00E456DA /* Debug */,
+				2C61EF3E1A1546FB00E456DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
