@@ -13,6 +13,8 @@
 #import "STJSONUtils.h"
 #import "STObject.h"
 #import "STIdentifier.h"
+#import "STItem.h"
+#import "STShortlink.h"
 #import <Social/Social.h>
 #import <AFNetworking/AFNetworking.h>
 
@@ -26,7 +28,7 @@ STAPIClient *apiClient;
 
 @synthesize textField;
 @synthesize installButton;
-@synthesize shareButton;
+@synthesize shortlinkButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,7 +43,12 @@ STAPIClient *apiClient;
 
         [apiClient getSessionWithReferrer:@"www.facebook.com"
             postSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                //any operations post-successful /install or /open
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Good To Go"
+                                                                message:@"Loopy session started!"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 //any failure operations
@@ -56,10 +63,10 @@ STAPIClient *apiClient;
     textField.text = @"http://www.sharethis.com";
 }
 
-//shorten then share
-- (IBAction)shareButtonPressed:(id)sender {
-    NSDictionary *jsonDict = [self jsonForShortlink:self.textField.text];
-    [apiClient shortlink:(NSDictionary *)jsonDict
+//shorten
+- (IBAction)shortlinkButtonPressed:(id)sender {
+    STShortlink *shortlinkObj = [self shortlinkObj:self.textField.text];
+    [apiClient shortlink:shortlinkObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                      if([responseDict count] == 1 && [responseDict valueForKey:@"shortlink"]) {
@@ -81,80 +88,86 @@ STAPIClient *apiClient;
 
 //shorten then share in one operation
 - (IBAction)sharelinkButtonPressed:(id)sender {
-//    NSArray *tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
-//    NSDictionary *jsonObj = [apiClient sharelinkWithURL:self.textField.text
-//                                                channel:@"facebook"
-//                                                  title:nil
-//                                                   meta:nil
-//                                                   tags:tags];
-//    [apiClient sharelink:jsonObj
-//                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                     NSDictionary *responseDict = (NSDictionary *)responseObject;
-//                 }
-//                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                     NSLog(@"FAILURE");
-//                 }];
+    NSArray *tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
+    STSharelink *sharelinkObj = [apiClient sharelinkWithURL:self.textField.text
+                                                    channel:@"facebook"
+                                                      title:nil
+                                                       meta:nil
+                                                       tags:tags];
+    [apiClient sharelink:sharelinkObj
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
+                     NSString *shortlink = [responseDict objectForKey:@"shortlink"];
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                                     message:shortlink
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil];
+                     [alert show];
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"FAILURE");
+                 }];
 }
 
 //install with device ID
 - (IBAction)installButtonPressed:(id)sender {
-//    NSDictionary *jsonDict = [self jsonForInstall];
-//    [apiClient install:jsonDict
-//               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                   NSDictionary *responseDict = (NSDictionary *)responseObject;
-//                   NSString *responseSTDID = (NSString *)[responseDict valueForKey:@"stdid"];
-//                   NSLog(@"SUCCESS: %@", responseSTDID);
-//               }
-//               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                   NSLog(@"FAILURE");
-//               }];
+    STInstall *installObj = [self installObj];
+    [apiClient install:installObj
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   NSDictionary *responseDict = (NSDictionary *)responseObject;
+                   NSString *responseSTDID = (NSString *)[responseDict valueForKey:@"stdid"];
+                   NSLog(@"SUCCESS: %@", responseSTDID);
+               }
+               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   NSLog(@"FAILURE");
+               }];
 }
 
-- (NSDictionary *)jsonForInstall {
-    NSDictionary *geoObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithDouble:12.456],@"lat",
-                            [NSNumber numberWithDouble:78.900],@"lon",
-                            nil];
-    NSDictionary *deviceObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"ABCD-1234",@"id",
-                               @"iPhone 4S",@"model",
-                               @"ios",@"os",
-                               @"6.1",@"osv",
-                               @"verizon",@"carrier",
-                               @"on",@"wifi",
-                               geoObj,@"geo",
-                               nil];
-    NSDictionary *appObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"com.socialize.appname",@"id",
-                            @"App Name",@"name",
-                            @"123.4",@"version",
-                            nil];
-    NSDictionary *clientObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"objc",@"lang",
-                               @"1.3",@"version",
-                               nil];
-    NSDictionary *installObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithInt:123456],@"timestamp",
-                             @"www.facebook.com",@"referrer",
-                             deviceObj,@"device",
-                             appObj,@"app",
-                             clientObj,@"client",
-                             nil];
-    return installObj;
+- (STInstall *)installObj {
+    STGeo *geo = [[STGeo alloc] init];
+    geo.lat = [NSNumber numberWithDouble:12.456];
+    geo.lon = [NSNumber numberWithDouble:78.900];
+    
+    STDevice *device = [[STDevice alloc] init];
+    device.id = @"ABCD-1234";
+    device.model = @"iPhone 6";
+    device.os = @"ios";
+    device.osv = @"8.1";
+    device.carrier = @"verizon";
+    device.geo = geo;
+    device.wifi = @"on";
+    
+    STApp *app = [[STApp alloc] init];
+    app.id = @"com.socialize.appname";
+    app.name = @"App Name";
+    app.version = @"123.4";
+    
+    STClient *client = [[STClient alloc] init];
+    client.lang = @"objc";
+    client.version = @"1.3";
+    
+    STInstall *install = [[STInstall alloc] init];
+    install.timestamp = [NSNumber numberWithInt:123456];
+    install.referrer = @"www.facebook.com";
+    install.device = device;
+    install.app = app;
+    install.client = client;
+
+    return install;
 }
 
-- (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
-     NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                              urlStr,@"url",
-                              nil];
-     NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"69",@"stdid",
-                                   [NSNumber numberWithInt:1234567890],@"timestamp",
-                                   itemObj,@"item",
-                                   [NSArray arrayWithObjects:@"sports", @"entertainment", nil],@"tags",
-                                   nil];
-     
-     return shortlinkObj;
+- (STShortlink *)shortlinkObj:(NSString *)urlStr {
+    STItem *item = [[STItem alloc] init];
+    item.url = urlStr;
+    
+    STShortlink *shortlink = [[STShortlink alloc] init];
+    shortlink.stdid = @"69";
+    shortlink.timestamp = [NSNumber numberWithInt:1234567890];
+    shortlink.item = item;
+    shortlink.tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
+
+    return shortlink;
 }
 
 @end
