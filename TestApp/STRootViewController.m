@@ -65,7 +65,8 @@ STAPIClient *apiClient;
 
 //shorten
 - (IBAction)shortlinkButtonPressed:(id)sender {
-    STShortlink *shortlinkObj = [self shortlinkObj:self.textField.text];
+    NSArray *tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
+    STShortlink *shortlinkObj = [apiClient shortlinkWithURL:self.textField.text title:nil meta:nil tags:tags];
     [apiClient shortlink:shortlinkObj
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
@@ -82,7 +83,12 @@ STAPIClient *apiClient;
                      }
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"FAILURE");
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FAILURE"
+                                                                     message:@"Shortlink failed."
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil];
+                     [alert show];
                  }];
 }
 
@@ -98,7 +104,7 @@ STAPIClient *apiClient;
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSDictionary *responseDict = (NSDictionary *)responseObject;
                      NSString *shortlink = [responseDict objectForKey:@"shortlink"];
-                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SUCCESS"
                                                                      message:shortlink
                                                                     delegate:nil
                                                            cancelButtonTitle:@"OK"
@@ -106,68 +112,35 @@ STAPIClient *apiClient;
                      [alert show];
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"FAILURE");
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FAILURE"
+                                                                     message:@"Sharelink failed."
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil];
+                     [alert show];
                  }];
 }
 
 //install with device ID
 - (IBAction)installButtonPressed:(id)sender {
-    STInstall *installObj = [self installObj];
+    STInstall *installObj = [apiClient installWithReferrer:@"www.facebook.com"];//[self installObj];
     [apiClient install:installObj
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   NSDictionary *responseDict = (NSDictionary *)responseObject;
-                   NSString *responseSTDID = (NSString *)[responseDict valueForKey:@"stdid"];
-                   NSLog(@"SUCCESS: %@", responseSTDID);
+                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SUCCESS"
+                                                                   message:@"Install succeeded."
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                   [alert show];
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                   NSLog(@"FAILURE");
+                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FAILURE"
+                                                                   message:@"Install failed."
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                   [alert show];
                }];
-}
-
-- (STInstall *)installObj {
-    STGeo *geo = [[STGeo alloc] init];
-    geo.lat = [NSNumber numberWithDouble:12.456];
-    geo.lon = [NSNumber numberWithDouble:78.900];
-    
-    STDevice *device = [[STDevice alloc] init];
-    device.id = @"ABCD-1234";
-    device.model = @"iPhone 6";
-    device.os = @"ios";
-    device.osv = @"8.1";
-    device.carrier = @"verizon";
-    device.geo = geo;
-    device.wifi = @"on";
-    
-    STApp *app = [[STApp alloc] init];
-    app.id = @"com.socialize.appname";
-    app.name = @"App Name";
-    app.version = @"123.4";
-    
-    STClient *client = [[STClient alloc] init];
-    client.lang = @"objc";
-    client.version = @"1.3";
-    
-    STInstall *install = [[STInstall alloc] init];
-    install.timestamp = [NSNumber numberWithInt:123456];
-    install.referrer = @"www.facebook.com";
-    install.device = device;
-    install.app = app;
-    install.client = client;
-
-    return install;
-}
-
-- (STShortlink *)shortlinkObj:(NSString *)urlStr {
-    STItem *item = [[STItem alloc] init];
-    item.url = urlStr;
-    
-    STShortlink *shortlink = [[STShortlink alloc] init];
-    shortlink.stdid = @"69";
-    shortlink.timestamp = [NSNumber numberWithInt:1234567890];
-    shortlink.item = item;
-    shortlink.tags = [NSArray arrayWithObjects:@"sports", @"entertainment", nil];
-
-    return shortlink;
 }
 
 @end
