@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C61EB8C1A13EBFB00E456DA /* Loopy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C61EB8B1A13EBFB00E456DA /* Loopy.h */; };
-		2C61EB8E1A13EBFB00E456DA /* Loopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EB8D1A13EBFB00E456DA /* Loopy.m */; };
 		2C61EB941A13EBFB00E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
 		2C61EBA61A13F66200E456DA /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EBA31A13F66200E456DA /* STConstants.m */; };
 		2C61EBA71A13F66200E456DA /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EBA51A13F66200E456DA /* STReachability.m */; };
@@ -119,7 +118,6 @@
 		222E95F3C8F14C38914732E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C61EB881A13EBFB00E456DA /* libLoopy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C61EB8B1A13EBFB00E456DA /* Loopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loopy.h; sourceTree = "<group>"; };
-		2C61EB8D1A13EBFB00E456DA /* Loopy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Loopy.m; sourceTree = "<group>"; };
 		2C61EB931A13EBFB00E456DA /* LoopyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoopyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C61EB991A13EBFB00E456DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C61EBA21A13F66200E456DA /* STConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConstants.h; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				2C61EC911A142D5000E456DA /* Resources */,
 				2C61EC901A142D3F00E456DA /* LoopyApiInfo.plist */,
 				2C61EB8B1A13EBFB00E456DA /* Loopy.h */,
-				2C61EB8D1A13EBFB00E456DA /* Loopy.m */,
 				2C61EBA21A13F66200E456DA /* STConstants.h */,
 				2C61EBA31A13F66200E456DA /* STConstants.m */,
 				2C61EBA41A13F66200E456DA /* STReachability.h */,
@@ -881,7 +878,6 @@
 				2C61EBD31A13F8E200E456DA /* STShare.m in Sources */,
 				2C61EC2E1A140CA800E456DA /* STFacebookActivity.m in Sources */,
 				2C61EBD11A13F8E200E456DA /* STObject.m in Sources */,
-				2C61EB8E1A13EBFB00E456DA /* Loopy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,6 +1303,7 @@
 				2C61EF3E1A1546FB00E456DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C61EF821A15569500E456DA /* Build configuration list for PBXNativeTarget "IntegrationTests" */ = {
 			isa = XCConfigurationList;
@@ -1315,6 +1312,7 @@
 				2C61EF841A15569500E456DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
