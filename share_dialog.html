@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using the Share Dialog &mdash; Loopy iOS Library 1.1.0 documentation</title>
+    <title>Using the Share Dialog &mdash; Loopy iOS Library 1.1.1 documentation</title>
     
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.1.0',
+        VERSION:     '1.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="shortcut icon" href="static/favicon.ico"/>
-    <link rel="top" title="Loopy iOS Library 1.1.0 documentation" href="index.html" />
+    <link rel="top" title="Loopy iOS Library 1.1.1 documentation" href="index.html" />
     <link rel="next" title="Using a Custom Share UI" href="custom_share.html" />
     <link rel="prev" title="Upgrading Loopy" href="upgrading.html" />
 <script type="text/javascript" src="static/loopy.js"></script>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="upgrading.html" title="Upgrading Loopy"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Loopy iOS Library 1.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -78,8 +78,8 @@
 <div class="block-padded container">
 <p>If you currently have a share function in your app you are most likely using the default UIActivityViewController provided by the iOS platform.</p>
 <p>The Loopy™ Share Dialog leverages UIActivityViewController but provides important callbacks to allow more sophisticated social analytics.</p>
-<p>To implement the Loopy™ Share Dialog, simply use the <strong>SZAPIClient</strong> and <strong>SZShare</strong> classes, along with the <strong>SZActivity</strong> protocol, to create a trackable URL and display it using the default share dialog.</p>
-<p>As with the iOS default UIActivityViewController, <strong>SZShare</strong> offers Facebook and Twitter sharing, as well as the ability to add additional UIActivity implementations you may have representing additional social networks or other sharing services.</p>
+<p>To implement the Loopy™ Share Dialog, simply use the <strong>STAPIClient</strong> and <strong>STShareActivityUI</strong> classes, along with the <strong>STActivity</strong> protocol, to create a trackable URL and display it using the default share dialog.</p>
+<p>As with the iOS default UIActivityViewController, <strong>STShareActivityUI</strong> offers Facebook and Twitter sharing, as well as the ability to add additional UIActivity implementations you may have representing additional social networks or other sharing services.</p>
 </div>
 <div class="block container">
 <a class="reference internal image-reference" href="images/share-dialog-1.png"><img alt="images/share-dialog-1.png" class="align-center" src="images/share-dialog-1.png" style="width: 201px; height: 405px;" /></a>
@@ -90,7 +90,13 @@
 <br /></p>
 <a class="reference internal image-reference" href="images/share-dialog-button.png"><img alt="images/share-dialog-button.png" src="images/share-dialog-button.png" style="width: 685px; height: 511px;" /></a>
 <p><br /></p>
-<p>Add an event handler for when the button is pressed (in this example, the <strong>Touch Up Inside</strong> event handled by an <strong>IBAction</strong>):</p>
+<p>Add an event handler for when the button is pressed (in this example, the <strong>Touch Up Inside</strong> event handled by an <strong>IBAction</strong>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>If you have event-handling code that needs to execute after certain share actions, see the examples in the snippet using NSNotificationCenter</li>
+</ul>
+</div>
 <div class="highlight-objective-c"><div class="highlight"><pre>//Returns a shortened URL then launches the Share Dialog
 - (IBAction)shareButtonPressed:(id)sender {
     STShare *share = [[STShare alloc] initWithParent:self];
@@ -132,7 +138,7 @@
 }
 </pre></div>
 </div>
-<p>To add additional <strong>UIActivity</strong> classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the <strong>SZActivity</strong> protocol; <strong>your header and implementation files should contain the following:</strong></p>
+<p>To add additional <strong>UIActivity</strong> classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the <strong>STActivity</strong> protocol; <strong>your header and implementation files should contain the following:</strong></p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 <span class="cp">#import &quot;STActivity.h&quot;</span>
 
@@ -184,7 +190,7 @@
 <span class="k">@end</span>
 </pre></div>
 </div>
-<p>Include the custom activity in the NSArray passed in to SZShare&#8217;s UIActivityViewController, as follows:</p>
+<p>Include the custom activity in the NSArray passed in to STShare&#8217;s UIActivityViewController, as follows:</p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">//This is an example of an activity controller with custom UIActivities added in</span>
 <span class="k">-</span> <span class="p">(</span><span class="n">UIActivityViewController</span> <span class="o">*</span><span class="p">)</span><span class="nf">activityControllerWithCustomActivities:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="nv">activityItems</span> <span class="p">{</span>
     <span class="n">STShare</span> <span class="o">*</span><span class="n">share</span> <span class="o">=</span> <span class="p">[[</span><span class="n">STShare</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithParent</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
@@ -247,7 +253,7 @@
         <li class="right" >
           <a href="upgrading.html" title="Upgrading Loopy"
              >previous</a> |</li>
-        <li><a href="index.html">Loopy iOS Library 1.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Loopy iOS Library 1.1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
