@@ -78,47 +78,48 @@
 <p>If you have your own custom implementation of a share UI you can still benefit from the Loopy™ social analytics platform by creating a trackable URL to be shared, and notifying the analytics platform when the share was successful.</p>
 <p>Simply use the <strong>[SZAPIClient shortlink:withCallback:]</strong> method to create a trackable URL for sharing when the user executes a share. Then, once sharing is complete, ensure you call <strong>[SZAPIClient reportShare:withCallback:]</strong> to record the share.</p>
 <p>This can be implemented as follows:</p>
-<div class="highlight-objective-c"><div class="highlight"><pre>//Returns a shortened URL
-- (void)shortenURL:(NSString *)url {
-    STAPIClient *apiClient = [[STAPIClient alloc] initWithURLPrefix:@&quot;http://loopy-api-url-prefix&quot;];
-    NSDictionary *jsonDict = [self jsonForShortlink:url];
-    [apiClient shortlink:(NSDictionary *)jsonDict withCallback:^(NSURLResponse *response, NSData *data, NSError *error) {
-        id responseData = [data objectFromJSONData];
-        BOOL success = (error == nil) &amp;&amp; ([responseData isKindOfClass:[NSDictionary class]]);
-        if(success) {
-            NSDictionary *responseDict = (NSDictionary *)responseData;
-            if([responseDict count] == 1 &amp;&amp; [responseDict valueForKey:@&quot;shortlink&quot;]) {
-                
-                //initialization code for UIActivity
-                NSString *shortlink = (NSString *)[responseDict valueForKey:@&quot;shortlink&quot;];
-                NSArray *activityItems = @[shortlink];
-                MyCustomActivity *activity = [MyCustomActivity initWithActivityItems:activityItems];
-                
-                //Your UI code goes here
-                //...
-                //Once share is successful for the specified activity, call this notification:
-                [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
-            }
-        }
-        else {
-            //error
-        }
-    }];
-}
-
-//This is a sample of JSON needed for the &quot;shortlink&quot; API call
-- (NSDictionary *)jsonForShortlink:(NSString *)urlStr {
-    NSDictionary *itemObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                             urlStr,@&quot;url&quot;,
-                             nil];
-    NSDictionary *shortlinkObj = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @&quot;69&quot;,@&quot;stdid&quot;,
-                                  [NSNumber numberWithInt:1234567890],@&quot;timestamp&quot;,
-                                  itemObj,@&quot;item&quot;,
-                                  [NSArray arrayWithObjects:@&quot;sports&quot;, @&quot;entertainment&quot;, nil],@&quot;tags&quot;,
-                                  nil];
+<div class="highlight-objective-c"><div class="highlight"><pre>- (void)shortenAndShareWithCustomUI:(NSString *)url {
     
-    return shortlinkObj;
+    //init this and begin its session elsewhere
+    STAPIClient *apiClient;
+    
+    NSArray *tags = [NSArray arrayWithObjects:@&quot;tag1&quot;, @&quot;tag2&quot;, nil];
+    STShortlink *shortlinkObj = [apiClient shortlinkWithURL:@&quot;www.UrlToShorten.com&quot; title:nil meta:nil tags:tags];
+    [apiClient shortlink:shortlinkObj
+                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     
+                     //use the shortlink in the activity dialog
+                     NSDictionary *responseDict = (NSDictionary *)responseObject;
+                     NSString *shortlink = (NSString *)[responseDict valueForKey:@&quot;shortlink&quot;];
+                     NSArray *activityItems = @[shortlink];
+                     
+                     //assumes you have a custom activity, though you can use the Loopy STFacebookActivity and STTwitterActivity as well
+                     MyCustomActivity *activity = [[MyCustomActivity alloc] init];
+                     [activity prepareWithActivityItems:activityItems];
+
+                     //Your custom UI sharing code goes here
+                     //...
+                     
+                     //when your custom UI receives notification of a successful share, call this:
+                     [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidComplete object:activity];
+
+                     //if user cancels before sharing in your custom UI, call this:
+                     [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidCancel object:activity];
+
+                     //Assuming share is called and is successful, call this to record with Loopy:
+                     STShare *shareObj = [apiClient reportShareWithShortlink:shortlink
+                                                                     channel:activity.activityType];
+                     [apiClient reportShare:shareObj
+                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidSucceed object:responseObject];
+                                    }
+                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidFail object:error];
+                                    }];
+                 }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     //any failure handling
+                 }];
 }
 </pre></div>
 </div>
