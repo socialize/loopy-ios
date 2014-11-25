@@ -10,6 +10,12 @@
 
 @interface STConstants : NSObject
 
-extern NSString * const BeginShareNotification;
-extern NSString * const EndShareNotification;
+extern NSString * const LoopyShareDidBegin;
+extern NSString * const LoopyShareDidComplete;
+extern NSString * const LoopyActivityDidComplete;
+extern NSString * const LoopyActivityDidCancel;
+extern NSString * const LoopyShareDidCancel;
+extern NSString * const LoopyRecordShareDidSucceed;
+extern NSString * const LoopyRecordShareDidFail;
+
 @end

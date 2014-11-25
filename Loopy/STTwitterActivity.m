@@ -51,7 +51,7 @@
 //Notification of intent to share
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
     self.shareItems = activityItems;
-    [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidBegin object:self];
 }
 
 @end

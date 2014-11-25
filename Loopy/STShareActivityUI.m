@@ -25,12 +25,12 @@
         self.apiClient = client;
         //listen for share events (both intent to share -- beginning -- and end -- share complete)
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(handleShowActivityShare:)
-                                                     name:BeginShareNotification
+                                                 selector:@selector(handleShareDidBegin:)
+                                                     name:LoopyShareDidBegin
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(handleShareComplete:)
-                                                     name:EndShareNotification
+                                                 selector:@selector(handleShareDidComplete:)
+                                                     name:LoopyShareDidComplete
                                                    object:nil];
     }
     
@@ -51,11 +51,19 @@
 - (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities {
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:shareItems
                                                                                          applicationActivities:activities];
+    //by default, e-mail and MMS are included, but they will not be tracked as shares
     activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,
                                                      UIActivityTypePostToTwitter,
                                                      UIActivityTypePostToWeibo,
-                                                     UIActivityTypeMail,
                                                      UIActivityTypeCopyToPasteboard];
+    activityViewController.completionHandler = ^(NSString *activityType, BOOL completed) {
+        if(completed) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:LoopyActivityDidComplete object:activityType];
+        }
+        else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:LoopyActivityDidCancel object:activityType];
+        }
+    };
     return activityViewController;
 }
 
@@ -93,19 +101,19 @@
 }
 
 //Shows specific share dialog for selected service
-- (void)handleShowActivityShare:(NSNotification *)notification {
+- (void)handleShareDidBegin:(NSNotification *)notification {
     __block id<STActivity> activity = (id<STActivity>)[notification object];
+    
     //dismiss share selector and bring up activity-specific share dialog
     [self.parentController dismissViewControllerAnimated:YES completion:^ {
         SLComposeViewController *controller = [self newActivityShareController:activity];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
             switch(result) {
                 case SLComposeViewControllerResultCancelled:
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidCancel object:activity];
                     break;
-                //post notification of share
-                //this is done as a callback as implementors may post notification as well
                 case SLComposeViewControllerResultDone:
-                    [[NSNotificationCenter defaultCenter] postNotificationName:EndShareNotification object:activity];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidComplete object:activity];
                     break;
             }
         };
@@ -114,7 +122,7 @@
 }
 
 //calls out to API to report share
-- (void)handleShareComplete:(NSNotification *)notification {
+- (void)handleShareDidComplete:(NSNotification *)notification {
     id<STActivity> activity = (id<STActivity>)[notification object];
     NSArray *shareItems = activity.shareItems;
     NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
@@ -122,10 +130,10 @@
                                                                channel:activity.activityType];
     [self.apiClient reportShare:shareObj
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            //Currently no response is needed after success
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidSucceed object:responseObject];
                         }
                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            //Currently no response is made after failure; this may change
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidFail object:error];
                         }];
 
 }

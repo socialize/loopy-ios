@@ -17,7 +17,7 @@ framework, or "roll their own" using direct Library calls.
 All calls to the Loopy Library are *asynchronous*, meaning that your application will not "block" while 
 waiting for a response from the Loopy server.
 
-.. note:: * iOS 6.1 is the minimum version supported by this Library
+.. note:: * iOS 7.0 is the minimum version supported by this Library
 
 Installing the Library
 ----------------------

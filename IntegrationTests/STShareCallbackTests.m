@@ -44,7 +44,7 @@
     id mockShare = [OCMockObject partialMockForObject:share];
     [[[mockShare stub] andReturn:activities] getDefaultActivities:shareItems];
     [self prepare];
-    [[[mockShare stub] andCall:@selector(shareFacebookCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
+    [[[mockShare stub] andCall:@selector(shareFacebookCallback:) onObject:self] handleShareDidBegin:[OCMArg any]];
     [facebookActivity prepareWithActivityItems:shareItems];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
     
@@ -63,7 +63,7 @@
     [self prepare];
     id mockShare = [OCMockObject partialMockForObject:share];
     [[[mockShare stub] andReturn:activities] getDefaultActivities:shareItems];
-    [[[mockShare stub] andCall:@selector(shareTwitterCallback:) onObject:self] handleShowActivityShare:[OCMArg any]];
+    [[[mockShare stub] andCall:@selector(shareTwitterCallback:) onObject:self] handleShareDidBegin:[OCMArg any]];
     [twitterActivity prepareWithActivityItems:shareItems];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
     
@@ -80,8 +80,8 @@
 - (void)testHandleShareComplete {
     STFacebookActivity *dummyActivity = [[STFacebookActivity alloc] init];
     dummyActivity.shareItems = shareItems;
-    NSNotification *dummyNotification = [NSNotification notificationWithName:EndShareNotification object:dummyActivity];
-    [share handleShareComplete:dummyNotification];
+    NSNotification *dummyNotification = [NSNotification notificationWithName:LoopyShareDidComplete object:dummyActivity];
+    [share handleShareDidComplete:dummyNotification];
 }
 
 @end

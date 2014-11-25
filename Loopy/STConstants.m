@@ -10,7 +10,12 @@
 
 @implementation STConstants
 
-NSString * const BeginShareNotification = @"BeginShareNotification";
-NSString * const EndShareNotification = @"EndShareNotification";
+NSString * const LoopyShareDidBegin = @"LoopyShareDidBegin";
+NSString * const LoopyShareDidComplete = @"LoopyShareDidEnd";
+NSString * const LoopyActivityDidComplete = @"LoopyActivityDidComplete";
+NSString * const LoopyActivityDidCancel = @"LoopyActivityDidCancel";
+NSString * const LoopyShareDidCancel = @"LoopyShareDidCancel";
+NSString * const LoopyRecordShareDidSucceed = @"LoopyRecordShareDidSucceed";
+NSString * const LoopyRecordShareDidFail = @"LoopyRecordShareDidFail";
 
 @end

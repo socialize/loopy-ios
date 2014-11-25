@@ -14,9 +14,9 @@ Using the Share Dialog
 
     The Loopy™ Share Dialog leverages UIActivityViewController but provides important callbacks to allow more sophisticated social analytics.
 
-    To implement the Loopy™ Share Dialog, simply use the **SZAPIClient** and **SZShare** classes, along with the **SZActivity** protocol, to create a trackable URL and display it using the default share dialog.
+    To implement the Loopy™ Share Dialog, simply use the **STAPIClient** and **STShareActivityUI** classes, along with the **STActivity** protocol, to create a trackable URL and display it using the default share dialog.
 
-    As with the iOS default UIActivityViewController, **SZShare** offers Facebook and Twitter sharing, as well as the ability to add additional UIActivity implementations you may have representing additional social networks or other sharing services. 
+    As with the iOS default UIActivityViewController, **STShareActivityUI** offers Facebook and Twitter sharing, as well as the ability to add additional UIActivity implementations you may have representing additional social networks or other sharing services. 
 
 .. container:: block
 
@@ -36,14 +36,16 @@ Using the Share Dialog
         :height: 511
     |br|
 
-    Add an event handler for when the button is pressed (in this example, the **Touch Up Inside** event handled by an **IBAction**):
+    Add an event handler for when the button is pressed (in this example, the **Touch Up Inside** event handled by an **IBAction**). 
+
+    .. note:: * If you have event-handling code that needs to execute after certain share actions, see the examples in the snippet using NSNotificationCenter
 
     .. literalinclude:: snippets/share_dialog.m
             :language: objective-c
             :start-after: begin-show-share-dialog-snippet
             :end-before: end-show-share-dialog-snippet
 
-    To add additional **UIActivity** classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the **SZActivity** protocol; **your header and implementation files should contain the following:**
+    To add additional **UIActivity** classes to the Loopy™ Share Dialog, create your custom UIActivities (or modify your existing ones) to conform to the **STActivity** protocol; **your header and implementation files should contain the following:**
 
     .. literalinclude:: snippets/custom_activity.h
             :language: objective-c
@@ -55,7 +57,7 @@ Using the Share Dialog
             :start-after: begin-custom-activity-snippet
             :end-before: end-custom-activity-snippet
 
-    Include the custom activity in the NSArray passed in to SZShare's UIActivityViewController, as follows:
+    Include the custom activity in the NSArray passed in to STShare's UIActivityViewController, as follows:
 
     .. literalinclude:: snippets/share_dialog.m
         :language: objective-c

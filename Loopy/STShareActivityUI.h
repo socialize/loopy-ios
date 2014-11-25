@@ -20,6 +20,6 @@
 - (UIActivityViewController *)newActivityViewController:(NSArray *)shareItems withActivities:(NSArray *)activities;
 - (SLComposeViewController *)newActivityShareController:(id)activityObj;
 - (void)showActivityViewDialog:(UIActivityViewController *)activityController completion:(void (^)(void))completion;
-- (void)handleShowActivityShare:(NSNotification *)notification;
-- (void)handleShareComplete:(NSNotification *)notification;
+- (void)handleShareDidBegin:(NSNotification *)notification;
+- (void)handleShareDidComplete:(NSNotification *)notification;
 @end
