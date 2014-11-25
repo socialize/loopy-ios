@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ShareDialogViewController : UIViewController
+@interface ShareDialogViewController : NSObject
 
 @end

@@ -78,9 +78,6 @@
 		2C61EF8D1A15570600E456DA /* STShareCallbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EF8A1A15570600E456DA /* STShareCallbackTests.m */; };
 		2C61EF941A155A9900E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF921A155A9900E456DA /* LaunchScreen.xib */; };
 		2C61EF981A155AAC00E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF961A155AAC00E456DA /* LaunchScreen.xib */; };
-		2CF771431A2510E900F60DBE /* custom_activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7713E1A2510E900F60DBE /* custom_activity.m */; };
-		2CF771441A2510E900F60DBE /* custom_share.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF771401A2510E900F60DBE /* custom_share.m */; };
-		2CF771451A2510E900F60DBE /* share_dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF771421A2510E900F60DBE /* share_dialog.m */; };
 		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -199,12 +196,6 @@
 		2C61EF8A1A15570600E456DA /* STShareCallbackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STShareCallbackTests.m; sourceTree = "<group>"; };
 		2C61EF931A155A9900E456DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		2C61EF971A155AAC00E456DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		2CF7713D1A2510E900F60DBE /* custom_activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = custom_activity.h; sourceTree = "<group>"; };
-		2CF7713E1A2510E900F60DBE /* custom_activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = custom_activity.m; sourceTree = "<group>"; };
-		2CF7713F1A2510E900F60DBE /* custom_share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = custom_share.h; sourceTree = "<group>"; };
-		2CF771401A2510E900F60DBE /* custom_share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = custom_share.m; sourceTree = "<group>"; };
-		2CF771411A2510E900F60DBE /* share_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = share_dialog.h; sourceTree = "<group>"; };
-		2CF771421A2510E900F60DBE /* share_dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = share_dialog.m; sourceTree = "<group>"; };
 		5F68C55D5BEE34A40857B68A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -384,7 +375,6 @@
 				2C61EF911A155A9900E456DA /* Base.lproj */,
 				2C61EC681A141F1400E456DA /* Images.xcassets */,
 				2C61EF901A15585B00E456DA /* Supporting Files */,
-				2CF7713C1A2510E900F60DBE /* snippets */,
 			);
 			path = TestApp;
 			sourceTree = SOURCE_ROOT;
@@ -481,19 +471,6 @@
 				2C61EF961A155AAC00E456DA /* LaunchScreen.xib */,
 			);
 			path = Base.lproj;
-			sourceTree = "<group>";
-		};
-		2CF7713C1A2510E900F60DBE /* snippets */ = {
-			isa = PBXGroup;
-			children = (
-				2CF7713D1A2510E900F60DBE /* custom_activity.h */,
-				2CF7713E1A2510E900F60DBE /* custom_activity.m */,
-				2CF7713F1A2510E900F60DBE /* custom_share.h */,
-				2CF771401A2510E900F60DBE /* custom_share.m */,
-				2CF771411A2510E900F60DBE /* share_dialog.h */,
-				2CF771421A2510E900F60DBE /* share_dialog.m */,
-			);
-			path = snippets;
 			sourceTree = "<group>";
 		};
 		3A758B1737514E1ECC2A4DC8 /* Pods */ = {
@@ -784,10 +761,7 @@
 			files = (
 				2C61EC761A141F1400E456DA /* STTestAppDelegate.m in Sources */,
 				2C61EC731A141F1400E456DA /* main.m in Sources */,
-				2CF771441A2510E900F60DBE /* custom_share.m in Sources */,
-				2CF771451A2510E900F60DBE /* share_dialog.m in Sources */,
 				2C61EC741A141F1400E456DA /* STRootViewController.m in Sources */,
-				2CF771431A2510E900F60DBE /* custom_activity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

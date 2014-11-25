@@ -46,7 +46,7 @@
 //Set shareItems and post notification here
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
     self.shareItems = activityItems;
-    [[NSNotificationCenter defaultCenter] postNotificationName:BeginShareNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LoopyShareDidBegin object:self];
 }
 
 @end
