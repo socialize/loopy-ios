@@ -80,14 +80,32 @@
         activityItems = [activity shareItems];
         slServiceType = [activity activityType];
     }
-
+    
     controller = [SLComposeViewController composeViewControllerForServiceType:slServiceType];
+    
+    //if any item is a URL, use it as a URL
+    //any other items wil be stringified, concatenated, and used as initial text
+    NSMutableString *initialText = [NSMutableString stringWithFormat:@""];
     if([activityItems count] > 0) {
-        id firstItem = [activityItems objectAtIndex:0];
-        if([firstItem isKindOfClass:[NSString class]]) {
-            NSString *shareMessage = [NSString stringWithFormat:@"Check out this link: %@", (NSString *)firstItem];
-            [controller setInitialText:shareMessage];
+        for (id item in activityItems) {
+            if([item isKindOfClass:[NSString class]]) {
+                NSString *itemStr = (NSString *)item;
+                
+                //try to make it a URL if one doesn't already exist
+                NSURL *url = [NSURL URLWithString:itemStr];
+                if(!url) {
+                    [initialText appendString:itemStr];
+                }
+                else {
+                    [controller addURL:url];
+                }
+            }
+            else if([item isKindOfClass:[NSURL class]]) {
+                [controller addURL:(NSURL *)item];
+            }
         }
+        
+        [controller setInitialText:initialText];
     }
     
     return controller;
@@ -127,7 +145,7 @@
     NSArray *shareItems = activity.shareItems;
     NSString *shareItem = (NSString *)[shareItems lastObject]; //by default last item is the shortlink or other share item
     STShare *shareObj = [self.apiClient reportShareWithShortlink:shareItem
-                                                               channel:activity.activityType];
+                                                         channel:activity.activityType];
     [self.apiClient reportShare:shareObj
                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidSucceed object:responseObject];
@@ -135,7 +153,7 @@
                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             [[NSNotificationCenter defaultCenter] postNotificationName:LoopyRecordShareDidFail object:error];
                         }];
-
+    
 }
 
 @end
