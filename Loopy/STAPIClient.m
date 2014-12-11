@@ -105,9 +105,14 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
 - (void)getSessionWithReferrer:(NSString *)referrer
                    postSuccess:(void(^)(AFHTTPRequestOperation *, id))postSuccessCallback
                        failure:(void(^)(AFHTTPRequestOperation *, NSError *))failureCallback {
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:SESSION_DATA_FILENAME];
-    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    //SZ-107: use the iOS 8+ way to get files
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+                                                                          inDomain:NSUserDomainMask
+                                                                 appropriateForURL:nil
+                                                                            create:NO
+                                                                             error:nil];
+    NSURL *fileURL = [documentsDirectoryURL URLByAppendingPathComponent:SESSION_DATA_FILENAME];
+    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfURL:fileURL];
     NSDate *now = [NSDate date];
     NSNumber *nowNum = [NSNumber numberWithDouble:[now timeIntervalSince1970]];
     NSString *error = nil;
@@ -124,7 +129,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
         plistData = [NSPropertyListSerialization dataFromPropertyList:(id)newPlistDict
                                                                format:NSPropertyListXMLFormat_v1_0
                                                      errorDescription:&error];
-        [plistData writeToFile:filePath atomically:YES];
+        [plistData writeToURL:fileURL atomically:YES];
         
         [self install:[self installWithReferrer:referrer]
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -145,7 +150,7 @@ NSString *const SESSION_DATA_FILENAME = @"STSessionData.plist";
             plistData = [NSPropertyListSerialization dataFromPropertyList:(id)plistDict
                                                                    format:NSPropertyListXMLFormat_v1_0
                                                          errorDescription:&error];
-            [plistData writeToFile:filePath atomically:YES];
+            [plistData writeToURL:fileURL atomically:YES];
             
             [self open:[self openWithReferrer:referrer]//[self openDictionaryWithReferrer:referrer]
                success:^(AFHTTPRequestOperation *operation, id responseObject) {

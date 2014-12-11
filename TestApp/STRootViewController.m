@@ -48,10 +48,17 @@ STAPIClient *apiClient;
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
-                [alert show];
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                //any failure operations
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FAILURE"
+                                                                message:@"No session."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [self.installButton setEnabled:NO];
+                [self.sharelinkButton setEnabled:NO];
+                [self.shortlinkButton setEnabled:NO];
             }];
         
         share = [[STShareActivityUI alloc] initWithParent:self apiClient:apiClient];
@@ -79,7 +86,12 @@ STAPIClient *apiClient;
                          [share showActivityViewDialog:activityController completion:nil];
                      }
                      else {
-                         NSLog(@"FAILURE");
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FAILURE"
+                                                                         message:@"Shortlink returned empty value."
+                                                                        delegate:nil
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles:nil];
+                         [alert show];
                      }
                  }
                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
