@@ -81,7 +81,7 @@
 		2C88E5C31A3B75C2003E22EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBD91A13F98300E456DA /* Foundation.framework */; };
 		2C88E5C51A3B75CE003E22EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C88E5C41A3B75CE003E22EA /* CoreGraphics.framework */; };
 		2C88E5C61A3B75D6003E22EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBD71A13F98300E456DA /* CoreLocation.framework */; };
-		9E2D3CD7C9E7D6E0869197A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
+		2C88E5C91A3B9AE9003E22EA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
 		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -225,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E2D3CD7C9E7D6E0869197A8 /* libPods.a in Frameworks */,
+				2C88E5C91A3B9AE9003E22EA /* libLoopy.a in Frameworks */,
 				2C61EC831A1425D600E456DA /* UIKit.framework in Frameworks */,
 				2C61EC841A1425D600E456DA /* AdSupport.framework in Frameworks */,
 				2C61EC851A1425D600E456DA /* CoreLocation.framework in Frameworks */,
@@ -1000,26 +1000,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = TestApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
+					"-all_load",
 				);
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1031,22 +1029,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				INFOPLIST_FILE = TestApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
+					"-all_load",
 				);
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
