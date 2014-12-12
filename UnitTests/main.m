@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GHUnitIOS/GHUnitIOSViewController.h>
+#import <GHUnitIOS/GHUnit.h>///GHUnitIOSViewController.h>
 
-extern void __gcov_flush(void);
+//extern void __gcov_flush(void);
 
 int main(int argc, char * argv[]) {
-    int retVal;
     @autoreleasepool {
-        if (getenv("GHUNIT_CLI")) {
-            retVal = [GHTestRunner run];
-            __gcov_flush();
-        }
-        else {
-            retVal = UIApplicationMain(argc, argv, nil, @"GHUnitIOSAppDelegate");
-        }
+        int retVal;
+//        if (getenv("GHUNIT_CLI")) {
+//            retVal = [GHTestRunner run];
+//            __gcov_flush();
+//        }
+//        else {
+            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([GHUnitIOSAppDelegate class]));
+//        }
+        return retVal;
     }
-    return retVal;
 }
