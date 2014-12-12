@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		245FA75994A43F61C155C9D9 /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7008EE9FB2D66924DAD6ACA /* libPods-UnitTests.a */; };
 		2C61EB8C1A13EBFB00E456DA /* Loopy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C61EB8B1A13EBFB00E456DA /* Loopy.h */; };
 		2C61EBA61A13F66200E456DA /* STConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EBA31A13F66200E456DA /* STConstants.m */; };
 		2C61EBA71A13F66200E456DA /* STReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C61EBA51A13F66200E456DA /* STReachability.m */; };
@@ -61,7 +60,6 @@
 		2C61EC9C1A142D5000E456DA /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC961A142D5000E456DA /* TwitterLogo60x60.png */; };
 		2C61EC9D1A142D5000E456DA /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC971A142D5000E456DA /* TwitterLogo76x76.png */; };
 		2C61EC9F1A142D5800E456DA /* LoopyApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EC901A142D3F00E456DA /* LoopyApiInfo.plist */; };
-		2C61EF181A15403D00E456DA /* libLoopy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EB881A13EBFB00E456DA /* libLoopy.a */; };
 		2C61EF531A15476A00E456DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF441A15476A00E456DA /* LaunchScreen.xib */; };
 		2C61EF551A15476A00E456DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF481A15476A00E456DA /* Images.xcassets */; };
 		2C61EF561A15476A00E456DA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C61EF491A15476A00E456DA /* Info.plist */; };
@@ -84,7 +82,6 @@
 		2C88E5C51A3B75CE003E22EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C88E5C41A3B75CE003E22EA /* CoreGraphics.framework */; };
 		2C88E5C61A3B75D6003E22EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C61EBD71A13F98300E456DA /* CoreLocation.framework */; };
 		9E2D3CD7C9E7D6E0869197A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
-		BDE5A011BAC33632B5007C45 /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7008EE9FB2D66924DAD6ACA /* libPods-UnitTests.a */; };
 		DDE06B420E297A01924F7ACE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222E95F3C8F14C38914732E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -174,7 +171,6 @@
 		2C61EC6E1A141F1400E456DA /* STTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestAppDelegate.h; sourceTree = "<group>"; };
 		2C61EC6F1A141F1400E456DA /* STTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestAppDelegate.m; sourceTree = "<group>"; };
 		2C61EC8B1A1425EA00E456DA /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
-		2C61EC8D1A14260D00E456DA /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2C61EC901A142D3F00E456DA /* LoopyApiInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoopyApiInfo.plist; sourceTree = "<group>"; };
 		2C61EC921A142D5000E456DA /* FacebookLogoNoBlue43x43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue43x43.png; sourceTree = "<group>"; };
 		2C61EC931A142D5000E456DA /* FacebookLogoNoBlue60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookLogoNoBlue60x60.png; sourceTree = "<group>"; };
@@ -207,7 +203,6 @@
 		327ADA85C0E94F460E3E3EDA /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F68C55D5BEE34A40857B68A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		735E52E11A1DB07F7F00BC4B /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D7008EE9FB2D66924DAD6ACA /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C61EF181A15403D00E456DA /* libLoopy.a in Frameworks */,
+				9E2D3CD7C9E7D6E0869197A8 /* libPods.a in Frameworks */,
 				2C61EC831A1425D600E456DA /* UIKit.framework in Frameworks */,
 				2C61EC841A1425D600E456DA /* AdSupport.framework in Frameworks */,
 				2C61EC851A1425D600E456DA /* CoreLocation.framework in Frameworks */,
@@ -238,7 +233,6 @@
 				2C61EC871A1425D600E456DA /* Foundation.framework in Frameworks */,
 				2C61EC881A1425D600E456DA /* Social.framework in Frameworks */,
 				2C61EC891A1425D600E456DA /* SystemConfiguration.framework in Frameworks */,
-				9E2D3CD7C9E7D6E0869197A8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +244,6 @@
 				2C88E5C51A3B75CE003E22EA /* CoreGraphics.framework in Frameworks */,
 				2C88E5C31A3B75C2003E22EA /* Foundation.framework in Frameworks */,
 				2C88E5C21A3B75BC003E22EA /* UIKit.framework in Frameworks */,
-				245FA75994A43F61C155C9D9 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +251,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDE5A011BAC33632B5007C45 /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,9 +497,9 @@
 		C448A77273A39D43FF7CFC3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C88E5C41A3B75CE003E22EA /* CoreGraphics.framework */,
-				2C61EC8D1A14260D00E456DA /* libPods.a */,
+				222E95F3C8F14C38914732E6 /* libPods.a */,
 				2C61EC8B1A1425EA00E456DA /* libPods-AFNetworking.a */,
+				2C88E5C41A3B75CE003E22EA /* CoreGraphics.framework */,
 				2C61EBF41A13FAA100E456DA /* UIKit.framework */,
 				2C61EBD61A13F98300E456DA /* AdSupport.framework */,
 				2C61EBD71A13F98300E456DA /* CoreLocation.framework */,
@@ -515,8 +507,6 @@
 				2C61EBD91A13F98300E456DA /* Foundation.framework */,
 				2C61EBDA1A13F98300E456DA /* Social.framework */,
 				2C61EBDB1A13F98300E456DA /* SystemConfiguration.framework */,
-				222E95F3C8F14C38914732E6 /* libPods.a */,
-				D7008EE9FB2D66924DAD6ACA /* libPods-UnitTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
