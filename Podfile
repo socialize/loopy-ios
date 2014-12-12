@@ -8,3 +8,8 @@ xcodeproj 'Loopy'
 
 link_with 'Loopy', 'TestApp'
 pod 'AFNetworking', '~> 2.2'
+
+target :Tests do
+  pod 'GHUnit'
+  pod 'OCMock'
+end
