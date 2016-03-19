@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/socialize/loopy-ios"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "David Jedeikin" => "djedeikin@sharethis.com" }
-  s.dependency     'AFNetworking'
+  s.dependency     'AFNetworking', '2.6.3'
   s.source       = { :git => "https://github.com/socialize/loopy-ios.git", :tag => "1.1.2" }
   s.source_files = 'Loopy/**/*.{h,m}'
   s.resources    = 'Loopy/Resources/*.png','Loopy/LoopyApiInfo.plist'
